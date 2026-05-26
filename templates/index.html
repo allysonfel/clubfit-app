@@ -2,60 +2,90 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ClubFit - Sofia Lee</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+
     <div class="app-shell">
-        <div class="progress-container"><div id="bar"></div></div>
-
-        <div id="quiz-container">
-            <!-- TELA 1 (Print 1) -->
+        
+        <div id="quiz-flow">
+            <!-- TELA 1: LANDING (Print 1) -->
             <div id="step-1" class="step">
-                <div class="badge">Quiz de 1 minuto | SEGUNDO SUA IDADE</div>
-                <h1>Reto de Tai Chi Indoor Walking de 28 dias para perder peso</h1>
-                <div class="image-box"><img src="" alt="Sofia Lee"></div>
-                <div class="option-card" onclick="nextStep()">18-29 anos <span class="arrow">→</span></div>
-                <div class="option-card" onclick="nextStep()">30-39 anos <span class="arrow">→</span></div>
-                <div class="option-card" onclick="nextStep()">40-49 anos <span class="arrow">→</span></div>
-                <div class="option-card" onclick="nextStep()">50+ anos <span class="arrow">→</span></div>
+                <div class="top-badges">
+                    <span class="rating-badge">★ 4.8 de 5 | <b>464k</b> usuários</span>
+                </div>
+                <h1>Desafio de 28 dias de Caminhada Tai Chi em Casa para emagrecimento</h1>
+                <p class="section-title">DE ACORDO COM A SUA IDADE</p>
+                <div class="quiz-time-badge">quiz de 1 minuto</div>
+                
+                <div class="main-image">
+                    <img src="" alt="Sofia Lee Coach" class="img-fluid"> <!-- Imagem da Sofia em pé -->
+                </div>
+
+                <div class="options-container">
+                    <div class="option-row" onclick="nextStep()">18-29 anos <span class="circle-arrow">→</span></div>
+                    <div class="option-row" onclick="nextStep()">30-39 anos <span class="circle-arrow">→</span></div>
+                    <div class="option-row" onclick="nextStep()">40-49 anos <span class="circle-arrow">→</span></div>
+                    <div class="option-row" onclick="nextStep()">50+ anos <span class="circle-arrow">→</span></div>
+                </div>
+                <p class="footer-info">Ao continuar, você concorda com nossos Termos e Políticas</p>
             </div>
 
-            <!-- TELA 2 (Print 2) -->
+            <!-- TELA 2: SOCIAL PROOF (Print 2) -->
             <div id="step-2" class="step hidden">
-                <h1>Como você descreveria seu biotipo físico?</h1>
-                <div class="option-card" onclick="nextStep()">Porte médio <span class="arrow">→</span></div>
-                <div class="option-card" onclick="nextStep()">Mais encorpada <span class="arrow">→</span></div>
-                <div class="option-card" onclick="nextStep()">Acima do peso <span class="arrow">→</span></div>
-            </div>
-
-            <!-- TELA 3 (Print 3) -->
-            <div id="step-3" class="step hidden">
-                <h1>Qual é o seu corpo dos sonhos?</h1>
-                <div class="option-card" onclick="nextStep()">Magro <span class="arrow">→</span></div>
-                <div class="option-card" onclick="nextStep()">Tonificado <span class="arrow">→</span></div>
-                <div class="option-card" onclick="nextStep()">Curvilíneo <span class="arrow">→</span></div>
-            </div>
-
-            <!-- TELA 4 (Print 4) -->
-            <div id="step-4" class="step hidden">
-                <h1>Você conhece a Caminhada Tai Chi em Casa?</h1>
-                <div class="option-card" onclick="nextStep()">Sim, pratico regularmente <span class="arrow">→</span></div>
-                <div class="option-card" onclick="nextStep()">Sim, já experimentei <span class="arrow">→</span></div>
-                <div class="option-card" onclick="nextStep()">Não, nunca experimentei <span class="arrow">→</span></div>
-            </div>
-
-            <!-- TELA 5 (Print 5) -->
-            <div id="step-5" class="step hidden">
-                <h1>Quais são suas áreas-alvo?</h1>
-                <p class="subtitle">Você pode selecionar várias</p>
-                <div class="option-card" onclick="this.classList.toggle('selected')">Braços</div>
-                <div class="option-card" onclick="this.classList.toggle('selected')">Abdômen</div>
-                <div class="option-card" onclick="this.classList.toggle('selected')">Glúteos</div>
-                <div class="option-card" onclick="this.classList.toggle('selected')">Pernas</div>
+                <div class="social-proof-circle">
+                    <!-- Espaço para o gráfico das fotos em círculo -->
+                    <div class="placeholder-circle"></div>
+                </div>
+                <h1 class="big-number">23 000 000+</h1>
+                <p class="subtitle">pessoas já se juntaram a nós</p>
                 <button class="btn-primary" onclick="nextStep()">Continuar</button>
             </div>
+
+            <!-- TELA 3: BOAS-VINDAS (Print 3) -->
+            <div id="step-3" class="step hidden">
+                <div class="welcome-image">
+                    <img src="" alt="Prática em casa"> <!-- Imagem da Sofia na sala -->
+                </div>
+                <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
+                <p class="description-text">
+                    Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa.
+                </p>
+                <button class="btn-primary" onclick="nextStep()">Continuar</button>
+            </div>
+
+            <!-- TELA 4: OBJETIVO (Print 4) - 1/25 -->
+            <div id="step-4" class="step hidden">
+                <div class="progress-bar-container"><div class="progress" style="width: 4%"></div></div>
+                <p class="step-counter">1 / 25</p>
+                <h3>Qual é o seu principal objetivo?</h3>
+                <p class="small-sub">Você pode selecionar vários objetivos</p>
+                
+                <div class="multi-select-list">
+                    <div class="select-item" onclick="toggleMulti(this)"><span>+</span> Perder peso <img src="" class="icon"></div>
+                    <div class="select-item" onclick="toggleMulti(this)"><span>+</span> Melhorar a saúde do coração <img src="" class="icon"></div>
+                    <div class="select-item selected" onclick="toggleMulti(this)"><span>✓</span> Ficar firme e tonificada <img src="" class="icon"></div>
+                    <div class="select-item" onclick="toggleMulti(this)"><span>+</span> Reduzir a idade biológica <img src="" class="icon"></div>
+                </div>
+                <button class="btn-primary" onclick="nextStep()">Continuar</button>
+            </div>
+
+            <!-- TELA 5: BIOTIPO (Print 5) - 2/25 -->
+            <div id="step-5" class="step hidden">
+                <div class="progress-bar-container"><div class="progress" style="width: 8%"></div></div>
+                <p class="step-counter">2 / 25</p>
+                <h3>Como você descreveria seu biotipo físico?</h3>
+                
+                <div class="single-select-list">
+                    <div class="select-item" onclick="nextStep()">Porte médio <img src="" class="icon"></div>
+                    <div class="select-item selected" onclick="nextStep()">Mais encorpada <img src="" class="icon"></div>
+                    <div class="select-item" onclick="nextStep()">Acima do peso <img src="" class="icon"></div>
+                </div>
+            </div>
+
         </div>
     </div>
 
