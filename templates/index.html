@@ -2,53 +2,93 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ClubFit - Sofia Lee</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="app-shell">
-        <div class="progress-container"><div id="bar"></div></div>
+        <!-- BARRA DE PROGRESSO -->
+        <div class="header">
+            <div class="progress-container"><div id="bar"></div></div>
+        </div>
 
-        <!-- TELA 1: IDADE -->
-        <div id="step-1" class="step">
-            <h1 style="text-align:center">Desafio de 28 dias de Caminhada Tai Chi com Sofia Lee</h1>
-            <p style="text-align:center; color:#666">DE ACORDO COM A SUA IDADE</p>
-            <div id="img-placeholder-1" style="height:300px; background:#f9f9f9; border-radius:20px; margin-bottom:20px">
-                <!-- Espaço para foto da Sofia Lee -->
+        <div id="quiz-flow">
+            <!-- TELA 1: INTRO (Print 1) -->
+            <div id="step-1" class="step">
+                <div class="badge">Quiz de 1 minuto | SEGUNDO SUA IDADE</div>
+                <h1>Reto de Tai Chi Indoor Walking de 28 dias para perder peso</h1>
+                <div class="image-box">
+                    <!-- Deixe aqui o espaço para a imagem da Sofia Lee -->
+                    <img src="" alt="Sofia Lee Coach" class="placeholder-img">
+                </div>
+                <div class="options-grid">
+                    <div class="option-card" onclick="nextStep('18-29', 'age')">18-29 anos <span class="arrow">→</span></div>
+                    <div class="option-card" onclick="nextStep('30-39', 'age')">30-39 anos <span class="arrow">→</span></div>
+                    <div class="option-card" onclick="nextStep('40-49', 'age')">40-49 anos <span class="arrow">→</span></div>
+                    <div class="option-card" onclick="nextStep('50+', 'age')">50+ anos <span class="arrow">→</span></div>
+                </div>
             </div>
-            <div class="option" onclick="nextStep('18-29', 'age')">18-29 anos <span>→</span></div>
-            <div class="option" onclick="nextStep('30-39', 'age')">30-39 anos <span>→</span></div>
-            <div class="option" onclick="nextStep('40-49', 'age')">40-49 anos <span>→</span></div>
-            <div class="option" onclick="nextStep('50+', 'age')">50+ anos <span>→</span></div>
-        </div>
 
-        <!-- TELA 2: OBJETIVO (Pode selecionar vários) -->
-        <div id="step-2" class="step hidden">
-            <h1>Qual é o seu principal objetivo?</h1>
-            <div class="option" onclick="this.classList.toggle('selected')">Perder peso</div>
-            <div class="option" onclick="this.classList.toggle('selected')">Melhorar a saúde do coração</div>
-            <div class="option" onclick="this.classList.toggle('selected')">Ficar firme e tonificada</div>
-            <button class="btn-primary" onclick="nextStep()">Continuar</button>
-        </div>
+            <!-- TELA 2: BIOTIPO (Print 2) -->
+            <div id="step-2" class="step hidden">
+                <h1>Como você descreveria seu biotipo físico?</h1>
+                <div class="option-card-img" onclick="nextStep('Medio', 'bodyType')">
+                    <span>Porte médio</span> <img src="" class="mini-icon">
+                </div>
+                <div class="option-card-img" onclick="nextStep('Encorpada', 'bodyType')">
+                    <span>Mais encorpada</span> <img src="" class="mini-icon">
+                </div>
+                <div class="option-card-img" onclick="nextStep('Acima do peso', 'bodyType')">
+                    <span>Acima do peso</span> <img src="" class="mini-icon">
+                </div>
+            </div>
 
-        <!-- TELA 3: INPUTS MÉTRICOS -->
-        <div id="step-3" class="step hidden">
-            <h1>Insira seus dados</h1>
-            <input type="number" id="height" class="option" placeholder="Sua altura (cm)" style="width:90%">
-            <input type="number" id="weight" class="option" placeholder="Seu peso (kg)" style="width:90%">
-            <button class="btn-primary" onclick="calculateBMI()">Analisar meu perfil</button>
-        </div>
+            <!-- TELA 3: CORPO DOS SONHOS (Print 3) -->
+            <div id="step-3" class="step hidden">
+                <h1>Qual é o seu corpo dos sonhos?</h1>
+                <div class="option-card-img" onclick="nextStep('Magro', 'dreamBody')">Magro</div>
+                <div class="option-card-img" onclick="nextStep('Tonificado', 'dreamBody')">Tonificado</div>
+                <div class="option-card-img" onclick="nextStep('Curvilíneo', 'dreamBody')">Curvilíneo</div>
+            </div>
 
-        <!-- TELA 4: RESULTADO IMC -->
-        <div id="step-4" class="step hidden">
-            <h1 style="text-align:center">Seu IMC é:</h1>
-            <div style="font-size:60px; text-align:center; color:var(--primary); font-weight:bold" id="bmi-value">--</div>
-            <p style="text-align:center">Sofia Lee está preparando seu plano...</p>
-            <button class="btn-primary" onclick="nextStep()">Ver meu plano completo</button>
-        </div>
+            <!-- TELA 4: ÁREAS ALVO (Print 5) -->
+            <div id="step-4" class="step hidden">
+                <h1>Quais são suas áreas-alvo?</h1>
+                <p class="subtitle">Selecione todas que desejar</p>
+                <div class="multi-select">
+                    <div class="option-check" onclick="toggleOption(this)">Braços</div>
+                    <div class="option-check" onclick="toggleOption(this)">Abdômen</div>
+                    <div class="option-check" onclick="toggleOption(this)">Glúteos</div>
+                    <div class="option-check" onclick="toggleOption(this)">Pernas</div>
+                </div>
+                <button class="btn-primary" onclick="nextStep()">Continuar</button>
+            </div>
 
+            <!-- TELA 5: MÉTRICAS (Print 19, 20, 21) -->
+            <div id="step-5" class="step hidden">
+                <h1>Vamos calcular seu IMC</h1>
+                <p class="subtitle">Insira seus dados para Sofia Lee analisar</p>
+                <div class="input-group">
+                    <label>Altura (cm)</label>
+                    <input type="number" id="height" placeholder="Ex: 165">
+                    <label>Peso Atual (kg)</label>
+                    <input type="number" id="weight" placeholder="Ex: 70">
+                </div>
+                <button class="btn-primary" onclick="processBMI()">Analisar meu Perfil</button>
+            </div>
+
+            <!-- TELA 6: LOADING (Print 38) -->
+            <div id="step-6" class="step hidden">
+                <div class="loader-container">
+                    <div class="circular-loader"></div>
+                    <h2 id="loading-text">Criando seu plano personalizado...</h2>
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
