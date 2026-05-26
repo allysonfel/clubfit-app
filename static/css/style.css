@@ -1,54 +1,56 @@
 :root {
     --primary: #3aa671;
-    --bg: #ffffff;
-    --card: #f5f5f5;
-    --text: #000000;
+    --bg-light: #f4f4f4;
+    --text-dark: #111111;
 }
 
-* { box-sizing: border-box; font-family: 'Inter', sans-serif; }
-
-body { margin: 0; background: var(--bg); display: flex; justify-content: center; }
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0; padding: 0;
+    background-color: #fff;
+    color: var(--text-dark);
+}
 
 .app-shell {
-    width: 100%;
-    max-width: 450px;
-    min-height: 100vh;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+    max-width: 480px; margin: 0 auto;
+    padding: 20px; min-height: 100vh;
 }
 
-/* Barra de progresso */
-.progress-container { background: #eee; height: 6px; border-radius: 10px; margin-bottom: 20px; }
-#bar { background: var(--primary); height: 100%; width: 5%; border-radius: 10px; transition: 0.4s; }
+h1 { font-size: 24px; font-weight: 800; text-align: center; line-height: 1.2; margin: 15px 0; }
+h2 { font-size: 20px; text-align: center; margin-top: 20px; }
+h3 { font-size: 22px; text-align: center; margin-bottom: 5px; }
 
-/* Textos */
-h1 { font-size: 24px; font-weight: 800; text-align: center; margin: 10px 0; line-height: 1.2; }
-.subtitle { color: #666; text-align: center; font-size: 14px; margin-bottom: 20px; }
-.badge { background: #e8f5ee; color: var(--primary); font-size: 11px; font-weight: bold; padding: 5px 12px; border-radius: 20px; width: fit-content; margin: 0 auto; }
+.section-title { text-align: center; font-size: 12px; color: #888; font-weight: bold; }
+.quiz-time-badge { background: #e8f5ee; color: var(--primary); font-size: 11px; font-weight: 800; padding: 5px 15px; border-radius: 20px; width: fit-content; margin: 10px auto; }
 
-/* Cards de Opção (Onde estava o bug) */
-.option-card {
-    background: var(--card);
-    padding: 18px 20px;
-    border-radius: 16px;
-    margin-bottom: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Botões da Tela 1 */
+.option-row {
+    background: var(--bg-light);
+    padding: 18px 20px; border-radius: 12px;
+    margin-bottom: 10px; font-weight: 700;
+    display: flex; justify-content: space-between; align-items: center;
     cursor: pointer;
-    font-weight: 700;
-    font-size: 16px;
-    border: 2px solid transparent;
 }
+.circle-arrow { background: var(--primary); color: white; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; }
 
-.option-card:active { background: #e0e0e0; }
-.option-card.selected { border-color: var(--primary); background: #e8f5ee; }
-.arrow { color: var(--primary); font-weight: bold; }
+/* Cards de Seleção (Telas 4 e 5) */
+.select-item {
+    background: var(--bg-light);
+    padding: 15px 20px; border-radius: 12px;
+    margin-bottom: 12px; font-weight: 600;
+    display: flex; justify-content: space-between; align-items: center;
+    border: 2px solid transparent; cursor: pointer;
+}
+.select-item.selected { border-color: var(--primary); background-color: #e8f5ee; }
+.select-item span { color: #aaa; margin-right: 10px; }
+.select-item.selected span { color: var(--primary); }
 
-/* Imagens */
-.image-box { width: 100%; border-radius: 20px; overflow: hidden; margin-bottom: 20px; background: #fafafa; }
-.image-box img { width: 100%; display: block; }
+/* Progress Bar */
+.progress-bar-container { background: #eee; height: 4px; border-radius: 10px; margin-top: 10px; }
+.progress { background: var(--primary); height: 100%; border-radius: 10px; }
+.step-counter { text-align: right; font-size: 12px; color: #888; margin-top: 5px; }
 
+/* Geral */
+.btn-primary { background: var(--primary); color: white; border: none; padding: 20px; border-radius: 14px; font-size: 18px; font-weight: bold; width: 100%; margin-top: 20px; cursor: pointer; }
 .hidden { display: none; }
-.btn-primary { background: var(--primary); color: white; border: none; padding: 20px; border-radius: 15px; font-size: 18px; font-weight: bold; width: 100%; margin-top: 10px; cursor: pointer; }
+.description-text { text-align: center; color: #555; line-height: 1.5; font-size: 15px; }
