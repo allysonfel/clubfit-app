@@ -1,146 +1,56 @@
 :root {
-    --primary: #3aa671; /* Verde exato do anúncio */
-    --primary-hover: #2d8258;
+    --primary: #3aa671;
     --bg: #ffffff;
-    --card: #f4f4f4;
-    --text: #111111;
-    --gray-text: #666666;
-    --progress-bg: #e0e0e0;
-}
-
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+    --text: #000000;
+    --card-bg: #f5f5f5;
+    --gray: #888;
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     margin: 0;
-    padding: 0;
-    background-color: var(--bg);
+    background: var(--bg);
     color: var(--text);
-    display: flex;
-    justify-content: center;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* Container que simula um App no celular */
 .app-shell {
-    width: 100%;
-    max-width: 450px;
-    min-height: 100vh;
+    max-width: 500px;
+    margin: 0 auto;
     padding: 20px;
-    display: flex;
-    flex-direction: column;
 }
 
-/* Barra de Progresso Superior */
-.progress-container {
-    width: 100%;
-    height: 6px;
-    background-color: var(--progress-bg);
-    border-radius: 10px;
-    margin-bottom: 30px;
-}
+/* Header & Progress */
+.header { margin-bottom: 20px; }
+.progress-container { background: #eee; height: 6px; border-radius: 10px; }
+#bar { background: var(--primary); height: 100%; width: 5%; border-radius: 10px; transition: 0.4s; }
 
-#bar {
-    width: 5%;
-    height: 100%;
-    background-color: var(--primary);
-    border-radius: 10px;
-    transition: width 0.4s ease-out;
-}
+/* Typography */
+h1 { font-size: 26px; font-weight: 800; text-align: center; margin-top: 10px; margin-bottom: 15px; letter-spacing: -0.5px; }
+.subtitle { text-align: center; color: var(--gray); font-size: 15px; margin-bottom: 30px; }
+.badge { background: #e8f5ee; color: var(--primary); font-size: 11px; font-weight: bold; padding: 4px 12px; border-radius: 20px; width: fit-content; margin: 0 auto; }
 
-/* Títulos e Textos */
-h1 {
-    font-size: 24px;
-    font-weight: 800;
-    text-align: center;
-    line-height: 1.2;
-    margin-bottom: 8px;
-}
-
-.subtitle {
-    font-size: 14px;
-    color: var(--gray-text);
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-/* Cards de Opções (Seleção Única) */
-.option {
-    background-color: var(--card);
-    padding: 18px 22px;
-    border-radius: 14px;
+/* Option Cards (Idênticos ao Lasta) */
+.option-card {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 16px;
     margin-bottom: 12px;
-    cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-weight: 600;
-    font-size: 16px;
-    transition: all 0.2s ease;
-    border: 2px solid transparent;
-}
-
-.option:active {
-    transform: scale(0.98);
-    background-color: #ededed;
-}
-
-.option.selected {
-    border-color: var(--primary);
-    background-color: #e8f5ee;
-}
-
-.option span {
-    color: var(--primary);
-    font-size: 20px;
-}
-
-/* Botão Principal */
-.btn-primary {
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    padding: 20px;
-    border-radius: 14px;
-    font-size: 18px;
-    font-weight: bold;
+    font-weight: 700;
+    font-size: 17px;
     cursor: pointer;
-    width: 100%;
-    margin-top: 15px;
-    transition: background 0.3s;
 }
 
-.btn-primary:hover {
-    background-color: var(--primary-hover);
-}
+.option-card:hover { background: #efefef; }
+.arrow { color: var(--primary); font-size: 20px; }
+
+/* Input e Botões */
+input[type="number"] { width: 100%; padding: 18px; border-radius: 12px; border: 2px solid #eee; font-size: 18px; margin-bottom: 15px; }
+.btn-primary { background: var(--primary); color: white; border: none; width: 100%; padding: 20px; border-radius: 15px; font-size: 18px; font-weight: bold; cursor: pointer; margin-top: 20px; }
 
 /* Utilitários */
 .hidden { display: none; }
-
-.image-placeholder {
-    width: 100%;
-    height: 280px;
-    background-color: #f9f9f9;
-    border-radius: 20px;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #ccc;
-    font-style: italic;
-    border: 1px dashed #ddd;
-}
-
-input[type="number"] {
-    width: 100%;
-    border: 2px solid #eee;
-    outline: none;
-    text-align: center;
-    font-size: 20px;
-}
-
-input[type="number"]:focus {
-    border-color: var(--primary);
-}
+.image-box { width: 100%; height: 350px; background: #fafafa; border-radius: 20px; margin-bottom: 20px; overflow: hidden; }
