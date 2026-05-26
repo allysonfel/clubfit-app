@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClubFit - Sofia Lee</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <div class="app-shell">
+        <div class="progress-container"><div id="bar"></div></div>
+
+        <!-- TELA 1: IDADE -->
+        <div id="step-1" class="step">
+            <h1 style="text-align:center">Desafio de 28 dias de Caminhada Tai Chi com Sofia Lee</h1>
+            <p style="text-align:center; color:#666">DE ACORDO COM A SUA IDADE</p>
+            <div id="img-placeholder-1" style="height:300px; background:#f9f9f9; border-radius:20px; margin-bottom:20px">
+                <!-- Espaço para foto da Sofia Lee -->
+            </div>
+            <div class="option" onclick="nextStep('18-29', 'age')">18-29 anos <span>→</span></div>
+            <div class="option" onclick="nextStep('30-39', 'age')">30-39 anos <span>→</span></div>
+            <div class="option" onclick="nextStep('40-49', 'age')">40-49 anos <span>→</span></div>
+            <div class="option" onclick="nextStep('50+', 'age')">50+ anos <span>→</span></div>
+        </div>
+
+        <!-- TELA 2: OBJETIVO (Pode selecionar vários) -->
+        <div id="step-2" class="step hidden">
+            <h1>Qual é o seu principal objetivo?</h1>
+            <div class="option" onclick="this.classList.toggle('selected')">Perder peso</div>
+            <div class="option" onclick="this.classList.toggle('selected')">Melhorar a saúde do coração</div>
+            <div class="option" onclick="this.classList.toggle('selected')">Ficar firme e tonificada</div>
+            <button class="btn-primary" onclick="nextStep()">Continuar</button>
+        </div>
+
+        <!-- TELA 3: INPUTS MÉTRICOS -->
+        <div id="step-3" class="step hidden">
+            <h1>Insira seus dados</h1>
+            <input type="number" id="height" class="option" placeholder="Sua altura (cm)" style="width:90%">
+            <input type="number" id="weight" class="option" placeholder="Seu peso (kg)" style="width:90%">
+            <button class="btn-primary" onclick="calculateBMI()">Analisar meu perfil</button>
+        </div>
+
+        <!-- TELA 4: RESULTADO IMC -->
+        <div id="step-4" class="step hidden">
+            <h1 style="text-align:center">Seu IMC é:</h1>
+            <div style="font-size:60px; text-align:center; color:var(--primary); font-weight:bold" id="bmi-value">--</div>
+            <p style="text-align:center">Sofia Lee está preparando seu plano...</p>
+            <button class="btn-primary" onclick="nextStep()">Ver meu plano completo</button>
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
