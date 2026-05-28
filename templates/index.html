@@ -23,22 +23,30 @@
             font-family: var(--font);
             background: #fff;
             color: var(--text);
-            min-height: 100vh;
+            height: 100dvh; /* Garante altura exata do celular */
             display: flex;
             justify-content: center;
+            overflow: hidden;
         }
 
         .app-shell {
             width: 100%;
             max-width: 480px;
-            min-height: 100vh;
+            height: 100%;
             display: flex;
             flex-direction: column;
         }
 
-        /* ── STEPS ── */
-        .step { display: none; flex-direction: column; min-height: 100vh; }
-        .step.active { display: flex; animation: fadeIn 0.3s ease; }
+        /* ── STEPS COMPACTADOS PARA CABER NA TELA ── */
+        .step { 
+            display: none; 
+            flex-direction: column; 
+            height: 100%; 
+            width: 100%; 
+            overflow: hidden; /* Impede rolagem nas telas de transição */
+            animation: fadeIn 0.3s ease; 
+        }
+        .step.active { display: flex; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -157,69 +165,75 @@
         .footer-note u { cursor: pointer; }
 
         /* ════════════════════════════════
-           STEP 2 — SOCIAL PROOF (Compactado para iPhone)
+           STEP 2 — SOCIAL PROOF (Responsivo)
         ════════════════════════════════ */
-        #step-2 {
+        .social-proof-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 20px 24px;
             text-align: center;
-            gap: 0;
         }
 
         .social-img {
-            width: 100%;
-            max-width: 260px; /* Reduzido de 300px para subir o botão */
+            width: auto;
+            max-width: 100%;
+            max-height: 25vh; /* Ocupa no máximo 25% da altura da tela */
             margin-bottom: 15px;
         }
 
         .badge-img {
-            width: 90%;
-            max-width: 230px; /* Reduzido de 260px para subir o botão */
+            width: auto;
+            max-width: 85%;
+            max-height: 8vh;
             margin-bottom: 10px;
         }
 
         .social-sub {
             font-size: 15px;
             color: #666;
-            margin-bottom: 25px; /* Reduzido de 36px */
+            margin-bottom: 20px;
         }
 
         /* ════════════════════════════════
-           STEP 3 — BOAS-VINDAS (AJUSTADO E CABEÇA BLINDADA)
+           STEP 3 — BOAS-VINDAS (Cabeça Protegida e Sem Scroll)
         ════════════════════════════════ */
-        #step-3 {
+        .welcome-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            padding: 0 0 32px;
-            text-align: center;
+            justify-content: flex-start;
         }
 
         .welcome-img {
             width: 100%;
-            max-height: 32vh; /* Reduzido de 380px para 32vh para descer no mobile */
+            max-height: 30vh; /* Ajustado para sobrar espaço pro botão em telas pequenas */
             object-fit: cover;
-            object-position: center 15%; /* CORREÇÃO: Foca no topo (cabeça da Sofia) */
+            object-position: center 10%; /* CORREÇÃO: Foca estritamente no topo da imagem */
             border-radius: 0 0 28px 28px;
-            margin-bottom: 22px;
+            margin-bottom: 15px;
         }
 
         #step-3 h2 {
             font-family: var(--font);
-            font-size: 22px;
+            font-size: 21px;
             font-weight: 800;
-            line-height: 1.3;
+            line-height: 1.25;
             letter-spacing: -0.4px;
             max-width: 340px;
-            margin: 0 auto 14px;
+            margin: 0 auto 10px;
             padding: 0 20px;
         }
 
         #step-3 .desc {
-            font-size: 14px;
+            font-size: 13.5px;
             color: #555;
-            line-height: 1.65;
+            line-height: 1.55;
             max-width: 340px;
-            margin: 0 auto 25px; /* Reduzido de 32px */
+            margin: 0 auto 15px;
             padding: 0 20px;
         }
 
@@ -257,6 +271,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
         }
 
         .quiz-body h3 {
@@ -282,7 +297,6 @@
             gap: 10px;
         }
 
-        /* Card com thumbnail — igual ao concorrente */
         .opt-card {
             display: flex;
             align-items: center;
@@ -309,7 +323,6 @@
             flex: 1;
         }
 
-        /* check / plus circle */
         .opt-icon {
             width: 26px; height: 26px;
             border-radius: 50%;
@@ -333,33 +346,30 @@
             font-weight: 700;
         }
 
-        /* thumbnail — espaço reservado mesmo sem imagem */
         .opt-thumb {
             width: 58px;
             height: 58px;
             border-radius: 10px;
             object-fit: cover;
             flex-shrink: 0;
-            background: #e0e0e0; /* cinza quando não há imagem */
+            background: #e0e0e0;
         }
         .opt-card.selected .opt-thumb {
             filter: brightness(1.05);
         }
 
-        /* single-select: hover já seleciona visualmente */
         .opt-card.single:hover {
             background: var(--green);
             border-color: var(--green);
             color: #fff;
         }
 
-        /* Emojis no final dos cards */
         .emoji {
             font-size: 24px;
             padding-right: 10px;
         }
 
-        /* ── BOTÃO PRINCIPAL ── */
+        /* ── BOTÃO PRINCIPAL (Fixado no rodapé) ── */
         .btn-primary {
             display: block;
             background: var(--green);
@@ -371,8 +381,7 @@
             font-size: 17px;
             font-weight: 800;
             cursor: pointer;
-            width: calc(100% - 40px);
-            margin: 0 auto;
+            width: 100%;
             transition: background 0.15s, transform 0.1s;
         }
         .btn-primary:hover  { background: var(--green-dark); }
@@ -384,7 +393,6 @@
             pointer-events: none;
         }
 
-        /* Botão fixo no rodapé (telas de quiz multi-select) */
         .btn-fixed {
             position: fixed;
             bottom: 24px;
@@ -400,6 +408,7 @@
 
         .footer-action {
             padding: 0 20px 36px;
+            width: 100%;
         }
 
         @media (max-width: 360px) {
@@ -433,9 +442,9 @@
         <p class="footer-note">Ao continuar, você concorda com nossos <u>Termos de Serviço</u>, <u>Política de Cookies</u> e <u>Política de Privacidade</u></p>
     </div>
 
-    <!-- STEP 2 (CORRIGIDO PARA SUBIR O BOTÃO) -->
+    <!-- STEP 2 (CORRIGIDO) -->
     <div id="step-2" class="step">
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px 24px;text-align:center;">
+        <div class="social-proof-wrap">
             <img src="static/img/social-proof.png" alt="Comunidade" class="social-img">
             <img src="static/img/badge-users.png" alt="800k usuários" class="badge-img">
             <p class="social-sub">pessoas já se juntaram a nós</p>
@@ -445,9 +454,9 @@
         </div>
     </div>
 
-    <!-- STEP 3 (CORRIGIDO CABEÇA E ALTURA) -->
+    <!-- STEP 3 (CORRIGIDO) -->
     <div id="step-3" class="step">
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+        <div class="welcome-wrap">
             <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
             <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
             <p class="desc">Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa. Vamos explorar juntas seus objetivos e necessidades.</p>
@@ -457,7 +466,7 @@
         </div>
     </div>
 
-    <!-- STEP 4: OBJETIVO (1/25) - multi-select -->
+    <!-- STEP 4: OBJETIVO (1/25) -->
     <div id="step-4" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:4%"></div></div>
@@ -476,7 +485,7 @@
         <button id="btn4" class="btn-primary btn-fixed disabled" onclick="goTo('step-5')">Continuar</button>
     </div>
 
-    <!-- STEP 5: BIOTIPO (2/25) - single-select -->
+    <!-- STEP 5: BIOTIPO (2/25) -->
     <div id="step-5" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:8%"></div></div>
@@ -493,29 +502,23 @@
         </div>
     </div>
 
-    <!-- STEP 6: CORPO DOS SONHOS (3/25) - single-select -->
+    <!-- STEP 6: CORPO DOS SONHOS (3/25) -->
     <div id="step-6" class="step">
-        <div class="quiz-header">
-            <div class="progress-bar"><div class="progress-fill" style="width:12%"></div></div>
-            <div class="step-label">3 / 25</div>
-        </div>
+        <div class="quiz-header"><div class="progress-bar"><div class="progress-fill" style="width:12%"></div></div><div class="step-label">3 / 25</div></div>
         <div class="quiz-body">
             <h3>Qual é o seu corpo dos sonhos?</h3>
             <p class="hint">&nbsp;</p>
             <div class="options-list">
-                <div class="opt-card single" onclick="autoNext(this,'step-7')"><div class="opt-left"><span class="opt-label">Magro</span></div><div class="opt-thumb"></div></div>
-                <div class="opt-card single" onclick="autoNext(this,'step-7')"><div class="opt-left"><span class="opt-label">Tonificado</span></div><div class="opt-thumb"></div></div>
-                <div class="opt-card single" onclick="autoNext(this,'step-7')"><div class="opt-left"><span class="opt-label">Curvilíneo</span></div><div class="opt-thumb"></div></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-7')"><div class="opt-left"><span class="opt-label">Magro</span></div><div class="opt-thumb"></div></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-7')"><div class="opt-left"><span class="opt-label">Tonificado</span></div><div class="opt-thumb"></div></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-7')"><div class="opt-left"><span class="opt-label">Curvilíneo</span></div><div class="opt-thumb"></div></div>
             </div>
         </div>
     </div>
 
-    <!-- STEP 7: EXPERIÊNCIA TAI CHI (4/25) - single-select com emojis -->
+    <!-- STEP 7: EXPERIÊNCIA (4/25) -->
     <div id="step-7" class="step">
-        <div class="quiz-header">
-            <div class="progress-bar"><div class="progress-fill" style="width:16%"></div></div>
-            <div class="step-label">4 / 25</div>
-        </div>
+        <div class="quiz-header"><div class="progress-container"><div class="progress-bar" style="width: 16%;"></div></div><div class="step-label">4 / 25</div></div>
         <div class="quiz-body">
             <h3>Você conhece a Caminhada Tai Chi em Casa?</h3>
             <p class="hint">&nbsp;</p>
@@ -550,11 +553,10 @@
         }
     }
 
-    // Corrigido: Não marca nada antes, executa o efeito verde apenas no clique
     function autoNext(card, nextId) {
         card.classList.add('selected');
         setTimeout(() => {
-            if(nextId === 'final') alert("Fim desta etapa! Envie os próximos prints.");
+            if(nextId === 'final') alert("Fim desta etapa!");
             else goTo(nextId);
         }, 500);
     }
