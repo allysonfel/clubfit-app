@@ -3,580 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ClubFit - Desafio 28 dias Tai Chi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>ClubFit - Sofia Lee</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        :root {
-            --green:       #2E9E58;
-            --green-dark:  #237A44;
-            --green-light: #E8F5EE;
-            --text:        #1A1A1A;
-            --muted:       #888888;
-            --card-bg:     #F5F5F0;
-            --radius:      14px;
-            --font:        'Inter', sans-serif;
+        :root { --green: #2E9E58; --green-dark: #237A44; --green-light: #E8F5EE; --text: #111111; --radius: 16px; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; background: #fff; color: var(--text); 
+            height: 100dvh; display: flex; justify-content: center; overflow: hidden;
         }
 
-        body {
-            font-family: var(--font);
-            background: #fff;
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-        }
+        .app-shell { width: 100%; max-width: 450px; height: 100%; display: flex; flex-direction: column; }
+        .step { display: none; flex-direction: column; height: 100%; width: 100%; animation: fadeIn 0.3s ease; }
+        .step.active { display: flex; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .app-shell {
-            width: 100%;
-            max-width: 480px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+        /* Estrutura de Conteúdo + Footer Fixo */
+        .main-content { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 20px; text-align: center; overflow-y: auto; }
+        .footer-action { height: 110px; padding: 0 20px 35px; display: flex; align-items: center; justify-content: center; }
 
-        /* ── STEPS ── */
-        .step { display: none; flex-direction: column; min-height: 100vh; }
-        .step.active { display: flex; animation: fadeIn 0.3s ease; }
+        h1, h2, h3 { font-weight: 800; text-align: center; letter-spacing: -0.8px; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+        /* ── TELAS 1, 2, 3 ── */
+        #step-1 .main-content { justify-content: flex-start; padding-top: 15px; }
+        .rating-badge { background: var(--green-light); color: #237A44; border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 700; margin-bottom: 15px; }
+        #step-1 h1 { font-size: 24px; line-height: 1.25; margin-bottom: 12px; }
+        .hero-layout { display: flex; align-items: flex-end; gap: 10px; width: 100%; }
+        .hero-img { width: 55%; object-fit: contain; max-height: 340px; }
+        .age-options { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+        .age-btn { background: var(--green); color: #fff; border: none; border-radius: 12px; padding: 15px 12px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; font-size: 14px; cursor: pointer; }
+        .arrow-circle { width: 22px; height: 22px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+        
+        .social-img { width: 100%; max-width: 300px; margin-bottom: 15px; }
+        .badge-800k { width: 90%; max-width: 250px; }
+        
+        .welcome-hero-img { width: 100%; border-radius: 0 0 40px 40px; max-height: 42vh; object-fit: cover; margin-bottom: 20px; }
+        .desc-text { font-size: 14px; color: #444; line-height: 1.6; padding: 0 10px; }
 
-        /* ════════════════════════════════
-           STEP 1 — LANDING
-        ════════════════════════════════ */
-        #step-1 {
-            padding: 22px 20px 16px;
-            align-items: center;
-            text-align: center;
-        }
+        /* ── QUIZ (Telas 4 em diante) ── */
+        .quiz-header { width: 100%; padding: 15px 20px 0; }
+        .progress-container { background: #eee; height: 4px; border-radius: 10px; width: 100%; margin-bottom: 5px; }
+        .progress-bar { background: var(--green); height: 100%; border-radius: 10px; }
+        .step-label { font-size: 12px; color: #888; text-align: right; font-weight: 700; }
+        
+        h3.quiz-title { font-size: 22px; text-align: left; width: 100%; margin-bottom: 5px; }
+        .hint { color: #888; font-size: 13px; text-align: left; width: 100%; margin-bottom: 20px; }
 
-        .rating-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: var(--green-light);
-            color: var(--green-dark);
-            border-radius: 100px;
-            padding: 6px 16px;
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-        .rating-badge .star { color: #F5A623; }
-
-        #step-1 h1 {
-            font-family: var(--font);
-            font-size: 24px;
-            font-weight: 800;
-            line-height: 1.25;
-            letter-spacing: -0.5px;
-            max-width: 340px;
-            margin-bottom: 10px;
-        }
-
-        .section-tag {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            color: var(--muted);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .quiz-badge {
-            display: inline-block;
-            border: 1.5px solid var(--green);
-            color: var(--green);
-            border-radius: 100px;
-            padding: 4px 14px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 14px;
-        }
-
-        .hero-layout {
-            display: flex;
-            width: 100%;
-            align-items: flex-end;
-            gap: 10px;
-        }
-
-        .hero-img {
-            width: 50%;
-            object-fit: contain;
-            max-height: 340px;
-        }
-
-        .age-options {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding-bottom: 6px;
-        }
-
-        .age-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--green);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            padding: 15px 14px;
-            font-family: var(--font);
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.15s, transform 0.1s;
-            width: 100%;
-        }
-        .age-btn:hover  { background: var(--green-dark); }
-        .age-btn:active { transform: scale(0.97); }
-
-        .arrow-circle {
-            width: 24px; height: 24px;
-            background: rgba(255,255,255,0.22);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 13px;
-            flex-shrink: 0;
-        }
-
-        .footer-note {
-            font-size: 10px;
-            color: var(--muted);
-            margin-top: 14px;
-            padding: 0 8px;
-            text-align: center;
-        }
-        .footer-note u { cursor: pointer; }
-
-        /* ════════════════════════════════
-           STEP 2 — SOCIAL PROOF
-        ════════════════════════════════ */
-        #step-2 {
-            align-items: center;
-            justify-content: center;
-            padding: 40px 24px 36px;
-            text-align: center;
-            gap: 0;
-        }
-
-        .social-img {
-            width: 100%;
-            max-width: 300px;
-            margin-bottom: 20px;
-        }
-
-        .badge-img {
-            width: 90%;
-            max-width: 260px;
-            margin-bottom: 10px;
-        }
-
-        .social-sub {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 36px;
-        }
-
-        /* ════════════════════════════════
-           STEP 3 — BOAS-VINDAS
-        ════════════════════════════════ */
-        #step-3 {
-            align-items: center;
-            padding: 0 0 32px;
-            text-align: center;
-        }
-
-        .welcome-img {
-            width: 100%;
-            max-height: 380px;
-            object-fit: cover;
-            border-radius: 0 0 28px 28px;
-            margin-bottom: 22px;
-        }
-
-        #step-3 h2 {
-            font-family: var(--font);
-            font-size: 22px;
-            font-weight: 800;
-            line-height: 1.3;
-            letter-spacing: -0.4px;
-            max-width: 340px;
-            margin: 0 auto 14px;
-            padding: 0 20px;
-        }
-
-        #step-3 .desc {
-            font-size: 14px;
-            color: #555;
-            line-height: 1.65;
-            max-width: 340px;
-            margin: 0 auto 32px;
-            padding: 0 20px;
-        }
-
-        /* ════════════════════════════════
-           QUIZ STEPS (4 em diante)
-        ════════════════════════════════ */
-        .quiz-header {
-            width: 100%;
-            padding: 14px 20px 0;
-        }
-
-        .progress-bar {
-            height: 4px;
-            background: #E0E0E0;
-            border-radius: 100px;
-            overflow: hidden;
-            margin-bottom: 5px;
-        }
-        .progress-fill {
-            height: 100%;
-            background: var(--green);
-            border-radius: 100px;
-            transition: width 0.4s ease;
-        }
-
-        .step-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--muted);
-            text-align: right;
-        }
-
-        .quiz-body {
-            padding: 22px 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .quiz-body h3 {
-            font-family: var(--font);
-            font-size: 22px;
-            font-weight: 800;
-            line-height: 1.25;
-            letter-spacing: -0.4px;
-            margin-bottom: 6px;
-            text-align: left;
-        }
-
-        .hint {
-            font-size: 13px;
-            color: var(--muted);
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        /* Card com thumbnail — igual ao concorrente */
+        .options-list { width: 100%; display: flex; flex-direction: column; gap: 10px; }
         .opt-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--card-bg);
-            border: 2px solid transparent;
-            border-radius: var(--radius);
-            padding: 10px 10px 10px 16px;
-            cursor: pointer;
-            transition: border-color 0.15s, background 0.15s, color 0.15s;
+            background: #F5F5F0; border-radius: 14px; padding: 10px 15px; width: 100%;
+            display: flex; justify-content: space-between; align-items: center;
+            cursor: pointer; border: 2px solid transparent; transition: 0.2s;
         }
-        .opt-card:hover { border-color: var(--green); }
+        .opt-card .label-box { display: flex; align-items: center; gap: 12px; font-weight: 700; font-size: 15px; }
+        .opt-card .thumb { width: 56px; height: 56px; border-radius: 10px; background: #e0e0e0; }
+        .check-circle { width: 24px; height: 24px; border: 2px solid #ccc; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; background: #fff; color: transparent; }
+        
+        .opt-card.selected { background: var(--green) !important; color: #fff; border-color: var(--green); }
+        .opt-card.selected .check-circle { background: #fff; border-color: #fff; color: var(--green); }
+        .opt-card.selected .check-circle::after { content: '✓'; color: var(--green); font-weight: 900; }
+        .emoji { font-size: 24px; }
 
-        .opt-card.selected {
-            background: var(--green);
-            border-color: var(--green);
-            color: #fff;
-        }
-
-        .opt-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex: 1;
-        }
-
-        /* check / plus circle */
-        .opt-icon {
-            width: 26px; height: 26px;
-            border-radius: 50%;
-            border: 2px solid #ccc;
-            background: #fff;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 13px;
-            font-weight: 800;
-            color: #aaa;
-            flex-shrink: 0;
-            transition: border-color 0.15s, color 0.15s;
-        }
-        .opt-card.selected .opt-icon {
-            border-color: rgba(255,255,255,0.7);
-            background: rgba(255,255,255,0.2);
-            color: #fff;
-        }
-
-        .opt-label {
-            font-size: 15px;
-            font-weight: 700;
-        }
-
-        /* thumbnail — espaço reservado mesmo sem imagem */
-        .opt-thumb {
-            width: 58px;
-            height: 58px;
-            border-radius: 10px;
-            object-fit: cover;
-            flex-shrink: 0;
-            background: #e0e0e0; /* cinza quando não há imagem */
-        }
-        .opt-card.selected .opt-thumb {
-            filter: brightness(1.05);
-        }
-
-        /* single-select: hover já seleciona visualmente */
-        .opt-card.single:hover {
-            background: var(--green);
-            border-color: var(--green);
-            color: #fff;
-        }
-
-        /* ── BOTÃO PRINCIPAL ── */
-        .btn-primary {
-            display: block;
-            background: var(--green);
-            color: #fff;
-            border: none;
-            border-radius: var(--radius);
-            padding: 17px;
-            font-family: var(--font);
-            font-size: 17px;
-            font-weight: 800;
-            cursor: pointer;
-            width: calc(100% - 40px);
-            margin: 0 auto;
-            transition: background 0.15s, transform 0.1s;
-        }
-        .btn-primary:hover  { background: var(--green-dark); }
-        .btn-primary:active { transform: scale(0.98); }
-
-        .btn-primary.disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            pointer-events: none;
-        }
-
-        /* Botão fixo no rodapé (telas de quiz multi-select) */
-        .btn-fixed {
-            position: fixed;
-            bottom: 24px;
-            left: 50%;
-            transform: translateX(-50%);
-            max-width: 440px;
-            z-index: 10;
-            box-shadow: 0 4px 20px rgba(46,158,88,0.3);
-        }
-        .btn-fixed:active { transform: translateX(-50%) scale(0.98) !important; }
-
-        /* espaço para o botão fixo não cobrir conteúdo */
-        .pb-fixed { padding-bottom: 90px; }
-
-        /* footer-action para steps com botão embaixo */
-        .footer-action {
-            padding: 0 20px 36px;
-        }
-
-        @media (max-width: 360px) {
-            #step-1 h1 { font-size: 20px; }
-            .age-btn { padding: 13px 12px; font-size: 13px; }
-        }
+        .btn-primary { background: var(--green); color: white; border: none; padding: 18px; border-radius: 15px; font-size: 18px; font-weight: 800; width: 100%; cursor: pointer; }
+        .btn-primary.disabled { background: #ccc; cursor: not-allowed; pointer-events: none; }
     </style>
 </head>
 <body>
 <div class="app-shell">
 
-    <!-- ════════════════════════════════════
-         STEP 1 — LANDING / SELEÇÃO DE IDADE
-    ════════════════════════════════════ -->
+    <!-- TELA 1 (RESTAURADA) -->
     <div id="step-1" class="step active">
-        <div style="display:flex;flex-direction:column;align-items:center;padding:22px 20px 0;text-align:center;">
-            <span class="rating-badge"><span class="star">★</span> 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
+        <div class="main-content">
+            <div class="rating-badge">★ 4.8 de 5 &nbsp;|&nbsp; 800k usuários</div>
             <h1>Desafio de 28 dias de Caminhada Tai Chi em Casa para emagrecimento</h1>
-            <p class="section-tag" style="margin-top:12px;">DE ACORDO COM A SUA IDADE</p>
-            <span class="quiz-badge">quiz de 1 minuto</span>
+            <center><p style="font-size:11px; font-weight:800; color:#888; text-transform: uppercase;">DE ACORDO COM A SUA IDADE</p>
+            <span style="border:1.5px solid var(--green); color:var(--green); border-radius:20px; padding:4px 14px; font-size:12px; font-weight:800; margin:12px 0; display:inline-block;">quiz de 1 minuto</span></center>
+            <div class="hero-layout">
+                <img src="static/img/hero-sofia.png" class="hero-img">
+                <div class="age-options">
+                    <button class="age-btn" onclick="goTo('step-2')">18-29 anos <span class="arrow-circle">→</span></button>
+                    <button class="age-btn" onclick="goTo('step-2')">30-39 anos <span class="arrow-circle">→</span></button>
+                    <button class="age-btn" onclick="goTo('step-2')">40-49 anos <span class="arrow-circle">→</span></button>
+                    <button class="age-btn" onclick="goTo('step-2')">50+ anos <span class="arrow-circle">→</span></button>
+                </div>
+            </div>
+            <p style="font-size:10px; color:#888; margin-top:15px; text-align:center;">Ao continuar, você concorda com nossos Termos e Políticas.</p>
         </div>
+    </div>
 
-        <div class="hero-layout" style="padding:0 16px;">
-            <img src="static/img/hero-sofia.png" alt="Sofia Lee Coach" class="hero-img">
-            <div class="age-options">
-                <button class="age-btn" onclick="goTo('step-2')">18-29 anos <span class="arrow-circle">→</span></button>
-                <button class="age-btn" onclick="goTo('step-2')">30-39 anos <span class="arrow-circle">→</span></button>
-                <button class="age-btn" onclick="goTo('step-2')">40-49 anos <span class="arrow-circle">→</span></button>
-                <button class="age-btn" onclick="goTo('step-2')">50+ anos  <span class="arrow-circle">→</span></button>
+    <!-- TELA 2 (RESTAURADA) -->
+    <div id="step-2" class="step">
+        <div class="main-content" style="justify-content: center;">
+            <img src="static/img/social-proof.png" class="social-img">
+            <img src="static/img/badge-users.png" class="badge-800k">
+            <p style="color:#666; font-size:16px; margin-top: 15px;">pessoas já se juntaram a nós</p>
+        </div>
+        <div class="footer-action"><button class="btn-primary" onclick="goTo('step-3')">Continuar</button></div>
+    </div>
+
+    <!-- TELA 3 (RESTAURADA) -->
+    <div id="step-3" class="step">
+        <div class="main-content" style="padding:0; justify-content: flex-start;">
+            <img src="static/img/welcome-sofia.png" class="welcome-hero-img">
+            <div style="padding:0 25px;">
+                <h2 style="margin-bottom:15px;">Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
+                <p class="desc-text">Você está prestes a começar uma prática inspirada no Tai Chi para atingir sua meta de passos e equilíbrio sem sair de casa. Vamos explorar juntas seus objetivos e necessidades.</p>
             </div>
         </div>
-
-        <p class="footer-note">Ao continuar, você concorda com nossos <u>Termos de Serviço</u>, <u>Política de Cookies</u> e <u>Política de Privacidade</u></p>
+        <div class="footer-action"><button class="btn-primary" onclick="goTo('step-4')">Continuar</button></div>
     </div>
 
-    <!-- ════════════════════════════════════
-         STEP 2 — SOCIAL PROOF
-    ════════════════════════════════════ -->
-    <div id="step-2" class="step">
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px 20px;text-align:center;">
-            <img src="static/img/social-proof.png" alt="Comunidade" class="social-img">
-            <img src="static/img/badge-users.png" alt="800k usuários" class="badge-img">
-            <p class="social-sub">pessoas já se juntaram a nós</p>
-        </div>
-        <div class="footer-action">
-            <button class="btn-primary" onclick="goTo('step-3')">Continuar</button>
-        </div>
-    </div>
-
-    <!-- ════════════════════════════════════
-         STEP 3 — BOAS-VINDAS
-    ════════════════════════════════════ -->
-    <div id="step-3" class="step">
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
-            <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
-            <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
-            <p class="desc">Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa. Vamos explorar juntas seus objetivos e necessidades.</p>
-        </div>
-        <div class="footer-action">
-            <button class="btn-primary" onclick="goTo('step-4')">Continuar</button>
-        </div>
-    </div>
-
-    <!-- ════════════════════════════════════
-         STEP 4 — OBJETIVO (1/25)  multi-select
-    ════════════════════════════════════ -->
+    <!-- TELA 4: OBJETIVOS (1/25) -->
     <div id="step-4" class="step">
-        <div class="quiz-header">
-            <div class="progress-bar"><div class="progress-fill" style="width:4%"></div></div>
-            <div class="step-label">1 / 25</div>
-        </div>
-        <div class="quiz-body pb-fixed">
-            <h3>Qual é o seu principal objetivo?</h3>
+        <div class="quiz-header"><div class="progress-container"><div class="progress-bar" style="width: 4%"></div></div><div class="step-label">1 / 25</div></div>
+        <div class="main-content" style="justify-content: flex-start;">
+            <h3 class="quiz-title">Qual é o seu principal objetivo?</h3>
             <p class="hint">Você pode selecionar vários objetivos</p>
             <div class="options-list">
-
-                <div class="opt-card" onclick="toggleSelect(this,'btn4')">
-                    <div class="opt-left">
-                        <div class="opt-icon">+</div>
-                        <span class="opt-label">Perder peso</span>
-                    </div>
-                    <img src="static/img/goal-1.png" alt="" class="opt-thumb" onerror="this.style.background='#ddd'">
-                </div>
-
-                <div class="opt-card" onclick="toggleSelect(this,'btn4')">
-                    <div class="opt-left">
-                        <div class="opt-icon">+</div>
-                        <span class="opt-label">Melhorar a saúde do coração</span>
-                    </div>
-                    <img src="static/img/goal-2.png" alt="" class="opt-thumb" onerror="this.style.background='#ddd'">
-                </div>
-
-                <div class="opt-card selected" onclick="toggleSelect(this,'btn4')">
-                    <div class="opt-left">
-                        <div class="opt-icon">✓</div>
-                        <span class="opt-label">Ficar firme e tonificada</span>
-                    </div>
-                    <img src="static/img/goal-3.png" alt="" class="opt-thumb" onerror="this.style.background='#ddd'">
-                </div>
-
-                <div class="opt-card" onclick="toggleSelect(this,'btn4')">
-                    <div class="opt-left">
-                        <div class="opt-icon">+</div>
-                        <span class="opt-label">Reduzir a idade biológica</span>
-                    </div>
-                    <img src="static/img/goal-4.png" alt="" class="opt-thumb" onerror="this.style.background='#ddd'">
-                </div>
-
+                <div class="opt-card" onclick="toggleMulti(this, 'btn4')"><div class="label-box"><div class="check-circle">+</div> Perder peso</div><div class="thumb"></div></div>
+                <div class="opt-card" onclick="toggleMulti(this, 'btn4')"><div class="label-box"><div class="check-circle">+</div> Melhorar a saúde</div><div class="thumb"></div></div>
+                <div class="opt-card" onclick="toggleMulti(this, 'btn4')"><div class="label-box"><div class="check-circle">+</div> Ficar firme</div><div class="thumb"></div></div>
+                <div class="opt-card" onclick="toggleMulti(this, 'btn4')"><div class="label-box"><div class="check-circle">+</div> Reduzir a idade</div><div class="thumb"></div></div>
             </div>
         </div>
-        <button id="btn4" class="btn-primary btn-fixed" onclick="goTo('step-5')">Continuar</button>
+        <div class="footer-action"><button id="btn4" class="btn-primary disabled" onclick="goTo('step-5')">Continuar</button></div>
     </div>
 
-    <!-- ════════════════════════════════════
-         STEP 5 — BIOTIPO (2/25)  single-select
-    ════════════════════════════════════ -->
+    <!-- TELA 5: BIOTIPO (2/25) -->
     <div id="step-5" class="step">
-        <div class="quiz-header">
-            <div class="progress-bar"><div class="progress-fill" style="width:8%"></div></div>
-            <div class="step-label">2 / 25</div>
-        </div>
-        <div class="quiz-body">
-            <h3>Como você descreveria seu biotipo físico?</h3>
-            <p class="hint">&nbsp;</p>
-            <div class="options-list">
-
-                <div class="opt-card single" onclick="autoNext(this,'step-6')">
-                    <div class="opt-left">
-                        <span class="opt-label">Porte médio</span>
-                    </div>
-                    <img src="static/img/body-1.png" alt="" class="opt-thumb" onerror="this.style.background='#ddd'">
-                </div>
-
-                <div class="opt-card single" onclick="autoNext(this,'step-6')">
-                    <div class="opt-left">
-                        <span class="opt-label">Mais encorpada</span>
-                    </div>
-                    <img src="static/img/body-2.png" alt="" class="opt-thumb" onerror="this.style.background='#ddd'">
-                </div>
-
-                <div class="opt-card single" onclick="autoNext(this,'step-6')">
-                    <div class="opt-left">
-                        <span class="opt-label">Acima do peso</span>
-                    </div>
-                    <img src="static/img/body-3.png" alt="" class="opt-thumb" onerror="this.style.background='#ddd'">
-                </div>
-
+        <div class="quiz-header"><div class="progress-container"><div class="progress-bar" style="width: 8%"></div></div><div class="step-label">2 / 25</div></div>
+        <div class="main-content" style="justify-content: flex-start;">
+            <h3 class="quiz-title">Como você descreveria seu biotipo físico?</h3>
+            <div class="options-list" style="margin-top:20px;">
+                <div class="opt-card" onclick="autoNext(this, 'step-6')"><div class="label-box">Porte médio</div><div class="thumb"></div></div>
+                <div class="opt-card" onclick="autoNext(this, 'step-6')"><div class="label-box">Mais encorpada</div><div class="thumb"></div></div>
+                <div class="opt-card" onclick="autoNext(this, 'step-6')"><div class="label-box">Acima do peso</div><div class="thumb"></div></div>
             </div>
         </div>
     </div>
 
-    <!-- ════════════════════════════════════
-         STEP 6+ — adicionar aqui as próximas telas
-    ════════════════════════════════════ -->
+    <!-- TELA 6: CORPO SONHOS (3/25) -->
+    <div id="step-6" class="step">
+        <div class="quiz-header"><div class="progress-container"><div class="progress-bar" style="width: 12%"></div></div><div class="step-label">3 / 25</div></div>
+        <div class="main-content" style="justify-content: flex-start;">
+            <h3 class="quiz-title">Qual é o seu corpo dos sonhos?</h3>
+            <div class="options-list" style="margin-top:20px;">
+                <div class="opt-card" onclick="autoNext(this, 'step-7')"><div class="label-box">Magro</div><div class="thumb"></div></div>
+                <div class="opt-card" onclick="autoNext(this, 'step-7')"><div class="label-box">Tonificado</div><div class="thumb"></div></div>
+                <div class="opt-card" onclick="autoNext(this, 'step-7')"><div class="label-box">Curvilíneo</div><div class="thumb"></div></div>
+            </div>
+        </div>
+    </div>
 
-</div><!-- /app-shell -->
+    <!-- TELA 7: EXPERIÊNCIA (4/25 - EMOJIS) -->
+    <div id="step-7" class="step">
+        <div class="quiz-header"><div class="progress-container"><div class="progress-bar" style="width: 16%"></div></div><div class="step-label">4 / 25</div></div>
+        <div class="main-content" style="justify-content: flex-start;">
+            <h3 class="quiz-title">Você conhece a Caminhada Tai Chi em Casa?</h3>
+            <div class="options-list" style="margin-top:20px;">
+                <div class="opt-card" onclick="autoNext(this, 'final')"><div class="label-box">Sim, pratico regularmente</div><span class="emoji">😎</span></div>
+                <div class="opt-card" onclick="autoNext(this, 'final')"><div class="label-box">Sim, já experimentei</div><span class="emoji">🧐</span></div>
+                <div class="opt-card" onclick="autoNext(this, 'final')"><div class="label-box">Não, nunca experimentei</div><span class="emoji">🤷‍♀️</span></div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
 <script>
-    function goTo(id) {
+    function goTo(stepId) {
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        const t = document.getElementById(id);
-        if (t) { t.classList.add('active'); window.scrollTo(0, 0); }
+        const target = document.getElementById(stepId);
+        if (target) { target.classList.add('active'); window.scrollTo(0, 0); }
     }
 
-    function toggleSelect(card, btnId) {
-        const icon = card.querySelector('.opt-icon');
-        if (card.classList.toggle('selected')) {
-            if (icon) icon.textContent = '✓';
-        } else {
-            if (icon) icon.textContent = '+';
-        }
-        // habilita/desabilita botão conforme seleção
+    function toggleMulti(card, btnId) {
+        const icon = card.querySelector('.check-circle');
+        if (card.classList.toggle('selected')) icon.textContent = '✓';
+        else icon.textContent = '+';
+        
         const btn = document.getElementById(btnId);
-        if (btn) {
-            const hasSel = !!document.querySelector('#step-4 .opt-card.selected');
-            btn.classList.toggle('disabled', !hasSel);
-        }
+        const hasSelection = !!document.querySelector('.step.active .selected');
+        if (hasSelection) btn.classList.remove('disabled');
+        else btn.classList.add('disabled');
     }
 
     function autoNext(card, nextId) {
         card.classList.add('selected');
-        setTimeout(() => goTo(nextId), 400);
+        setTimeout(() => {
+            if(nextId === 'final') alert("Sequência concluída!");
+            else goTo(nextId);
+        }, 500);
     }
 </script>
 </body>
