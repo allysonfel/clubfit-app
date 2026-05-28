@@ -12,7 +12,7 @@
     <div class="app-shell">
         
         <div id="quiz-flow">
-            <!-- TELA 1: LANDING (Print 1) -->
+            <!-- TELA 1: LANDING -->
             <div id="step-1" class="step">
                 <div class="top-badges">
                     <span class="rating-badge">★ 4.8 de 5 | <b>464k</b> usuários</span>
@@ -22,7 +22,8 @@
                 <div class="quiz-time-badge">quiz de 1 minuto</div>
                 
                 <div class="main-image">
-                    <img src="" alt="Sofia Lee Coach" class="img-fluid"> <!-- Imagem da Sofia em pé -->
+                    <!-- CORRIGIDO: Caminho da imagem da Sofia -->
+                    <img src="{{ url_for('static', filename='img/hero-sofia.png') }}" alt="Sofia Lee Coach" class="img-fluid">
                 </div>
 
                 <div class="options-container">
@@ -34,55 +35,59 @@
                 <p class="footer-info">Ao continuar, você concorda com nossos Termos e Políticas</p>
             </div>
 
-            <!-- TELA 2: SOCIAL PROOF (Print 2) -->
+            <!-- TELA 2: SOCIAL PROOF -->
             <div id="step-2" class="step hidden">
-                <div class="social-proof-circle">
-                    <!-- Espaço para o gráfico das fotos em círculo -->
-                    <div class="placeholder-circle"></div>
+                <div class="social-proof-content" style="text-align: center; padding-top: 20px;">
+                    <!-- CORRIGIDO: Caminho do círculo de mulheres -->
+                    <img src="{{ url_for('static', filename='img/social-proof.png') }}" alt="Comunidade" style="max-width: 300px; margin-bottom: 20px;">
+                    
+                    <!-- CORRIGIDO: Caminho do badge 800k -->
+                    <img src="{{ url_for('static', filename='img/badge-users.png') }}" alt="800k users" style="max-width: 250px; margin-bottom: 10px;">
+                    
+                    <p class="subtitle" style="color: #888;">personas ya se han unido a nosotros</p>
+                    <button class="btn-primary" onclick="nextStep()">Continuar</button>
                 </div>
-                <h1 class="big-number">23 000 000+</h1>
-                <p class="subtitle">pessoas já se juntaram a nós</p>
-                <button class="btn-primary" onclick="nextStep()">Continuar</button>
             </div>
 
-            <!-- TELA 3: BOAS-VINDAS (Print 3) -->
+            <!-- TELA 3: BOAS-VINDAS -->
             <div id="step-3" class="step hidden">
                 <div class="welcome-image">
-                    <img src="" alt="Prática em casa"> <!-- Imagem da Sofia na sala -->
+                    <!-- CORRIGIDO: Caminho da Sofia na sala -->
+                    <img src="{{ url_for('static', filename='img/welcome-sofia.png') }}" alt="Prática em casa" class="img-fluid">
                 </div>
-                <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
-                <p class="description-text">
-                    Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa.
+                <h2>¡Bienvenida a tu experiencia de Tai Chi Indoor Walking!</h2>
+                <p class="description-text" style="text-align: center; color: #555; padding: 0 10px;">
+                    Estás a punto de comenzar una práctica de caminata consciente inspirada en el Tai Chi — diseñada para ayudarte a alcanzar tus metas diarias de pasos, mejorar el equilibrio e recuperar la calma interior sin salir de casa.
                 </p>
                 <button class="btn-primary" onclick="nextStep()">Continuar</button>
             </div>
 
-            <!-- TELA 4: OBJETIVO (Print 4) - 1/25 -->
+            <!-- TELA 4: OBJETIVO - 1/25 -->
             <div id="step-4" class="step hidden">
                 <div class="progress-bar-container"><div class="progress" style="width: 4%"></div></div>
                 <p class="step-counter">1 / 25</p>
                 <h3>Qual é o seu principal objetivo?</h3>
-                <p class="small-sub">Você pode selecionar vários objetivos</p>
+                <p class="subtitle">Você pode selecionar vários objetivos</p>
                 
                 <div class="multi-select-list">
-                    <div class="select-item" onclick="toggleMulti(this)"><span>+</span> Perder peso <img src="" class="icon"></div>
-                    <div class="select-item" onclick="toggleMulti(this)"><span>+</span> Melhorar a saúde do coração <img src="" class="icon"></div>
-                    <div class="select-item selected" onclick="toggleMulti(this)"><span>✓</span> Ficar firme e tonificada <img src="" class="icon"></div>
-                    <div class="select-item" onclick="toggleMulti(this)"><span>+</span> Reduzir a idade biológica <img src="" class="icon"></div>
+                    <div class="option-row" onclick="this.classList.toggle('selected')"><span>+</span> Perder peso</div>
+                    <div class="option-row" onclick="this.classList.toggle('selected')"><span>+</span> Melhorar a saúde do coração</div>
+                    <div class="option-row selected" onclick="this.classList.toggle('selected')"><span>✓</span> Ficar firme e tonificada</div>
+                    <div class="option-row" onclick="this.classList.toggle('selected')"><span>+</span> Reduzir a idade biológica</div>
                 </div>
                 <button class="btn-primary" onclick="nextStep()">Continuar</button>
             </div>
 
-            <!-- TELA 5: BIOTIPO (Print 5) - 2/25 -->
+            <!-- TELA 5: BIOTIPO - 2/25 -->
             <div id="step-5" class="step hidden">
                 <div class="progress-bar-container"><div class="progress" style="width: 8%"></div></div>
                 <p class="step-counter">2 / 25</p>
                 <h3>Como você descreveria seu biotipo físico?</h3>
                 
                 <div class="single-select-list">
-                    <div class="select-item" onclick="nextStep()">Porte médio <img src="" class="icon"></div>
-                    <div class="select-item selected" onclick="nextStep()">Mais encorpada <img src="" class="icon"></div>
-                    <div class="select-item" onclick="nextStep()">Acima do peso <img src="" class="icon"></div>
+                    <div class="option-row" onclick="nextStep()">Porte médio <span class="circle-arrow">→</span></div>
+                    <div class="option-row" onclick="nextStep()">Mais encorpada <span class="circle-arrow">→</span></div>
+                    <div class="option-row" onclick="nextStep()">Acima do peso <span class="circle-arrow">→</span></div>
                 </div>
             </div>
 
