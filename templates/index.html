@@ -20,14 +20,16 @@
             font-family: 'Inter', sans-serif; 
             background: #fff; 
             color: var(--text); 
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             justify-content: center;
+            overflow: hidden; /* Trava o scroll global */
         }
 
         .app-shell { 
             width: 100%; 
             max-width: 450px; 
+            height: 100vh;
             display: flex;
             flex-direction: column;
             background: #fff;
@@ -37,58 +39,65 @@
             display: none; 
             flex-direction: column; 
             width: 100%;
-            min-height: 100vh; /* Ocupa a altura da tela */
-            padding-bottom: 30px;
+            height: 100%; /* Ocupa exatamente a altura do celular */
             animation: fadeIn 0.3s ease;
         }
         .step.active { display: flex; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Títulos Padrão Bold */
         h1, h2, h3 { font-weight: 800; text-align: center; letter-spacing: -0.5px; }
 
-        /* ── ESTRUTURA DE CONTEÚDO QUE EMPURRA O BOTÃO ── */
+        /* ÁREA PRINCIPAL: Espaço flexível */
         .main-content {
-            flex: 1; /* Faz o conteúdo crescer e empurrar o footer */
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            justify-content: center; /* Centraliza tudo no meio */
+            padding: 10px 20px;
+            overflow: hidden;
         }
 
+        /* RODAPÉ: Onde o botão mora */
         .footer-action {
-            padding: 10px 20px 20px;
+            padding: 10px 20px 25px;
             width: 100%;
         }
 
-        /* ── TELA 1 (LANDING) ── */
-        .rating-badge { background: var(--green-light); color: #237A44; border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 700; margin-bottom: 15px; }
-        #step-1 h1 { font-size: 24px; line-height: 1.2; margin-bottom: 20px; }
-        .hero-layout { display: flex; align-items: flex-end; gap: 10px; width: 100%; margin-top: 10px; }
-        .hero-img { width: 55%; object-fit: contain; max-height: 380px; }
-        .age-options { flex: 1; display: flex; flex-direction: column; gap: 10px; }
-        .age-btn { background: var(--green); color: #fff; border: none; border-radius: 12px; padding: 15px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; cursor: pointer; font-size: 14px; width: 100%; }
-        .arrow-circle { width: 22px; height: 22px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        /* ── AJUSTES TELA 1 ── */
+        #step-1 .main-content { justify-content: flex-start; padding-top: 15px; }
+        .rating-badge { background: var(--green-light); color: #237A44; border-radius: 100px; padding: 5px 14px; font-size: 12px; font-weight: 700; margin-bottom: 10px; }
+        #step-1 h1 { font-size: 22px; line-height: 1.2; margin-bottom: 15px; }
+        .hero-layout { display: flex; align-items: flex-end; gap: 8px; width: 100%; }
+        .hero-img { width: 52%; max-height: 35vh; object-fit: contain; }
+        .age-options { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+        .age-btn { background: var(--green); color: #fff; border: none; border-radius: 12px; padding: 12px 14px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; font-size: 13px; width: 100%; }
+        .arrow-circle { width: 20px; height: 20px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; }
 
-        /* ── TELA 2 (SOCIAL PROOF) ── */
-        .social-img-main { width: 100%; max-width: 340px; margin-bottom: 15px; }
-        .badge-800k { width: 90%; max-width: 280px; margin-bottom: 10px; }
+        /* ── AJUSTES TELA 2 ── */
+        .social-img-main { max-height: 30vh; width: auto; margin-bottom: 15px; }
+        .badge-800k { max-width: 240px; margin-bottom: 10px; }
 
-        /* ── TELA 3 (BOAS-VINDAS) ── */
-        #step-3 { padding-top: 0; }
-        .welcome-hero-img { width: 100%; border-radius: 0 0 40px 40px; margin-bottom: 25px; max-height: 45vh; object-fit: cover; }
-        #step-3 .main-content { padding: 0; } /* Reseta padding para a imagem colar no topo */
-        #step-3 h2 { padding: 0 25px; margin-bottom: 15px; font-size: 24px; }
-        #step-3 .desc { font-size: 15px; color: #555; line-height: 1.6; padding: 0 25px; text-align: center; }
+        /* ── AJUSTES TELA 3 ── */
+        #step-3 .main-content { padding: 0; justify-content: flex-start; }
+        .welcome-hero-img { 
+            width: 100%; 
+            max-height: 38vh; /* Diminuído para sobrar espaço pro botão */
+            border-radius: 0 0 35px 35px; 
+            margin-bottom: 15px; 
+            object-fit: cover; 
+        }
+        #step-3 h2 { padding: 0 20px; margin-bottom: 10px; font-size: 22px; }
+        #step-3 .desc { font-size: 14px; color: #555; line-height: 1.5; padding: 0 20px; text-align: center; }
 
         /* BOTÃO PADRÃO */
         .btn-primary { 
             background: var(--green); color: white; border: none; padding: 18px; border-radius: 15px; 
-            font-size: 18px; font-weight: 800; width: 100%; cursor: pointer; 
+            font-size: 17px; font-weight: 800; width: 100%; cursor: pointer; 
         }
 
-        .footer-note { font-size: 10px; color: var(--text-muted); text-align: center; margin-top: 15px; width: 100%; }
+        .footer-note { font-size: 10px; color: var(--text-muted); text-align: center; margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -99,8 +108,8 @@
         <div class="main-content">
             <div class="rating-badge">★ 4.8 de 5 &nbsp;|&nbsp; 800k usuários</div>
             <h1>Desafio de 28 dias de Caminhada Tai Chi em Casa para emagrecimento</h1>
-            <p style="font-size:11px; font-weight:800; color:#888; letter-spacing:1px; margin-bottom: 10px; text-transform: uppercase;">DE ACORDO COM A SUA IDADE</p>
-            <span style="border:1.5px solid var(--green); color:var(--green); border-radius:20px; padding:4px 14px; font-size:12px; font-weight:800; margin-bottom:20px;">quiz de 1 minuto</span>
+            <p style="font-size:10px; font-weight:800; color:#888; letter-spacing:1px; margin-bottom: 5px; text-transform: uppercase;">DE ACORDO COM A SUA IDADE</p>
+            <span style="border:1.5px solid var(--green); color:var(--green); border-radius:20px; padding:3px 12px; font-size:11px; font-weight:800; margin-bottom:12px;">quiz de 1 minuto</span>
 
             <div class="hero-layout">
                 <img src="static/img/hero-sofia.png" alt="Sofia Lee" class="hero-img">
@@ -111,16 +120,16 @@
                     <button class="age-btn" onclick="goTo('step-2')">50+ anos <span class="arrow-circle">→</span></button>
                 </div>
             </div>
-            <p class="footer-note">Ao continuar, você concorda com nossos Termos de Serviço, Política de Cookies e Política de Privacidade.</p>
+            <p class="footer-note">Ao continuar, você concorda com nossos Termos e Políticas.</p>
         </div>
     </div>
 
     <!-- TELA 2 -->
     <div id="step-2" class="step">
-        <div class="main-content" style="justify-content: center;">
+        <div class="main-content">
             <img src="static/img/social-proof.png" class="social-img-main">
             <img src="static/img/badge-users.png" class="badge-800k">
-            <p style="color:#666; font-size:16px;">pessoas já se juntaram a nós</p>
+            <p style="color:#666; font-size:15px;">pessoas já se juntaram a nós</p>
         </div>
         <div class="footer-action">
             <button class="btn-primary" onclick="goTo('step-3')">Continuar</button>
@@ -129,10 +138,10 @@
 
     <!-- TELA 3 -->
     <div id="step-3" class="step">
-        <div class="main-content" style="justify-content: flex-start;">
+        <div class="main-content">
             <img src="static/img/welcome-sofia.png" class="welcome-hero-img">
-            <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
-            <p class="desc">Você está prestes a começar uma prática inspirada no Tai Chi para atingir sua meta de passos e equilíbrio sem sair de casa. Vamos explorar seus objetivos e necessidades.</p>
+            <h2>Boas-vindas à sua jornada!</h2>
+            <p class="desc">Comece uma prática de caminhada consciente para atingir suas metas de passos e equilíbrio sem sair de casa.</p>
         </div>
         <div class="footer-action">
             <button class="btn-primary" onclick="goTo('step-4')">Continuar</button>
