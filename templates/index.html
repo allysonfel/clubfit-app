@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ClubFit - Desafio 28 dias Tai Chi</title>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <!-- Usando Inter, que é a fonte padrão de apps modernos -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -15,43 +16,104 @@
             --text: #1A1A1A;
             --text-muted: #888;
             --radius: 14px;
-            --font: 'DM Sans', sans-serif;
         }
 
-        body { font-family: var(--font); background: #fff; color: var(--text); min-height: 100vh; display: flex; justify-content: center; }
+        body { 
+            font-family: 'Inter', -apple-system, sans-serif; 
+            background: #fff; 
+            color: var(--text); 
+            min-height: 100vh; 
+            display: flex; 
+            justify-content: center; 
+        }
 
-        .app-shell { width: 100%; max-width: 480px; display: flex; flex-direction: column; position: relative; }
+        .app-shell { width: 100%; max-width: 450px; display: flex; flex-direction: column; }
 
-        .step { display: none; flex-direction: column; min-height: 100vh; animation: fadeIn 0.35s ease; }
+        .step { display: none; flex-direction: column; min-height: 100vh; animation: fadeIn 0.3s ease; }
         .step.active { display: flex; }
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* ── STEP 1 (Landing) ── */
-        #step-1 { padding: 24px 15px; text-align: center; }
-        .rating-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-light); color: var(--green-dark); border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 600; margin-bottom: 15px; }
-        #step-1 h1 { font-family: 'Playfair Display', serif; font-size: 26px; line-height: 1.2; margin-bottom: 10px; }
-        .hero-layout { display: flex; align-items: flex-end; gap: 10px; margin-top: 10px; }
-        .hero-img { width: 58%; object-fit: contain; max-height: 420px; }
-        .age-options { flex: 1; display: flex; flex-direction: column; gap: 12px; padding-bottom: 20px; }
-        .age-btn { display: flex; align-items: center; justify-content: space-between; background: var(--green); color: #fff; border: none; border-radius: var(--radius); padding: 14px 16px; font-weight: 700; cursor: pointer; width: 100%; }
-        .arrow-circle { width: 26px; height: 26px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        /* Títulos Padrão Bold */
+        h1, h2, h3 { 
+            font-weight: 800; 
+            text-align: center; 
+            letter-spacing: -0.5px;
+            color: #000;
+        }
 
-        /* ── STEP 2 (Social Proof) ── */
+        /* ── STEP 1 ── */
+        #step-1 { padding: 20px 15px; text-align: center; align-items: center; }
+        
+        /* Centralizado */
+        .rating-badge { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 6px; 
+            background: var(--green-light); 
+            color: var(--green-dark); 
+            border-radius: 100px; 
+            padding: 6px 16px; 
+            font-size: 13px; 
+            font-weight: 700; 
+            margin: 0 auto 15px auto; 
+        }
+        
+        #step-1 h1 { font-size: 24px; line-height: 1.2; margin-bottom: 12px; width: 100%; }
+        
+        .hero-layout { display: flex; align-items: flex-end; gap: 10px; margin-top: 15px; width: 100%; }
+        .hero-img { width: 55%; object-fit: contain; max-height: 380px; }
+        .age-options { flex: 1; display: flex; flex-direction: column; gap: 10px; padding-bottom: 10px; }
+        
+        .age-btn { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            background: var(--green); 
+            color: #fff; 
+            border: none; 
+            border-radius: var(--radius); 
+            padding: 14px 15px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            width: 100%;
+            font-size: 14px;
+        }
+        .arrow-circle { width: 22px; height: 22px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+
+        .footer-note { font-size: 10px; color: var(--text-muted); margin-top: 20px; line-height: 1.4; padding: 0 10px; }
+
+        /* ── STEP 2 ── */
         #step-2 { padding: 40px 20px; text-align: center; align-items: center; justify-content: center; }
         .social-img-main { width: 100%; max-width: 320px; margin-bottom: 20px; }
         .badge-800k { width: 100%; max-width: 280px; margin-bottom: 15px; }
-        .proof-text { font-size: 16px; color: var(--text-muted); margin-bottom: 30px; }
 
-        /* ── STEP 3 (Boas-vindas) ── */
+        /* ── STEP 3 ── */
         #step-3 { text-align: center; }
-        .welcome-hero-img { width: 100%; border-radius: 0 0 40px 40px; margin-bottom: 25px; object-fit: cover; }
-        #step-3 h2 { font-family: 'Playfair Display', serif; font-size: 24px; padding: 0 25px; margin-bottom: 15px; }
-        #step-3 .desc { font-size: 15px; color: #555; line-height: 1.6; padding: 0 25px; margin-bottom: 35px; }
+        /* Ajustado para caber na tela */
+        .welcome-hero-img { 
+            width: 100%; 
+            max-height: 45vh; /* Limita a altura a 45% da tela */
+            border-radius: 0 0 40px 40px; 
+            margin-bottom: 20px; 
+            object-fit: cover; 
+        }
+        #step-3 h2 { font-size: 22px; padding: 0 20px; margin-bottom: 12px; }
+        #step-3 .desc { font-size: 14px; color: #555; line-height: 1.5; padding: 0 25px; margin-bottom: 25px; }
 
         /* Botão Geral */
-        .btn-primary { background: var(--green); color: white; border: none; padding: 20px; border-radius: 15px; font-size: 18px; font-weight: bold; width: calc(100% - 40px); margin: 0 auto; cursor: pointer; }
-        .hidden { display: none; }
+        .btn-primary { 
+            background: var(--green); 
+            color: white; 
+            border: none; 
+            padding: 18px; 
+            border-radius: 15px; 
+            font-size: 18px; 
+            font-weight: 800; 
+            width: calc(100% - 40px); 
+            margin: 0 auto; 
+            cursor: pointer; 
+        }
     </style>
 </head>
 <body>
@@ -59,10 +121,10 @@
 
     <!-- TELA 1 -->
     <div id="step-1" class="step active">
-        <span class="rating-badge">★ 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
+        <div class="rating-badge">★ 4.8 de 5 &nbsp;|&nbsp; 800k usuários</div>
         <h1>Desafio de 28 dias de Caminhada Tai Chi em Casa para emagrecimento</h1>
-        <p style="font-size:11px; font-weight:700; color:#888; letter-spacing:1px; margin: 10px 0;">DE ACORDO COM A SUA IDADE</p>
-        <span style="border:1px solid var(--green); color:var(--green); border-radius:20px; padding:4px 12px; font-size:12px; font-weight:700; margin-bottom:15px; display:inline-block;">quiz de 1 minuto</span>
+        <p style="font-size:11px; font-weight:800; color:#888; letter-spacing:1px; margin-bottom: 8px;">DE ACORDO COM A SUA IDADE</p>
+        <span style="border:1.5px solid var(--green); color:var(--green); border-radius:20px; padding:4px 14px; font-size:12px; font-weight:800; margin-bottom:15px;">quiz de 1 minuto</span>
 
         <div class="hero-layout">
             <img src="static/img/hero-sofia.png" alt="Sofia Lee" class="hero-img">
@@ -73,21 +135,23 @@
                 <button class="age-btn" onclick="goTo('step-2')">50+ anos <span class="arrow-circle">→</span></button>
             </div>
         </div>
+        
+        <p class="footer-note">Ao continuar, você concorda com nossos <u>Termos de Serviço</u>, <u>Política de Cookies</u> e <u>Política de Privacidade</u>.</p>
     </div>
 
     <!-- TELA 2 -->
     <div id="step-2" class="step">
         <img src="static/img/social-proof.png" alt="Comunidade" class="social-img-main">
-        <img src="static/img/badge-users.png" alt="800k+" class="badge-800k">
-        <p class="proof-text">pessoas já se juntaram a nós</p>
+        <img src="static/img/badge-users.png" alt="800,000+" class="badge-800k">
+        <p style="color:#666; font-size:15px; margin-bottom:30px;">pessoas já se juntaram a nós</p>
         <button class="btn-primary" onclick="goTo('step-3')">Continuar</button>
     </div>
 
-    <!-- TELA 3 (RECONSTRUÍDA) -->
+    <!-- TELA 3 (COMPACTADA) -->
     <div id="step-3" class="step">
-        <img src="static/img/welcome-sofia.png" alt="Prática em casa" class="welcome-hero-img">
+        <img src="static/img/welcome-sofia.png" alt="Prática" class="welcome-hero-img">
         <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
-        <p class="desc">Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa. Vamos explorar juntas seus objetivos e necessidades.</p>
+        <p class="desc">Você está prestes a começar uma prática inspirada no Tai Chi para atingir sua meta de passos e equilíbrio sem sair de casa. Vamos explorar seus objetivos.</p>
         <button class="btn-primary" onclick="goTo('step-4')">Continuar</button>
     </div>
 
@@ -97,10 +161,7 @@
     function goTo(stepId) {
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         const target = document.getElementById(stepId);
-        if (target) {
-            target.classList.add('active');
-            window.scrollTo(0, 0);
-        }
+        if (target) { target.classList.add('active'); window.scrollTo(0, 0); }
     }
 </script>
 </body>
