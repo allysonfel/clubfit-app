@@ -19,105 +19,129 @@
             font-family: 'Inter', sans-serif; 
             background: #fff; 
             color: var(--text); 
-            height: 100%;
-            overflow-x: hidden;
+            height: 100dvh; /* Altura dinâmica para iPhone */
+            display: flex; 
+            justify-content: center;
+            overflow: hidden;
         }
 
         .app-shell { 
             width: 100%; 
             max-width: 450px; 
-            margin: 0 auto;
-            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
         /* ── ESTRUTURA DOS PASSOS ── */
         .step { 
             display: none; 
             flex-direction: column; 
-            min-height: 100dvh; /* Dynamic VH para iPhone */
-            padding: 15px;
-            justify-content: space-between; /* Empurra o botão pro final */
+            height: 100%;
+            width: 100%;
         }
         .step.active { display: flex; }
 
-        h1 { font-weight: 800; font-size: 26px; text-align: center; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 10px; }
-        h2 { font-weight: 800; font-size: 24px; text-align: center; line-height: 1.2; margin-bottom: 15px; }
-
-        /* ── TELA 1 (LANDING) - RESTAURADA ── */
-        #step-1 { justify-content: flex-start; }
-        .rating-badge { background: var(--green-light); color: #237A44; border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 700; margin: 10px auto 15px; width: fit-content; }
-        .quiz-badge { border: 1.5px solid var(--green); color: var(--green); border-radius: 20px; padding: 4px 14px; font-size: 12px; font-weight: 800; margin-bottom: 15px; display: inline-block; }
-        
-        .hero-layout { display: flex; align-items: flex-end; gap: 10px; width: 100%; margin-top: 10px; }
-        .hero-img { width: 55%; height: auto; max-height: 400px; object-fit: contain; }
-        .age-options { flex: 1; display: flex; flex-direction: column; gap: 10px; padding-bottom: 5px; }
-        .age-btn { background: var(--green); color: #fff; border: none; border-radius: 12px; padding: 16px 12px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; font-size: 14px; width: 100%; cursor: pointer; }
-        .arrow-circle { width: 22px; height: 22px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; }
-        .footer-note { font-size: 11px; color: #888; text-align: center; margin-top: 20px; line-height: 1.4; }
-
-        /* ── TELA 2 & 3 (COM BOTÃO FIXO EMBAIXO) ── */
-        .content-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        
-        .social-img { width: 100%; max-width: 320px; margin-bottom: 15px; height: auto; }
-        .badge-800k { width: 90%; max-width: 280px; margin-bottom: 10px; }
-
-        .welcome-img { width: 100%; border-radius: 20px; margin-bottom: 20px; max-height: 300px; object-fit: cover; }
-        .desc-text { font-size: 15px; color: #555; line-height: 1.5; text-align: center; padding: 0 10px; }
-
-        /* BOTÃO PRINCIPAL */
-        .footer-btn-container { padding: 20px 5px 30px; width: 100%; }
-        .btn-primary { 
-            background: var(--green); color: white; border: none; padding: 20px; border-radius: 15px; 
-            font-size: 18px; font-weight: 800; width: 100%; cursor: pointer;
+        /* Área de conteúdo flexível que preenche o buraco */
+        .main-content {
+            flex: 1; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center; /* Centraliza ou distribui o conteúdo no espaço vago */
+            padding: 20px;
+            text-align: center;
         }
 
+        /* Área fixa do botão no rodapé */
+        .footer-action {
+            height: 120px; /* Altura fixa para o botão ficar sempre no mesmo lugar */
+            padding: 0 20px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 { font-weight: 800; font-size: 26px; line-height: 1.2; letter-spacing: -0.8px; margin-bottom: 12px; }
+        h2 { font-weight: 800; font-size: 24px; line-height: 1.2; letter-spacing: -0.5px; margin-bottom: 15px; }
+
+        /* ── TELA 1 ── */
+        #step-1 .main-content { justify-content: flex-start; padding-top: 15px; }
+        .rating-badge { background: var(--green-light); color: #237A44; border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 700; margin-bottom: 15px; }
+        .hero-layout { display: flex; align-items: flex-end; gap: 10px; width: 100%; margin-top: 10px; }
+        .hero-img { width: 58%; object-fit: contain; max-height: 400px; }
+        .age-options { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+        .age-btn { background: var(--green); color: #fff; border: none; border-radius: 12px; padding: 16px 12px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; font-size: 14px; cursor: pointer; }
+        .arrow-circle { width: 22px; height: 22px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; }
+
+        /* ── TELA 2 ── */
+        .social-img { width: 100%; max-width: 320px; margin-bottom: 25px; }
+        .badge-800k { width: 90%; max-width: 280px; }
+
+        /* ── TELA 3 (MELHORADA) ── */
+        #step-3 .main-content { padding: 0; justify-content: space-between; } /* Distribui imagem no topo e texto no meio */
+        .welcome-hero-img { width: 100%; border-radius: 0 0 40px 40px; max-height: 45vh; object-fit: cover; }
+        .text-box { padding: 0 25px 20px; flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .desc-text { font-size: 15px; color: #444; line-height: 1.6; }
+
+        /* BOTÃO PADRÃO */
+        .btn-primary { 
+            background: var(--green); color: white; border: none; padding: 18px; border-radius: 15px; 
+            font-size: 18px; font-weight: 800; width: 100%; cursor: pointer;
+        }
+        
+        .footer-note { font-size: 11px; color: #888; margin-top: 15px; }
         .hidden { display: none; }
     </style>
 </head>
 <body>
 <div class="app-shell">
 
-    <!-- TELA 1 (Tamanho Restaurado) -->
+    <!-- TELA 1 -->
     <div id="step-1" class="step active">
-        <div class="rating-badge">★ 4.8 de 5 &nbsp;|&nbsp; 800k usuários</div>
-        <h1>Desafio de 28 dias de Caminhada Tai Chi em Casa para emagrecimento</h1>
-        <center>
+        <div class="main-content">
+            <div class="rating-badge">★ 4.8 de 5 &nbsp;|&nbsp; 800k usuários</div>
+            <h1>Desafio de 28 dias de Caminhada Tai Chi em Casa para emagrecimento</h1>
             <p style="font-size:11px; font-weight:800; color:#888; letter-spacing:1px; margin-bottom: 8px; text-transform: uppercase;">DE ACORDO COM A SUA IDADE</p>
-            <span class="quiz-badge">quiz de 1 minuto</span>
-        </center>
+            <span style="border:1.5px solid var(--green); color:var(--green); border-radius:20px; padding:4px 14px; font-size:12px; font-weight:800; margin-bottom:15px;">quiz de 1 minuto</span>
 
-        <div class="hero-layout">
-            <img src="static/img/hero-sofia.png" alt="Sofia Lee" class="hero-img">
-            <div class="age-options">
-                <button class="age-btn" onclick="goTo('step-2')">18-29 anos <span class="arrow-circle">→</span></button>
-                <button class="age-btn" onclick="goTo('step-2')">30-39 anos <span class="arrow-circle">→</span></button>
-                <button class="age-btn" onclick="goTo('step-2')">40-49 anos <span class="arrow-circle">→</span></button>
-                <button class="age-btn" onclick="goTo('step-2')">50+ anos <span class="arrow-circle">→</span></button>
+            <div class="hero-layout">
+                <img src="static/img/hero-sofia.png" alt="Sofia Lee" class="hero-img">
+                <div class="age-options">
+                    <button class="age-btn" onclick="goTo('step-2')">18-29 anos <span class="arrow-circle">→</span></button>
+                    <button class="age-btn" onclick="goTo('step-2')">30-39 anos <span class="arrow-circle">→</span></button>
+                    <button class="age-btn" onclick="goTo('step-2')">40-49 anos <span class="arrow-circle">→</span></button>
+                    <button class="age-btn" onclick="goTo('step-2')">50+ anos <span class="arrow-circle">→</span></button>
+                </div>
             </div>
+            <p class="footer-note">Ao continuar, você concorda com nossos Termos e Políticas.</p>
         </div>
-        <p class="footer-note">Ao continuar, você concorda com nossos Termos e Políticas.</p>
     </div>
 
-    <!-- TELA 2 (Botão Visível no iPhone) -->
+    <!-- TELA 2 -->
     <div id="step-2" class="step">
-        <div class="content-wrap">
+        <div class="main-content">
             <img src="static/img/social-proof.png" class="social-img">
             <img src="static/img/badge-users.png" class="badge-800k">
-            <p style="color:#666; font-size:16px;">pessoas já se juntaram a nós</p>
+            <p style="color:#666; font-size:16px; margin-top: 15px;">pessoas já se juntaram a nós</p>
         </div>
-        <div class="footer-btn-container">
+        <div class="footer-action">
             <button class="btn-primary" onclick="goTo('step-3')">Continuar</button>
         </div>
     </div>
 
-    <!-- TELA 3 (Compacta para não dar scroll) -->
+    <!-- TELA 3 (TEXTO COMPLETO E DISTRIBUIÇÃO CORRIGIDA) -->
     <div id="step-3" class="step">
-        <div class="content-wrap" style="justify-content: flex-start; padding-top: 10px;">
-            <img src="static/img/welcome-sofia.png" class="welcome-img">
-            <h2>Boas-vindas à sua jornada!</h2>
-            <p class="desc-text">Você está prestes a começar uma prática inspirada no Tai Chi para atingir suas metas de passos e equilíbrio sem sair de casa.</p>
+        <div class="main-content">
+            <img src="static/img/welcome-sofia.png" class="welcome-hero-img">
+            <div class="text-box">
+                <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
+                <p class="desc-text">
+                    Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa. Vamos explorar juntas seus objetivos e necessidades.
+                </p>
+            </div>
         </div>
-        <div class="footer-btn-container">
+        <div class="footer-action">
             <button class="btn-primary" onclick="goTo('step-4')">Continuar</button>
         </div>
     </div>
@@ -128,10 +152,7 @@
     function goTo(stepId) {
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         const target = document.getElementById(stepId);
-        if (target) {
-            target.classList.add('active');
-            window.scrollTo(0, 0);
-        }
+        if (target) { target.classList.add('active'); window.scrollTo(0, 0); }
     }
 </script>
 </body>
