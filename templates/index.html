@@ -12,214 +12,83 @@
             --green: #2E9E58;
             --green-dark: #237A44;
             --green-light: #E8F5EE;
-            --green-selected: #2E9E58;
             --text: #1A1A1A;
             --text-muted: #888;
-            --bg: #FFFFFF;
-            --card-bg: #F5F5F0;
             --radius: 14px;
             --font: 'DM Sans', sans-serif;
         }
 
-        body {
-            font-family: var(--font);
-            background: var(--bg);
-            color: var(--text);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-        }
+        body { font-family: var(--font); background: #fff; color: var(--text); min-height: 100vh; display: flex; justify-content: center; }
 
-        .app-shell {
-            width: 100%;
-            max-width: 480px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: hidden;
-        }
+        .app-shell { width: 100%; max-width: 480px; display: flex; flex-direction: column; position: relative; }
 
-        /* ── STEPS ── */
-        .step { display: none; flex-direction: column; min-height: 100vh; }
-        .step.active { display: flex; animation: fadeIn 0.35s ease; }
+        .step { display: none; flex-direction: column; min-height: 100vh; animation: fadeIn 0.35s ease; }
+        .step.active { display: flex; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(12px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* ──────────────────────────────────────
-           STEP 1 — LANDING
-        ────────────────────────────────────── */
-        #step-1 {
-            padding: 24px 15px 20px;
-            align-items: center;
-            text-align: center;
-        }
+        /* ── STEP 1 (Landing) ── */
+        #step-1 { padding: 24px 15px; text-align: center; }
+        .rating-badge { display: inline-flex; align-items: center; gap: 6px; background: var(--green-light); color: var(--green-dark); border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 600; margin-bottom: 15px; }
+        #step-1 h1 { font-family: 'Playfair Display', serif; font-size: 26px; line-height: 1.2; margin-bottom: 10px; }
+        .hero-layout { display: flex; align-items: flex-end; gap: 10px; margin-top: 10px; }
+        .hero-img { width: 58%; object-fit: contain; max-height: 420px; }
+        .age-options { flex: 1; display: flex; flex-direction: column; gap: 12px; padding-bottom: 20px; }
+        .age-btn { display: flex; align-items: center; justify-content: space-between; background: var(--green); color: #fff; border: none; border-radius: var(--radius); padding: 14px 16px; font-weight: 700; cursor: pointer; width: 100%; }
+        .arrow-circle { width: 26px; height: 26px; background: rgba(255,255,255,0.25); border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 
-        .rating-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--green-light);
-            color: var(--green-dark);
-            border-radius: 100px;
-            padding: 6px 16px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        .rating-badge .star { color: #F5A623; }
+        /* ── STEP 2 (Social Proof) ── */
+        #step-2 { padding: 40px 20px; text-align: center; align-items: center; justify-content: center; }
+        .social-img-main { width: 100%; max-width: 320px; margin-bottom: 20px; }
+        .badge-800k { width: 100%; max-width: 280px; margin-bottom: 15px; }
+        .proof-text { font-size: 16px; color: var(--text-muted); margin-bottom: 30px; }
 
-        #step-1 h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 26px;
-            line-height: 1.2;
-            max-width: 380px;
-            margin-bottom: 12px;
-        }
+        /* ── STEP 3 (Boas-vindas) ── */
+        #step-3 { text-align: center; }
+        .welcome-hero-img { width: 100%; border-radius: 0 0 40px 40px; margin-bottom: 25px; object-fit: cover; }
+        #step-3 h2 { font-family: 'Playfair Display', serif; font-size: 24px; padding: 0 25px; margin-bottom: 15px; }
+        #step-3 .desc { font-size: 15px; color: #555; line-height: 1.6; padding: 0 25px; margin-bottom: 35px; }
 
-        .section-tag {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-        }
-
-        .quiz-badge {
-            display: inline-block;
-            background: var(--green-light);
-            color: var(--green);
-            border-radius: 100px;
-            padding: 4px 14px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .hero-layout {
-            display: flex;
-            width: 100%;
-            align-items: flex-end;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .hero-img {
-            width: 58%; /* AUMENTADA PARA MAIOR DESTAQUE */
-            object-fit: contain;
-            max-height: 420px;
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05));
-        }
-
-        .age-options {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            padding-bottom: 20px;
-        }
-
-        .age-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--green);
-            color: #fff;
-            border: none;
-            border-radius: var(--radius);
-            padding: 14px 16px;
-            font-family: var(--font);
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s;
-            width: 100%;
-        }
-        .age-btn:active { transform: scale(0.96); }
-
-        .arrow-circle {
-            width: 26px; height: 26px;
-            background: rgba(255,255,255,0.25);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        .footer-note {
-            font-size: 10px;
-            color: var(--text-muted);
-            margin-top: 15px;
-            line-height: 1.4;
-        }
-
-        /* ──────────────────────────────────────
-           STEP 2 — SOCIAL PROOF
-        ────────────────────────────────────── */
-        #step-2 {
-            align-items: center;
-            justify-content: center;
-            padding: 40px 24px;
-            text-align: center;
-        }
-
-        .badge-img {
-            width: 100%;
-            max-width: 280px;
-            margin: 20px 0;
-        }
-
-        /* Resto do CSS omitido para brevidade, mas mantido igual ao seu */
-        /* ... (Mantenha o restante das classes do seu código anterior aqui) ... */
-        .community-wrap { position: relative; width: 280px; height: 280px; margin: 0 auto 10px; }
-        .community-wrap::before { content: ''; position: absolute; inset: 0; border-radius: 50%; border: 2px dashed #C5DFD0; }
-        .center-img { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: 0 4px 18px rgba(0,0,0,0.1); }
-        .avatar { position: absolute; width: 52px; height: 52px; border-radius: 50%; border: 3px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); background: #ddd; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .av-1 { top: -10px; left: 50%; transform: translateX(-50%); } .av-2 { top: 20px; right: -10px; } .av-3 { bottom: 20px; right: -10px; } .av-4 { bottom: -10px; left: 50%; transform: translateX(-50%); } .av-5 { top: 20px; left: -10px; }
-        .counter-num { font-family: 'Playfair Display', serif; font-size: 38px; font-weight: 700; margin: 15px 0 5px; }
-        .counter-sub { color: var(--text-muted); margin-bottom: 30px; font-size: 14px; }
-        .btn-primary { background: var(--green); color: white; border: none; padding: 18px; border-radius: 15px; font-size: 18px; font-weight: bold; width: 100%; cursor: pointer; }
+        /* Botão Geral */
+        .btn-primary { background: var(--green); color: white; border: none; padding: 20px; border-radius: 15px; font-size: 18px; font-weight: bold; width: calc(100% - 40px); margin: 0 auto; cursor: pointer; }
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 <div class="app-shell">
 
-    <!-- STEP 1 — LANDING -->
+    <!-- TELA 1 -->
     <div id="step-1" class="step active">
-        <span class="rating-badge"><span class="star">★</span> 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
+        <span class="rating-badge">★ 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
         <h1>Desafio de 28 dias de Caminhada Tai Chi em Casa para emagrecimento</h1>
-        <p class="section-tag">DE ACORDO COM A SUA IDADE</p>
-        <span class="quiz-badge">quiz de 1 minuto</span>
+        <p style="font-size:11px; font-weight:700; color:#888; letter-spacing:1px; margin: 10px 0;">DE ACORDO COM A SUA IDADE</p>
+        <span style="border:1px solid var(--green); color:var(--green); border-radius:20px; padding:4px 12px; font-size:12px; font-weight:700; margin-bottom:15px; display:inline-block;">quiz de 1 minuto</span>
 
         <div class="hero-layout">
-            <img src="static/img/hero-sofia.png" alt="Sofia Lee Coach" class="hero-img">
+            <img src="static/img/hero-sofia.png" alt="Sofia Lee" class="hero-img">
             <div class="age-options">
                 <button class="age-btn" onclick="goTo('step-2')">18-29 anos <span class="arrow-circle">→</span></button>
                 <button class="age-btn" onclick="goTo('step-2')">30-39 anos <span class="arrow-circle">→</span></button>
                 <button class="age-btn" onclick="goTo('step-2')">40-49 anos <span class="arrow-circle">→</span></button>
-                <button class="age-btn" onclick="goTo('step-2')">50+ anos  <span class="arrow-circle">→</span></button>
+                <button class="age-btn" onclick="goTo('step-2')">50+ anos <span class="arrow-circle">→</span></button>
             </div>
         </div>
-
-        <p class="footer-note">Ao continuar, você concorda com nossos <u>Termos de Serviço</u>, <u>Política de Cookies</u> e <u>Política de Privacidade</u></p>
     </div>
 
-    <!-- STEP 2 — SOCIAL PROOF -->
+    <!-- TELA 2 -->
     <div id="step-2" class="step">
-        <div class="community-wrap">
-            <img src="static/img/social-proof.png" alt="Comunidade" class="center-img">
-            <div class="avatar av-1">👩</div> <div class="avatar av-2">👩‍🦳</div> <div class="avatar av-3">👩‍🦱</div> <div class="avatar av-4">🧕</div> <div class="avatar av-5">👩‍🦰</div>
-        </div>
-        
-        <!-- Puxando a sua imagem do selo 800k -->
-        <img src="static/img/badge-users.png" class="badge-img" alt="800k+">
-        
-        <p class="counter-sub">pessoas já se juntaram a nós</p>
+        <img src="static/img/social-proof.png" alt="Comunidade" class="social-img-main">
+        <img src="static/img/badge-users.png" alt="800k+" class="badge-800k">
+        <p class="proof-text">pessoas já se juntaram a nós</p>
         <button class="btn-primary" onclick="goTo('step-3')">Continuar</button>
+    </div>
+
+    <!-- TELA 3 (RECONSTRUÍDA) -->
+    <div id="step-3" class="step">
+        <img src="static/img/welcome-sofia.png" alt="Prática em casa" class="welcome-hero-img">
+        <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
+        <p class="desc">Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa. Vamos explorar juntas seus objetivos e necessidades.</p>
+        <button class="btn-primary" onclick="goTo('step-4')">Continuar</button>
     </div>
 
 </div>
@@ -228,7 +97,10 @@
     function goTo(stepId) {
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         const target = document.getElementById(stepId);
-        if (target) { target.classList.add('active'); window.scrollTo(0,0); }
+        if (target) {
+            target.classList.add('active');
+            window.scrollTo(0, 0);
+        }
     }
 </script>
 </body>
