@@ -23,7 +23,7 @@
             font-family: var(--font);
             background: #fff;
             color: var(--text);
-            height: 100dvh; /* Altura exata da tela */
+            height: 100dvh;
             display: flex;
             justify-content: center;
             overflow: hidden;
@@ -47,7 +47,7 @@
         }
 
         /* ════════════════════════════════
-           STEP 1 — LANDING (Seu Original Intocado)
+           STEP 1 — LANDING
         ════════════════════════════════ */
         #step-1 {
             padding: 22px 20px 16px;
@@ -158,32 +158,32 @@
         .footer-note u { cursor: pointer; }
 
         /* ════════════════════════════════
-           STEP 2 — SOCIAL PROOF (Espaçamento Inteligente)
+           STEP 2 — SOCIAL PROOF
         ════════════════════════════════ */
         #step-2 {
             align-items: center;
             justify-content: center;
-            padding: 10px 24px 20px; /* Reduzido padding do topo para subir tudo */
+            padding: 10px 24px 20px;
             text-align: center;
             gap: 0;
         }
 
         .social-img {
             width: 100%;
-            max-width: 280px; /* Tamanho grande mantido */
-            margin-bottom: 12px; /* Reduzido de 20px */
+            max-width: 280px;
+            margin-bottom: 12px;
         }
 
         .badge-img {
             width: 90%;
             max-width: 250px;
-            margin-bottom: 8px; /* Reduzido de 10px */
+            margin-bottom: 8px;
         }
 
         .social-sub {
             font-size: 15px;
             color: #666;
-            margin-bottom: 15px; /* Reduzido de 36px para o botão subir */
+            margin-bottom: 15px;
         }
 
         /* ════════════════════════════════
@@ -197,11 +197,11 @@
 
         .welcome-img {
             width: 100%;
-            max-height: 32vh; /* Altura inteligente para iPhone */
+            max-height: 32vh;
             object-fit: cover;
-            object-position: center 10%; /* Mantém a cabeça da Sofia */
+            object-position: center 10%;
             border-radius: 0 0 28px 28px;
-            margin-bottom: 15px; /* Reduzido de 22px */
+            margin-bottom: 15px;
         }
 
         #step-3 h2 {
@@ -211,7 +211,7 @@
             line-height: 1.3;
             letter-spacing: -0.4px;
             max-width: 340px;
-            margin: 0 auto 10px; /* Reduzido de 14px */
+            margin: 0 auto 10px;
             padding: 0 20px;
         }
 
@@ -220,7 +220,7 @@
             color: #555;
             line-height: 1.6;
             max-width: 340px;
-            margin: 0 auto 20px; /* Reduzido de 32px para o botão subir */
+            margin: 0 auto 20px;
             padding: 0 20px;
         }
 
@@ -367,8 +367,7 @@
             font-size: 17px;
             font-weight: 800;
             cursor: pointer;
-            width: calc(100% - 40px);
-            margin: 0 auto;
+            width: 100%;
             transition: background 0.15s, transform 0.1s;
         }
         .btn-primary:hover  { background: var(--green-dark); }
@@ -380,11 +379,20 @@
             pointer-events: none;
         }
 
+        /* footer-action: container do botão nas telas 2 e 3 */
+        .footer-action {
+            width: 100%;
+            padding: 0 20px 32px;
+            flex-shrink: 0;
+        }
+
+        /* Botão fixo no rodapé (telas de quiz multi-select) */
         .btn-fixed {
             position: fixed;
             bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
+            width: calc(100% - 40px);
             max-width: 440px;
             z-index: 10;
             box-shadow: 0 4px 20px rgba(46,158,88,0.3);
@@ -392,10 +400,6 @@
         .btn-fixed:active { transform: translateX(-50%) scale(0.98) !important; }
 
         .pb-fixed { padding-bottom: 90px; }
-
-        .footer-action {
-            padding: 0 20px 24px; /* Reduzido de 36px para dar espaço de segurança */
-        }
 
         @media (max-width: 360px) {
             #step-1 h1 { font-size: 20px; }
@@ -406,7 +410,7 @@
 <body>
 <div class="app-shell">
 
-    <!-- STEP 1 (Seu Original Intocado) -->
+    <!-- STEP 1 -->
     <div id="step-1" class="step active">
         <div style="display:flex;flex-direction:column;align-items:center;padding:22px 20px 0;text-align:center;">
             <span class="rating-badge"><span class="star">★</span> 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
@@ -414,7 +418,6 @@
             <p class="section-tag" style="margin-top:12px;">DE ACORDO COM A SUA IDADE</p>
             <span class="quiz-badge">quiz de 1 minuto</span>
         </div>
-
         <div class="hero-layout" style="padding:0 16px;">
             <img src="static/img/hero-sofia.png" alt="Sofia Lee Coach" class="hero-img">
             <div class="age-options">
@@ -424,11 +427,10 @@
                 <button class="age-btn" onclick="goTo('step-2')">50+ anos  <span class="arrow-circle">→</span></button>
             </div>
         </div>
-
         <p class="footer-note">Ao continuar, você concorda com nossos <u>Termos de Serviço</u>, <u>Política de Cookies</u> e <u>Política de Privacidade</u></p>
     </div>
 
-    <!-- STEP 2 (CORRIGIDO: Removido Padding Inline) -->
+    <!-- STEP 2 — SOCIAL PROOF -->
     <div id="step-2" class="step">
         <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 24px 10px;text-align:center;">
             <img src="static/img/social-proof.png" alt="Comunidade" class="social-img">
@@ -440,7 +442,7 @@
         </div>
     </div>
 
-    <!-- STEP 3 (CORRIGIDO: Removido Padding Inline) -->
+    <!-- STEP 3 — BOAS-VINDAS -->
     <div id="step-3" class="step">
         <div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:0 0 10px;">
             <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
@@ -463,20 +465,20 @@
             <p class="hint">Você pode selecionar vários objetivos</p>
             <div class="options-list">
                 <div class="opt-card" onclick="toggleSelect(this,'btn4')">
-                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Perder peso</span></div>
-                    <img src="{{ url_for('static', filename='img/goal-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <div class="opt-left"><div class="opt-icon">+</div><span class="opt-label">Perder peso</span></div>
+                    <img src="static/img/goal-1.png" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
                 <div class="opt-card" onclick="toggleSelect(this,'btn4')">
-                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Melhorar a saúde do coração</span></div>
-                    <img src="{{ url_for('static', filename='img/goal-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <div class="opt-left"><div class="opt-icon">+</div><span class="opt-label">Melhorar a saúde do coração</span></div>
+                    <img src="static/img/goal-2.png" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
                 <div class="opt-card" onclick="toggleSelect(this,'btn4')">
-                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Ficar firme e tonificada</span></div>
-                    <img src="{{ url_for('static', filename='img/goal-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <div class="opt-left"><div class="opt-icon">+</div><span class="opt-label">Ficar firme e tonificada</span></div>
+                    <img src="static/img/goal-3.png" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
                 <div class="opt-card" onclick="toggleSelect(this,'btn4')">
-                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Reduzir a idade biológica</span></div>
-                    <img src="{{ url_for('static', filename='img/goal-4.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <div class="opt-left"><div class="opt-icon">+</div><span class="opt-label">Reduzir a idade biológica</span></div>
+                    <img src="static/img/goal-4.png" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
             </div>
         </div>
@@ -495,15 +497,15 @@
             <div class="options-list">
                 <div class="opt-card single" onclick="autoNext(this,'step-6')">
                     <div class="opt-left"><span class="opt-label">Porte médio</span></div>
-                    <img src="{{ url_for('static', filename='img/body-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <img src="static/img/body-1.png" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
                 <div class="opt-card single" onclick="autoNext(this,'step-6')">
                     <div class="opt-left"><span class="opt-label">Mais encorpada</span></div>
-                    <img src="{{ url_for('static', filename='img/body-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <img src="static/img/body-2.png" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
                 <div class="opt-card single" onclick="autoNext(this,'step-6')">
                     <div class="opt-left"><span class="opt-label">Acima do peso</span></div>
-                    <img src="{{ url_for('static', filename='img/body-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <img src="static/img/body-3.png" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
             </div>
         </div>
@@ -511,22 +513,25 @@
 
     <!-- STEP 6: CORPO DOS SONHOS (3/25) -->
     <div id="step-6" class="step">
-        <div class="quiz-header"><div class="progress-bar"><div class="progress-fill" style="width:12%"></div></div><div class="step-label">3 / 25</div></div>
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:12%"></div></div>
+            <div class="step-label">3 / 25</div>
+        </div>
         <div class="quiz-body">
             <h3>Qual é o seu corpo dos sonhos?</h3>
             <p class="hint">&nbsp;</p>
             <div class="options-list">
-                <div class="opt-card single" onclick="autoNext(this, 'step-7')">
+                <div class="opt-card single" onclick="autoNext(this,'step-7')">
                     <div class="opt-left"><span class="opt-label">Magro</span></div>
-                    <img src="{{ url_for('static', filename='img/dream-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <img src="static/img/dream-1.png" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
-                <div class="opt-card single" onclick="autoNext(this, 'step-7')">
+                <div class="opt-card single" onclick="autoNext(this,'step-7')">
                     <div class="opt-left"><span class="opt-label">Tonificado</span></div>
-                    <img src="{{ url_for('static', filename='img/dream-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <img src="static/img/dream-2.png" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
-                <div class="opt-card single" onclick="autoNext(this, 'step-7')">
+                <div class="opt-card single" onclick="autoNext(this,'step-7')">
                     <div class="opt-left"><span class="opt-label">Curvilíneo</span></div>
-                    <img src="{{ url_for('static', filename='img/dream-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <img src="static/img/dream-3.png" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
             </div>
         </div>
@@ -534,17 +539,31 @@
 
     <!-- STEP 7: EXPERIÊNCIA (4/25) -->
     <div id="step-7" class="step">
-        <div class="quiz-header"><div class="progress-container"><div class="progress-bar" style="width: 16%;"></div></div><div class="step-label">4 / 25</div></div>
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:16%"></div></div>
+            <div class="step-label">4 / 25</div>
+        </div>
         <div class="quiz-body">
             <h3>Você conhece a Caminhada Tai Chi em Casa?</h3>
             <p class="hint">&nbsp;</p>
             <div class="options-list">
-                <div class="opt-card single" onclick="autoNext(this,'final')"><div class="opt-left"><span class="opt-label">Sim, pratico regularmente</span></div><span class="emoji">😎</span></div>
-                <div class="opt-card single" onclick="autoNext(this,'final')"><div class="opt-left"><span class="opt-label">Sim, já experimentei</span></div><span class="emoji">🧐</span></div>
-                <div class="opt-card single" onclick="autoNext(this,'final')"><div class="opt-left"><span class="opt-label">Não, nunca experimentei</span></div><span class="emoji">🤷‍♀️</span></div>
+                <div class="opt-card single" onclick="autoNext(this,'step-8')">
+                    <div class="opt-left"><span class="opt-label">Sim, pratico regularmente</span></div>
+                    <span class="emoji">😎</span>
+                </div>
+                <div class="opt-card single" onclick="autoNext(this,'step-8')">
+                    <div class="opt-left"><span class="opt-label">Sim, já experimentei</span></div>
+                    <span class="emoji">🧐</span>
+                </div>
+                <div class="opt-card single" onclick="autoNext(this,'step-8')">
+                    <div class="opt-left"><span class="opt-label">Não, nunca experimentei</span></div>
+                    <span class="emoji">🤷‍♀️</span>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- STEP 8+ — adicionar próximas telas aqui -->
 
 </div>
 
@@ -571,10 +590,7 @@
 
     function autoNext(card, nextId) {
         card.classList.add('selected');
-        setTimeout(() => {
-            if(nextId === 'final') alert("Fim desta etapa!");
-            else goTo(nextId);
-        }, 500);
+        setTimeout(() => goTo(nextId), 400);
     }
 </script>
 </body>
