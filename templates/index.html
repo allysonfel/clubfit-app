@@ -40,426 +40,127 @@
 
         /* ── STEPS ── */
         .step { display: none; flex-direction: column; height: 100%; width: 100%; overflow: hidden; animation: fadeIn 0.3s ease; }
-        .step.active { display: flex; animation: fadeIn 0.3s ease; }
+        .step.active { display: flex; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* ════════════════════════════════
-           STEP 1 — LANDING (Seu Original Intocado)
-        ════════════════════════════════ */
-        #step-1 {
-            padding: 22px 20px 16px;
-            align-items: center;
-            text-align: center;
-        }
+        /* ── CONFIGURAÇÃO DE FLUXO E CONTEÚDO ── */
+        .main-content { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 20px; text-align: center; overflow-y: auto; }
+        .footer-action { padding: 0 20px 36px; width: 100%; flex-shrink: 0; }
 
-        .rating-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            background: var(--green-light);
-            color: var(--green-dark);
-            border-radius: 100px;
-            padding: 6px 16px;
-            font-size: 13px;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
+        h1, h2, h3 { font-weight: 800; text-align: center; letter-spacing: -0.8px; }
+
+        /* ── STEP 1 (Seu Original Intocado) ── */
+        #step-1 { padding: 22px 20px 16px; align-items: center; text-align: center; }
+        .rating-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-light); color: var(--green-dark); border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 700; margin-bottom: 16px; }
         .rating-badge .star { color: #F5A623; }
+        #step-1 h1 { font-size: 24px; line-height: 1.25; letter-spacing: -0.5px; max-width: 340px; margin-bottom: 10px; }
+        .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
+        .quiz-badge { display: inline-block; border: 1.5px solid var(--green); color: var(--green); border-radius: 100px; padding: 4px 14px; font-size: 12px; font-weight: 700; margin-bottom: 14px; }
+        .hero-layout { display: flex; width: 100%; align-items: flex-end; gap: 10px; }
+        .hero-img { width: 50%; object-fit: contain; max-height: 340px; }
+        .age-options { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+        .age-btn { display: flex; align-items: center; justify-content: space-between; background: var(--green); color: #fff; border: none; border-radius: 12px; padding: 15px 14px; font-family: var(--font); font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.15s, transform 0.1s; width: 100%; }
+        .arrow-circle { width: 24px; height: 24px; background: rgba(255,255,255,0.22); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; }
+        .footer-note { font-size: 10px; color: var(--muted); margin-top: 14px; padding: 0 8px; text-align: center; }
 
-        #step-1 h1 {
-            font-family: var(--font);
-            font-size: 24px;
-            font-weight: 800;
-            line-height: 1.25;
-            letter-spacing: -0.5px;
-            max-width: 340px;
-            margin-bottom: 10px;
-        }
+        /* ── STEP 2 & 3 (Originais Aprovados) ── */
+        .social-proof-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 24px; text-align: center; }
+        .social-img { width: auto; max-width: 100%; max-height: 25vh; margin-bottom: 15px; }
+        .badge-img { width: auto; max-width: 85%; max-height: 8vh; margin-bottom: 10px; }
+        .social-sub { font-size: 15px; color: #666; margin-bottom: 20px; }
+        .welcome-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+        .welcome-img { width: 100%; max-height: 30vh; object-fit: cover; object-position: center 10%; border-radius: 0 0 28px 28px; margin-bottom: 15px; }
+        #step-3 h2 { font-size: 21px; font-weight: 800; line-height: 1.25; margin: 0 auto 10px; padding: 0 20px; }
+        #step-3 .desc { font-size: 13.5px; color: #555; line-height: 1.55; margin: 0 auto 15px; padding: 0 20px; }
+        .welcome-img-card { width: 100%; max-height: 30vh; object-fit: cover; object-position: center center; border-radius: 24px; margin-bottom: 20px; }
 
-        .section-tag {
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.12em;
-            color: var(--muted);
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
-
-        .quiz-badge {
-            display: inline-block;
-            border: 1.5px solid var(--green);
-            color: var(--green);
-            border-radius: 100px;
-            padding: 4px 14px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 14px;
-        }
-
-        .hero-layout {
-            display: flex;
-            width: 100%;
-            align-items: flex-end;
-            gap: 10px;
-        }
-
-        .hero-img {
-            width: 50%;
-            object-fit: contain;
-            max-height: 340px;
-        }
-
-        .age-options {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            padding-bottom: 6px;
-        }
-
-        .age-btn {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--green);
-            color: #fff;
-            border: none;
-            border-radius: 12px;
-            padding: 15px 14px;
-            font-family: var(--font);
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: background 0.15s, transform 0.1s;
-            width: 100%;
-        }
-        .age-btn:hover  { background: var(--green-dark); }
-        .age-btn:active { transform: scale(0.97); }
-
-        .arrow-circle {
-            width: 24px; height: 24px;
-            background: rgba(255,255,255,0.22);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 13px;
-            flex-shrink: 0;
-        }
-
-        .footer-note {
-            font-size: 10px;
-            color: var(--muted);
-            margin-top: 14px;
-            padding: 0 8px;
-            text-align: center;
-        }
-        .footer-note u { cursor: pointer; }
-
-        /* ════════════════════════════════
-           STEP 2 — SOCIAL PROOF
-        ════════════════════════════════ */
-        .social-proof-wrap {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px 24px;
-            text-align: center;
-        }
-
-        .social-img {
-            width: auto;
-            max-width: 100%;
-            max-height: 25vh;
-            margin-bottom: 15px;
-        }
-
-        .badge-img {
-            width: auto;
-            max-width: 85%;
-            max-height: 8vh;
-            margin-bottom: 10px;
-        }
-
-        .social-sub {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        /* ════════════════════════════════
-           STEP 3 — BOAS-VINDAS (Ajustado estilo Card)
-        ════════════════════════════════ */
-        .welcome-wrap {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding: 15px 24px 0; /* Adicionado respiro nas laterais */
-        }
-
-        .welcome-img {
-            width: 100%;
-            max-height: 30vh;
-            object-fit: cover;
-            object-position: center center; /* Alinhamento centralizado natural */
-            border-radius: 24px; /* Arredondado em todos os 4 cantos */
-            margin-bottom: 20px;
-        }
-
-        #step-3 h2 {
-            font-family: var(--font);
-            font-size: 21px;
-            font-weight: 800;
-            line-height: 1.25;
-            letter-spacing: -0.4px;
-            max-width: 340px;
-            margin: 0 auto 12px;
-        }
-
-        #step-3 .desc {
-            font-size: 13.5px;
-            color: #555;
-            line-height: 1.55;
-            max-width: 340px;
-            margin: 0 auto 15px;
-        }
-
-        /* ── TRANSIÇÕES TIPO CARD (Telas 8, 11, 24) ── */
-        .welcome-img-card {
-            width: 100%;
-            max-height: 30vh;
-            object-fit: cover;
-            object-position: center center;
-            border-radius: 24px; /* Mantém arredondado perfeito */
-            margin-bottom: 20px;
-        }
-
-        /* ════════════════════════════════
-           QUIZ STEPS (4 em diante)
-        ════════════════════════════════ */
-        .quiz-header {
-            width: 100%;
-            padding: 14px 20px 0;
-        }
-
-        .progress-bar {
-            height: 4px;
-            background: #E0E0E0;
-            border-radius: 100px;
-            overflow: hidden;
-            margin-bottom: 5px;
-        }
-        .progress-fill {
-            height: 100%;
-            background: var(--green);
-            border-radius: 100px;
-            transition: width 0.4s ease;
-        }
-
-        .step-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--muted);
-            text-align: right;
-        }
-
-        .quiz-body {
-            padding: 22px 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-        }
-
-        .quiz-body h3 {
-            font-family: var(--font);
-            font-size: 22px;
-            font-weight: 800;
-            line-height: 1.25;
-            letter-spacing: -0.4px;
-            margin-bottom: 6px;
-            text-align: left;
-        }
-
-        .hint {
-            font-size: 13px;
-            color: var(--muted);
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .options-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .opt-card {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--card-bg);
-            border: 2px solid transparent;
-            border-radius: var(--radius);
-            padding: 10px 10px 10px 16px;
-            cursor: pointer;
-            transition: border-color 0.15s, background 0.15s, color 0.15s;
-        }
+        /* ── QUIZ HEADER & CARDS ── */
+        .quiz-header { width: 100%; padding: 14px 20px 0; }
+        .progress-bar { height: 4px; background: #E0E0E0; border-radius: 100px; overflow: hidden; margin-bottom: 5px; }
+        .progress-fill { height: 100%; background: var(--green); border-radius: 100px; transition: width 0.4s ease; }
+        .step-label { font-size: 12px; font-weight: 700; color: var(--muted); text-align: right; }
+        .quiz-body { padding: 22px 20px; flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
+        .quiz-body h3 { font-size: 22px; font-weight: 800; line-height: 1.25; margin-bottom: 6px; text-align: left; }
+        .hint { font-size: 13px; color: var(--muted); margin-bottom: 20px; text-align: left; }
+        .options-list { display: flex; flex-direction: column; gap: 10px; }
+        .opt-card { display: flex; align-items: center; justify-content: space-between; background: var(--card-bg); border: 2px solid transparent; border-radius: var(--radius); padding: 10px 10px 10px 16px; cursor: pointer; transition: 0.15s; }
         .opt-card:hover { border-color: var(--green); }
-
-        .opt-card.selected {
-            background: var(--green);
-            border-color: var(--green);
-            color: #fff;
-        }
-
-        .opt-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex: 1;
-        }
-
-        .opt-icon {
-            width: 26px; height: 26px;
-            border-radius: 50%;
-            border: 2px solid #ccc;
-            background: #fff;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 13px;
-            font-weight: 800;
-            color: #aaa;
-            flex-shrink: 0;
-            transition: border-color 0.15s, color 0.15s;
-        }
-        .opt-card.selected .opt-icon {
-            border-color: rgba(255,255,255,0.7);
-            background: rgba(255,255,255,0.2);
-            color: #fff;
-        }
-
-        .opt-label {
-            font-size: 15px;
-            font-weight: 700;
-        }
-
-        .opt-thumb {
-            width: 58px;
-            height: 58px;
-            border-radius: 10px;
-            object-fit: cover;
-            flex-shrink: 0;
-            background: #e0e0e0;
-        }
-        .opt-card.selected .opt-thumb {
-            filter: brightness(1.05);
-        }
-
-        .opt-card.single:hover {
-            background: var(--green);
-            border-color: var(--green);
-            color: #fff;
-        }
-
-        .emoji {
-            font-size: 24px;
-            padding-right: 10px;
-        }
+        .opt-card.selected { background: var(--green); border-color: var(--green); color: #fff; }
+        .opt-left { display: flex; align-items: center; gap: 12px; flex: 1; }
+        .opt-icon { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #ccc; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #aaa; }
+        .opt-card.selected .opt-icon { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.2); color: #fff; }
+        .opt-label { font-size: 15px; font-weight: 700; }
+        .opt-thumb { width: 58px; height: 58px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: #e0e0e0; }
+        .opt-card.single:hover { background: var(--green); border-color: var(--green); color: #fff; }
+        .emoji { font-size: 24px; padding-right: 10px; }
 
         /* ── INTERATIVIDADE ANATOMIA (TELA 9) ── */
         .anatomy-container { display: flex; width: 100%; gap: 15px; align-items: center; }
         .anatomy-list { flex: 1.1; display: flex; flex-direction: column; gap: 10px; }
         .anatomy-view { flex: 0.9; position: relative; display: flex; justify-content: center; }
         .anatomy-view img { width: 100%; max-height: 280px; object-fit: contain; }
-        
-        .glow-dot {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--orange-glow);
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.3s ease-in-out;
-            pointer-events: none;
-            box-shadow: 0 0 15px rgba(255,165,0,0.8);
-            animation: pulse-glow 1.5s infinite ease-in-out;
-        }
-        .glow-dot.active { opacity: 1; transform: scale(1.4); }
 
-        .dot-arms   { top: 25%; left: 35%; }
-        .dot-abs    { top: 40%; left: 50%; transform: translateX(-50%); }
-        .dot-glutes { top: 52%; left: 62%; }
-        .dot-legs   { top: 72%; left: 50%; transform: translateX(-50%); }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 10px rgba(255,140,0,0.6); }
-            50% { box-shadow: 0 0 25px rgba(255,69,0,0.9); }
-        }
-
-        /* ── NOVAS ENTRADAS (INPUTS MÉTRICOS) ── */
-        .metric-input-wrapper {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 10px;
-        }
-        .metric-field {
-            width: 100%;
-            background: var(--card-bg);
-            border: 2px solid transparent;
-            border-radius: var(--radius);
-            padding: 18px;
-            font-size: 24px;
-            font-weight: 800;
-            text-align: center;
-            outline: none;
-            transition: border-color 0.2s;
-        }
-        .metric-field:focus {
-            border-color: var(--green);
-        }
-        .unit-label {
-            font-size: 16px;
-            color: var(--text);
-            font-weight: 800;
-            margin-left: 5px;
-        }
-        
-        /* Box de Alertas e Análise de IMC */
-        .analysis-box {
-            width: 100%;
-            background: #fff5f5;
-            border: 1.5px solid #ffcccc;
-            border-radius: 12px;
-            padding: 15px;
-            margin-top: 15px;
-            text-align: left;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
+        /* ── DINÂMICAS DE INPUTS MÉTRICOS ── */
+        .metric-input-wrapper { width: 100%; display: flex; flex-direction: column; gap: 15px; margin-top: 10px; }
+        .metric-field { width: 100%; background: var(--card-bg); border: 2px solid transparent; border-radius: var(--radius); padding: 18px; font-size: 24px; font-weight: 800; text-align: center; outline: none; transition: border-color 0.2s; }
+        .metric-field:focus { border-color: var(--green); }
+        .unit-label { font-size: 16px; color: var(--text); font-weight: 800; margin-left: 5px; }
+        .analysis-box { width: 100%; background: #fff5f5; border: 1.5px solid #ffcccc; border-radius: 12px; padding: 15px; margin-top: 15px; text-align: left; display: flex; gap: 12px; align-items: flex-start; }
         .analysis-box.green { background: #f4faf7; border-color: #cdeada; }
         .analysis-box.orange { background: #fffdf5; border-color: #fceec7; }
         .analysis-icon { font-size: 20px; }
         .analysis-text { font-size: 13px; line-height: 1.5; font-weight: 500; }
         .analysis-text strong { font-weight: 800; }
+        .error-message { color: #d9534f; font-size: 12px; font-weight: 700; margin-top: 5px; text-align: center; width: 100%; }
 
-        .error-message {
-            color: #d9534f;
-            font-size: 12px;
-            font-weight: 700;
-            margin-top: 5px;
-            text-align: center;
-            width: 100%;
+        /* ── DINÂMICA DO PONTEIRO DE IMC (TELA 30) ── */
+        .bmi-gauge-container { width: 100%; position: relative; margin: 25px 0 15px; }
+        .gauge-bar { width: 100%; height: 12px; border-radius: 10px; background: linear-gradient(to right, #4CAF50 0%, #4CAF50 40%, #FF9800 40%, #FF9800 75%, #F44336 75%, #F44336 100%); position: relative; }
+        .gauge-labels { display: flex; justify-content: space-between; font-size: 10px; color: #888; font-weight: 700; margin-top: 6px; }
+        .gauge-pointer {
+            position: absolute;
+            top: -24px;
+            transform: translateX(-50%);
+            background: #111;
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: left 1s ease-in-out;
         }
+        .gauge-pointer::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 50%;
+            transform: translateX(-50%);
+            border-width: 4px 4px 0;
+            border-style: solid;
+            border-color: #111 transparent;
+            display: block; width: 0;
+        }
+
+        /* ── CARREGAMENTO CIRCULAR (TELA 33) ── */
+        .spinner-container { width: 150px; height: 150px; position: relative; margin: 30px auto; }
+        .svg-circle { width: 100%; height: 100%; transform: rotate(-90deg); }
+        .bg-circle, .progress-circle { width: 100%; height: 100%; fill: none; stroke-width: 10; stroke-linecap: round; }
+        .bg-circle { stroke: #eee; }
+        .progress-circle { stroke: var(--green); stroke-dasharray: 440; stroke-dashoffset: 440; transition: stroke-dashoffset 0.05s linear; }
+        .percentage-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 32px; font-weight: 800; color: var(--text); }
+        
+        /* Depoimentos Rotativos */
+        .review-box { width: 100%; background: #F5F5F0; border-radius: 12px; padding: 20px; text-align: left; margin-top: 15px; min-height: 120px; transition: opacity 0.3s; }
+        .review-name { font-weight: 800; font-size: 14px; margin-bottom: 4px; }
+        .review-stars { color: #F5A623; font-size: 14px; margin-bottom: 8px; }
+        .review-desc { font-size: 13px; color: #555; line-height: 1.5; }
+
+        /* ── GRÁFICO DINÂMICO DE PERDA DE PESO ── */
+        .dynamic-chart-box { width: 100%; background: #fbfbfb; border: 1px solid #eee; border-radius: 16px; padding: 20px; margin: 20px auto; }
 
         /* ── BOTÃO PRINCIPAL ── */
         .btn-primary {
@@ -473,7 +174,8 @@
             font-size: 17px;
             font-weight: 800;
             cursor: pointer;
-            width: 100%;
+            width: calc(100% - 40px);
+            margin: 0 auto;
             transition: background 0.15s, transform 0.1s;
         }
         .btn-primary:hover  { background: var(--green-dark); }
@@ -490,6 +192,7 @@
             bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
+            width: calc(100% - 40px);
             max-width: 440px;
             z-index: 10;
             box-shadow: 0 4px 20px rgba(46,158,88,0.3);
@@ -546,7 +249,7 @@
         </div>
     </div>
 
-    <!-- STEP 3 (Corrigido para estilo Card) -->
+    <!-- STEP 3 -->
     <div id="step-3" class="step">
         <div class="welcome-wrap">
             <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
@@ -652,7 +355,7 @@
         </div>
     </div>
 
-    <!-- STEP 8: TRANSIÇÃO/CONCEITO (Arredondado Card) -->
+    <!-- STEP 8: TRANSIÇÃO/CONCEITO -->
     <div id="step-8" class="step">
         <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
             <img src="static/img/welcome-sofia.png" class="welcome-img-card">
@@ -707,7 +410,7 @@
         </div>
     </div>
 
-    <!-- STEP 11: TRANSIÇÃO "VOCÊ É INCRÍVEL" (Arredondado Card) -->
+    <!-- STEP 11: TRANSIÇÃO "VOCÊ É INCRÍVEL" -->
     <div id="step-11" class="step">
         <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
             <img src="static/img/amazing-sofia.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
@@ -806,7 +509,7 @@
         </div>
     </div>
 
-    <!-- STEP 17: SENSIBILIDADES (12/25) - multi-select com imagens -->
+    <!-- STEP 17: SENSIBILIDADES (12/25) -->
     <div id="step-17" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:48%"></div></div>
@@ -908,7 +611,7 @@
         </div>
     </div>
 
-    <!-- STEP 22: HÁBITOS RUINS (17/25) - multi-select -->
+    <!-- STEP 22: HÁBITOS RUINS (17/25) -->
     <div id="step-22" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
@@ -929,7 +632,7 @@
         <div class="footer-action"><button id="btn22" class="btn-primary btn-fixed disabled" onclick="goTo('step-23')">Continuar</button></div>
     </div>
 
-    <!-- STEP 23: GANHO DE PESO (18/25) - multi-select -->
+    <!-- STEP 23: GANHO DE PESO (18/25) -->
     <div id="step-23" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
@@ -950,12 +653,9 @@
         <div class="footer-action"><button id="btn23" class="btn-primary btn-fixed disabled" onclick="goTo('step-24')">Continuar</button></div>
     </div>
 
-    <!-- ── NOVAS TELAS (Telas 24 a 28) ── -->
-
-    <!-- STEP 24: TRANSIÇÃO HÁBITOS (Sem numeração) -->
+    <!-- STEP 24: TRANSIÇÃO HÁBITOS -->
     <div id="step-24" class="step">
         <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
-            <!-- Espaço reservado para carregar antes/depois: habits-sofia.png -->
             <img src="static/img/habits-sofia.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
             <h2>Você sempre pode mudar seus hábitos para melhor</h2>
             <p class="desc" style="padding: 0 10px;">Grandes mudanças na vida muitas vezes afetam o peso de uma pessoa. Isso é normal. Vamos apoiar você até alcançar seu objetivo.</p>
@@ -974,15 +674,12 @@
         <div class="quiz-body">
             <h3>Qual é a sua altura?</h3>
             <p class="hint">&nbsp;</p>
-
             <div class="metric-input-wrapper">
                 <div style="display: flex; align-items: center; justify-content: center;">
                     <input type="number" id="height-input" class="metric-field" placeholder="170" oninput="validateHeight()">
                     <span class="unit-label">cm</span>
                 </div>
             </div>
-
-            <!-- Box Informativo Dinâmico -->
             <div class="analysis-box orange" style="margin-top: 30px;">
                 <span class="analysis-icon">☝️</span>
                 <p class="analysis-text"><strong>Calculando seu índice de massa corporal.</strong><br>O IMC é amplamente usado como fator de risco para o desenvolvimento de vários problemas de saúde.</p>
@@ -1002,15 +699,12 @@
         <div class="quiz-body">
             <h3>Qual é o seu peso atual?</h3>
             <p class="hint">&nbsp;</p>
-
             <div class="metric-input-wrapper">
                 <div style="display: flex; align-items: center; justify-content: center;">
                     <input type="number" id="weight-input" class="metric-field" placeholder="70" oninput="calculateBMI()">
                     <span class="unit-label">kg</span>
                 </div>
             </div>
-
-            <!-- Box Informativo de IMC Dinâmico que acende no Input -->
             <div id="bmi-analysis-box" class="analysis-box" style="display: none;">
                 <span id="bmi-emoji" class="analysis-icon">🔥</span>
                 <p id="bmi-status-text" class="analysis-text"></p>
@@ -1030,7 +724,6 @@
         <div class="quiz-body">
             <h3>Qual seria o seu peso ideal?</h3>
             <p class="hint">&nbsp;</p>
-
             <div class="metric-input-wrapper">
                 <div style="display: flex; align-items: center; justify-content: center;">
                     <input type="number" id="target-weight-input" class="metric-field" placeholder="60" oninput="validateWeights()">
@@ -1038,8 +731,6 @@
                 </div>
                 <div id="weight-error-msg" class="error-message" style="display: none;"></div>
             </div>
-
-            <!-- Box Informativo de Meta Dinâmico (Muda conforme % de peso a perder) -->
             <div id="goal-analysis-box" class="analysis-box" style="display: none;">
                 <span id="goal-icon" class="analysis-icon">⭐</span>
                 <p id="goal-text" class="analysis-text"></p>
@@ -1059,21 +750,19 @@
         <div class="quiz-body">
             <h3>Qual é a sua idade?</h3>
             <p class="hint">&nbsp;</p>
-
             <div class="metric-input-wrapper">
                 <div style="display: flex; align-items: center; justify-content: center;">
                     <input type="number" id="age-input" class="metric-field" placeholder="35" oninput="validateAge()">
                     <span class="unit-label">anos</span>
                 </div>
             </div>
-
             <div class="analysis-box orange" style="margin-top: 30px;">
                 <span class="analysis-icon">☝️</span>
                 <p class="analysis-text">Isso nos ajudará a ajustar seu plano pessoal com base na sua taxa metabólica basal.</p>
             </div>
         </div>
         <div class="footer-action">
-            <button id="btn-age" class="btn-primary disabled" onclick="alert('Dados coletados com sucesso! Sofia Lee está gerando seu cronograma.')">Próximo</button>
+            <button id="btn-age" class="btn-primary disabled" onclick="goTo('step-29')">Próximo</button>
         </div>
     </div>
 
@@ -1135,8 +824,6 @@
         }
     }
 
-    /* ── LÓGICA DE ENTRADAS DINÂMICAS ── */
-    
     function validateHeight() {
         const val = parseFloat(document.getElementById('height-input').value);
         const btn = document.getElementById('btn-height');
@@ -1161,11 +848,9 @@
 
         if (weight > 20 && weight < 300) {
             btn.classList.remove('disabled');
-            
             const hMetros = userData.height / 100;
             const bmi = (weight / (hMetros * hMetros)).toFixed(1);
             userData.bmi = parseFloat(bmi);
-
             bmiBox.style.display = 'flex';
 
             if (bmi >= 30) {
