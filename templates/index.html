@@ -23,21 +23,22 @@
             font-family: var(--font);
             background: #fff;
             color: var(--text);
-            min-height: 100vh;
+            height: 100dvh; /* Altura exata da tela */
             display: flex;
             justify-content: center;
+            overflow: hidden;
         }
 
         .app-shell {
             width: 100%;
             max-width: 480px;
-            min-height: 100vh;
+            height: 100%;
             display: flex;
             flex-direction: column;
         }
 
         /* ── STEPS ── */
-        .step { display: none; flex-direction: column; min-height: 100vh; }
+        .step { display: none; flex-direction: column; height: 100%; }
         .step.active { display: flex; animation: fadeIn 0.3s ease; }
 
         @keyframes fadeIn {
@@ -157,53 +158,48 @@
         .footer-note u { cursor: pointer; }
 
         /* ════════════════════════════════
-           STEP 2 — SOCIAL PROOF (Correção de Spacing)
+           STEP 2 — SOCIAL PROOF (Espaçamento Inteligente)
         ════════════════════════════════ */
         #step-2 {
             align-items: center;
             justify-content: center;
-            padding: 15px 24px 20px; /* Espaço otimizado */
+            padding: 10px 24px 20px; /* Reduzido padding do topo para subir tudo */
             text-align: center;
             gap: 0;
         }
 
-        /* Sobrescreve o padding inline gigante para subir o botão de Continuar */
-        #step-2 > div:first-child {
-            padding: 20px 24px 10px !important;
-        }
-
         .social-img {
             width: 100%;
-            max-width: 240px; /* Reduzido de 300px para o botão subir */
-            margin-bottom: 10px;
+            max-width: 280px; /* Tamanho grande mantido */
+            margin-bottom: 12px; /* Reduzido de 20px */
         }
 
         .badge-img {
             width: 90%;
-            max-width: 240px; /* Ajustado de 260px */
-            margin-bottom: 5px;
+            max-width: 250px;
+            margin-bottom: 8px; /* Reduzido de 10px */
         }
 
         .social-sub {
             font-size: 15px;
             color: #666;
-            margin-bottom: 20px; /* Reduzido de 36px */
+            margin-bottom: 15px; /* Reduzido de 36px para o botão subir */
         }
 
         /* ════════════════════════════════
-           STEP 3 — BOAS-VINDAS (Cabeça Blindada e Sem Cortes)
+           STEP 3 — BOAS-VINDAS
         ════════════════════════════════ */
         #step-3 {
             align-items: center;
-            padding: 0 0 24px;
+            padding: 0;
             text-align: center;
         }
 
         .welcome-img {
             width: 100%;
-            max-height: 250px; /* Reduzido de 380px para o botão subir */
+            max-height: 32vh; /* Altura inteligente para iPhone */
             object-fit: cover;
-            object-position: center 10%; /* CORREÇÃO: Foca na cabeça da Sofia */
+            object-position: center 10%; /* Mantém a cabeça da Sofia */
             border-radius: 0 0 28px 28px;
             margin-bottom: 15px; /* Reduzido de 22px */
         }
@@ -222,9 +218,9 @@
         #step-3 .desc {
             font-size: 14px;
             color: #555;
-            line-height: 1.65;
+            line-height: 1.6;
             max-width: 340px;
-            margin: 0 auto 20px; /* Reduzido de 32px */
+            margin: 0 auto 20px; /* Reduzido de 32px para o botão subir */
             padding: 0 20px;
         }
 
@@ -398,7 +394,7 @@
         .pb-fixed { padding-bottom: 90px; }
 
         .footer-action {
-            padding: 0 20px 36px;
+            padding: 0 20px 24px; /* Reduzido de 36px para dar espaço de segurança */
         }
 
         @media (max-width: 360px) {
@@ -432,9 +428,9 @@
         <p class="footer-note">Ao continuar, você concorda com nossos <u>Termos de Serviço</u>, <u>Política de Cookies</u> e <u>Política de Privacidade</u></p>
     </div>
 
-    <!-- STEP 2 -->
+    <!-- STEP 2 (CORRIGIDO: Removido Padding Inline) -->
     <div id="step-2" class="step">
-        <div class="social-proof-wrap">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 24px 10px;text-align:center;">
             <img src="static/img/social-proof.png" alt="Comunidade" class="social-img">
             <img src="static/img/badge-users.png" alt="800k usuários" class="badge-img">
             <p class="social-sub">pessoas já se juntaram a nós</p>
@@ -444,9 +440,9 @@
         </div>
     </div>
 
-    <!-- STEP 3 -->
+    <!-- STEP 3 (CORRIGIDO: Removido Padding Inline) -->
     <div id="step-3" class="step">
-        <div class="welcome-wrap">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:0 0 10px;">
             <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
             <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
             <p class="desc">Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa. Vamos explorar juntas seus objetivos e necessidades.</p>
