@@ -157,50 +157,55 @@
         .footer-note u { cursor: pointer; }
 
         /* ════════════════════════════════
-           STEP 2 — SOCIAL PROOF
+           STEP 2 — SOCIAL PROOF (Correção de Spacing)
         ════════════════════════════════ */
         #step-2 {
             align-items: center;
             justify-content: center;
-            padding: 15px 24px 20px;
+            padding: 15px 24px 20px; /* Espaço otimizado */
             text-align: center;
             gap: 0;
         }
 
+        /* Sobrescreve o padding inline gigante para subir o botão de Continuar */
+        #step-2 > div:first-child {
+            padding: 20px 24px 10px !important;
+        }
+
         .social-img {
             width: 100%;
-            max-width: 240px;
+            max-width: 240px; /* Reduzido de 300px para o botão subir */
             margin-bottom: 10px;
         }
 
         .badge-img {
             width: 90%;
-            max-width: 260px;
+            max-width: 240px; /* Ajustado de 260px */
             margin-bottom: 5px;
         }
 
         .social-sub {
             font-size: 15px;
             color: #666;
-            margin-bottom: 36px;
+            margin-bottom: 20px; /* Reduzido de 36px */
         }
 
         /* ════════════════════════════════
-           STEP 3 — BOAS-VINDAS
+           STEP 3 — BOAS-VINDAS (Cabeça Blindada e Sem Cortes)
         ════════════════════════════════ */
         #step-3 {
             align-items: center;
-            padding: 0 0 32px;
+            padding: 0 0 24px;
             text-align: center;
         }
 
         .welcome-img {
             width: 100%;
-            max-height: 32vh;
+            max-height: 250px; /* Reduzido de 380px para o botão subir */
             object-fit: cover;
-            object-position: center 10%;
+            object-position: center 10%; /* CORREÇÃO: Foca na cabeça da Sofia */
             border-radius: 0 0 28px 28px;
-            margin-bottom: 12px;
+            margin-bottom: 15px; /* Reduzido de 22px */
         }
 
         #step-3 h2 {
@@ -210,7 +215,7 @@
             line-height: 1.3;
             letter-spacing: -0.4px;
             max-width: 340px;
-            margin: 0 auto 14px;
+            margin: 0 auto 10px; /* Reduzido de 14px */
             padding: 0 20px;
         }
 
@@ -219,7 +224,7 @@
             color: #555;
             line-height: 1.65;
             max-width: 340px;
-            margin: 0 auto 32px;
+            margin: 0 auto 20px; /* Reduzido de 32px */
             padding: 0 20px;
         }
 
@@ -429,7 +434,7 @@
 
     <!-- STEP 2 -->
     <div id="step-2" class="step">
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px 20px;text-align:center;">
+        <div class="social-proof-wrap">
             <img src="static/img/social-proof.png" alt="Comunidade" class="social-img">
             <img src="static/img/badge-users.png" alt="800k usuários" class="badge-img">
             <p class="social-sub">pessoas já se juntaram a nós</p>
@@ -441,7 +446,7 @@
 
     <!-- STEP 3 -->
     <div id="step-3" class="step">
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
+        <div class="welcome-wrap">
             <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
             <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
             <p class="desc">Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa. Vamos explorar juntas seus objetivos e necessidades.</p>
