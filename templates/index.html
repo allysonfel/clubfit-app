@@ -23,7 +23,7 @@
             font-family: var(--font);
             background: #fff;
             color: var(--text);
-            height: 100dvh; /* Trava a altura na tela do celular */
+            height: 100dvh; /* Garante altura exata do celular */
             display: flex;
             justify-content: center;
             overflow: hidden;
@@ -37,14 +37,16 @@
             flex-direction: column;
         }
 
-        /* ── STEPS ── */
+        /* ── STEPS COMPACTADOS PARA CABER NA TELA ── */
         .step { 
             display: none; 
             flex-direction: column; 
-            height: 100%; /* Ocupa 100% do app-shell */
-            overflow: hidden;
+            height: 100%; 
+            width: 100%; 
+            overflow: hidden; /* Impede rolagem nas telas de transição */
+            animation: fadeIn 0.3s ease; 
         }
-        .step.active { display: flex; animation: fadeIn 0.3s ease; }
+        .step.active { display: flex; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -163,56 +165,42 @@
         .footer-note u { cursor: pointer; }
 
         /* ════════════════════════════════
-           STEP 2 — SOCIAL PROOF (Proporções Grandes + Fixo)
+           STEP 2 — SOCIAL PROOF (Responsivo)
         ════════════════════════════════ */
-        #step-2 {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between; /* Empurra o botão pro rodapé */
-            height: 100%;
-            text-align: center;
-        }
-
-        .social-content-container {
+        .social-proof-wrap {
             flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Centraliza as imagens no espaço do meio */
+            justify-content: center;
             padding: 20px 24px;
+            text-align: center;
         }
 
         .social-img {
-            width: 100%;
-            max-width: 280px; /* Reduzi levemente de 300px apenas para caber no iPhone */
-            height: auto;
+            width: auto;
+            max-width: 100%;
+            max-height: 25vh; /* Ocupa no máximo 25% da altura da tela */
             margin-bottom: 15px;
         }
 
         .badge-img {
-            width: 90%;
-            max-width: 240px;
+            width: auto;
+            max-width: 85%;
+            max-height: 8vh;
             margin-bottom: 10px;
         }
 
         .social-sub {
             font-size: 15px;
             color: #666;
-            margin-bottom: 0;
+            margin-bottom: 20px;
         }
 
         /* ════════════════════════════════
-           STEP 3 — BOAS-VINDAS (Grande + Cabeça Protegida)
+           STEP 3 — BOAS-VINDAS (Cabeça Protegida e Sem Scroll)
         ════════════════════════════════ */
-        #step-3 {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-            text-align: center;
-        }
-
-        .welcome-content-container {
+        .welcome-wrap {
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -222,30 +210,30 @@
 
         .welcome-img {
             width: 100%;
-            height: 250px; /* Definido tamanho fixo de segurança */
+            max-height: 30vh; /* Ajustado para sobrar espaço pro botão em telas pequenas */
             object-fit: cover;
-            object-position: center 10%; /* CORREÇÃO: Foca na cabeça da Sofia */
+            object-position: center 10%; /* CORREÇÃO: Foca estritamente no topo da imagem */
             border-radius: 0 0 28px 28px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         #step-3 h2 {
             font-family: var(--font);
-            font-size: 22px;
+            font-size: 21px;
             font-weight: 800;
-            line-height: 1.3;
+            line-height: 1.25;
             letter-spacing: -0.4px;
             max-width: 340px;
-            margin: 0 auto 12px;
+            margin: 0 auto 10px;
             padding: 0 20px;
         }
 
         #step-3 .desc {
-            font-size: 14px;
+            font-size: 13.5px;
             color: #555;
-            line-height: 1.6;
+            line-height: 1.55;
             max-width: 340px;
-            margin: 0 auto;
+            margin: 0 auto 15px;
             padding: 0 20px;
         }
 
@@ -283,6 +271,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
         }
 
         .quiz-body h3 {
@@ -380,7 +369,7 @@
             padding-right: 10px;
         }
 
-        /* ── BOTÃO PRINCIPAL ── */
+        /* ── BOTÃO PRINCIPAL (Fixado no rodapé) ── */
         .btn-primary {
             display: block;
             background: var(--green);
@@ -392,8 +381,7 @@
             font-size: 17px;
             font-weight: 800;
             cursor: pointer;
-            width: calc(100% - 40px);
-            margin: 0 auto;
+            width: 100%;
             transition: background 0.15s, transform 0.1s;
         }
         .btn-primary:hover  { background: var(--green-dark); }
@@ -454,9 +442,9 @@
         <p class="footer-note">Ao continuar, você concorda com nossos <u>Termos de Serviço</u>, <u>Política de Cookies</u> e <u>Política de Privacidade</u></p>
     </div>
 
-    <!-- STEP 2 (CORRIGIDO E SEGURO) -->
+    <!-- STEP 2 (CORRIGIDO) -->
     <div id="step-2" class="step">
-        <div class="social-content-container">
+        <div class="social-proof-wrap">
             <img src="static/img/social-proof.png" alt="Comunidade" class="social-img">
             <img src="static/img/badge-users.png" alt="800k usuários" class="badge-img">
             <p class="social-sub">pessoas já se juntaram a nós</p>
@@ -466,9 +454,9 @@
         </div>
     </div>
 
-    <!-- STEP 3 (CORRIGIDO E SEGURO) -->
+    <!-- STEP 3 (CORRIGIDO) -->
     <div id="step-3" class="step">
-        <div class="welcome-content-container">
+        <div class="welcome-wrap">
             <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
             <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
             <p class="desc">Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa. Vamos explorar juntas seus objetivos e necessidades.</p>
@@ -542,7 +530,7 @@
         </div>
     </div>
 
-</div><!-- /app-shell -->
+</div>
 
 <script>
     function goTo(id) {
