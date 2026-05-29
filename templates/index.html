@@ -17,13 +17,14 @@
             --card-bg:     #F5F5F0;
             --radius:      14px;
             --font:        'Inter', sans-serif;
+            --orange-glow: radial-gradient(circle, rgba(255,165,0,1) 0%, rgba(255,69,0,0.8) 50%, rgba(255,0,0,0) 100%);
         }
 
         body {
             font-family: var(--font);
             background: #fff;
             color: var(--text);
-            height: 100dvh;
+            height: 100dvh; /* Garante altura exata do celular */
             display: flex;
             justify-content: center;
             overflow: hidden;
@@ -37,9 +38,16 @@
             flex-direction: column;
         }
 
-        /* ── STEPS ── */
-        .step { display: none; flex-direction: column; height: 100%; }
-        .step.active { display: flex; animation: fadeIn 0.3s ease; }
+        /* ── STEPS COMPACTADOS PARA CABER NA TELA ── */
+        .step { 
+            display: none; 
+            flex-direction: column; 
+            height: 100%; 
+            width: 100%; 
+            overflow: hidden; /* Impede rolagem nas telas de transição */
+            animation: fadeIn 0.3s ease; 
+        }
+        .step.active { display: flex; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -47,7 +55,7 @@
         }
 
         /* ════════════════════════════════
-           STEP 1 — LANDING
+           STEP 1 — LANDING (Seu Original Intocado)
         ════════════════════════════════ */
         #step-1 {
             padding: 22px 20px 16px;
@@ -158,57 +166,63 @@
         .footer-note u { cursor: pointer; }
 
         /* ════════════════════════════════
-           STEP 2 — SOCIAL PROOF
+           STEP 2 — SOCIAL PROOF (Responsivo)
         ════════════════════════════════ */
-        #step-2 {
+        .social-proof-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 10px 24px 20px;
+            padding: 20px 24px;
             text-align: center;
-            gap: 0;
         }
 
         .social-img {
-            width: 100%;
-            max-width: 280px;
-            margin-bottom: 12px;
+            width: auto;
+            max-width: 100%;
+            max-height: 25vh; /* Ocupa no máximo 25% da altura da tela */
+            margin-bottom: 15px;
         }
 
         .badge-img {
-            width: 90%;
-            max-width: 250px;
-            margin-bottom: 8px;
+            width: auto;
+            max-width: 85%;
+            max-height: 8vh;
+            margin-bottom: 10px;
         }
 
         .social-sub {
             font-size: 15px;
             color: #666;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         /* ════════════════════════════════
            STEP 3 — BOAS-VINDAS
         ════════════════════════════════ */
-        #step-3 {
+        .welcome-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            padding: 0;
-            text-align: center;
+            justify-content: flex-start;
         }
 
         .welcome-img {
             width: 100%;
-            max-height: 32vh;
+            max-height: 30vh; /* Ajustado para sobrar espaço pro botão em telas pequenas */
             object-fit: cover;
-            object-position: center 10%;
+            object-position: center 10%; /* CORREÇÃO: Foca estritamente no topo da imagem */
             border-radius: 0 0 28px 28px;
             margin-bottom: 15px;
         }
 
         #step-3 h2 {
             font-family: var(--font);
-            font-size: 22px;
+            font-size: 21px;
             font-weight: 800;
-            line-height: 1.3;
+            line-height: 1.25;
             letter-spacing: -0.4px;
             max-width: 340px;
             margin: 0 auto 10px;
@@ -216,11 +230,11 @@
         }
 
         #step-3 .desc {
-            font-size: 14px;
+            font-size: 13.5px;
             color: #555;
-            line-height: 1.6;
+            line-height: 1.55;
             max-width: 340px;
-            margin: 0 auto 20px;
+            margin: 0 auto 15px;
             padding: 0 20px;
         }
 
@@ -258,6 +272,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            overflow-y: auto;
         }
 
         .quiz-body h3 {
@@ -355,6 +370,61 @@
             padding-right: 10px;
         }
 
+        /* ── INTERATIVIDADE ANATOMIA (TELA 9) ── */
+        .anatomy-container {
+            display: flex;
+            width: 100%;
+            gap: 15px;
+            align-items: center;
+        }
+        .anatomy-list {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .anatomy-view {
+            flex: 0.9;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        .anatomy-view img {
+            width: 100%;
+            max-height: 280px;
+            object-fit: contain;
+        }
+        
+        /* Pontos de Brilho Dinâmicos (Glow) */
+        .glow-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--orange-glow);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s ease-in-out;
+            pointer-events: none;
+            box-shadow: 0 0 15px rgba(255,165,0,0.8);
+            animation: pulse-glow 1.5s infinite ease-in-out;
+        }
+        .glow-dot.active {
+            opacity: 1;
+            transform: scale(1.4);
+        }
+
+        /* Coordenadas anatômicas sobre a foto da modelo */
+        .dot-arms   { top: 25%; left: 35%; }
+        .dot-abs    { top: 40%; left: 50%; transform: translateX(-50%); }
+        .dot-glutes { top: 52%; left: 62%; }
+        .dot-legs   { top: 72%; left: 50%; transform: translateX(-50%); }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255,140,0,0.6); }
+            50% { box-shadow: 0 0 25px rgba(255,69,0,0.9); }
+        }
+
         /* ── BOTÃO PRINCIPAL ── */
         .btn-primary {
             display: block;
@@ -367,7 +437,8 @@
             font-size: 17px;
             font-weight: 800;
             cursor: pointer;
-            width: 100%;
+            width: calc(100% - 40px);
+            margin: 0 auto;
             transition: background 0.15s, transform 0.1s;
         }
         .btn-primary:hover  { background: var(--green-dark); }
@@ -379,14 +450,6 @@
             pointer-events: none;
         }
 
-        /* footer-action: container do botão nas telas 2 e 3 */
-        .footer-action {
-            width: 100%;
-            padding: 0 20px 32px;
-            flex-shrink: 0;
-        }
-
-        /* Botão fixo no rodapé (telas de quiz multi-select) */
         .btn-fixed {
             position: fixed;
             bottom: 24px;
@@ -401,6 +464,11 @@
 
         .pb-fixed { padding-bottom: 90px; }
 
+        .footer-action {
+            padding: 0 20px 36px;
+            width: 100%;
+        }
+
         @media (max-width: 360px) {
             #step-1 h1 { font-size: 20px; }
             .age-btn { padding: 13px 12px; font-size: 13px; }
@@ -410,7 +478,7 @@
 <body>
 <div class="app-shell">
 
-    <!-- STEP 1 -->
+    <!-- STEP 1 (Seu Original Intocado) -->
     <div id="step-1" class="step active">
         <div style="display:flex;flex-direction:column;align-items:center;padding:22px 20px 0;text-align:center;">
             <span class="rating-badge"><span class="star">★</span> 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
@@ -418,6 +486,7 @@
             <p class="section-tag" style="margin-top:12px;">DE ACORDO COM A SUA IDADE</p>
             <span class="quiz-badge">quiz de 1 minuto</span>
         </div>
+
         <div class="hero-layout" style="padding:0 16px;">
             <img src="static/img/hero-sofia.png" alt="Sofia Lee Coach" class="hero-img">
             <div class="age-options">
@@ -427,12 +496,13 @@
                 <button class="age-btn" onclick="goTo('step-2')">50+ anos  <span class="arrow-circle">→</span></button>
             </div>
         </div>
+
         <p class="footer-note">Ao continuar, você concorda com nossos <u>Termos de Serviço</u>, <u>Política de Cookies</u> e <u>Política de Privacidade</u></p>
     </div>
 
-    <!-- STEP 2 — SOCIAL PROOF -->
+    <!-- STEP 2 -->
     <div id="step-2" class="step">
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 24px 10px;text-align:center;">
+        <div class="social-proof-wrap">
             <img src="static/img/social-proof.png" alt="Comunidade" class="social-img">
             <img src="static/img/badge-users.png" alt="800k usuários" class="badge-img">
             <p class="social-sub">pessoas já se juntaram a nós</p>
@@ -442,9 +512,9 @@
         </div>
     </div>
 
-    <!-- STEP 3 — BOAS-VINDAS -->
+    <!-- STEP 3 -->
     <div id="step-3" class="step">
-        <div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:0 0 10px;">
+        <div class="welcome-wrap">
             <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
             <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
             <p class="desc">Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa. Vamos explorar juntas seus objetivos e necessidades.</p>
@@ -465,20 +535,20 @@
             <p class="hint">Você pode selecionar vários objetivos</p>
             <div class="options-list">
                 <div class="opt-card" onclick="toggleSelect(this,'btn4')">
-                    <div class="opt-left"><div class="opt-icon">+</div><span class="opt-label">Perder peso</span></div>
-                    <img src="static/img/goal-1.png" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Perder peso</span></div>
+                    <img src="{{ url_for('static', filename='img/goal-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
                 <div class="opt-card" onclick="toggleSelect(this,'btn4')">
-                    <div class="opt-left"><div class="opt-icon">+</div><span class="opt-label">Melhorar a saúde do coração</span></div>
-                    <img src="static/img/goal-2.png" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Melhorar a saúde do coração</span></div>
+                    <img src="{{ url_for('static', filename='img/goal-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
                 <div class="opt-card" onclick="toggleSelect(this,'btn4')">
-                    <div class="opt-left"><div class="opt-icon">+</div><span class="opt-label">Ficar firme e tonificada</span></div>
-                    <img src="static/img/goal-3.png" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Ficar firme e tonificada</span></div>
+                    <img src="{{ url_for('static', filename='img/goal-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
                 <div class="opt-card" onclick="toggleSelect(this,'btn4')">
-                    <div class="opt-left"><div class="opt-icon">+</div><span class="opt-label">Reduzir a idade biológica</span></div>
-                    <img src="static/img/goal-4.png" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Reduzir a idade biológica</span></div>
+                    <img src="{{ url_for('static', filename='img/goal-4.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
             </div>
         </div>
@@ -497,15 +567,15 @@
             <div class="options-list">
                 <div class="opt-card single" onclick="autoNext(this,'step-6')">
                     <div class="opt-left"><span class="opt-label">Porte médio</span></div>
-                    <img src="static/img/body-1.png" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <img src="{{ url_for('static', filename='img/body-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
                 <div class="opt-card single" onclick="autoNext(this,'step-6')">
                     <div class="opt-left"><span class="opt-label">Mais encorpada</span></div>
-                    <img src="static/img/body-2.png" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <img src="{{ url_for('static', filename='img/body-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
                 <div class="opt-card single" onclick="autoNext(this,'step-6')">
                     <div class="opt-left"><span class="opt-label">Acima do peso</span></div>
-                    <img src="static/img/body-3.png" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <img src="{{ url_for('static', filename='img/body-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
             </div>
         </div>
@@ -513,25 +583,22 @@
 
     <!-- STEP 6: CORPO DOS SONHOS (3/25) -->
     <div id="step-6" class="step">
-        <div class="quiz-header">
-            <div class="progress-bar"><div class="progress-fill" style="width:12%"></div></div>
-            <div class="step-label">3 / 25</div>
-        </div>
+        <div class="quiz-header"><div class="progress-bar"><div class="progress-fill" style="width:12%"></div></div><div class="step-label">3 / 25</div></div>
         <div class="quiz-body">
             <h3>Qual é o seu corpo dos sonhos?</h3>
             <p class="hint">&nbsp;</p>
             <div class="options-list">
-                <div class="opt-card single" onclick="autoNext(this,'step-7')">
+                <div class="opt-card single" onclick="autoNext(this, 'step-7')">
                     <div class="opt-left"><span class="opt-label">Magro</span></div>
-                    <img src="static/img/dream-1.png" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <img src="{{ url_for('static', filename='img/dream-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
-                <div class="opt-card single" onclick="autoNext(this,'step-7')">
+                <div class="opt-card single" onclick="autoNext(this, 'step-7')">
                     <div class="opt-left"><span class="opt-label">Tonificado</span></div>
-                    <img src="static/img/dream-2.png" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <img src="{{ url_for('static', filename='img/dream-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
-                <div class="opt-card single" onclick="autoNext(this,'step-7')">
+                <div class="opt-card single" onclick="autoNext(this, 'step-7')">
                     <div class="opt-left"><span class="opt-label">Curvilíneo</span></div>
-                    <img src="static/img/dream-3.png" class="opt-thumb" onerror="this.style.background='#ddd'">
+                    <img src="{{ url_for('static', filename='img/dream-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
             </div>
         </div>
@@ -539,31 +606,72 @@
 
     <!-- STEP 7: EXPERIÊNCIA (4/25) -->
     <div id="step-7" class="step">
-        <div class="quiz-header">
-            <div class="progress-bar"><div class="progress-fill" style="width:16%"></div></div>
-            <div class="step-label">4 / 25</div>
-        </div>
+        <div class="quiz-header"><div class="progress-container"><div class="progress-bar" style="width: 16%;"></div></div><div class="step-label">4 / 25</div></div>
         <div class="quiz-body">
             <h3>Você conhece a Caminhada Tai Chi em Casa?</h3>
             <p class="hint">&nbsp;</p>
             <div class="options-list">
-                <div class="opt-card single" onclick="autoNext(this,'step-8')">
-                    <div class="opt-left"><span class="opt-label">Sim, pratico regularmente</span></div>
-                    <span class="emoji">😎</span>
-                </div>
-                <div class="opt-card single" onclick="autoNext(this,'step-8')">
-                    <div class="opt-left"><span class="opt-label">Sim, já experimentei</span></div>
-                    <span class="emoji">🧐</span>
-                </div>
-                <div class="opt-card single" onclick="autoNext(this,'step-8')">
-                    <div class="opt-left"><span class="opt-label">Não, nunca experimentei</span></div>
-                    <span class="emoji">🤷‍♀️</span>
-                </div>
+                <div class="opt-card single" onclick="autoNext(this,'step-8')"><div class="opt-left"><span class="opt-label">Sim, pratico regularmente</span></div><span class="emoji">😎</span></div>
+                <div class="opt-card single" onclick="autoNext(this,'step-8')"><div class="opt-left"><span class="opt-label">Sim, já experimentei</span></div><span class="emoji">🧐</span></div>
+                <div class="opt-card single" onclick="autoNext(this,'step-8')"><div class="opt-left"><span class="opt-label">Não, nunca experimentei</span></div><span class="emoji">🤷‍♀️</span></div>
             </div>
         </div>
     </div>
 
-    <!-- STEP 8+ — adicionar próximas telas aqui -->
+    <!-- STEP 8: TRANSIÇÃO/CONCEITO (Sem numeração, direto para Step 9) -->
+    <div id="step-8" class="step">
+        <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
+            <img src="static/img/welcome-sofia.png" class="welcome-img">
+            <h2>Descubra o poder da Caminhada Tai Chi em Casa</h2>
+            <p class="desc">Este programa único combina o fluxo consciente do Tai Chi com os benefícios de uma caminhada suave — ajudando você a aliviar o estresse, melhorar o equilíbrio e aumentar sua energia a cada passo.</p>
+        </div>
+        <div class="footer-action">
+            <button class="btn-primary" onclick="goTo('step-9')">Continuar</button>
+        </div>
+    </div>
+
+    <!-- STEP 9: ÁREAS-ALVO INTERATIVO (5/25) -->
+    <div id="step-9" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:20%"></div></div>
+            <div class="step-label">5 / 25</div>
+        </div>
+        <div class="quiz-body pb-fixed">
+            <h3>Quais são suas áreas-alvo?</h3>
+            <p class="hint">Selecione as áreas que deseja focar</p>
+            
+            <div class="anatomy-container">
+                <!-- Coluna da Esquerda: Opções de seleção -->
+                <div class="anatomy-list">
+                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-arms', 'btn9')">
+                        <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Braços</span></div>
+                    </div>
+                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-abs', 'btn9')">
+                        <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Abdômen</span></div>
+                    </div>
+                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-glutes', 'btn9')">
+                        <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Glúteos</span></div>
+                    </div>
+                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-legs', 'btn9')">
+                        <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Pernas</span></div>
+                    </div>
+                </div>
+
+                <!-- Coluna da Direita: Ilustração da Modelo + Pontos Luminescentes -->
+                <div class="anatomy-view">
+                    <!-- Modelo padrão anatômica do ClubFit (Arraste sua foto para static/img/target-body.png) -->
+                    <img src="static/img/target-body.png" alt="Áreas Alvo" onerror="this.style.background='#ddd'">
+                    
+                    <!-- Bolinhas de Brilho (Glow) que ligam no clique -->
+                    <div class="glow-dot dot-arms"></div>
+                    <div class="glow-dot dot-abs"></div>
+                    <div class="glow-dot dot-glutes"></div>
+                    <div class="glow-dot dot-legs"></div>
+                </div>
+            </div>
+        </div>
+        <button id="btn9" class="btn-primary btn-fixed disabled" onclick="goTo('step-10')">Continuar</button>
+    </div>
 
 </div>
 
@@ -591,6 +699,32 @@
     function autoNext(card, nextId) {
         card.classList.add('selected');
         setTimeout(() => goTo(nextId), 400);
+    }
+
+    // Função Interativa para acender os pontos brilhantes (Glow) no corpo da modelo
+    function toggleTargetZone(card, dotClass, btnId) {
+        // Liga/Desliga o card verde
+        const isSelected = card.classList.toggle('selected');
+        const icon = card.querySelector('.opt-icon');
+        if (isSelected) {
+            if (icon) icon.textContent = '✓';
+        } else {
+            if (icon) icon.textContent = '+';
+        }
+
+        // Liga/Desliga o ponto de luz correspondente na foto da modelo
+        const dot = document.querySelector('.' + dotClass);
+        if (dot) {
+            if (isSelected) dot.classList.add('active');
+            else dot.classList.remove('active');
+        }
+
+        // Ativa/Desativa o botão continuar dependendo de alguma seleção estar marcada
+        const btn = document.getElementById(btnId);
+        if (btn) {
+            const hasSel = !!document.querySelector('#step-9 .opt-card.selected');
+            btn.classList.toggle('disabled', !hasSel);
+        }
     }
 </script>
 </body>
