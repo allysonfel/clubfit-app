@@ -40,7 +40,7 @@
 
         /* ── STEPS ── */
         .step { display: none; flex-direction: column; height: 100%; width: 100%; overflow: hidden; animation: fadeIn 0.3s ease; }
-        .step.active { display: flex; }
+        .step.active { display: flex; animation: fadeIn 0.3s ease; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -159,7 +159,7 @@
         .footer-note u { cursor: pointer; }
 
         /* ════════════════════════════════
-           STEP 2 — SOCIAL PROOF (Responsivo)
+           STEP 2 — SOCIAL PROOF
         ════════════════════════════════ */
         .social-proof-wrap {
             flex: 1;
@@ -192,7 +192,7 @@
         }
 
         /* ════════════════════════════════
-           STEP 3 — BOAS-VINDAS
+           STEP 3 — BOAS-VINDAS (Ajustado estilo Card)
         ════════════════════════════════ */
         .welcome-wrap {
             flex: 1;
@@ -200,15 +200,16 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
+            padding: 15px 24px 0; /* Adicionado respiro nas laterais */
         }
 
         .welcome-img {
             width: 100%;
             max-height: 30vh;
             object-fit: cover;
-            object-position: center 10%;
-            border-radius: 0 0 28px 28px;
-            margin-bottom: 15px;
+            object-position: center center; /* Alinhamento centralizado natural */
+            border-radius: 24px; /* Arredondado em todos os 4 cantos */
+            margin-bottom: 20px;
         }
 
         #step-3 h2 {
@@ -218,8 +219,7 @@
             line-height: 1.25;
             letter-spacing: -0.4px;
             max-width: 340px;
-            margin: 0 auto 10px;
-            padding: 0 20px;
+            margin: 0 auto 12px;
         }
 
         #step-3 .desc {
@@ -228,7 +228,16 @@
             line-height: 1.55;
             max-width: 340px;
             margin: 0 auto 15px;
-            padding: 0 20px;
+        }
+
+        /* ── TRANSIÇÕES TIPO CARD (Telas 8, 11, 24) ── */
+        .welcome-img-card {
+            width: 100%;
+            max-height: 30vh;
+            object-fit: cover;
+            object-position: center center;
+            border-radius: 24px; /* Mantém arredondado perfeito */
+            margin-bottom: 20px;
         }
 
         /* ════════════════════════════════
@@ -437,14 +446,8 @@
             gap: 12px;
             align-items: flex-start;
         }
-        .analysis-box.green {
-            background: #f4faf7;
-            border-color: #cdeada;
-        }
-        .analysis-box.orange {
-            background: #fffdf5;
-            border-color: #fceec7;
-        }
+        .analysis-box.green { background: #f4faf7; border-color: #cdeada; }
+        .analysis-box.orange { background: #fffdf5; border-color: #fceec7; }
         .analysis-icon { font-size: 20px; }
         .analysis-text { font-size: 13px; line-height: 1.5; font-weight: 500; }
         .analysis-text strong { font-weight: 800; }
@@ -456,29 +459,6 @@
             margin-top: 5px;
             text-align: center;
             width: 100%;
-        }
-
-        /* Toggles de Unidade */
-        .unit-toggle {
-            display: flex;
-            background: #eee;
-            padding: 3px;
-            border-radius: 30px;
-            width: fit-content;
-            margin: 0 auto 15px;
-        }
-        .unit-btn {
-            border: none;
-            background: none;
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 800;
-            cursor: pointer;
-        }
-        .unit-btn.active {
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
 
         /* ── BOTÃO PRINCIPAL ── */
@@ -532,7 +512,7 @@
 <body>
 <div class="app-shell">
 
-    <!-- STEP 1 (Seu Original Intocado) -->
+    <!-- STEP 1 (Original Aprovado) -->
     <div id="step-1" class="step active">
         <div style="display:flex;flex-direction:column;align-items:center;padding:22px 20px 0;text-align:center;">
             <span class="rating-badge"><span class="star">★</span> 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
@@ -566,7 +546,7 @@
         </div>
     </div>
 
-    <!-- STEP 3 -->
+    <!-- STEP 3 (Corrigido para estilo Card) -->
     <div id="step-3" class="step">
         <div class="welcome-wrap">
             <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
@@ -672,10 +652,10 @@
         </div>
     </div>
 
-    <!-- STEP 8: TRANSIÇÃO/CONCEITO -->
+    <!-- STEP 8: TRANSIÇÃO/CONCEITO (Arredondado Card) -->
     <div id="step-8" class="step">
         <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
-            <img src="static/img/welcome-sofia.png" class="welcome-img">
+            <img src="static/img/welcome-sofia.png" class="welcome-img-card">
             <h2>Descubra o poder da Caminhada Tai Chi em Casa</h2>
             <p class="desc">Este programa único combina o fluxo consciente do Tai Chi com os benefícios de uma caminhada suave — ajudando você a aliviar o estresse, melhorar o equilíbrio e aumentar sua energia a cada passo.</p>
         </div>
@@ -727,10 +707,10 @@
         </div>
     </div>
 
-    <!-- STEP 11: TRANSIÇÃO "VOCÊ É INCRÍVEL" (Sem numeração) -->
+    <!-- STEP 11: TRANSIÇÃO "VOCÊ É INCRÍVEL" (Arredondado Card) -->
     <div id="step-11" class="step">
         <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
-            <img src="static/img/amazing-sofia.png" class="welcome-img" onerror="this.style.background='#ddd'">
+            <img src="static/img/amazing-sofia.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
             <h2>Você é incrível!</h2>
             <p class="desc">Muitas pessoas lidam com o medo de não serem boas o bastante. Vamos levar isso em conta ao criar seu plano para oferecer uma abordagem que fortaleça sua confiança!</p>
         </div>
@@ -826,7 +806,7 @@
         </div>
     </div>
 
-    <!-- STEP 17: SENSIBILIDADES (12/25) - multi-select -->
+    <!-- STEP 17: SENSIBILIDADES (12/25) - multi-select com imagens -->
     <div id="step-17" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:48%"></div></div>
@@ -976,7 +956,7 @@
     <div id="step-24" class="step">
         <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
             <!-- Espaço reservado para carregar antes/depois: habits-sofia.png -->
-            <img src="static/img/habits-sofia.png" class="welcome-img" onerror="this.style.background='#ddd'">
+            <img src="static/img/habits-sofia.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
             <h2>Você sempre pode mudar seus hábitos para melhor</h2>
             <p class="desc" style="padding: 0 10px;">Grandes mudanças na vida muitas vezes afetam o peso de uma pessoa. Isso é normal. Vamos apoiar você até alcançar seu objetivo.</p>
         </div>
@@ -994,11 +974,6 @@
         <div class="quiz-body">
             <h3>Qual é a sua altura?</h3>
             <p class="hint">&nbsp;</p>
-            
-            <div class="unit-toggle">
-                <button class="unit-btn active">cm</button>
-                <button class="unit-btn">in</button>
-            </div>
 
             <div class="metric-input-wrapper">
                 <div style="display: flex; align-items: center; justify-content: center;">
@@ -1009,7 +984,7 @@
 
             <!-- Box Informativo Dinâmico -->
             <div class="analysis-box orange" style="margin-top: 30px;">
-                <span class="analysis-icon">👆</span>
+                <span class="analysis-icon">☝️</span>
                 <p class="analysis-text"><strong>Calculando seu índice de massa corporal.</strong><br>O IMC é amplamente usado como fator de risco para o desenvolvimento de vários problemas de saúde.</p>
             </div>
         </div>
@@ -1027,11 +1002,6 @@
         <div class="quiz-body">
             <h3>Qual é o seu peso atual?</h3>
             <p class="hint">&nbsp;</p>
-
-            <div class="unit-toggle">
-                <button class="unit-btn active">kg</button>
-                <button class="unit-btn">lbs</button>
-            </div>
 
             <div class="metric-input-wrapper">
                 <div style="display: flex; align-items: center; justify-content: center;">
@@ -1060,11 +1030,6 @@
         <div class="quiz-body">
             <h3>Qual seria o seu peso ideal?</h3>
             <p class="hint">&nbsp;</p>
-
-            <div class="unit-toggle">
-                <button class="unit-btn active">kg</button>
-                <button class="unit-btn">lbs</button>
-            </div>
 
             <div class="metric-input-wrapper">
                 <div style="display: flex; align-items: center; justify-content: center;">
@@ -1197,7 +1162,6 @@
         if (weight > 20 && weight < 300) {
             btn.classList.remove('disabled');
             
-            // Cálculo Dinâmico do IMC baseado na altura inserida
             const hMetros = userData.height / 100;
             const bmi = (weight / (hMetros * hMetros)).toFixed(1);
             userData.bmi = parseFloat(bmi);
@@ -1244,7 +1208,6 @@
             return;
         }
 
-        // Validação 1: Valor aceitável entre 40 e 250
         if (target < 40 || target > 250) {
             errMsg.textContent = "Por favor, insira um valor entre 40 e 250.";
             errMsg.style.display = 'block';
@@ -1253,7 +1216,6 @@
             return;
         }
 
-        // Validação 2: Peso ideal menor que o atual
         if (target >= current) {
             errMsg.textContent = "Seu peso ideal deve ser menor que o atual.";
             errMsg.style.display = 'block';
@@ -1262,7 +1224,6 @@
             return;
         }
 
-        // Se passar das validações, calcula a porcentagem e exibe o feedback correto
         errMsg.style.display = 'none';
         btn.classList.remove('disabled');
         goalBox.style.display = 'flex';
