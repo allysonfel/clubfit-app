@@ -17,7 +17,6 @@
             --card-bg:     #F5F5F0;
             --radius:      14px;
             --font:        'Inter', sans-serif;
-            --orange-glow: radial-gradient(circle, rgba(255,165,0,1) 0%, rgba(255,69,0,0.8) 50%, rgba(255,0,0,0) 100%);
         }
 
         body {
@@ -39,8 +38,8 @@
         }
 
         /* ── STEPS ── */
-        .step { display: none; flex-direction: column; height: 100%; width: 100%; overflow: hidden; animation: fadeIn 0.3s ease; }
-        .step.active { display: flex; }
+        .step { display: none; flex-direction: column; height: 100%; }
+        .step.active { display: flex; animation: fadeIn 0.3s ease; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -48,7 +47,7 @@
         }
 
         /* ════════════════════════════════
-           STEP 1 — LANDING (Sua Versão Original)
+           STEP 1 — LANDING (Seu Original Intocado)
         ════════════════════════════════ */
         #step-1 {
             padding: 22px 20px 16px;
@@ -159,46 +158,52 @@
         .footer-note u { cursor: pointer; }
 
         /* ════════════════════════════════
-           STEP 2 — SOCIAL PROOF
+           STEP 2 — SOCIAL PROOF (Responsivo)
         ════════════════════════════════ */
-        #step-2 {
+        .social-proof-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 10px 24px 20px;
+            padding: 20px 24px;
             text-align: center;
-            gap: 0;
         }
 
         .social-img {
-            width: 100%;
-            max-width: 280px;
-            margin-bottom: 12px;
+            width: auto;
+            max-width: 100%;
+            max-height: 25vh;
+            margin-bottom: 15px;
         }
 
         .badge-img {
-            width: 90%;
-            max-width: 250px;
-            margin-bottom: 8px;
+            width: auto;
+            max-width: 85%;
+            max-height: 8vh;
+            margin-bottom: 10px;
         }
 
         .social-sub {
             font-size: 15px;
             color: #666;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         /* ════════════════════════════════
-           STEP 3 — BOAS-VINDAS
+           STEP 3 — BOAS-VINDAS (Cabeça Protegida e Sem Scroll)
         ════════════════════════════════ */
-        #step-3 {
+        .welcome-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-            padding: 0;
-            text-align: center;
+            justify-content: flex-start;
         }
 
         .welcome-img {
             width: 100%;
-            max-height: 32vh;
+            max-height: 30vh;
             object-fit: cover;
             object-position: center 10%;
             border-radius: 0 0 28px 28px;
@@ -207,9 +212,9 @@
 
         #step-3 h2 {
             font-family: var(--font);
-            font-size: 22px;
+            font-size: 21px;
             font-weight: 800;
-            line-height: 1.3;
+            line-height: 1.25;
             letter-spacing: -0.4px;
             max-width: 340px;
             margin: 0 auto 10px;
@@ -217,11 +222,11 @@
         }
 
         #step-3 .desc {
-            font-size: 14px;
+            font-size: 13.5px;
             color: #555;
-            line-height: 1.6;
+            line-height: 1.55;
             max-width: 340px;
-            margin: 0 auto 20px;
+            margin: 0 auto 15px;
             padding: 0 20px;
         }
 
@@ -357,76 +362,6 @@
             padding-right: 10px;
         }
 
-        /* ── INTERATIVIDADE ANATOMIA (TELA 9) ── */
-        .anatomy-container { display: flex; width: 100%; gap: 15px; align-items: center; }
-        .anatomy-list { flex: 1.1; display: flex; flex-direction: column; gap: 10px; }
-        .anatomy-view { flex: 0.9; position: relative; display: flex; justify-content: center; }
-        .anatomy-view img { width: 100%; max-height: 280px; object-fit: contain; }
-        
-        .glow-dot {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--orange-glow);
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.3s ease-in-out;
-            pointer-events: none;
-            box-shadow: 0 0 15px rgba(255,165,0,0.8);
-            animation: pulse-glow 1.5s infinite ease-in-out;
-        }
-        .glow-dot.active { opacity: 1; transform: scale(1.4); }
-
-        .dot-arms   { top: 25%; left: 35%; }
-        .dot-abs    { top: 40%; left: 50%; transform: translateX(-50%); }
-        .dot-glutes { top: 52%; left: 62%; }
-        .dot-legs   { top: 72%; left: 50%; transform: translateX(-50%); }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 10px rgba(255,140,0,0.6); }
-            50% { box-shadow: 0 0 25px rgba(255,69,0,0.9); }
-        }
-
-        /* ── INTERATIVIDADE AUDIO (TELA 16) ── */
-        .audio-wrapper {
-            width: 100%;
-            background: #F5F5F0;
-            border-radius: 20px;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .audio-icon {
-            font-size: 50px;
-            animation: bounce-audio 1.5s infinite ease-in-out;
-        }
-        .sound-meter {
-            width: 100%;
-            height: 8px;
-            background: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .sound-fill {
-            height: 100%;
-            width: 35%;
-            background: var(--green);
-            border-radius: 10px;
-            animation: sound-wave 2s infinite ease-in-out;
-        }
-        @keyframes sound-wave {
-            0%, 100% { width: 30%; }
-            50% { width: 85%; }
-        }
-        @keyframes bounce-audio {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
         /* ── BOTÃO PRINCIPAL ── */
         .btn-primary {
             display: block;
@@ -439,8 +374,7 @@
             font-size: 17px;
             font-weight: 800;
             cursor: pointer;
-            width: calc(100% - 40px);
-            margin: 0 auto;
+            width: 100%;
             transition: background 0.15s, transform 0.1s;
         }
         .btn-primary:hover  { background: var(--green-dark); }
@@ -452,6 +386,14 @@
             pointer-events: none;
         }
 
+        /* footer-action: container do botão nas telas 2, 3, 8 e transições */
+        .footer-action {
+            padding: 0 20px 36px;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        /* Botão fixo no rodapé (telas de quiz multi-select) */
         .btn-fixed {
             position: fixed;
             bottom: 24px;
@@ -466,11 +408,6 @@
 
         .pb-fixed { padding-bottom: 90px; }
 
-        .footer-action {
-            padding: 0 20px 36px;
-            width: 100%;
-        }
-
         @media (max-width: 360px) {
             #step-1 h1 { font-size: 20px; }
             .age-btn { padding: 13px 12px; font-size: 13px; }
@@ -480,7 +417,7 @@
 <body>
 <div class="app-shell">
 
-    <!-- TELAS 1 a 3 (Seus Originais Aprovados) -->
+    <!-- STEP 1 (Original Aprovado) -->
     <div id="step-1" class="step active">
         <div style="display:flex;flex-direction:column;align-items:center;padding:22px 20px 0;text-align:center;">
             <span class="rating-badge"><span class="star">★</span> 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
@@ -488,6 +425,7 @@
             <p class="section-tag" style="margin-top:12px;">DE ACORDO COM A SUA IDADE</p>
             <span class="quiz-badge">quiz de 1 minuto</span>
         </div>
+
         <div class="hero-layout" style="padding:0 16px;">
             <img src="static/img/hero-sofia.png" alt="Sofia Lee Coach" class="hero-img">
             <div class="age-options">
@@ -497,9 +435,11 @@
                 <button class="age-btn" onclick="goTo('step-2')">50+ anos  <span class="arrow-circle">→</span></button>
             </div>
         </div>
-        <p class="footer-note">Ao continuar, você concorda com nossos Termos de Serviço, Política de Cookies e Política de Privacidade</p>
+
+        <p class="footer-note">Ao continuar, você concorda com nossos <u>Termos de Serviço</u>, <u>Política de Cookies</u> e <u>Política de Privacidade</u></p>
     </div>
 
+    <!-- STEP 2 (Original Aprovado) -->
     <div id="step-2" class="step">
         <div class="social-proof-wrap">
             <img src="static/img/social-proof.png" alt="Comunidade" class="social-img">
@@ -511,6 +451,7 @@
         </div>
     </div>
 
+    <!-- STEP 3 (Original Aprovado) -->
     <div id="step-3" class="step">
         <div class="welcome-wrap">
             <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
@@ -522,7 +463,7 @@
         </div>
     </div>
 
-    <!-- TELAS DE QUIZ (4 a 9) -->
+    <!-- STEP 4: OBJETIVO (1/25) -->
     <div id="step-4" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:4%"></div></div>
@@ -532,15 +473,28 @@
             <h3>Qual é o seu principal objetivo?</h3>
             <p class="hint">Você pode selecionar vários objetivos</p>
             <div class="options-list">
-                <div class="opt-card" onclick="toggleSelect(this,'btn4')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Perder peso</span></div><img src="{{ url_for('static', filename='img/goal-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'"></div>
-                <div class="opt-card" onclick="toggleSelect(this,'btn4')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Melhorar a saúde do coração</span></div><img src="{{ url_for('static', filename='img/goal-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'"></div>
-                <div class="opt-card" onclick="toggleSelect(this,'btn4')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Ficar firme e tonificada</span></div><img src="{{ url_for('static', filename='img/goal-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'"></div>
-                <div class="opt-card" onclick="toggleSelect(this,'btn4')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Reduzir a idade biológica</span></div><img src="{{ url_for('static', filename='img/goal-4.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'"></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn4')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Perder peso</span></div>
+                    <img src="{{ url_for('static', filename='img/goal-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn4')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Melhorar a saúde do coração</span></div>
+                    <img src="{{ url_for('static', filename='img/goal-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn4')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Ficar firme e tonificada</span></div>
+                    <img src="{{ url_for('static', filename='img/goal-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn4')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Reduzir a idade biológica</span></div>
+                    <img src="{{ url_for('static', filename='img/goal-4.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
             </div>
         </div>
         <button id="btn4" class="btn-primary btn-fixed disabled" onclick="goTo('step-5')">Continuar</button>
     </div>
 
+    <!-- STEP 5: BIOTIPO (2/25) -->
     <div id="step-5" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:8%"></div></div>
@@ -550,26 +504,46 @@
             <h3>Como você descreveria seu biotipo físico?</h3>
             <p class="hint">&nbsp;</p>
             <div class="options-list">
-                <div class="opt-card single" onclick="autoNext(this,'step-6')"><div class="opt-left"><span class="opt-label">Porte médio</span></div><img src="{{ url_for('static', filename='img/body-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'"></div>
-                <div class="opt-card single" onclick="autoNext(this,'step-6')"><div class="opt-left"><span class="opt-label">Mais encorpada</span></div><img src="{{ url_for('static', filename='img/body-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'"></div>
-                <div class="opt-card single" onclick="autoNext(this,'step-6')"><div class="opt-left"><span class="opt-label">Acima do peso</span></div><img src="{{ url_for('static', filename='img/body-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'"></div>
+                <div class="opt-card single" onclick="autoNext(this,'step-6')">
+                    <div class="opt-left"><span class="opt-label">Porte médio</span></div>
+                    <img src="{{ url_for('static', filename='img/body-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card single" onclick="autoNext(this,'step-6')">
+                    <div class="opt-left"><span class="opt-label">Mais encorpada</span></div>
+                    <img src="{{ url_for('static', filename='img/body-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card single" onclick="autoNext(this,'step-6')">
+                    <div class="opt-left"><span class="opt-label">Acima do peso</span></div>
+                    <img src="{{ url_for('static', filename='img/body-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- STEP 6: CORPO DOS SONHOS (3/25) -->
     <div id="step-6" class="step">
         <div class="quiz-header"><div class="progress-bar"><div class="progress-fill" style="width:12%"></div></div><div class="step-label">3 / 25</div></div>
         <div class="quiz-body">
             <h3>Qual é o seu corpo dos sonhos?</h3>
             <p class="hint">&nbsp;</p>
             <div class="options-list">
-                <div class="opt-card single" onclick="autoNext(this, 'step-7')"><div class="opt-left"><span class="opt-label">Magro</span></div><img src="{{ url_for('static', filename='img/dream-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'"></div>
-                <div class="opt-card single" onclick="autoNext(this, 'step-7')"><div class="opt-left"><span class="opt-label">Tonificado</span></div><img src="{{ url_for('static', filename='img/dream-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'"></div>
-                <div class="opt-card single" onclick="autoNext(this, 'step-7')"><div class="opt-left"><span class="opt-label">Curvilíneo</span></div><img src="{{ url_for('static', filename='img/dream-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'"></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-7')">
+                    <div class="opt-left"><span class="opt-label">Magro</span></div>
+                    <img src="{{ url_for('static', filename='img/dream-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-7')">
+                    <div class="opt-left"><span class="opt-label">Tonificado</span></div>
+                    <img src="{{ url_for('static', filename='img/dream-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-7')">
+                    <div class="opt-left"><span class="opt-label">Curvilíneo</span></div>
+                    <img src="{{ url_for('static', filename='img/dream-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
             </div>
         </div>
     </div>
 
+    <!-- STEP 7: EXPERIÊNCIA (4/25) -->
     <div id="step-7" class="step">
         <div class="quiz-header"><div class="progress-container"><div class="progress-bar" style="width: 16%;"></div></div><div class="step-label">4 / 25</div></div>
         <div class="quiz-body">
@@ -583,6 +557,7 @@
         </div>
     </div>
 
+    <!-- STEP 8: TRANSIÇÃO/CONCEITO -->
     <div id="step-8" class="step">
         <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
             <img src="static/img/welcome-sofia.png" class="welcome-img">
@@ -594,6 +569,7 @@
         </div>
     </div>
 
+    <!-- STEP 9: ÁREAS-ALVO INTERATIVO (5/25) -->
     <div id="step-9" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:20%"></div></div>
@@ -602,23 +578,17 @@
         <div class="quiz-body pb-fixed">
             <h3>Quais são suas áreas-alvo?</h3>
             <p class="hint">Selecione as áreas que deseja focar</p>
-            <div class="anatomy-container">
-                <div class="anatomy-list">
-                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-arms', 'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Braços</span></div></div>
-                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-abs', 'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Abdômen</span></div></div>
-                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-glutes', 'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Glúteos</span></div></div>
-                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-legs', 'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Pernas</span></div></div>
-                </div>
-                <div class="anatomy-view">
-                    <img src="static/img/target-body.png" alt="Áreas Alvo" onerror="this.style.background='#ddd'">
-                    <div class="glow-dot dot-arms"></div><div class="glow-dot dot-abs"></div><div class="glow-dot dot-glutes"></div><div class="glow-dot dot-legs"></div>
-                </div>
+            <div class="options-list">
+                <div class="opt-card" onclick="toggleSelect(this,'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Braços</span></div></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Abdômen</span></div></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Glúteos</span></div></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Pernas</span></div></div>
             </div>
         </div>
         <button id="btn9" class="btn-primary btn-fixed disabled" onclick="goTo('step-10')">Continuar</button>
     </div>
 
-    <!-- ── 7 NOVAS TELAS ADICIONADAS ABAIXO (STEPS 10 a 16) ── -->
+    <!-- ── NOVAS TELAS ADICIONADAS (Telas 10 a 23) ── -->
 
     <!-- STEP 10: BEST SHAPE (6/25) -->
     <div id="step-10" class="step">
@@ -641,7 +611,6 @@
     <!-- STEP 11: TRANSIÇÃO "VOCÊ É INCRÍVEL" (Sem numeração) -->
     <div id="step-11" class="step">
         <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
-            <!-- Reservado espaço de imagem para carregar amazing-sofia.png depois -->
             <img src="static/img/amazing-sofia.png" class="welcome-img" onerror="this.style.background='#ddd'">
             <h2>Você é incrível!</h2>
             <p class="desc">Muitas pessoas lidam com o medo de não serem boas o bastante. Vamos levar isso em conta ao criar seu plano para oferecer uma abordagem que fortaleça sua confiança!</p>
@@ -721,7 +690,7 @@
         </div>
     </div>
 
-    <!-- STEP 16: CAMINHADA FREQUENCIA INTERATIVO COM ONDA AUDIO (11/25) -->
+    <!-- STEP 16: CAMINHADA FREQUENCIA (11/25) -->
     <div id="step-16" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:44%"></div></div>
@@ -731,19 +700,155 @@
             <h3>Com que frequência você sai para caminhar?</h3>
             <p class="hint">&nbsp;</p>
             <div class="options-list">
-                <div class="opt-card single" onclick="autoNext(this, 'final')"><div class="opt-left"><span class="opt-label">Quase todos os dias</span></div><span class="emoji">💪</span></div>
-                <div class="opt-card single" onclick="autoNext(this, 'final')"><div class="opt-left"><span class="opt-label">2-3 vezes por semana</span></div><span class="emoji">👍</span></div>
-                <div class="opt-card single" onclick="autoNext(this, 'final')"><div class="opt-left"><span class="opt-label">Mais ou menos uma vez por mês</span></div><span class="emoji">👌</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-17')"><div class="opt-left"><span class="opt-label">Quase todos os dias</span></div><span class="emoji">💪</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-17')"><div class="opt-left"><span class="opt-label">2-3 vezes por semana</span></div><span class="emoji">👍</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-17')"><div class="opt-left"><span class="opt-label">Mais ou menos uma vez por mês</span></div><span class="emoji">👌</span></div>
             </div>
+        </div>
+    </div>
 
-            <!-- Onda sonora decorativa interativa igual ao concorrente -->
-            <div class="audio-wrapper">
-                <span class="audio-icon">🔊</span>
-                <div class="sound-meter">
-                    <div class="sound-fill"></div>
+    <!-- STEP 17: SENSIBILIDADES (12/25) - multi-select com imagens -->
+    <div id="step-17" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:48%"></div></div>
+            <div class="step-label">12 / 25</div>
+        </div>
+        <div class="quiz-body pb-fixed">
+            <h3>Você tem alguma das seguintes sensibilidades?</h3>
+            <p class="hint">Selecione todas que desejar</p>
+            <div class="options-list">
+                <div class="opt-card" onclick="toggleSelect(this,'btn17')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Costas sensíveis</span></div>
+                    <img src="{{ url_for('static', filename='img/focus-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn17')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Joelhos sensíveis</span></div>
+                    <img src="{{ url_for('static', filename='img/focus-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn17')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Cotovelos sensíveis</span></div>
+                    <img src="{{ url_for('static', filename='img/focus-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn17')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Nenhuma das opções acima</span></div>
+                    <img src="{{ url_for('static', filename='img/focus-4.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
                 </div>
             </div>
         </div>
+        <button id="btn17" class="btn-primary btn-fixed disabled" onclick="goTo('step-18')">Continuar</button>
+    </div>
+
+    <!-- STEP 18: ROTINA TRABALHO (13/25) -->
+    <div id="step-18" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:52%"></div></div>
+            <div class="step-label">13 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Como é sua rotina de trabalho?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-19')"><div class="opt-left"><span class="opt-label">Das 9 às 17</span></div><span class="emoji">☀️</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-19')"><div class="opt-left"><span class="opt-label">Turnos noturnos</span></div><span class="emoji">🌑</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-19')"><div class="opt-left"><span class="opt-label">É bem flexível</span></div><span class="emoji">🙂</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-19')"><div class="opt-left"><span class="opt-label">Sou aposentada</span></div><span class="emoji">🌴</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 19: DIA TÍPICO (14/25) -->
+    <div id="step-19" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:56%"></div></div>
+            <div class="step-label">14 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Como você descreveria seu dia típico?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-20')"><div class="opt-left"><span class="opt-label">Fico em pé o dia todo</span></div><span class="emoji">🏃‍♀️</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-20')"><div class="opt-left"><span class="opt-label">Faço pausas ativas</span></div><span class="emoji">✌️</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-20')"><div class="opt-left"><span class="opt-label">Passo a maior parte do dia sentada</span></div><span class="emoji">👩‍💻</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 20: SONO (15/25) -->
+    <div id="step-20" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+            <div class="step-label">15 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Quantas horas você costuma dormir?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-21')"><div class="opt-left"><span class="opt-label">Durmo menos de 5 horas</span></div><span class="emoji">😴</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-21')"><div class="opt-left"><span class="opt-label">Durmo cerca de 5-6 horas</span></div><span class="emoji">💤</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-21')"><div class="opt-left"><span class="opt-label">Durmo bem por 7-8 horas</span></div><span class="emoji">💪</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-21')"><div class="opt-left"><span class="opt-label">Gosto de dormir mais de 8 horas</span></div><span class="emoji">😎</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 21: INGESTÃO DE ÁGUA (16/25) -->
+    <div id="step-21" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:64%"></div></div>
+            <div class="step-label">16 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Qual é a sua ingestão diária de água?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-22')"><div class="opt-left"><span class="opt-label">Cerca de 2 copos (16 oz)</span></div><span class="emoji">💧</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-22')"><div class="opt-left"><span class="opt-label">Entre 2 e 6 copos (17 - 51 oz)</span></div><span class="emoji">💦</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-22')"><div class="opt-left"><span class="opt-label">Mais de 6 copos (51 oz >)</span></div><span class="emoji">😎</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-22')"><div class="opt-left"><span class="opt-label">Bebo apenas café ou chá</span></div><span class="emoji">☕</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 22: HÁBITOS RUINS (17/25) - multi-select -->
+    <div id="step-22" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
+            <div class="step-label">17 / 25</div>
+        </div>
+        <div class="quiz-body pb-fixed">
+            <h3>Você tem algum hábito ruim?</h3>
+            <p class="hint">Selecione todas que desejar</p>
+            <div class="options-list">
+                <div class="opt-card" onclick="toggleSelect(this,'btn22')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Tenho dificuldade para dormir o suficiente</span></div><span class="emoji">😴</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn22')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Tenho dificuldade para reduzir o açúcar</span></div><span class="emoji">🍫</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn22')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Sou viciada em refrigerante</span></div><span class="emoji">🥤</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn22')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Consumo muitos alimentos salgados</span></div><span class="emoji">🧂</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn22')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Costumo beliscar à meia-noite</span></div><span class="emoji">🌘</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn22')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Nenhuma das opções acima</span></div><span class="emoji">👍</span></div>
+            </div>
+        </div>
+        <div class="footer-action"><button id="btn22" class="btn-primary btn-fixed disabled" onclick="goTo('step-23')">Continuar</button></div>
+    </div>
+
+    <!-- STEP 23: GANHO DE PESO (18/25) - multi-select -->
+    <div id="step-23" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
+            <div class="step-label">18 / 25</div>
+        </div>
+        <div class="quiz-body pb-fixed">
+            <h3>Algum acontecimento da sua vida levou ao ganho de peso?</h3>
+            <p class="hint">Você pode selecionar vários</p>
+            <div class="options-list">
+                <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Casamento ou relacionamento</span></div><span class="emoji">💑</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Rotina de trabalho corrida</span></div><span class="emoji">👩‍💻</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Estresse ou saúde mental</span></div><span class="emoji">🤯</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Gravidez</span></div><span class="emoji">🤰</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Medicamentos ou distúrbio hormonal</span></div><span class="emoji">💊</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Nenhum evento parecido</span></div><span class="emoji">👍</span></div>
+            </div>
+        </div>
+        <div class="footer-action"><button id="btn23" class="btn-primary btn-fixed disabled" onclick="alert('Fim desta etapa do quiz!')">Continuar</button></div>
     </div>
 
 </div><!-- /app-shell -->
@@ -771,32 +876,7 @@
 
     function autoNext(card, nextId) {
         card.classList.add('selected');
-        setTimeout(() => {
-            if(nextId === 'final') alert("Fim desta etapa do quiz!");
-            else goTo(nextId);
-        }, 500);
-    }
-
-    function toggleTargetZone(card, dotClass, btnId) {
-        const isSelected = card.classList.toggle('selected');
-        const icon = card.querySelector('.opt-icon');
-        if (isSelected) {
-            if (icon) icon.textContent = '✓';
-        } else {
-            if (icon) icon.textContent = '+';
-        }
-
-        const dot = document.querySelector('.' + dotClass);
-        if (dot) {
-            if (isSelected) dot.classList.add('active');
-            else dot.classList.remove('active');
-        }
-
-        const btn = document.getElementById(btnId);
-        if (btn) {
-            const hasSel = !!document.querySelector('#step-9 .opt-card.selected');
-            btn.classList.toggle('disabled', !hasSel);
-        }
+        setTimeout(() => goTo(nextId), 400);
     }
 </script>
 </body>
