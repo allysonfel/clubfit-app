@@ -17,6 +17,7 @@
             --card-bg:     #F5F5F0;
             --radius:      14px;
             --font:        'Inter', sans-serif;
+            --orange-glow: radial-gradient(circle, rgba(255,165,0,1) 0%, rgba(255,69,0,0.8) 50%, rgba(255,0,0,0) 100%);
         }
 
         body {
@@ -38,8 +39,8 @@
         }
 
         /* ── STEPS ── */
-        .step { display: none; flex-direction: column; height: 100%; }
-        .step.active { display: flex; animation: fadeIn 0.3s ease; }
+        .step { display: none; flex-direction: column; height: 100%; width: 100%; overflow: hidden; animation: fadeIn 0.3s ease; }
+        .step.active { display: flex; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -191,7 +192,7 @@
         }
 
         /* ════════════════════════════════
-           STEP 3 — BOAS-VINDAS (Cabeça Protegida e Sem Scroll)
+           STEP 3 — BOAS-VINDAS
         ════════════════════════════════ */
         .welcome-wrap {
             flex: 1;
@@ -362,6 +363,124 @@
             padding-right: 10px;
         }
 
+        /* ── INTERATIVIDADE ANATOMIA (TELA 9) ── */
+        .anatomy-container { display: flex; width: 100%; gap: 15px; align-items: center; }
+        .anatomy-list { flex: 1.1; display: flex; flex-direction: column; gap: 10px; }
+        .anatomy-view { flex: 0.9; position: relative; display: flex; justify-content: center; }
+        .anatomy-view img { width: 100%; max-height: 280px; object-fit: contain; }
+        
+        .glow-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--orange-glow);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s ease-in-out;
+            pointer-events: none;
+            box-shadow: 0 0 15px rgba(255,165,0,0.8);
+            animation: pulse-glow 1.5s infinite ease-in-out;
+        }
+        .glow-dot.active { opacity: 1; transform: scale(1.4); }
+
+        .dot-arms   { top: 25%; left: 35%; }
+        .dot-abs    { top: 40%; left: 50%; transform: translateX(-50%); }
+        .dot-glutes { top: 52%; left: 62%; }
+        .dot-legs   { top: 72%; left: 50%; transform: translateX(-50%); }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255,140,0,0.6); }
+            50% { box-shadow: 0 0 25px rgba(255,69,0,0.9); }
+        }
+
+        /* ── NOVAS ENTRADAS (INPUTS MÉTRICOS) ── */
+        .metric-input-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .metric-field {
+            width: 100%;
+            background: var(--card-bg);
+            border: 2px solid transparent;
+            border-radius: var(--radius);
+            padding: 18px;
+            font-size: 24px;
+            font-weight: 800;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        .metric-field:focus {
+            border-color: var(--green);
+        }
+        .unit-label {
+            font-size: 16px;
+            color: var(--text);
+            font-weight: 800;
+            margin-left: 5px;
+        }
+        
+        /* Box de Alertas e Análise de IMC */
+        .analysis-box {
+            width: 100%;
+            background: #fff5f5;
+            border: 1.5px solid #ffcccc;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+            text-align: left;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+        .analysis-box.green {
+            background: #f4faf7;
+            border-color: #cdeada;
+        }
+        .analysis-box.orange {
+            background: #fffdf5;
+            border-color: #fceec7;
+        }
+        .analysis-icon { font-size: 20px; }
+        .analysis-text { font-size: 13px; line-height: 1.5; font-weight: 500; }
+        .analysis-text strong { font-weight: 800; }
+
+        .error-message {
+            color: #d9534f;
+            font-size: 12px;
+            font-weight: 700;
+            margin-top: 5px;
+            text-align: center;
+            width: 100%;
+        }
+
+        /* Toggles de Unidade */
+        .unit-toggle {
+            display: flex;
+            background: #eee;
+            padding: 3px;
+            border-radius: 30px;
+            width: fit-content;
+            margin: 0 auto 15px;
+        }
+        .unit-btn {
+            border: none;
+            background: none;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .unit-btn.active {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
         /* ── BOTÃO PRINCIPAL ── */
         .btn-primary {
             display: block;
@@ -386,20 +505,11 @@
             pointer-events: none;
         }
 
-        /* footer-action: container do botão nas telas 2, 3, 8 e transições */
-        .footer-action {
-            padding: 0 20px 36px;
-            width: 100%;
-            flex-shrink: 0;
-        }
-
-        /* Botão fixo no rodapé (telas de quiz multi-select) */
         .btn-fixed {
             position: fixed;
             bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
-            width: calc(100% - 40px);
             max-width: 440px;
             z-index: 10;
             box-shadow: 0 4px 20px rgba(46,158,88,0.3);
@@ -407,6 +517,11 @@
         .btn-fixed:active { transform: translateX(-50%) scale(0.98) !important; }
 
         .pb-fixed { padding-bottom: 90px; }
+
+        .footer-action {
+            padding: 0 20px 36px;
+            width: 100%;
+        }
 
         @media (max-width: 360px) {
             #step-1 h1 { font-size: 20px; }
@@ -417,7 +532,7 @@
 <body>
 <div class="app-shell">
 
-    <!-- STEP 1 (Original Aprovado) -->
+    <!-- STEP 1 (Seu Original Intocado) -->
     <div id="step-1" class="step active">
         <div style="display:flex;flex-direction:column;align-items:center;padding:22px 20px 0;text-align:center;">
             <span class="rating-badge"><span class="star">★</span> 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
@@ -439,7 +554,7 @@
         <p class="footer-note">Ao continuar, você concorda com nossos <u>Termos de Serviço</u>, <u>Política de Cookies</u> e <u>Política de Privacidade</u></p>
     </div>
 
-    <!-- STEP 2 (Original Aprovado) -->
+    <!-- STEP 2 -->
     <div id="step-2" class="step">
         <div class="social-proof-wrap">
             <img src="static/img/social-proof.png" alt="Comunidade" class="social-img">
@@ -451,7 +566,7 @@
         </div>
     </div>
 
-    <!-- STEP 3 (Original Aprovado) -->
+    <!-- STEP 3 -->
     <div id="step-3" class="step">
         <div class="welcome-wrap">
             <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
@@ -578,17 +693,21 @@
         <div class="quiz-body pb-fixed">
             <h3>Quais são suas áreas-alvo?</h3>
             <p class="hint">Selecione as áreas que deseja focar</p>
-            <div class="options-list">
-                <div class="opt-card" onclick="toggleSelect(this,'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Braços</span></div></div>
-                <div class="opt-card" onclick="toggleSelect(this,'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Abdômen</span></div></div>
-                <div class="opt-card" onclick="toggleSelect(this,'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Glúteos</span></div></div>
-                <div class="opt-card" onclick="toggleSelect(this,'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Pernas</span></div></div>
+            <div class="anatomy-container">
+                <div class="anatomy-list">
+                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-arms', 'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Braços</span></div></div>
+                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-abs', 'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Abdômen</span></div></div>
+                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-glutes', 'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Glúteos</span></div></div>
+                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-legs', 'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Pernas</span></div></div>
+                </div>
+                <div class="anatomy-view">
+                    <img src="static/img/target-body.png" alt="Áreas Alvo" onerror="this.style.background='#ddd'">
+                    <div class="glow-dot dot-arms"></div><div class="glow-dot dot-abs"></div><div class="glow-dot dot-glutes"></div><div class="glow-dot dot-legs"></div>
+                </div>
             </div>
         </div>
         <button id="btn9" class="btn-primary btn-fixed disabled" onclick="goTo('step-10')">Continuar</button>
     </div>
-
-    <!-- ── NOVAS TELAS ADICIONADAS (Telas 10 a 23) ── -->
 
     <!-- STEP 10: BEST SHAPE (6/25) -->
     <div id="step-10" class="step">
@@ -707,7 +826,7 @@
         </div>
     </div>
 
-    <!-- STEP 17: SENSIBILIDADES (12/25) - multi-select com imagens -->
+    <!-- STEP 17: SENSIBILIDADES (12/25) - multi-select -->
     <div id="step-17" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:48%"></div></div>
@@ -735,7 +854,7 @@
                 </div>
             </div>
         </div>
-        <button id="btn17" class="btn-primary btn-fixed disabled" onclick="goTo('step-18')">Continuar</button>
+        <div class="footer-action"><button id="btn17" class="btn-primary btn-fixed disabled" onclick="goTo('step-18')">Continuar</button></div>
     </div>
 
     <!-- STEP 18: ROTINA TRABALHO (13/25) -->
@@ -837,7 +956,7 @@
             <div class="step-label">18 / 25</div>
         </div>
         <div class="quiz-body pb-fixed">
-            <h3>Algum acontecimento da sua vida levou ao ganho de peso??</h3>
+            <h3>Algum acontecimento da sua vida levou ao ganho de peso?</h3>
             <p class="hint">Você pode selecionar vários</p>
             <div class="options-list">
                 <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Casamento ou relacionamento</span></div><span class="emoji">💑</span></div>
@@ -848,12 +967,162 @@
                 <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Nenhum evento parecido</span></div><span class="emoji">👍</span></div>
             </div>
         </div>
-        <div class="footer-action"><button id="btn23" class="btn-primary btn-fixed disabled" onclick="alert('Fim desta etapa do quiz!')">Continuar</button></div>
+        <div class="footer-action"><button id="btn23" class="btn-primary btn-fixed disabled" onclick="goTo('step-24')">Continuar</button></div>
+    </div>
+
+    <!-- ── NOVAS TELAS (Telas 24 a 28) ── -->
+
+    <!-- STEP 24: TRANSIÇÃO HÁBITOS (Sem numeração) -->
+    <div id="step-24" class="step">
+        <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
+            <!-- Espaço reservado para carregar antes/depois: habits-sofia.png -->
+            <img src="static/img/habits-sofia.png" class="welcome-img" onerror="this.style.background='#ddd'">
+            <h2>Você sempre pode mudar seus hábitos para melhor</h2>
+            <p class="desc" style="padding: 0 10px;">Grandes mudanças na vida muitas vezes afetam o peso de uma pessoa. Isso é normal. Vamos apoiar você até alcançar seu objetivo.</p>
+        </div>
+        <div class="footer-action">
+            <button class="btn-primary" onclick="goTo('step-25')">Continuar</button>
+        </div>
+    </div>
+
+    <!-- STEP 25: ALTURA (19/25) -->
+    <div id="step-25" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:76%"></div></div>
+            <div class="step-label">19 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Qual é a sua altura?</h3>
+            <p class="hint">&nbsp;</p>
+            
+            <div class="unit-toggle">
+                <button class="unit-btn active">cm</button>
+                <button class="unit-btn">in</button>
+            </div>
+
+            <div class="metric-input-wrapper">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <input type="number" id="height-input" class="metric-field" placeholder="170" oninput="validateHeight()">
+                    <span class="unit-label">cm</span>
+                </div>
+            </div>
+
+            <!-- Box Informativo Dinâmico -->
+            <div class="analysis-box orange" style="margin-top: 30px;">
+                <span class="analysis-icon">👆</span>
+                <p class="analysis-text"><strong>Calculando seu índice de massa corporal.</strong><br>O IMC é amplamente usado como fator de risco para o desenvolvimento de vários problemas de saúde.</p>
+            </div>
+        </div>
+        <div class="footer-action">
+            <button id="btn-height" class="btn-primary disabled" onclick="saveHeight()">Continuar</button>
+        </div>
+    </div>
+
+    <!-- STEP 26: PESO ATUAL (20/25) -->
+    <div id="step-26" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+            <div class="step-label">20 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Qual é o seu peso atual?</h3>
+            <p class="hint">&nbsp;</p>
+
+            <div class="unit-toggle">
+                <button class="unit-btn active">kg</button>
+                <button class="unit-btn">lbs</button>
+            </div>
+
+            <div class="metric-input-wrapper">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <input type="number" id="weight-input" class="metric-field" placeholder="70" oninput="calculateBMI()">
+                    <span class="unit-label">kg</span>
+                </div>
+            </div>
+
+            <!-- Box Informativo de IMC Dinâmico que acende no Input -->
+            <div id="bmi-analysis-box" class="analysis-box" style="display: none;">
+                <span id="bmi-emoji" class="analysis-icon">🔥</span>
+                <p id="bmi-status-text" class="analysis-text"></p>
+            </div>
+        </div>
+        <div class="footer-action">
+            <button id="btn-weight" class="btn-primary disabled" onclick="saveWeight()">Continuar</button>
+        </div>
+    </div>
+
+    <!-- STEP 27: PESO IDEAL (21/25) -->
+    <div id="step-27" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:84%"></div></div>
+            <div class="step-label">21 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Qual seria o seu peso ideal?</h3>
+            <p class="hint">&nbsp;</p>
+
+            <div class="unit-toggle">
+                <button class="unit-btn active">kg</button>
+                <button class="unit-btn">lbs</button>
+            </div>
+
+            <div class="metric-input-wrapper">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <input type="number" id="target-weight-input" class="metric-field" placeholder="60" oninput="validateWeights()">
+                    <span class="unit-label">kg</span>
+                </div>
+                <div id="weight-error-msg" class="error-message" style="display: none;"></div>
+            </div>
+
+            <!-- Box Informativo de Meta Dinâmico (Muda conforme % de peso a perder) -->
+            <div id="goal-analysis-box" class="analysis-box" style="display: none;">
+                <span id="goal-icon" class="analysis-icon">⭐</span>
+                <p id="goal-text" class="analysis-text"></p>
+            </div>
+        </div>
+        <div class="footer-action">
+            <button id="btn-target" class="btn-primary disabled" onclick="goTo('step-28')">Continuar</button>
+        </div>
+    </div>
+
+    <!-- STEP 28: IDADE (22/25) -->
+    <div id="step-28" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div>
+            <div class="step-label">22 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Qual é a sua idade?</h3>
+            <p class="hint">&nbsp;</p>
+
+            <div class="metric-input-wrapper">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <input type="number" id="age-input" class="metric-field" placeholder="35" oninput="validateAge()">
+                    <span class="unit-label">anos</span>
+                </div>
+            </div>
+
+            <div class="analysis-box orange" style="margin-top: 30px;">
+                <span class="analysis-icon">☝️</span>
+                <p class="analysis-text">Isso nos ajudará a ajustar seu plano pessoal com base na sua taxa metabólica basal.</p>
+            </div>
+        </div>
+        <div class="footer-action">
+            <button id="btn-age" class="btn-primary disabled" onclick="alert('Dados coletados com sucesso! Sofia Lee está gerando seu cronograma.')">Próximo</button>
+        </div>
     </div>
 
 </div><!-- /app-shell -->
 
 <script>
+    let userData = {
+        height: 0,
+        weight: 0,
+        targetWeight: 0,
+        bmi: 0,
+        age: 0
+    };
+
     function goTo(id) {
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         const t = document.getElementById(id);
@@ -877,6 +1146,148 @@
     function autoNext(card, nextId) {
         card.classList.add('selected');
         setTimeout(() => goTo(nextId), 400);
+    }
+
+    function toggleTargetZone(card, dotClass, btnId) {
+        const isSelected = card.classList.toggle('selected');
+        const icon = card.querySelector('.opt-icon');
+        if (isSelected) {
+            if (icon) icon.textContent = '✓';
+        } else {
+            if (icon) icon.textContent = '+';
+        }
+
+        const dot = document.querySelector('.' + dotClass);
+        if (dot) {
+            if (isSelected) dot.classList.add('active');
+            else dot.classList.remove('active');
+        }
+
+        const btn = document.getElementById(btnId);
+        if (btn) {
+            const hasSel = !!document.querySelector('#step-9 .opt-card.selected');
+            btn.classList.toggle('disabled', !hasSel);
+        }
+    }
+
+    /* ── LÓGICA DE ENTRADAS DINÂMICAS ── */
+    
+    function validateHeight() {
+        const val = parseFloat(document.getElementById('height-input').value);
+        const btn = document.getElementById('btn-height');
+        if (val > 50 && val < 250) {
+            btn.classList.remove('disabled');
+        } else {
+            btn.classList.add('disabled');
+        }
+    }
+
+    function saveHeight() {
+        userData.height = parseFloat(document.getElementById('height-input').value);
+        goTo('step-26');
+    }
+
+    function calculateBMI() {
+        const weight = parseFloat(document.getElementById('weight-input').value);
+        const btn = document.getElementById('btn-weight');
+        const bmiBox = document.getElementById('bmi-analysis-box');
+        const bmiText = document.getElementById('bmi-status-text');
+        const bmiEmoji = document.getElementById('bmi-emoji');
+
+        if (weight > 20 && weight < 300) {
+            btn.classList.remove('disabled');
+            
+            // Cálculo Dinâmico do IMC baseado na altura inserida
+            const hMetros = userData.height / 100;
+            const bmi = (weight / (hMetros * hMetros)).toFixed(1);
+            userData.bmi = parseFloat(bmi);
+
+            bmiBox.style.display = 'flex';
+
+            if (bmi >= 30) {
+                bmiBox.className = "analysis-box";
+                bmiEmoji.textContent = "⚠️";
+                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado obesidade.</strong><br>Seu peso atual representa riscos para a sua saúde. Usaremos seu índice para criar um programa de perda de peso adaptado às suas necessidades.`;
+            } else if (bmi >= 25) {
+                bmiBox.className = "analysis-box orange";
+                bmiEmoji.textContent = "⚡";
+                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado sobrepeso.</strong><br>Seu peso está um pouco acima do recomendado. Vamos te ajudar a voltar para a faixa ideal com segurança.`;
+            } else {
+                bmiBox.className = "analysis-box green";
+                bmiEmoji.textContent = "✨";
+                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado peso saudável.</strong><br>Ótimo! Seu peso está dentro da faixa saudável. Nosso plano vai te focar em tonificação e bem-estar geral.`;
+            }
+        } else {
+            btn.classList.add('disabled');
+            bmiBox.style.display = 'none';
+        }
+    }
+
+    function saveWeight() {
+        userData.weight = parseFloat(document.getElementById('weight-input').value);
+        goTo('step-27');
+    }
+
+    function validateWeights() {
+        const target = parseFloat(document.getElementById('target-weight-input').value);
+        const current = userData.weight;
+        const btn = document.getElementById('btn-target');
+        const errMsg = document.getElementById('weight-error-msg');
+        const goalBox = document.getElementById('goal-analysis-box');
+        const goalIcon = document.getElementById('goal-icon');
+        const goalText = document.getElementById('goal-text');
+
+        if (!target) {
+            btn.classList.add('disabled');
+            errMsg.style.display = 'none';
+            goalBox.style.display = 'none';
+            return;
+        }
+
+        // Validação 1: Valor aceitável entre 40 e 250
+        if (target < 40 || target > 250) {
+            errMsg.textContent = "Por favor, insira um valor entre 40 e 250.";
+            errMsg.style.display = 'block';
+            btn.classList.add('disabled');
+            goalBox.style.display = 'none';
+            return;
+        }
+
+        // Validação 2: Peso ideal menor que o atual
+        if (target >= current) {
+            errMsg.textContent = "Seu peso ideal deve ser menor que o atual.";
+            errMsg.style.display = 'block';
+            btn.classList.add('disabled');
+            goalBox.style.display = 'none';
+            return;
+        }
+
+        // Se passar das validações, calcula a porcentagem e exibe o feedback correto
+        errMsg.style.display = 'none';
+        btn.classList.remove('disabled');
+        goalBox.style.display = 'flex';
+
+        const lossPct = Math.round(((current - target) / current) * 100);
+
+        if (lossPct >= 20) {
+            goalBox.className = "analysis-box orange";
+            goalIcon.textContent = "🏆";
+            goalText.innerHTML = `<strong>OBJETIVO AMBICIOSO: perder ${lossPct}% do seu peso.</strong><br>Pessoas com sobrepeso que perdem mais de 20% do peso corporal tendem a ter melhor saúde e satisfação com a vida em comparação com aquelas que perdem 10% ou menos.`;
+        } else {
+            goalBox.className = "analysis-box green";
+            goalIcon.textContent = "☘️";
+            goalText.innerHTML = `<strong>MELHORE SUA SAÚDE: perder ${lossPct}% do seu peso.</strong><br>Condições de saúde relacionadas ao peso melhoram com uma perda de peso de 10% ou mais. O risco de doenças diminui e a energia melhora.`;
+        }
+    }
+
+    function validateAge() {
+        const val = parseInt(document.getElementById('age-input').value);
+        const btn = document.getElementById('btn-age');
+        if (val > 14 && val < 110) {
+            btn.classList.remove('disabled');
+        } else {
+            btn.classList.add('disabled');
+        }
     }
 </script>
 </body>
