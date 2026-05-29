@@ -23,30 +23,22 @@
             font-family: var(--font);
             background: #fff;
             color: var(--text);
-            height: 100dvh; /* Garante altura exata do celular */
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            overflow: hidden;
         }
 
         .app-shell {
             width: 100%;
             max-width: 480px;
-            height: 100%;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* ── STEPS COMPACTADOS PARA CABER NA TELA ── */
-        .step { 
-            display: none; 
-            flex-direction: column; 
-            height: 100%; 
-            width: 100%; 
-            overflow: hidden; /* Impede rolagem nas telas de transição */
-            animation: fadeIn 0.3s ease; 
-        }
-        .step.active { display: flex; }
+        /* ── STEPS ── */
+        .step { display: none; flex-direction: column; min-height: 100vh; }
+        .step.active { display: flex; animation: fadeIn 0.3s ease; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -165,75 +157,69 @@
         .footer-note u { cursor: pointer; }
 
         /* ════════════════════════════════
-           STEP 2 — SOCIAL PROOF (Responsivo)
+           STEP 2 — SOCIAL PROOF
         ════════════════════════════════ */
-        .social-proof-wrap {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+        #step-2 {
             align-items: center;
             justify-content: center;
-            padding: 20px 24px;
+            padding: 40px 24px 36px;
             text-align: center;
+            gap: 0;
         }
 
         .social-img {
-            width: auto;
-            max-width: 100%;
-            max-height: 25vh; /* Ocupa no máximo 25% da altura da tela */
-            margin-bottom: 15px;
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 20px;
         }
 
         .badge-img {
-            width: auto;
-            max-width: 85%;
-            max-height: 8vh;
+            width: 90%;
+            max-width: 260px;
             margin-bottom: 10px;
         }
 
         .social-sub {
             font-size: 15px;
             color: #666;
-            margin-bottom: 20px;
+            margin-bottom: 36px;
         }
 
         /* ════════════════════════════════
-           STEP 3 — BOAS-VINDAS (Cabeça Protegida e Sem Scroll)
+           STEP 3 — BOAS-VINDAS
         ════════════════════════════════ */
-        .welcome-wrap {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+        #step-3 {
             align-items: center;
-            justify-content: flex-start;
+            padding: 0 0 32px;
+            text-align: center;
         }
 
         .welcome-img {
             width: 100%;
-            max-height: 30vh; /* Ajustado para sobrar espaço pro botão em telas pequenas */
+            max-height: 32vh;
             object-fit: cover;
-            object-position: center 10%; /* CORREÇÃO: Foca estritamente no topo da imagem */
+            object-position: center 15%;
             border-radius: 0 0 28px 28px;
-            margin-bottom: 15px;
+            margin-bottom: 22px;
         }
 
         #step-3 h2 {
             font-family: var(--font);
-            font-size: 21px;
+            font-size: 22px;
             font-weight: 800;
-            line-height: 1.25;
+            line-height: 1.3;
             letter-spacing: -0.4px;
             max-width: 340px;
-            margin: 0 auto 10px;
+            margin: 0 auto 14px;
             padding: 0 20px;
         }
 
         #step-3 .desc {
-            font-size: 13.5px;
+            font-size: 14px;
             color: #555;
-            line-height: 1.55;
+            line-height: 1.65;
             max-width: 340px;
-            margin: 0 auto 15px;
+            margin: 0 auto 32px;
             padding: 0 20px;
         }
 
@@ -271,7 +257,6 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            overflow-y: auto;
         }
 
         .quiz-body h3 {
@@ -369,7 +354,7 @@
             padding-right: 10px;
         }
 
-        /* ── BOTÃO PRINCIPAL (Fixado no rodapé) ── */
+        /* ── BOTÃO PRINCIPAL ── */
         .btn-primary {
             display: block;
             background: var(--green);
@@ -381,7 +366,8 @@
             font-size: 17px;
             font-weight: 800;
             cursor: pointer;
-            width: 100%;
+            width: calc(100% - 40px);
+            margin: 0 auto;
             transition: background 0.15s, transform 0.1s;
         }
         .btn-primary:hover  { background: var(--green-dark); }
@@ -408,7 +394,6 @@
 
         .footer-action {
             padding: 0 20px 36px;
-            width: 100%;
         }
 
         @media (max-width: 360px) {
@@ -442,9 +427,9 @@
         <p class="footer-note">Ao continuar, você concorda com nossos <u>Termos de Serviço</u>, <u>Política de Cookies</u> e <u>Política de Privacidade</u></p>
     </div>
 
-    <!-- STEP 2 (CORRIGIDO) -->
+    <!-- STEP 2 -->
     <div id="step-2" class="step">
-        <div class="social-proof-wrap">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 24px 20px;text-align:center;">
             <img src="static/img/social-proof.png" alt="Comunidade" class="social-img">
             <img src="static/img/badge-users.png" alt="800k usuários" class="badge-img">
             <p class="social-sub">pessoas já se juntaram a nós</p>
@@ -454,9 +439,9 @@
         </div>
     </div>
 
-    <!-- STEP 3 (CORRIGIDO) -->
+    <!-- STEP 3 -->
     <div id="step-3" class="step">
-        <div class="welcome-wrap">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;">
             <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
             <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
             <p class="desc">Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa. Vamos explorar juntas seus objetivos e necessidades.</p>
@@ -476,10 +461,22 @@
             <h3>Qual é o seu principal objetivo?</h3>
             <p class="hint">Você pode selecionar vários objetivos</p>
             <div class="options-list">
-                <div class="opt-card" onclick="toggleSelect(this,'btn4')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Perder peso</span></div><div class="opt-thumb"></div></div>
-                <div class="opt-card" onclick="toggleSelect(this,'btn4')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Melhorar a saúde do coração</span></div><div class="opt-thumb"></div></div>
-                <div class="opt-card" onclick="toggleSelect(this,'btn4')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Ficar firme e tonificada</span></div><div class="opt-thumb"></div></div>
-                <div class="opt-card" onclick="toggleSelect(this,'btn4')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Reduzir a idade biológica</span></div><div class="opt-thumb"></div></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn4')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Perder peso</span></div>
+                    <img src="{{ url_for('static', filename='img/goal-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn4')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Melhorar a saúde do coração</span></div>
+                    <img src="{{ url_for('static', filename='img/goal-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn4')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Ficar firme e tonificada</span></div>
+                    <img src="{{ url_for('static', filename='img/goal-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn4')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Reduzir a idade biológica</span></div>
+                    <img src="{{ url_for('static', filename='img/goal-4.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
             </div>
         </div>
         <button id="btn4" class="btn-primary btn-fixed disabled" onclick="goTo('step-5')">Continuar</button>
@@ -495,9 +492,18 @@
             <h3>Como você descreveria seu biotipo físico?</h3>
             <p class="hint">&nbsp;</p>
             <div class="options-list">
-                <div class="opt-card single" onclick="autoNext(this,'step-6')"><div class="opt-left"><span class="opt-label">Porte médio</span></div><div class="opt-thumb"></div></div>
-                <div class="opt-card single" onclick="autoNext(this,'step-6')"><div class="opt-left"><span class="opt-label">Mais encorpada</span></div><div class="opt-thumb"></div></div>
-                <div class="opt-card single" onclick="autoNext(this,'step-6')"><div class="opt-left"><span class="opt-label">Acima do peso</span></div><div class="opt-thumb"></div></div>
+                <div class="opt-card single" onclick="autoNext(this,'step-6')">
+                    <div class="opt-left"><span class="opt-label">Porte médio</span></div>
+                    <img src="{{ url_for('static', filename='img/body-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card single" onclick="autoNext(this,'step-6')">
+                    <div class="opt-left"><span class="opt-label">Mais encorpada</span></div>
+                    <img src="{{ url_for('static', filename='img/body-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card single" onclick="autoNext(this,'step-6')">
+                    <div class="opt-left"><span class="opt-label">Acima do peso</span></div>
+                    <img src="{{ url_for('static', filename='img/body-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
             </div>
         </div>
     </div>
@@ -509,9 +515,18 @@
             <h3>Qual é o seu corpo dos sonhos?</h3>
             <p class="hint">&nbsp;</p>
             <div class="options-list">
-                <div class="opt-card single" onclick="autoNext(this, 'step-7')"><div class="opt-left"><span class="opt-label">Magro</span></div><div class="opt-thumb"></div></div>
-                <div class="opt-card single" onclick="autoNext(this, 'step-7')"><div class="opt-left"><span class="opt-label">Tonificado</span></div><div class="opt-thumb"></div></div>
-                <div class="opt-card single" onclick="autoNext(this, 'step-7')"><div class="opt-left"><span class="opt-label">Curvilíneo</span></div><div class="opt-thumb"></div></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-7')">
+                    <div class="opt-left"><span class="opt-label">Magro</span></div>
+                    <img src="{{ url_for('static', filename='img/dream-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-7')">
+                    <div class="opt-left"><span class="opt-label">Tonificado</span></div>
+                    <img src="{{ url_for('static', filename='img/dream-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-7')">
+                    <div class="opt-left"><span class="opt-label">Curvilíneo</span></div>
+                    <img src="{{ url_for('static', filename='img/dream-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
             </div>
         </div>
     </div>
