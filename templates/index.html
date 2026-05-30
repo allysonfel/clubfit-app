@@ -85,6 +85,25 @@
             margin-bottom: 20px;
         }
 
+        /* CORREÇÃO: Alinhamento, margem e largura dos blocos de texto de transição */
+        .welcome-text-container {
+            max-width: 320px; /* Impede que o texto encoste na lateral */
+            margin: 0 auto;
+            text-align: center;
+        }
+        .welcome-text-container h2 {
+            font-size: 21px;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            letter-spacing: -0.4px;
+        }
+        .welcome-text-container .desc {
+            font-size: 13.5px;
+            color: #555;
+            line-height: 1.6;
+        }
+
         /* ── QUIZ HEADER & CARDS ── */
         .quiz-header { width: 100%; padding: 14px 20px 0; }
         .progress-bar { height: 4px; background: #E0E0E0; border-radius: 100px; overflow: hidden; margin-bottom: 5px; }
@@ -111,7 +130,6 @@
         .anatomy-view { flex: 0.9; position: relative; display: flex; justify-content: center; }
         .anatomy-view img { width: 100%; max-height: 280px; object-fit: contain; z-index: 1; }
         
-        /* CORREÇÃO: z-index alto para as bolinhas luminosas ficarem por cima do corpo */
         .glow-dot {
             position: absolute;
             width: 20px;
@@ -138,7 +156,7 @@
             50% { box-shadow: 0 0 25px rgba(255,69,0,0.9); }
         }
 
-        /* ── DINÂMICA DE INPUTS MÉTRICOS ── */
+        /* ── DINÂMICA DE INPUTS MÉTRICOS ── */
         .metric-input-wrapper { width: 100%; display: flex; flex-direction: column; gap: 15px; margin-top: 10px; }
         .metric-field { width: 100%; background: var(--card-bg); border: 2px solid transparent; border-radius: var(--radius); padding: 18px; font-size: 24px; font-weight: 800; text-align: center; outline: none; transition: border-color 0.2s; }
         .metric-field:focus { border-color: var(--green); }
@@ -189,11 +207,25 @@
         
         .review-box { width: 100%; background: #F5F5F0; border-radius: 12px; padding: 20px; text-align: left; margin-top: 10px; min-height: 120px; transition: opacity 0.3s; }
         .review-name { font-weight: 800; font-size: 14px; margin-bottom: 4px; }
-        .review-stars { color: #F5A623; font-size: 14px; margin-bottom: 8px; }
+        .review-stars { color: #4285F4; font-size: 14px; margin-bottom: 8px; } /* Cor Google Oficial */
         .review-desc { font-size: 13px; color: #555; line-height: 1.5; }
 
         /* ── GRÁFICO DINÂMICO DE PERDA DE PESO (TELA 32) ── */
         .dynamic-chart-box { width: 100%; background: #fbfbfb; border: 1px solid #eee; border-radius: 16px; padding: 15px; margin: 15px auto; }
+
+        /* ── GRÁFICO ANIMADO FLUTUANTE (TELA 35) ── */
+        .chart-animated {
+            width: 100%;
+            max-height: 30vh;
+            object-fit: contain;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(46,158,88,0.15); /* Sombra suave verde */
+            animation: float-chart 3s infinite ease-in-out;
+        }
+        @keyframes float-chart {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
 
         /* ── BOTÃO PRINCIPAL ── */
         .btn-primary {
@@ -283,12 +315,14 @@
         </div>
     </div>
 
-    <!-- STEP 3 -->
+    <!-- STEP 3 (Card Ajustado) -->
     <div id="step-3" class="step">
         <div class="welcome-wrap">
             <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
-            <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
-            <p class="desc">Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa. Vamos explorar juntas seus objetivos e necessidades.</p>
+            <div class="welcome-text-container">
+                <h2>Boas-vindas à sua jornada de Caminhada Tai Chi em Casa!</h2>
+                <p class="desc">Você está prestes a começar uma prática de caminhada consciente inspirada no Tai Chi — criada para ajudar você a atingir sua meta diária de passos, melhorar o equilíbrio e restaurar a calma interior sem sair de casa. Vamos explorar juntas seus objetivos e necessidades.</p>
+            </div>
         </div>
         <div class="footer-action">
             <button class="btn-primary" onclick="goTo('step-4')">Continuar</button>
@@ -391,10 +425,12 @@
 
     <!-- STEP 8: TRANSIÇÃO/CONCEITO -->
     <div id="step-8" class="step">
-        <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
+        <div class="welcome-wrap">
             <img src="static/img/welcome-sofia.png" class="welcome-img-card">
-            <h2>Descubra o poder da Caminhada Tai Chi em Casa</h2>
-            <p class="desc">Este programa único combina o fluxo consciente do Tai Chi com os benefícios de uma caminhada suave — ajudando você a aliviar o estresse, melhorar o equilíbrio e aumentar sua energia a cada passo.</p>
+            <div class="welcome-text-container">
+                <h2>Descubra o poder da Caminhada Tai Chi em Casa</h2>
+                <p class="desc">Este programa único combina o fluxo consciente do Tai Chi com os benefícios de uma caminhada suave — ajudando você a aliviar o estresse, melhorar o equilíbrio e aumentar sua energia a cada passo.</p>
+            </div>
         </div>
         <div class="footer-action">
             <button class="btn-primary" onclick="goTo('step-9')">Continuar</button>
@@ -419,6 +455,7 @@
                 </div>
                 <div class="anatomy-view">
                     <img src="static/img/target-body.png" alt="Áreas Alvo" onerror="this.style.background='#ddd'">
+                    <!-- Restaurado: z-index do glow-dot colocado acima da imagem -->
                     <div class="glow-dot dot-arms"></div><div class="glow-dot dot-abs"></div><div class="glow-dot dot-glutes"></div><div class="glow-dot dot-legs"></div>
                 </div>
             </div>
@@ -446,10 +483,12 @@
 
     <!-- STEP 11: TRANSIÇÃO "VOCÊ É INCRÍVEL" -->
     <div id="step-11" class="step">
-        <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
+        <div class="welcome-wrap">
             <img src="static/img/amazing-sofia.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
-            <h2>Você é incrível!</h2>
-            <p class="desc">Muitas pessoas lidam com o medo de não serem boas o bastante. Vamos levar isso em conta ao criar seu plano para oferecer uma abordagem que fortaleça sua confiança!</p>
+            <div class="welcome-text-container">
+                <h2>Você é incrível!</h2>
+                <p class="desc">Muitas pessoas lidam com o medo de não serem boas o bastante. Vamos levar isso em conta ao criar seu plano para oferecer uma abordagem que fortaleça sua confiança!</p>
+            </div>
         </div>
         <div class="footer-action">
             <button class="btn-primary" onclick="goTo('step-12')">Continuar</button>
@@ -645,7 +684,7 @@
         </div>
     </div>
 
-    <!-- STEP 22: HÁBITOS RUINS (17/25) - multi-select -->
+    <!-- STEP 22: HÁBITOS RUINS (17/25) -->
     <div id="step-22" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
@@ -666,7 +705,7 @@
         <div class="footer-action"><button id="btn22" class="btn-primary btn-fixed disabled" onclick="goTo('step-23')">Continuar</button></div>
     </div>
 
-    <!-- STEP 23: GANHO DE PESO (18/25) - multi-select -->
+    <!-- STEP 23: GANHO DE PESO (18/25) -->
     <div id="step-23" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
@@ -687,12 +726,14 @@
         <div class="footer-action"><button id="btn23" class="btn-primary btn-fixed disabled" onclick="goTo('step-24')">Continuar</button></div>
     </div>
 
-    <!-- STEP 24: TRANSIÇÃO HÁBITOS -->
+    <!-- STEP 24: TRANSIÇÃO HÁBITOS (Estilo Card) -->
     <div id="step-24" class="step">
-        <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
+        <div class="welcome-wrap">
             <img src="static/img/habits-sofia.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
-            <h2>Você sempre pode mudar seus hábitos para melhor</h2>
-            <p class="desc" style="padding: 0 10px;">Grandes mudanças na vida muitas vezes afetam o peso de uma pessoa. Isso é normal. Vamos apoiar você até alcançar seu objetivo.</p>
+            <div class="welcome-text-container">
+                <h2>Você sempre pode mudar seus hábitos para melhor</h2>
+                <p class="desc">Grandes mudanças na vida muitas vezes afetam o peso de uma pessoa. Isso é normal. Vamos apoiar você até alcançar seu objetivo.</p>
+            </div>
         </div>
         <div class="footer-action">
             <button class="btn-primary" onclick="goTo('step-25')">Continuar</button>
@@ -771,7 +812,7 @@
             </div>
         </div>
         <div class="footer-action">
-            <button id="btn-target" class="btn-primary disabled" onclick="goTo('step-28')">Continuar</button>
+            <button id="btn-target" class="btn-primary disabled" onclick="saveTargetWeight()">Continuar</button>
         </div>
     </div>
 
@@ -825,7 +866,6 @@
         <div class="main-content">
             <h2 style="font-size: 20px; margin-bottom: 5px;">Aqui está o seu perfil de bem-estar</h2>
             
-            <!-- Gráfico de ponteiro dinâmico que move até o IMC real -->
             <div class="bmi-gauge-container">
                 <div class="gauge-pointer" id="dynamic-pointer">Seu IMC é <span id="gauge-bmi-val">--</span></div>
                 <div class="gauge-bar"></div>
@@ -836,14 +876,12 @@
                 </div>
             </div>
 
-            <!-- Resumo Perfil de Estilo de Vida -->
             <div class="options-list" style="margin-top: 15px;">
                 <div class="opt-card" style="cursor: default;"><div class="opt-left"><span class="opt-label" style="font-size: 13px; color: var(--muted);">ESTILO DE VIDA</span></div><span style="font-weight: 800; font-size: 14px;">Ativo</span></div>
                 <div class="opt-card" style="cursor: default;"><div class="opt-left"><span class="opt-label" style="font-size: 13px; color: var(--muted);">TIPO DE ALIMENTAÇÃO</span></div><span style="font-weight: 800; font-size: 14px;">Gourmand</span></div>
                 <div class="opt-card" style="cursor: default;"><div class="opt-left"><span class="opt-label" style="font-size: 13px; color: var(--muted);">MOTIVAÇÃO FITNESS</span></div><span style="font-weight: 800; font-size: 14px;">Alta</span></div>
             </div>
 
-            <!-- Imagem reservada: serene-sofia.png -->
             <img src="static/img/serene-sofia.png" class="welcome-img-card" style="margin-top: 15px;" onerror="this.style.background='#ddd'">
 
             <div id="risks-box" class="analysis-box" style="display: none; background: #fff5f5; border-color: #ffcccc;">
@@ -856,13 +894,15 @@
         </div>
     </div>
 
-    <!-- STEP 31: IDADE BIOLÓGICA -->
+    <!-- STEP 31: IDADE BIOLÓGICA (Card Ajustado) -->
     <div id="step-31" class="step">
-        <div class="welcome-wrap" style="justify-content: flex-start; padding-top: 15px;">
+        <div class="welcome-wrap">
             <img src="static/img/bio-age-chart.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
-            <h2>Idade biológica</h2>
-            <p class="desc" style="font-size: 14px; font-weight: 800; margin-bottom: 8px;">Caminhar regularmente pode ajudar a reduzir a idade biológica e apoiar a saúde do coração</p>
-            <p class="desc" style="color: #666; font-size: 11px;">Um estudo publicado no Journal of Physical Activity and Health constatou que adultos mais velhos que caminham regularmente tendem a apresentar menos fatores de risco ligados à saúde metabólica e cardiovascular.<br>Apenas para fins educativos. Não constitui aconselhamento médico.</p>
+            <div class="welcome-text-container">
+                <h2>Idade biológica</h2>
+                <p class="desc" style="font-size: 14px; font-weight: 800; margin-bottom: 8px;">Caminhar regularmente pode ajudar a reduzir a idade biológica e apoiar a saúde do coração</p>
+                <p class="desc" style="color: #666; font-size: 11px;">Um estudo publicado no Journal of Physical Activity and Health constatou que adultos mais velhos que caminham regularmente tendem a apresentar menos fatores de risco ligados à saúde metabólica e cardiovascular.<br>Apenas para fins educativos. Não constitui aconselhamento médico.</p>
+            </div>
         </div>
         <div class="footer-action">
             <button class="btn-primary" onclick="goTo('step-32')">Continuar</button>
@@ -878,7 +918,6 @@
             <h1 style="color: var(--green); font-size: 28px; margin-bottom: 15px;"><span id="proj-target-weight">--</span> kg até <span id="proj-date">--</span></h1>
             <p style="font-size: 11px; color: #888; margin-bottom: 15px;">Prepare-se para surpreender todo mundo!</p>
 
-            <!-- Grafico dinâmico em SVG desenhando a curva de perda de peso em tempo real -->
             <div class="dynamic-chart-box">
                 <svg viewBox="0 0 300 120" style="width: 100%; height: auto;">
                     <path d="M10 20 Q 150 50, 290 100" fill="none" stroke="#2E9E58" stroke-width="4"></path>
@@ -894,7 +933,7 @@
         </div>
     </div>
 
-    <!-- STEP 33: TELA DE CARREGAMENTO ANIMADA -->
+    <!-- STEP 33: TELA DE CARREGAMENTO ANIMADA (Avaliações do Google) -->
     <div id="step-33" class="step">
         <div class="main-content" style="justify-content: center;">
             <div class="spinner-container">
@@ -906,16 +945,15 @@
             </div>
             <h2 id="loader-headline" style="font-size: 18px; line-height: 1.3;">Analisando seu perfil de bem-estar...</h2>
 
-            <!-- Depoimentos Rotativos dinâmicos em tempo real -->
             <div class="review-box" id="review-slider">
                 <div class="review-name" id="rev-name">Juliana Rosella</div>
-                <div class="review-stars">★★★★★ <span style="font-size: 11px; color: #888; font-weight: 700;">Trustpilot</span></div>
-                <div class="review-desc" id="rev-desc">A barriga sempre foi meu ponto fraco, mas sumiu! Lembro de como meu marido ria de mim por fazer caminhadas, mas agora ele está impressionado!</div>
+                <div class="review-stars">★★★★★ <span style="font-size: 11px; color: #4285F4; font-weight: 800;">Avaliações do Google</span></div>
+                <div class="review-desc" id="rev-desc">A barriga sempre foi meu ponto fraco, mas sumiu! Lembro de como meu marido ria de mim, mas agora ele está impressionado!</div>
             </div>
         </div>
     </div>
 
-    <!-- STEP 34: EMAIL -->
+    <!-- STEP 34: EMAIL (Correção da Ativação do Botão) -->
     <div id="step-34" class="step">
         <div class="main-content" style="justify-content: center;">
             <h2>Digite seu e-mail para receber seu plano pessoal de treino de Caminhada Tai Chi em Casa</h2>
@@ -930,12 +968,11 @@
         </div>
     </div>
 
-    <!-- STEP 35: RESULTADOS VISÍVEIS 28 DIAS -->
+    <!-- STEP 35: RESULTADOS VISÍVEIS 28 DIAS (Animação Flutuante) -->
     <div id="step-35" class="step">
         <div class="main-content" style="justify-content: center;">
-            <!-- Gráfico universal de 28 dias: final-chart.png -->
-            <img src="static/img/final-chart.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
-            <h2>Tenha resultados visíveis em apenas 28 dias!</h2>
+            <img src="static/img/final-chart.png" class="chart-animated" onerror="this.style.background='#ddd'">
+            <h2 style="margin-top: 25px;">Tenha resultados visíveis em apenas 28 dias!</h2>
         </div>
         <div class="footer-action">
             <button class="btn-primary" onclick="alert('Fim do Quiz! Redirecionando para a página de vendas.')">Continuar</button>
@@ -961,7 +998,6 @@
             t.classList.add('active'); 
             window.scrollTo(0, 0); 
             
-            // Ativadores de scripts dinâmicos de cada tela
             if (id === 'step-30') animateBMIGauge();
             if (id === 'step-32') renderDynamicPlan();
             if (id === 'step-33') startSpinnerLoader();
@@ -984,10 +1020,7 @@
 
     function autoNext(card, nextId) {
         card.classList.add('selected');
-        setTimeout(() => {
-            if(nextId === 'final') alert("Fim desta etapa!");
-            else goTo(nextId);
-        }, 500);
+        setTimeout(() => goTo(nextId), 400);
     }
 
     function toggleTargetZone(card, dotClass, btnId) {
@@ -1012,7 +1045,7 @@
         }
     }
 
-    /* ── LÓGICA MÉTRICA AVANÇADA ── */
+    /* ── LÓGICA DE INPUTS MÉTRICOS ── */
     
     function validateHeight() {
         const val = parseFloat(document.getElementById('height-input').value);
@@ -1143,7 +1176,6 @@
         const bmi = userData.bmi || 22.0;
         document.getElementById('gauge-bmi-val').textContent = bmi;
         
-        // Define a posição do cursor dinâmico (limites de 15 a 35 de IMC)
         let pct = ((bmi - 15) / (35 - 15)) * 100;
         if (pct < 5) pct = 5;
         if (pct > 95) pct = 95;
@@ -1152,7 +1184,6 @@
             document.getElementById('dynamic-pointer').style.left = pct + '%';
         }, 300);
 
-        // Ativa alerta de riscos se IMC for acima do peso saudável
         const risksBox = document.getElementById('risks-box');
         if (bmi >= 25) risksBox.style.display = 'flex';
         else risksBox.style.display = 'none';
@@ -1163,7 +1194,6 @@
         const target = userData.targetWeight || 60;
         const weightDiff = current - target;
         
-        // Algoritmo: 1 kg por semana (promessa forte e viável)
         const weeks = Math.max(4, Math.ceil(weightDiff / 1)); 
         const today = new Date();
         const targetDate = new Date(today.getTime() + (weeks * 7 * 24 * 60 * 60 * 1000));
@@ -1205,7 +1235,6 @@
             count++;
             percentText.textContent = count + '%';
             
-            // Anima o círculo SVG
             const offset = 440 - (440 * count) / 100;
             circle.style.strokeDashoffset = offset;
 
@@ -1218,7 +1247,7 @@
                 clearInterval(reviewInterval);
                 setTimeout(() => goTo('step-34'), 500);
             }
-        }, 70); // Velocidade de carregamento (aprox 7 segundos totais)
+        }, 70);
     }
 
     function validateEmail() {
@@ -1226,8 +1255,9 @@
         const btn = document.getElementById('btn-email');
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        if (emailRegex.test(email)) btn.remove('disabled');
-        else btn.add('disabled');
+        // CORREÇÃO: Usa classList de forma segura e limpa
+        if (emailRegex.test(email)) btn.classList.remove('disabled');
+        else btn.classList.add('disabled');
     }
 
     function saveEmail() {
