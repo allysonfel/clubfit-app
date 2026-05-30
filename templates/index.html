@@ -67,9 +67,9 @@
         .arrow-circle { width: 24px; height: 24px; background: rgba(255,255,255,0.22); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; }
         .footer-note { font-size: 10px; color: var(--muted); margin-top: 14px; padding: 0 8px; text-align: center; }
 
-        /* ── STEP 2 & 3 (Originais Sem Cortes) ── */
+        /* ── STEP 2 — SOCIAL PROOF (Imagem do círculo aumentada) ── */
         .social-proof-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 24px; text-align: center; }
-        .social-img { width: auto; max-width: 100%; max-height: 25vh; margin-bottom: 15px; }
+        .social-img { width: 100%; max-width: 320px; max-height: 32vh; margin-bottom: 15px; } /* Ajustado de 280px/25vh para aumentar o círculo de mulheres */
         .badge-img { width: auto; max-width: 85%; max-height: 8vh; margin-bottom: 10px; }
         .social-sub { font-size: 15px; color: #666; margin-bottom: 20px; }
         
@@ -102,6 +102,16 @@
             font-size: 13.5px;
             color: #555;
             line-height: 1.6;
+        }
+
+        /* ── TRANSIÇÕES TIPO CARD (Telas 8, 11, 24) ── */
+        .welcome-img-card {
+            width: 100%;
+            max-height: 30vh;
+            object-fit: cover;
+            object-position: center center;
+            border-radius: 24px; /* Mantém arredondado perfeito */
+            margin-bottom: 20px;
         }
 
         /* ── QUIZ HEADER & CARDS ── */
@@ -257,7 +267,6 @@
             bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
-            width: calc(100% - 40px);
             max-width: 440px;
             z-index: 10;
             box-shadow: 0 4px 20px rgba(46,158,88,0.3);
@@ -269,7 +278,6 @@
         .footer-action {
             padding: 0 20px 36px;
             width: 100%;
-            flex-shrink: 0;
         }
 
         @media (max-width: 360px) {
@@ -423,10 +431,10 @@
         </div>
     </div>
 
-    <!-- STEP 8: TRANSIÇÃO/CONCEITO -->
+    <!-- STEP 8: TRANSIÇÃO/CONCEITO (MUDADO PARA POWER-SOFIA.PNG) -->
     <div id="step-8" class="step">
         <div class="welcome-wrap">
-            <img src="static/img/welcome-sofia.png" class="welcome-img-card">
+            <img src="static/img/power-sofia.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
             <div class="welcome-text-container">
                 <h2>Descubra o poder da Caminhada Tai Chi em Casa</h2>
                 <p class="desc">Este programa único combina o fluxo consciente do Tai Chi com os benefícios de uma caminhada suave — ajudando você a aliviar o estresse, melhorar o equilíbrio e aumentar sua energia a cada passo.</p>
@@ -455,7 +463,6 @@
                 </div>
                 <div class="anatomy-view">
                     <img src="static/img/target-body.png" alt="Áreas Alvo" onerror="this.style.background='#ddd'">
-                    <!-- Restaurado: z-index do glow-dot colocado acima da imagem -->
                     <div class="glow-dot dot-arms"></div><div class="glow-dot dot-abs"></div><div class="glow-dot dot-glutes"></div><div class="glow-dot dot-legs"></div>
                 </div>
             </div>
@@ -684,7 +691,7 @@
         </div>
     </div>
 
-    <!-- STEP 22: HÁBITOS RUINS (17/25) -->
+    <!-- STEP 22: HÁBITOS RUINS (17/25) - multi-select -->
     <div id="step-22" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
@@ -705,7 +712,7 @@
         <div class="footer-action"><button id="btn22" class="btn-primary btn-fixed disabled" onclick="goTo('step-23')">Continuar</button></div>
     </div>
 
-    <!-- STEP 23: GANHO DE PESO (18/25) -->
+    <!-- STEP 23: GANHO DE PESO (18/25) - multi-select -->
     <div id="step-23" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
@@ -726,7 +733,7 @@
         <div class="footer-action"><button id="btn23" class="btn-primary btn-fixed disabled" onclick="goTo('step-24')">Continuar</button></div>
     </div>
 
-    <!-- STEP 24: TRANSIÇÃO HÁBITOS (Estilo Card) -->
+    <!-- STEP 24: TRANSIÇÃO HÁBITOS (Estilo Card Ajustado) -->
     <div id="step-24" class="step">
         <div class="welcome-wrap">
             <img src="static/img/habits-sofia.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
@@ -878,7 +885,7 @@
 
             <div class="options-list" style="margin-top: 15px;">
                 <div class="opt-card" style="cursor: default;"><div class="opt-left"><span class="opt-label" style="font-size: 13px; color: var(--muted);">ESTILO DE VIDA</span></div><span style="font-weight: 800; font-size: 14px;">Ativo</span></div>
-                <div class="opt-card" style="cursor: default;"><div class="opt-left"><span class="opt-label" style="font-size: 13px; color: var(--muted);">TIPO DE ALIMENTAÇÃO</span></div><span style="font-weight: 800; font-size: 14px;">Gourmand</span></div>
+                <div class="opt-card" style="cursor: default;"><div class="opt-left"><span class="opt-label" style="font-size: 13px; color: var(--muted);">TIPO DE ALIMENTAÇÃO</span></div><span style="font-weight: 800; font-size: 14px;">Gourmet</span></div>
                 <div class="opt-card" style="cursor: default;"><div class="opt-left"><span class="opt-label" style="font-size: 13px; color: var(--muted);">MOTIVAÇÃO FITNESS</span></div><span style="font-weight: 800; font-size: 14px;">Alta</span></div>
             </div>
 
@@ -1255,7 +1262,6 @@
         const btn = document.getElementById('btn-email');
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-        // CORREÇÃO: Usa classList de forma segura e limpa
         if (emailRegex.test(email)) btn.classList.remove('disabled');
         else btn.classList.add('disabled');
     }
