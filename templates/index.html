@@ -24,7 +24,7 @@
             font-family: var(--font);
             background: #fff;
             color: var(--text);
-            height: 100dvh;
+            height: 100dvh; /* Altura exata da tela */
             display: flex;
             justify-content: center;
             overflow: hidden;
@@ -54,38 +54,165 @@
         h1, h2, h3 { font-weight: 800; text-align: center; letter-spacing: -0.8px; }
 
         /* ── STEP 1 (Seu Original Intocado) ── */
-        #step-1 { padding: 22px 20px 16px; align-items: center; text-align: center; }
-        .rating-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-light); color: var(--green-dark); border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 700; margin-bottom: 16px; }
+        #step-1 {
+            padding: 22px 20px 16px;
+            align-items: center;
+            text-align: center;
+        }
+
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--green-light);
+            color: var(--green-dark);
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
         .rating-badge .star { color: #F5A623; }
-        #step-1 h1 { font-size: 24px; line-height: 1.25; letter-spacing: -0.5px; max-width: 340px; margin-bottom: 10px; }
-        .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
-        .quiz-badge { display: inline-block; border: 1.5px solid var(--green); color: var(--green); border-radius: 100px; padding: 4px 14px; font-size: 12px; font-weight: 700; margin-bottom: 14px; }
-        .hero-layout { display: flex; width: 100%; align-items: flex-end; gap: 10px; }
-        .hero-img { width: 50%; object-fit: contain; max-height: 340px; }
-        .age-options { flex: 1; display: flex; flex-direction: column; gap: 10px; }
-        .age-btn { display: flex; align-items: center; justify-content: space-between; background: var(--green); color: #fff; border: none; border-radius: 12px; padding: 15px 14px; font-family: var(--font); font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.15s, transform 0.1s; width: 100%; }
-        .arrow-circle { width: 24px; height: 24px; background: rgba(255,255,255,0.22); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; }
-        .footer-note { font-size: 10px; color: var(--muted); margin-top: 14px; padding: 0 8px; text-align: center; }
+
+        #step-1 h1 {
+            font-family: var(--font);
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: -0.5px;
+            max-width: 340px;
+            margin-bottom: 10px;
+        }
+
+        .section-tag {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .quiz-badge {
+            display: inline-block;
+            border: 1.5px solid var(--green);
+            color: var(--green);
+            border-radius: 100px;
+            padding: 4px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .hero-layout {
+            display: flex;
+            width: 100%;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .hero-img {
+            width: 50%;
+            object-fit: contain;
+            max-height: 340px;
+        }
+
+        .age-options {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-bottom: 6px;
+        }
+
+        .age-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--green);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 14px;
+            font-family: var(--font);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
+            width: 100%;
+        }
+        .age-btn:hover  { background: var(--green-dark); }
+        .age-btn:active { transform: scale(0.97); }
+
+        .arrow-circle {
+            width: 24px; height: 24px;
+            background: rgba(255,255,255,0.22);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .footer-note {
+            font-size: 10px;
+            color: var(--muted);
+            margin-top: 14px;
+            padding: 0 8px;
+            text-align: center;
+        }
+        .footer-note u { cursor: pointer; }
 
         /* ── STEP 2 — SOCIAL PROOF ── */
-        .social-proof-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 24px; text-align: center; }
-        .social-img { width: 100%; max-width: 280px; height: auto !important; margin-bottom: 15px; }
-        .badge-img { width: auto; max-width: 85%; max-height: 8vh; margin-bottom: 10px; }
-        .social-sub { font-size: 15px; color: #666; margin-bottom: 20px; }
-        
-        .welcome-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
-        
-        /* CORREÇÃO: object-fit contain para as fotos de Sofia nunca cortarem a cabeça */
-        .welcome-img, .welcome-img-card {
+        .social-proof-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 24px;
+            text-align: center;
+        }
+
+        .social-img {
             width: 100%;
-            max-height: 32vh;
-            object-fit: cover;
-            object-position: center 10%;
-            border-radius: 0 0 28px 28px;
+            max-width: 280px;
+            height: auto !important;
             margin-bottom: 15px;
         }
 
-        /* CORREÇÃO: Alinhamento, margem e largura dos blocos de texto de transição */
+        .badge-img {
+            width: auto;
+            max-width: 85%;
+            max-height: 8vh;
+            margin-bottom: 10px;
+        }
+
+        .social-sub {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* ── STEP 3 — BOAS-VINDAS ── */
+        .welcome-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 15px 24px 0;
+        }
+
+        .welcome-img, .welcome-img-card {
+            width: 100%;
+            aspect-ratio: 3 / 2;
+            max-height: 230px;
+            object-fit: cover;
+            object-position: center top !important;
+            border-radius: 24px;
+            margin-bottom: 20px;
+        }
+
         .welcome-text-container {
             max-width: 320px;
             margin: 0 auto;
@@ -104,7 +231,54 @@
             line-height: 1.6;
         }
 
-        .welcome-img-card { width: 100%; max-height: 30vh; object-fit: cover; object-position: center center; border-radius: 24px; margin-bottom: 20px; }
+        /* ── TELA 30: NOVO LAYOUT LATERAL (SIDE-BY-SIDE) ── */
+        .profile-side-layout {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 15px 0 10px;
+            padding: 0 10px;
+        }
+        .summary-column-list {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .summary-column-item {
+            display: flex;
+            flex-direction: column; /* Legenda no topo, valor embaixo */
+            align-items: flex-start;
+            padding-bottom: 6px;
+            border-bottom: 1.5px solid #f0f0f0; /* Divisor fino sutil */
+            text-align: left;
+        }
+        .summary-column-label {
+            font-size: 10px;
+            color: var(--muted);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .summary-column-value {
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--text);
+            margin-top: 1px;
+        }
+        .summary-column-image {
+            flex: 0.9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .serene-sofia-img {
+            width: 100%;
+            max-height: 135px; /* Tamanho proporcional perfeito para não rolar a tela */
+            object-fit: contain;
+        }
 
         /* ── QUIZ HEADER & CARDS ── */
         .quiz-header { width: 100%; padding: 14px 20px 0; }
@@ -199,54 +373,6 @@
             display: block; width: 0;
         }
 
-        /* ── NOVO LAYOUT SIDE-BY-SIDE (TELA 30) ── */
-        .profile-side-layout {
-            display: flex;
-            width: 100%;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            margin: 15px 0 5px;
-            padding: 0 10px;
-        }
-        .summary-list {
-            flex: 1.1;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .summary-item {
-            display: flex;
-            flex-direction: column; /* Alinha legenda no topo, valor embaixo */
-            align-items: flex-start;
-            padding-bottom: 6px;
-            border-bottom: 1.5px solid #f0f0f0;
-        }
-        .summary-left {
-            font-size: 10px;
-            color: var(--muted);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .summary-right {
-            font-weight: 800;
-            font-size: 14px;
-            color: var(--text);
-            margin-top: 1px;
-        }
-        .summary-image-container {
-            flex: 0.9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .serene-sofia-img {
-            width: 100%;
-            max-height: 135px; /* Tamanho proporcional perfeito para não rolar a tela */
-            object-fit: contain;
-        }
-
         /* ── CARREGAMENTO CIRCULAR (TELA 33) ── */
         .spinner-container { width: 140px; height: 140px; position: relative; margin: 20px auto; }
         .svg-circle { width: 100%; height: 100%; transform: rotate(-90deg); }
@@ -257,7 +383,7 @@
         
         .review-box { width: 100%; background: #F5F5F0; border-radius: 12px; padding: 20px; text-align: left; margin-top: 10px; min-height: 120px; transition: opacity 0.3s; }
         .review-name { font-weight: 800; font-size: 14px; margin-bottom: 4px; }
-        .review-stars { color: #F5A623; font-size: 14px; margin-bottom: 8px; } /* Estrelas Amarelas */
+        .review-stars { color: #F5A623; font-size: 14px; margin-bottom: 8px; } /* Estrelas Amarelas de volta */
         .review-desc { font-size: 13px; color: #555; line-height: 1.5; }
 
         /* ── GRÁFICO DINÂMICO DE PERDA DE PESO (TELA 32) ── */
@@ -335,7 +461,7 @@
         <div style="display:flex;flex-direction:column;align-items:center;padding:22px 20px 0;text-align:center;">
             <span class="rating-badge"><span class="star">★</span> 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
             <h1>Desafio de 28 dias de Caminhada Tai Chi em Casa para emagrecimento</h1>
-            <p class="section-tag" style="margin-top:12px;">DE ACORDO COM A SUA IDADE</p>
+            <p class="section-tag" style="margin-top:12px;">DE ACORDO WITH A SUA IDADE</p>
             <span class="quiz-badge">quiz de 1 minuto</span>
         </div>
 
@@ -889,154 +1015,6 @@
         </div>
     </div>
 
-    <!-- STEP 29: NOME (23/25) -->
-    <div id="step-29" class="step">
-        <div class="quiz-header">
-            <div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div>
-            <div class="step-label">23 / 25</div>
-        </div>
-        <div class="quiz-body">
-            <h3>Qual é o seu nome?</h3>
-            <p class="hint">&nbsp;</p>
-            <div class="metric-input-wrapper">
-                <div style="display: flex; align-items: center; justify-content: center;">
-                    <input type="text" id="name-input" class="metric-field" placeholder="Seu nome" oninput="validateName()" style="font-size: 20px;">
-                </div>
-            </div>
-        </div>
-        <div class="footer-action">
-            <button id="btn-name" class="btn-primary disabled" onclick="saveName()">Continuar</button>
-        </div>
-    </div>
-
-    <!-- STEP 30: PERFIL DE BEM-ESTAR -->
-    <div id="step-30" class="step">
-        <div class="main-content">
-            <h2 style="font-size: 20px; margin-bottom: 5px;">Aqui está o seu perfil de bem-estar</h2>
-            
-            <div class="bmi-gauge-container">
-                <div class="gauge-pointer" id="dynamic-pointer">Seu IMC é <span id="gauge-bmi-val">--</span></div>
-                <div class="gauge-bar"></div>
-                <div class="gauge-labels">
-                    <span>NORMAL</span>
-                    <span>SOBREPESO</span>
-                    <span>OBESIDADE</span>
-                </div>
-            </div>
-
-            <!-- Lista de perfil limpa (sem parecer botão) conforme solicitado -->
-            <div class="summary-list">
-                <div class="summary-item">
-                    <div class="summary-left">🔄 Estilo de vida</div>
-                    <div class="summary-right">Ativo</div>
-                </div>
-                <div class="summary-item">
-                    <div class="summary-left">🥗 Tipo de alimentação</div>
-                    <div class="summary-right">Gourmet</div>
-                </div>
-                <div class="summary-item">
-                    <div class="summary-left">⚡ Motivação fitness</div>
-                    <div class="summary-right">Alta</div>
-                </div>
-            </div>
-
-            <img src="static/img/serene-sofia.png" class="serene-sofia-img" onerror="this.style.background='#ddd'">
-
-            <div id="risks-box" class="analysis-box">
-                <span id="risks-icon" class="analysis-icon">⚠️</span>
-                <p id="risks-text" class="analysis-text"></p>
-            </div>
-        </div>
-        <div class="footer-action">
-            <button class="btn-primary" onclick="goTo('step-31')">Continuar</button>
-        </div>
-    </div>
-
-    <!-- STEP 31: IDADE BIOLÓGICA (Card Ajustado) -->
-    <div id="step-31" class="step">
-        <div class="welcome-wrap">
-            <img src="static/img/bio-age-chart.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
-            <div class="welcome-text-container">
-                <h2>Idade biológica</h2>
-                <p class="desc" style="font-size: 14px; font-weight: 800; margin-bottom: 8px;">Caminhar regularmente pode ajudar a reduzir a idade biológica e apoiar a saúde do coração</p>
-                <p class="desc" style="color: #666; font-size: 11px;">Um estudo publicado no Journal of Physical Activity and Health constatou que adultos mais velhos que caminham regularmente tendem a apresentar menos fatores de risco ligados à saúde metabólica e cardiovascular.<br>Apenas para fins educativos. Não constitui aconselhamento médico.</p>
-            </div>
-        </div>
-        <div class="footer-action">
-            <button class="btn-primary" onclick="goTo('step-32')">Continuar</button>
-        </div>
-    </div>
-
-    <!-- STEP 32: GRÁFICO DINÂMICO DE PROJEÇÃO -->
-    <div id="step-32" class="step">
-        <div class="main-content" style="justify-content: flex-start;">
-            <h2 style="font-size: 20px; margin-bottom: 5px;">O único plano de que você vai precisar para entrar em forma em 2026</h2>
-            <p style="color: #666; font-size: 13px; margin-bottom: 20px;">Você está a um passo de alcançar seu objetivo!</p>
-
-            <h1 style="color: var(--green); font-size: 28px; margin-bottom: 15px;"><span id="proj-target-weight">--</span> kg até <span id="proj-date">--</span></h1>
-            <p style="font-size: 11px; color: #888; margin-bottom: 15px;">Prepare-se para surpreender todo mundo!</p>
-
-            <div class="dynamic-chart-box">
-                <svg viewBox="0 0 300 120" style="width: 100%; height: auto;">
-                    <path d="M10 20 Q 150 50, 290 100" fill="none" stroke="#2E9E58" stroke-width="4"></path>
-                    <circle cx="10" cy="20" r="6" fill="#FFC107"></circle>
-                    <text x="15" y="15" font-size="10" font-weight="800" id="chart-start-weight">-- kg</text>
-                    <circle cx="290" cy="100" r="6" fill="#2E9E58"></circle>
-                    <text x="245" y="115" font-size="10" font-weight="800" id="chart-end-weight" fill="#2E9E58">-- kg</text>
-                </svg>
-            </div>
-        </div>
-        <div class="footer-action">
-            <button class="btn-primary" onclick="goTo('step-33')">Continuar</button>
-        </div>
-    </div>
-
-    <!-- STEP 33: TELA DE CARREGAMENTO ANIMADA (Avaliações do Google) -->
-    <div id="step-33" class="step">
-        <div class="main-content" style="justify-content: center;">
-            <div class="spinner-container">
-                <svg class="svg-circle">
-                    <circle class="bg-circle" cx="70" cy="70" r="60"></circle>
-                    <circle class="progress-circle" id="loader-circle" cx="70" cy="70" r="60"></circle>
-                </svg>
-                <div class="percentage-text" id="loader-percent">0%</div>
-            </div>
-            <h2 id="loader-headline" style="font-size: 18px; line-height: 1.3;">Analisando seu perfil de bem-estar...</h2>
-
-            <div class="review-box" id="review-slider">
-                <div class="review-name" id="rev-name">Juliana Rosella</div>
-                <div class="review-stars">★★★★★ <span style="font-size: 11px; color: #F5A623; font-weight: 800;">Avaliações do Google</span></div>
-                <div class="review-desc" id="rev-desc">A barriga sempre foi meu ponto fragilidade, mas sumiu! Lembro de como meu marido ria de mim, mas agora ele está impressionado!</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- STEP 34: EMAIL (Correção da Ativação do Botão) -->
-    <div id="step-34" class="step">
-        <div class="main-content" style="justify-content: center;">
-            <h2>Digite seu e-mail para receber seu plano pessoal de treino de Caminhada Tai Chi em Casa</h2>
-            <p style="color: #666; font-size: 13px; margin: 10px 0 25px;">Inclui um guia imprimível para praticar offline 🎁</p>
-
-            <div class="metric-input-wrapper">
-                <input type="email" id="email-input" class="metric-field" placeholder="seuemail@exemplo.com" oninput="validateEmail()" style="font-size: 18px;">
-            </div>
-        </div>
-        <div class="footer-action">
-            <button id="btn-email" class="btn-primary disabled" onclick="saveEmail()">Continuar</button>
-        </div>
-    </div>
-
-    <!-- STEP 35: RESULTADOS VISÍVEIS 28 DIAS (Animação Flutuante) -->
-    <div id="step-35" class="step">
-        <div class="main-content" style="justify-content: center;">
-            <img src="static/img/final-chart.png" class="chart-animated" onerror="this.style.background='#ddd'">
-            <h2 style="margin-top: 25px;">Tenha resultados visíveis em apenas 28 dias!</h2>
-        </div>
-        <div class="footer-action">
-            <button class="btn-primary" onclick="alert('Fim do Quiz! Redirecionando para a página de vendas.')">Continuar</button>
-        </div>
-    </div>
-
 </div><!-- /app-shell -->
 
 <script>
@@ -1045,21 +1023,13 @@
         weight: 0,
         targetWeight: 0,
         bmi: 0,
-        age: 0,
-        name: ''
+        age: 0
     };
 
     function goTo(id) {
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         const t = document.getElementById(id);
-        if (t) { 
-            t.classList.add('active'); 
-            window.scrollTo(0, 0); 
-            
-            if (id === 'step-30') animateBMIGauge();
-            if (id === 'step-32') renderDynamicPlan();
-            if (id === 'step-33') startSpinnerLoader();
-        }
+        if (t) { t.classList.add('active'); window.scrollTo(0, 0); }
     }
 
     function toggleSelect(card, btnId) {
@@ -1078,265 +1048,10 @@
 
     function autoNext(card, nextId) {
         card.classList.add('selected');
-        setTimeout(() => goTo(nextId), 400);
-    }
-
-    function toggleTargetZone(card, dotClass, btnId) {
-        const isSelected = card.classList.toggle('selected');
-        const icon = card.querySelector('.opt-icon');
-        if (isSelected) {
-            if (icon) icon.textContent = '✓';
-        } else {
-            if (icon) icon.textContent = '+';
-        }
-
-        const dot = document.querySelector('.' + dotClass);
-        if (dot) {
-            if (isSelected) dot.classList.add('active');
-            else dot.classList.remove('active');
-        }
-
-        const btn = document.getElementById(btnId);
-        if (btn) {
-            const hasSel = !!document.querySelector('#step-9 .opt-card.selected');
-            btn.classList.toggle('disabled', !hasSel);
-        }
-    }
-
-    /* ── LÓGICA DE INPUTS MÉTRICOS ── */
-    
-    function validateHeight() {
-        const val = parseFloat(document.getElementById('height-input').value);
-        const btn = document.getElementById('btn-height');
-        if (val > 100 && val < 250) btn.classList.remove('disabled');
-        else btn.classList.add('disabled');
-    }
-
-    function saveHeight() {
-        userData.height = parseFloat(document.getElementById('height-input').value);
-        goTo('step-26');
-    }
-
-    function calculateBMI() {
-        const weight = parseFloat(document.getElementById('weight-input').value);
-        const btn = document.getElementById('btn-weight');
-        const bmiBox = document.getElementById('bmi-analysis-box');
-        const bmiText = document.getElementById('bmi-status-text');
-        const bmiEmoji = document.getElementById('bmi-emoji');
-
-        if (weight > 30 && weight < 250) {
-            btn.classList.remove('disabled');
-            const hMetros = userData.height / 100;
-            const bmi = (weight / (hMetros * hMetros)).toFixed(1);
-            userData.bmi = parseFloat(bmi);
-            bmiBox.style.display = 'flex';
-
-            if (bmi >= 30) {
-                bmiBox.className = "analysis-box";
-                bmiEmoji.textContent = "🥵";
-                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado obesidade.</strong><br>Seu peso atual representa riscos para a sua saúde. Usaremos seu índice para criar um programa de perda de peso adaptado às suas necessidades.`;
-            } else if (bmi >= 25) {
-                bmiBox.className = "analysis-box orange";
-                bmiEmoji.textContent = "😒";
-                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado sobrepeso.</strong><br>Seu peso requer mais atenção. Usaremos seu índice para personalizar um programa de perda de peso alinhado às suas necessidades e objetivos.`;
-            } else if (bmi < 18.5) {
-                bmiBox.className = "analysis-box orange";
-                bmiEmoji.textContent = "⚠️";
-                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado abaixo do peso.</strong><br>Foque em tonificação muscular e em uma alimentação equilibrada. Mantenha-se positiva e tente manter o consumo diário de calorias dentro da faixa recomendada.`;
-            } else {
-                bmiBox.className = "analysis-box green";
-                bmiEmoji.textContent = "✨";
-                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado peso saudável.</strong><br>Ótimo! Seu peso está dentro da faixa saudável. Nosso plano vai te focar em tonificação e bem-estar geral.`;
-            }
-        } else {
-            btn.classList.add('disabled');
-            bmiBox.style.display = 'none';
-        }
-    }
-
-    function saveWeight() {
-        userData.weight = parseFloat(document.getElementById('weight-input').value);
-        goTo('step-27');
-    }
-
-    function validateWeights() {
-        const target = parseFloat(document.getElementById('target-weight-input').value);
-        const current = userData.weight;
-        const btn = document.getElementById('btn-target');
-        const errMsg = document.getElementById('weight-error-msg');
-        const goalBox = document.getElementById('goal-analysis-box');
-        const goalIcon = document.getElementById('goal-icon');
-        const goalText = document.getElementById('goal-text');
-
-        if (!target) {
-            btn.classList.add('disabled');
-            errMsg.style.display = 'none';
-            goalBox.style.display = 'none';
-            return;
-        }
-
-        if (target < 40 || target > 250) {
-            errMsg.textContent = "Por favor, insira um valor entre 40 e 250.";
-            errMsg.style.display = 'block';
-            btn.classList.add('disabled');
-            goalBox.style.display = 'none';
-            return;
-        }
-
-        if (target >= current) {
-            errMsg.textContent = "Seu peso ideal deve ser menor que o atual.";
-            errMsg.style.display = 'block';
-            btn.classList.add('disabled');
-            goalBox.style.display = 'none';
-            return;
-        }
-
-        errMsg.style.display = 'none';
-        btn.classList.remove('disabled');
-        goalBox.style.display = 'flex';
-
-        const lossPct = Math.round(((current - target) / current) * 100);
-
-        if (lossPct >= 20) {
-            goalBox.className = "analysis-box orange";
-            goalIcon.textContent = "🏆";
-            goalText.innerHTML = `<strong>OBJETIVO AMBICIOSO: perder ${lossPct}% do seu peso.</strong><br>Pessoas com sobrepeso que perdem mais de 20% do peso corporal tendem a ter melhor saúde e satisfação com a vida em comparação com aquelas que perdem 10% ou menos.`;
-        } else {
-            goalBox.className = "analysis-box green";
-            goalIcon.textContent = "☘️";
-            goalText.innerHTML = `<strong>MELHORE SUA SAÚDE: perder ${lossPct}% do seu peso.</strong><br>Condições de saúde relacionadas ao peso melhoram com uma perda de peso de 10% ou mais. O risco de doenças diminui e a energia melhora.`;
-        }
-    }
-
-    function saveTargetWeight() {
-        userData.targetWeight = parseFloat(document.getElementById('target-weight-input').value);
-        goTo('step-28');
-    }
-
-    function validateAge() {
-        const val = parseInt(document.getElementById('age-input').value);
-        const btn = document.getElementById('btn-age');
-        if (val > 14 && val < 110) btn.classList.remove('disabled');
-        else btn.classList.add('disabled');
-    }
-
-    function validateName() {
-        const val = document.getElementById('name-input').value.trim();
-        const btn = document.getElementById('btn-name');
-        if (val.length >= 2) btn.classList.remove('disabled');
-        else btn.classList.add('disabled');
-    }
-
-    function saveName() {
-        userData.name = document.getElementById('name-input').value.trim();
-        goTo('step-30');
-    }
-
-    /* ── SCRIPTS DE ANIMAÇÕES DINÂMICAS ── */
-    
-    function animateBMIGauge() {
-        const bmi = userData.bmi || 22.0;
-        document.getElementById('gauge-bmi-val').textContent = bmi;
-        
-        let pct = ((bmi - 15) / (35 - 15)) * 100;
-        if (pct < 5) pct = 5;
-        if (pct > 95) pct = 95;
-        
         setTimeout(() => {
-            document.getElementById('dynamic-pointer').style.left = pct + '%';
-        }, 300);
-
-        const risksBox = document.getElementById('risks-box');
-        const risksIcon = document.getElementById('risks-icon');
-        const risksText = document.getElementById('risks-text');
-
-        if (bmi >= 30) {
-            risksBox.style.display = 'flex';
-            risksBox.className = "analysis-box"; // Vermelho
-            risksIcon.textContent = "🥵";
-            risksText.innerHTML = `<strong>Riscos de um IMC não saudável!</strong><br>Seu peso representa um risco crítico para a sua saúde. Usaremos seu índice para criar um programa de perda de peso adaptado às suas necessidades.`;
-        } else if (bmi >= 25) {
-            risksBox.style.display = 'flex';
-            risksBox.className = "analysis-box orange"; // Laranja
-            risksIcon.textContent = "😒";
-            risksText.innerHTML = `<strong>Seu peso requer mais atenção!</strong><br>Usaremos seu índice de sobrepeso para personalizar um programa de perda de peso alinhado às suas necessidades e objetivos.`;
-        } else {
-            risksBox.style.display = 'none'; // Esconde se for saudável
-        }
-    }
-
-    function renderDynamicPlan() {
-        const current = userData.weight || 70;
-        const target = userData.targetWeight || 60;
-        const weightDiff = current - target;
-        
-        const weeks = Math.max(4, Math.ceil(weightDiff / 1)); 
-        const today = new Date();
-        const targetDate = new Date(today.getTime() + (weeks * 7 * 24 * 60 * 60 * 1000));
-        
-        const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
-        const formattedDate = `${meses[targetDate.getMonth()]} ${targetDate.getDate()}, ${targetDate.getFullYear()}`;
-
-        document.getElementById('proj-target-weight').textContent = target;
-        document.getElementById('proj-date').textContent = formattedDate;
-
-        document.getElementById('chart-start-weight').textContent = current + ' kg';
-        document.getElementById('chart-end-weight').textContent = target + ' kg';
-    }
-
-    function startSpinnerLoader() {
-        const circle = document.getElementById('loader-circle');
-        const percentText = document.getElementById('loader-percent');
-        const headline = document.getElementById('loader-headline');
-        let count = 0;
-
-        const reviews = [
-            { name: "Juliana Rosella", desc: "A barriga sempre foi meu ponto fragilidade, mas sumiu! Lembro de como meu marido ria de mim, mas agora ele está impressionado!" },
-            { name: "Mariana Costa", desc: "Nunca gostei tanto do meu bumbum! Nunca recebi tantos elogios e tanta atenção! É simplesmente surreal!" },
-            { name: "Carla Mendes", desc: "Depois que completei meus 28 dias do Tai Chi com a Sofia Lee, perdi 6 kg e me sinto 10 anos mais jovem! Super recomendo!" }
-        ];
-
-        let reviewIdx = 0;
-        const reviewInterval = setInterval(() => {
-            reviewIdx = (reviewIdx + 1) % reviews.length;
-            document.getElementById('review-slider').style.opacity = 0;
-            setTimeout(() => {
-                document.getElementById('rev-name').textContent = reviews[reviewIdx].name;
-                document.getElementById('rev-desc').textContent = reviews[reviewIdx].desc;
-                document.getElementById('review-slider').style.opacity = 1;
-            }, 300);
-        }, 2500);
-
-        const loaderInterval = setInterval(() => {
-            count++;
-            percentText.textContent = count + '%';
-            
-            const offset = 440 - (440 * count) / 100;
-            circle.style.strokeDashoffset = offset;
-
-            if (count === 30) headline.textContent = "Alinhando rotina de caminhada...";
-            if (count === 60) headline.textContent = "Calculando taxa metabólica basal...";
-            if (count === 85) headline.textContent = "Montando cronograma Sofia Lee...";
-
-            if (count >= 100) {
-                clearInterval(loaderInterval);
-                clearInterval(reviewInterval);
-                setTimeout(() => goTo('step-34'), 500);
-            }
-        }, 70);
-    }
-
-    function validateEmail() {
-        const email = document.getElementById('email-input').value.trim();
-        const btn = document.getElementById('btn-email');
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-        if (emailRegex.test(email)) btn.classList.remove('disabled');
-        else btn.classList.add('disabled');
-    }
-
-    function saveEmail() {
-        goTo('step-35');
+            if(nextId === 'final') alert("Fim desta etapa!");
+            else goTo(nextId);
+        }, 500);
     }
 </script>
 </body>
