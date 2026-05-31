@@ -24,7 +24,7 @@
             font-family: var(--font);
             background: #fff;
             color: var(--text);
-            height: 100dvh; /* Altura exata da tela */
+            height: 100dvh;
             display: flex;
             justify-content: center;
             overflow: hidden;
@@ -73,29 +73,21 @@
         .badge-img { width: auto; max-width: 85%; max-height: 8vh; margin-bottom: 10px; }
         .social-sub { font-size: 15px; color: #666; margin-bottom: 20px; }
         
-        /* ── ESTRUTURA CARD 3:2 (welcome-sofia, amazing-sofia, power-sofia, habits-sofia) ── */
-        .welcome-wrap { 
-            flex: 1; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: flex-start;
-            padding: 15px 24px 0; 
-        }
+        .welcome-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
         
-        /* CORREÇÃO MATEMÁTICA: Usando Proporção 3:2 com limite de segurança no celular */
+        /* CORREÇÃO: object-fit contain para as fotos de Sofia nunca cortarem a cabeça */
         .welcome-img, .welcome-img-card {
             width: 100%;
-            aspect-ratio: 3 / 2; /* Casamento perfeito com o seu formato 450x300 */
-            max-height: 230px; /* Limite de altura seguro para iPhone */
+            max-height: 32vh;
             object-fit: cover;
-            object-position: center top !important; /* Evita corte da cabeça */
-            border-radius: 24px;
-            margin-bottom: 20px;
+            object-position: center 10%;
+            border-radius: 0 0 28px 28px;
+            margin-bottom: 15px;
         }
 
+        /* CORREÇÃO: Alinhamento, margem e largura dos blocos de texto de transição */
         .welcome-text-container {
-            max-width: 320px; 
+            max-width: 320px;
             margin: 0 auto;
             text-align: center;
         }
@@ -112,6 +104,8 @@
             line-height: 1.6;
         }
 
+        .welcome-img-card { width: 100%; max-height: 30vh; object-fit: cover; object-position: center center; border-radius: 24px; margin-bottom: 20px; }
+
         /* ── QUIZ HEADER & CARDS ── */
         .quiz-header { width: 100%; padding: 14px 20px 0; }
         .progress-bar { height: 4px; background: #E0E0E0; border-radius: 100px; overflow: hidden; margin-bottom: 5px; }
@@ -127,7 +121,7 @@
         .opt-left { display: flex; align-items: center; gap: 12px; flex: 1; }
         .opt-icon { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #ccc; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #aaa; }
         .opt-card.selected .opt-icon { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.2); color: #fff; }
-        .opt-label { font-size: 15px; font-weight: 700; text-align: left; }
+        .opt-label { font-size: 15px; font-weight: 700; }
         .opt-thumb { width: 58px; height: 58px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: #e0e0e0; }
         .opt-card.single:hover { background: var(--green); border-color: var(--green); color: #fff; }
         .emoji { font-size: 24px; padding-right: 10px; }
@@ -178,7 +172,7 @@
         .error-message { color: #d9534f; font-size: 12px; font-weight: 700; margin-top: 5px; text-align: center; width: 100%; }
 
         /* ── DINÂMICA DO PONTEIRO DE IMC (TELA 30) ── */
-        .bmi-gauge-container { width: 100%; position: relative; margin: 25px 0 15px; }
+        .bmi-gauge-container { width: 100%; position: relative; margin: 10px 0 15px; }
         .gauge-bar { width: 100%; height: 12px; border-radius: 10px; background: linear-gradient(to right, #4CAF50 0%, #4CAF50 40%, #FF9800 40%, #FF9800 75%, #F44336 75%, #F44336 100%); position: relative; }
         .gauge-labels { display: flex; justify-content: space-between; font-size: 10px; color: #888; font-weight: 700; margin-top: 6px; }
         .gauge-pointer {
@@ -205,12 +199,53 @@
             display: block; width: 0;
         }
 
-        /* ── LISTA DE PERFIL PREMIUM (TELA 30) ── */
-        .summary-list { width: 100%; display: flex; flex-direction: column; gap: 12px; margin: 20px 0; padding: 0 10px; }
-        .summary-item { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1.5px solid #f0f0f0; }
-        .summary-left { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); font-weight: 800; }
-        .summary-right { font-weight: 800; font-size: 14px; color: var(--text); }
-        .serene-sofia-img { width: auto !important; height: 140px !important; object-fit: contain !important; margin: 15px auto; display: block; }
+        /* ── NOVO LAYOUT SIDE-BY-SIDE (TELA 30) ── */
+        .profile-side-layout {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 15px 0 5px;
+            padding: 0 10px;
+        }
+        .summary-list {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .summary-item {
+            display: flex;
+            flex-direction: column; /* Alinha legenda no topo, valor embaixo */
+            align-items: flex-start;
+            padding-bottom: 6px;
+            border-bottom: 1.5px solid #f0f0f0;
+        }
+        .summary-left {
+            font-size: 10px;
+            color: var(--muted);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .summary-right {
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--text);
+            margin-top: 1px;
+        }
+        .summary-image-container {
+            flex: 0.9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .serene-sofia-img {
+            width: 100%;
+            max-height: 135px; /* Tamanho proporcional perfeito para não rolar a tela */
+            object-fit: contain;
+        }
 
         /* ── CARREGAMENTO CIRCULAR (TELA 33) ── */
         .spinner-container { width: 140px; height: 140px; position: relative; margin: 20px auto; }
@@ -222,7 +257,7 @@
         
         .review-box { width: 100%; background: #F5F5F0; border-radius: 12px; padding: 20px; text-align: left; margin-top: 10px; min-height: 120px; transition: opacity 0.3s; }
         .review-name { font-weight: 800; font-size: 14px; margin-bottom: 4px; }
-        .review-stars { color: #F5A623; font-size: 14px; margin-bottom: 8px; } /* Estrelas Amarelas de volta */
+        .review-stars { color: #F5A623; font-size: 14px; margin-bottom: 8px; } /* Estrelas Amarelas */
         .review-desc { font-size: 13px; color: #555; line-height: 1.5; }
 
         /* ── GRÁFICO DINÂMICO DE PERDA DE PESO (TELA 32) ── */
