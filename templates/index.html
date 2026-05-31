@@ -67,56 +67,27 @@
         .arrow-circle { width: 24px; height: 24px; background: rgba(255,255,255,0.22); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; }
         .footer-note { font-size: 10px; color: var(--muted); margin-top: 14px; padding: 0 8px; text-align: center; }
 
-        /* ── STEP 2 — SOCIAL PROOF (CORREÇÃO DE ACHATAMENTO) ── */
+        /* ── STEP 2 & 3 (Originais Sem Cortes) ── */
         .social-proof-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 24px; text-align: center; }
-        
-        .social-img { 
-            width: 100%; 
-            max-width: 260px; 
-            height: auto !important; /* CORREÇÃO: Impede achatamento e distorção */
-            margin-bottom: 15px; 
-        }
-        
-        .badge-img { 
-            width: auto; 
-            max-width: 85%; 
-            max-height: 8vh; 
-            margin-bottom: 10px; 
-        }
+        .social-img { width: auto; max-width: 100%; max-height: 25vh; margin-bottom: 15px; }
+        .badge-img { width: auto; max-width: 85%; max-height: 8vh; margin-bottom: 10px; }
         .social-sub { font-size: 15px; color: #666; margin-bottom: 20px; }
         
         .welcome-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
-        
-        /* CORREÇÃO: Alinhamento pela cabeça da Sofia em todas as fotos de transição */
         .welcome-img, .welcome-img-card {
             width: 100%;
-            height: auto;
-            max-height: 240px; /* Altura ideal de segurança */
+            max-height: 32vh;
             object-fit: cover;
-            object-position: center top !important; /* CORREÇÃO: Alinha estritamente pelo topo (cabeça) */
-            background: #fff;
-            border-radius: 24px;
-            margin-bottom: 20px;
+            object-position: center 10%;
+            border-radius: 0 0 28px 28px;
+            margin-bottom: 15px;
         }
 
-        /* Alinhamento, margem e largura dos blocos de texto de transição */
-        .welcome-text-container {
-            max-width: 320px; /* Impede que o texto encoste na lateral */
-            margin: 0 auto;
-            text-align: center;
-        }
-        .welcome-text-container h2 {
-            font-size: 21px;
-            font-weight: 800;
-            line-height: 1.3;
-            margin-bottom: 12px;
-            letter-spacing: -0.4px;
-        }
-        .welcome-text-container .desc {
-            font-size: 13.5px;
-            color: #555;
-            line-height: 1.6;
-        }
+        .welcome-text-container { max-width: 320px; margin: 0 auto; text-align: center; }
+        .welcome-text-container h2 { font-size: 21px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.4px; }
+        .welcome-text-container .desc { font-size: 13.5px; color: #555; line-height: 1.6; }
+
+        .welcome-img-card { width: 100%; max-height: 30vh; object-fit: cover; object-position: center center; border-radius: 24px; margin-bottom: 20px; }
 
         /* ── QUIZ HEADER & CARDS ── */
         .quiz-header { width: 100%; padding: 14px 20px 0; }
@@ -209,6 +180,36 @@
             border-style: solid;
             border-color: #111 transparent;
             display: block; width: 0;
+        }
+
+        /* ── LISTA DE PERFIL PREMIUM (TELA 30) ── */
+        .summary-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 1.5px solid #f0f0f0;
+        }
+        .summary-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 800;
+        }
+        .summary-right {
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--text);
         }
 
         /* ── CARREGAMENTO CIRCULAR (TELA 33) ── */
@@ -436,7 +437,7 @@
         </div>
     </div>
 
-    <!-- STEP 8: TRANSIÇÃO/CONCEITO (USANDO POWER-SOFIA.PNG) -->
+    <!-- STEP 8: TRANSIÇÃO/CONCEITO -->
     <div id="step-8" class="step">
         <div class="welcome-wrap">
             <img src="static/img/power-sofia.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
@@ -697,7 +698,7 @@
         </div>
     </div>
 
-    <!-- STEP 22: HÁBITOS RUINS (17/25) -->
+    <!-- STEP 22: HÁBITOS RUINS (17/25) - multi-select -->
     <div id="step-22" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
@@ -718,7 +719,7 @@
         <div class="footer-action"><button id="btn22" class="btn-primary btn-fixed disabled" onclick="goTo('step-23')">Continuar</button></div>
     </div>
 
-    <!-- STEP 23: GANHO DE PESO (18/25) -->
+    <!-- STEP 23: GANHO DE PESO (18/25) - multi-select -->
     <div id="step-23" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
@@ -960,13 +961,13 @@
 
             <div class="review-box" id="review-slider">
                 <div class="review-name" id="rev-name">Juliana Rosella</div>
-                <div class="review-stars">★★★★★ <span style="font-size: 11px; color: #F5A623; font-weight: 800;">Avaliações do Google</span></div>
-                <div class="review-desc" id="rev-desc">A barriga sempre foi meu ponto fraco, mas sumiu! Lembro de como meu marido ria de mim, mas agora ele está impressionado!</div>
+                <div class="review-stars">★★★★★ <span style="font-size: 11px; color: #4285F4; font-weight: 800;">Avaliações do Google</span></div>
+                <div class="review-desc" id="rev-desc">A barriga sempre foi meu ponto fragilidade, mas sumiu! Lembro de como meu marido ria de mim, mas agora ele está impressionado!</div>
             </div>
         </div>
     </div>
 
-    <!-- STEP 34: EMAIL -->
+    <!-- STEP 34: EMAIL (Correção da Ativação do Botão) -->
     <div id="step-34" class="step">
         <div class="main-content" style="justify-content: center;">
             <h2>Digite seu e-mail para receber seu plano pessoal de treino de Caminhada Tai Chi em Casa</h2>
@@ -1088,12 +1089,16 @@
 
             if (bmi >= 30) {
                 bmiBox.className = "analysis-box";
-                bmiEmoji.textContent = "⚠️";
+                bmiEmoji.textContent = "🥵";
                 bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado obesidade.</strong><br>Seu peso atual representa riscos para a sua saúde. Usaremos seu índice para criar um programa de perda de peso adaptado às suas necessidades.`;
             } else if (bmi >= 25) {
                 bmiBox.className = "analysis-box orange";
-                bmiEmoji.textContent = "⚡";
-                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado sobrepeso.</strong><br>Seu peso está um pouco acima do recomendado. Vamos te ajudar a voltar para a faixa ideal com segurança.`;
+                bmiEmoji.textContent = "😒";
+                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado sobrepeso.</strong><br>Seu peso requer mais atenção. Usaremos seu índice para personalizar um programa de perda de peso alinhado às suas necessidades e objetivos.`;
+            } else if (bmi < 18.5) {
+                bmiBox.className = "analysis-box orange";
+                bmiEmoji.textContent = "⚠️";
+                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado abaixo do peso.</strong><br>Foque em tonificação muscular e em uma alimentação equilibrada. Mantenha-se positiva e tente manter o consumo diário de calorias dentro da faixa recomendada.`;
             } else {
                 bmiBox.className = "analysis-box green";
                 bmiEmoji.textContent = "✨";
@@ -1228,8 +1233,8 @@
         let count = 0;
 
         const reviews = [
-            { name: "Juliana Rosella", desc: "A barriga sempre foi meu ponto fraco, mas sumiu! Lembro de como meu marido ria de mim, mas agora ele está impressionado!" },
-            { name: "Mariana Costa", desc: "Nunca gostei tanto do meu bumbum! Nunca recebi tantos elogios e tanta atenção! É simplesmente surreal!" }, // Nome Brasileiro
+            { name: "Juliana Rosella", desc: "A barriga sempre foi meu ponto fragilidade, mas sumiu! Lembro de como meu marido ria de mim, mas agora ele está impressionado!" },
+            { name: "Mariana Costa", desc: "Nunca gostei tanto do meu bumbum! Nunca recebi tantos elogios e tanta atenção! É simplesmente surreal!" },
             { name: "Carla Mendes", desc: "Depois que completei meus 28 dias do Tai Chi com a Sofia Lee, perdi 6 kg e me sinto 10 anos mais jovem! Super recomendo!" }
         ];
 
