@@ -24,22 +24,21 @@
             font-family: var(--font);
             background: #fff;
             color: var(--text);
-            height: 100dvh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            overflow: hidden;
         }
 
         .app-shell {
             width: 100%;
             max-width: 480px;
-            height: 100%;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
         /* ── STEPS ── */
-        .step { display: none; flex-direction: column; height: 100%; width: 100%; overflow: hidden; }
+        .step { display: none; flex-direction: column; min-height: 100vh; }
         .step.active { display: flex; animation: fadeIn 0.3s ease; }
 
         @keyframes fadeIn {
@@ -47,67 +46,363 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── ESTRUTURA GLOBAL ── */
-        .main-content { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 20px; text-align: center; overflow-y: auto; }
-        .footer-action { padding: 0 20px 36px; width: 100%; flex-shrink: 0; }
+        /* ════════════════════════════════
+           STEP 1 — LANDING (Seu Original Intocado)
+        ════════════════════════════════ */
+        #step-1 {
+            padding: 22px 20px 16px;
+            align-items: center;
+            text-align: center;
+        }
 
-        h1, h2, h3 { font-weight: 800; text-align: center; letter-spacing: -0.8px; }
-
-        /* ── STEP 1 (Seu Original Intocado) ── */
-        #step-1 { padding: 22px 20px 16px; align-items: center; text-align: center; }
-        .rating-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-light); color: var(--green-dark); border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 700; margin-bottom: 16px; }
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--green-light);
+            color: var(--green-dark);
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
         .rating-badge .star { color: #F5A623; }
-        #step-1 h1 { font-size: 24px; line-height: 1.25; letter-spacing: -0.5px; max-width: 340px; margin-bottom: 10px; }
-        .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
-        .quiz-badge { display: inline-block; border: 1.5px solid var(--green); color: var(--green); border-radius: 100px; padding: 4px 14px; font-size: 12px; font-weight: 700; margin-bottom: 14px; }
-        .hero-layout { display: flex; width: 100%; align-items: flex-end; gap: 10px; }
-        .hero-img { width: 50%; object-fit: contain; max-height: 340px; }
-        .age-options { flex: 1; display: flex; flex-direction: column; gap: 10px; }
-        .age-btn { display: flex; align-items: center; justify-content: space-between; background: var(--green); color: #fff; border: none; border-radius: 12px; padding: 15px 14px; font-family: var(--font); font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.15s, transform 0.1s; width: 100%; }
-        .arrow-circle { width: 24px; height: 24px; background: rgba(255,255,255,0.22); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; }
-        .footer-note { font-size: 10px; color: var(--muted); margin-top: 14px; padding: 0 8px; text-align: center; }
 
-        /* ── STEP 2 & 3 (Originais Sem Cortes) ── */
-        .social-proof-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 24px; text-align: center; }
-        .social-img { width: auto; max-width: 100%; max-height: 25vh; margin-bottom: 15px; }
-        .badge-img { width: auto; max-width: 85%; max-height: 8vh; margin-bottom: 10px; }
-        .social-sub { font-size: 15px; color: #666; margin-bottom: 20px; }
-        
-        .welcome-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
-        .welcome-img, .welcome-img-card {
+        #step-1 h1 {
+            font-family: var(--font);
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: -0.5px;
+            max-width: 340px;
+            margin-bottom: 10px;
+        }
+
+        .section-tag {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .quiz-badge {
+            display: inline-block;
+            border: 1.5px solid var(--green);
+            color: var(--green);
+            border-radius: 100px;
+            padding: 4px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .hero-layout {
+            display: flex;
+            width: 100%;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .hero-img {
+            width: 50%;
+            object-fit: contain;
+            max-height: 340px;
+        }
+
+        .age-options {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-bottom: 6px;
+        }
+
+        .age-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--green);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 14px;
+            font-family: var(--font);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
+            width: 100%;
+        }
+        .age-btn:hover  { background: var(--green-dark); }
+        .age-btn:active { transform: scale(0.97); }
+
+        .arrow-circle {
+            width: 24px; height: 24px;
+            background: rgba(255,255,255,0.22);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .footer-note {
+            font-size: 10px;
+            color: var(--muted);
+            margin-top: 14px;
+            padding: 0 8px;
+            text-align: center;
+        }
+        .footer-note u { cursor: pointer; }
+
+        /* ════════════════════════════════
+           STEP 2 — SOCIAL PROOF (Seu Original Intocado)
+        ════════════════════════════════ */
+        #step-2 {
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px 36px;
+            text-align: center;
+            gap: 0;
+        }
+
+        .social-img {
+            width: 100%;
+            max-width: 300px;
+            margin-bottom: 20px;
+        }
+
+        .badge-img {
+            width: 90%;
+            max-width: 260px;
+            margin-bottom: 10px;
+        }
+
+        .social-sub {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 36px;
+        }
+
+        /* ════════════════════════════════
+           STEP 3 — BOAS-VINDAS (Cabeça Blindada e Proporção Restaurada)
+        ════════════════════════════════ */
+        #step-3 {
+            align-items: center;
+            padding: 0 0 32px;
+            text-align: center;
+        }
+
+        .welcome-img {
             width: 100%;
             max-height: 32vh;
             object-fit: cover;
-            object-position: center 10%;
+            object-position: center 10%; /* Foca na cabeça da Sofia */
             border-radius: 0 0 28px 28px;
-            margin-bottom: 15px;
+            margin-bottom: 22px;
         }
 
-        .welcome-text-container { max-width: 320px; margin: 0 auto; text-align: center; }
-        .welcome-text-container h2 { font-size: 21px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.4px; }
-        .welcome-text-container .desc { font-size: 13.5px; color: #555; line-height: 1.6; }
+        /* CORREÇÃO: welcom-img-card idêntica à welcome-img para não cortar cabeça */
+        .welcome-img-card {
+            width: 100%;
+            max-height: 32vh;
+            object-fit: cover;
+            object-position: center 10% !important; /* CORREÇÃO: impede o corte da cabeça */
+            border-radius: 24px;
+            margin-bottom: 20px;
+        }
 
-        .welcome-img-card { width: 100%; max-height: 30vh; object-fit: cover; object-position: center center; border-radius: 24px; margin-bottom: 20px; }
+        #step-3 h2 {
+            font-family: var(--font);
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.3;
+            letter-spacing: -0.4px;
+            max-width: 340px;
+            margin: 0 auto 14px;
+            padding: 0 20px;
+        }
 
-        /* ── QUIZ HEADER & CARDS ── */
-        .quiz-header { width: 100%; padding: 14px 20px 0; }
-        .progress-bar { height: 4px; background: #E0E0E0; border-radius: 100px; overflow: hidden; margin-bottom: 5px; }
-        .progress-fill { height: 100%; background: var(--green); border-radius: 100px; transition: width 0.4s ease; }
-        .step-label { font-size: 12px; font-weight: 700; color: var(--muted); text-align: right; }
-        .quiz-body { padding: 22px 20px; flex: 1; display: flex; flex-direction: column; overflow-y: auto; }
-        .quiz-body h3 { font-size: 22px; font-weight: 800; line-height: 1.25; margin-bottom: 6px; text-align: left; }
-        .hint { font-size: 13px; color: var(--muted); margin-bottom: 20px; text-align: left; }
-        .options-list { display: flex; flex-direction: column; gap: 10px; width: 100%; }
-        .opt-card { display: flex; align-items: center; justify-content: space-between; background: var(--card-bg); border: 2px solid transparent; border-radius: var(--radius); padding: 10px 10px 10px 16px; cursor: pointer; transition: 0.15s; }
+        #step-3 .desc {
+            font-size: 14px;
+            color: #555;
+            line-height: 1.65;
+            max-width: 340px;
+            margin: 0 auto 32px;
+            padding: 0 20px;
+        }
+
+        /* ── LISTA DE RESUMO DO PERFIL (TELA 30) ── */
+        .summary-list {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+            padding: 0 10px;
+        }
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 1.5px solid #f0f0f0; /* Linha sutil de divisão */
+        }
+        .summary-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: var(--muted);
+            font-weight: 800;
+        }
+        .summary-right {
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        /* Sofia menor para pegar meio-corpo no Step 30 */
+        .serene-sofia-img {
+            width: auto !important;
+            height: 140px !important; /* Tamanho proporcional perfeito */
+            object-fit: contain !important;
+            margin: 15px auto;
+            display: block;
+        }
+
+        /* ════════════════════════════════
+           QUIZ STEPS (4 em diante)
+        ════════════════════════════════ */
+        .quiz-header {
+            width: 100%;
+            padding: 14px 20px 0;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: #E0E0E0;
+            border-radius: 100px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+        .progress-fill {
+            height: 100%;
+            background: var(--green);
+            border-radius: 100px;
+            transition: width 0.4s ease;
+        }
+
+        .step-label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--muted);
+            text-align: right;
+        }
+
+        .quiz-body {
+            padding: 22px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .quiz-body h3 {
+            font-family: var(--font);
+            font-size: 22px;
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: -0.4px;
+            margin-bottom: 6px;
+            text-align: left;
+        }
+
+        .hint {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .opt-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--card-bg);
+            border: 2px solid transparent;
+            border-radius: var(--radius);
+            padding: 10px 10px 10px 16px;
+            cursor: pointer;
+            transition: border-color 0.15s, background 0.15s, color 0.15s;
+        }
         .opt-card:hover { border-color: var(--green); }
-        .opt-card.selected { background: var(--green); border-color: var(--green); color: #fff; }
-        .opt-left { display: flex; align-items: center; gap: 12px; flex: 1; }
-        .opt-icon { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #ccc; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: #aaa; }
-        .opt-card.selected .opt-icon { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.2); color: #fff; }
-        .opt-label { font-size: 15px; font-weight: 700; text-align: left; }
-        .opt-thumb { width: 58px; height: 58px; border-radius: 10px; object-fit: cover; flex-shrink: 0; background: #e0e0e0; }
-        .opt-card.single:hover { background: var(--green); border-color: var(--green); color: #fff; }
-        .emoji { font-size: 24px; padding-right: 10px; }
+
+        .opt-card.selected {
+            background: var(--green);
+            border-color: var(--green);
+            color: #fff;
+        }
+
+        .opt-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .opt-icon {
+            width: 26px; height: 26px;
+            border-radius: 50%;
+            border: 2px solid #ccc;
+            background: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px;
+            font-weight: 800;
+            color: #aaa;
+            flex-shrink: 0;
+            transition: border-color 0.15s, color 0.15s;
+        }
+        .opt-card.selected .opt-icon {
+            border-color: rgba(255,255,255,0.7);
+            background: rgba(255,255,255,0.2);
+            color: #fff;
+        }
+
+        .opt-label {
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .opt-thumb {
+            width: 58px;
+            height: 58px;
+            border-radius: 10px;
+            object-fit: cover;
+            flex-shrink: 0;
+            background: #e0e0e0;
+        }
+        .opt-card.selected .opt-thumb {
+            filter: brightness(1.05);
+        }
+
+        .opt-card.single:hover {
+            background: var(--green);
+            border-color: var(--green);
+            color: #fff;
+        }
+
+        .emoji {
+            font-size: 24px;
+            padding-right: 10px;
+        }
 
         /* ── INTERATIVIDADE ANATOMIA (TELA 9) ── */
         .anatomy-container { display: flex; width: 100%; gap: 15px; align-items: center; }
@@ -180,36 +475,6 @@
             border-style: solid;
             border-color: #111 transparent;
             display: block; width: 0;
-        }
-
-        /* ── LISTA DE PERFIL PREMIUM (TELA 30) ── */
-        .summary-list {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin: 20px 0;
-            padding: 0 10px;
-        }
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 12px;
-            border-bottom: 1.5px solid #f0f0f0;
-        }
-        .summary-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 13px;
-            color: var(--muted);
-            font-weight: 800;
-        }
-        .summary-right {
-            font-weight: 800;
-            font-size: 14px;
-            color: var(--text);
         }
 
         /* ── CARREGAMENTO CIRCULAR (TELA 33) ── */
@@ -329,7 +594,7 @@
         </div>
     </div>
 
-    <!-- STEP 3 (Card Ajustado) -->
+    <!-- STEP 3 -->
     <div id="step-3" class="step">
         <div class="welcome-wrap">
             <img src="static/img/welcome-sofia.png" alt="Prática Tai Chi em casa" class="welcome-img">
@@ -469,7 +734,6 @@
                 </div>
                 <div class="anatomy-view">
                     <img src="static/img/target-body.png" alt="Áreas Alvo" onerror="this.style.background='#ddd'">
-                    <!-- RE-RESTABELECIDO: flares por cima do target-body.png -->
                     <div class="glow-dot dot-arms"></div><div class="glow-dot dot-abs"></div><div class="glow-dot dot-glutes"></div><div class="glow-dot dot-legs"></div>
                 </div>
             </div>
@@ -890,17 +1154,27 @@
                 </div>
             </div>
 
-            <div class="options-list" style="margin-top: 15px;">
-                <div class="opt-card" style="cursor: default;"><div class="opt-left"><span class="opt-label" style="font-size: 13px; color: var(--muted);">ESTILO DE VIDA</span></div><span style="font-weight: 800; font-size: 14px;">Ativo</span></div>
-                <div class="opt-card" style="cursor: default;"><div class="opt-left"><span class="opt-label" style="font-size: 13px; color: var(--muted);">TIPO DE ALIMENTAÇÃO</span></div><span style="font-weight: 800; font-size: 14px;">Gourmet</span></div>
-                <div class="opt-card" style="cursor: default;"><div class="opt-left"><span class="opt-label" style="font-size: 13px; color: var(--muted);">MOTIVAÇÃO FITNESS</span></div><span style="font-weight: 800; font-size: 14px;">Alta</span></div>
+            <!-- Lista de perfil limpa (sem parecer botão) conforme solicitado -->
+            <div class="summary-list">
+                <div class="summary-item">
+                    <div class="summary-left">🔄 Estilo de vida</div>
+                    <div class="summary-right">Ativo</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-left">🥗 Tipo de alimentação</div>
+                    <div class="summary-right">Gourmet</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-left">⚡ Motivação fitness</div>
+                    <div class="summary-right">Alta</div>
+                </div>
             </div>
 
-            <img src="static/img/serene-sofia.png" class="welcome-img-card" style="margin-top: 15px;" onerror="this.style.background='#ddd'">
+            <img src="static/img/serene-sofia.png" class="serene-sofia-img" onerror="this.style.background='#ddd'">
 
-            <div id="risks-box" class="analysis-box" style="display: none; background: #fff5f5; border-color: #ffcccc;">
-                <span class="analysis-icon">⚠️</span>
-                <p class="analysis-text"><strong>Riscos de um IMC não saudável!</strong><br>Seu peso representa um risco para a sua saúde. Usaremos seu índice para criar um programa de perda de peso adaptado às suas necessidades.</p>
+            <div id="risks-box" class="analysis-box">
+                <span id="risks-icon" class="analysis-icon">⚠️</span>
+                <p id="risks-text" class="analysis-text"></p>
             </div>
         </div>
         <div class="footer-action">
@@ -908,7 +1182,7 @@
         </div>
     </div>
 
-    <!-- STEP 31: IDADE BIOLÓGICA (Card Ajustado) -->
+    <!-- STEP 31: IDADE BIOLÓGICA -->
     <div id="step-31" class="step">
         <div class="welcome-wrap">
             <img src="static/img/bio-age-chart.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
@@ -961,13 +1235,13 @@
 
             <div class="review-box" id="review-slider">
                 <div class="review-name" id="rev-name">Juliana Rosella</div>
-                <div class="review-stars">★★★★★ <span style="font-size: 11px; color: #4285F4; font-weight: 800;">Avaliações do Google</span></div>
+                <div class="review-stars">★★★★★ <span style="font-size: 11px; color: #F5A623; font-weight: 800;">Avaliações do Google</span></div>
                 <div class="review-desc" id="rev-desc">A barriga sempre foi meu ponto fragilidade, mas sumiu! Lembro de como meu marido ria de mim, mas agora ele está impressionado!</div>
             </div>
         </div>
     </div>
 
-    <!-- STEP 34: EMAIL (Correção da Ativação do Botão) -->
+    <!-- STEP 34: EMAIL -->
     <div id="step-34" class="step">
         <div class="main-content" style="justify-content: center;">
             <h2>Digite seu e-mail para receber seu plano pessoal de treino de Caminhada Tai Chi em Casa</h2>
@@ -1203,8 +1477,22 @@
         }, 300);
 
         const risksBox = document.getElementById('risks-box');
-        if (bmi >= 25) risksBox.style.display = 'flex';
-        else risksBox.style.display = 'none';
+        const risksIcon = document.getElementById('risks-icon');
+        const risksText = document.getElementById('risks-text');
+
+        if (bmi >= 30) {
+            risksBox.style.display = 'flex';
+            risksBox.className = "analysis-box"; // Vermelho
+            risksIcon.textContent = "🥵";
+            risksText.innerHTML = `<strong>Riscos de um IMC não saudável!</strong><br>Seu peso representa um risco crítico para a sua saúde. Usaremos seu índice para criar um programa de perda de peso adaptado às suas necessidades.`;
+        } else if (bmi >= 25) {
+            risksBox.style.display = 'flex';
+            risksBox.className = "analysis-box orange"; // Laranja
+            risksIcon.textContent = "😒";
+            risksText.innerHTML = `<strong>Seu peso requer mais atenção!</strong><br>Usaremos seu índice de sobrepeso para personalizar um programa de perda de peso alinhado às suas necessidades e objetivos.`;
+        } else {
+            risksBox.style.display = 'none'; // Esconde se for saudável
+        }
     }
 
     function renderDynamicPlan() {
