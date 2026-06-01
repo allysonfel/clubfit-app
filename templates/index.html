@@ -24,7 +24,7 @@
             font-family: var(--font);
             background: #fff;
             color: var(--text);
-            height: 100dvh;
+            height: 100dvh; /* Garante altura exata do celular */
             display: flex;
             justify-content: center;
             overflow: hidden;
@@ -38,9 +38,16 @@
             flex-direction: column;
         }
 
-        /* ── STEPS ── */
-        .step { display: none; flex-direction: column; height: 100%; width: 100%; overflow: hidden; }
-        .step.active { display: flex; animation: fadeIn 0.3s ease; }
+        /* ── STEPS COMPACTADOS PARA CABER NA TELA ── */
+        .step { 
+            display: none; 
+            flex-direction: column; 
+            height: 100%; 
+            width: 100%; 
+            overflow: hidden; /* Impede rolagem nas telas de transição */
+            animation: fadeIn 0.3s ease; 
+        }
+        .step.active { display: flex; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -54,40 +61,181 @@
         h1, h2, h3 { font-weight: 800; text-align: center; letter-spacing: -0.8px; }
 
         /* ── STEP 1 (Seu Original Intocado) ── */
-        #step-1 { padding: 22px 20px 16px; align-items: center; text-align: center; }
-        .rating-badge { display: inline-flex; align-items: center; gap: 5px; background: var(--green-light); color: var(--green-dark); border-radius: 100px; padding: 6px 16px; font-size: 13px; font-weight: 700; margin-bottom: 16px; }
-        .rating-badge .star { color: #F5A623; }
-        #step-1 h1 { font-size: 24px; line-height: 1.25; letter-spacing: -0.5px; max-width: 340px; margin-bottom: 10px; }
-        .section-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase; margin-bottom: 10px; }
-        .quiz-badge { display: inline-block; border: 1.5px solid var(--green); color: var(--green); border-radius: 100px; padding: 4px 14px; font-size: 12px; font-weight: 700; margin-bottom: 14px; }
-        .hero-layout { display: flex; width: 100%; align-items: flex-end; gap: 10px; }
-        .hero-img { width: 50%; object-fit: contain; max-height: 340px; }
-        .age-options { flex: 1; display: flex; flex-direction: column; gap: 10px; }
-        .age-btn { display: flex; align-items: center; justify-content: space-between; background: var(--green); color: #fff; border: none; border-radius: 12px; padding: 15px 14px; font-family: var(--font); font-size: 14px; font-weight: 700; cursor: pointer; transition: background 0.15s, transform 0.1s; width: 100%; }
-        .arrow-circle { width: 24px; height: 24px; background: rgba(255,255,255,0.22); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; }
-        .footer-note { font-size: 10px; color: var(--muted); margin-top: 14px; padding: 0 8px; text-align: center; }
+        #step-1 {
+            padding: 22px 20px 16px;
+            align-items: center;
+            text-align: center;
+        }
 
-        /* ── STEP 2 & 3 (Originais Sem Cortes) ── */
-        .social-proof-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 24px; text-align: center; }
-        .social-img { width: 100%; max-width: 280px; height: auto !important; margin-bottom: 15px; }
-        .badge-img { width: auto; max-width: 85%; max-height: 8vh; margin-bottom: 10px; }
-        .social-sub { font-size: 15px; color: #666; margin-bottom: 20px; }
-        
-        .welcome-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; }
+        .rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: var(--green-light);
+            color: var(--green-dark);
+            border-radius: 100px;
+            padding: 6px 16px;
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        .rating-badge .star { color: #F5A623; }
+
+        #step-1 h1 {
+            font-family: var(--font);
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: -0.5px;
+            max-width: 340px;
+            margin-bottom: 10px;
+        }
+
+        .section-tag {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .quiz-badge {
+            display: inline-block;
+            border: 1.5px solid var(--green);
+            color: var(--green);
+            border-radius: 100px;
+            padding: 4px 14px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 14px;
+        }
+
+        .hero-layout {
+            display: flex;
+            width: 100%;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .hero-img {
+            width: 50%;
+            object-fit: contain;
+            max-height: 340px;
+        }
+
+        .age-options {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-bottom: 6px;
+        }
+
+        .age-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--green);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 14px;
+            font-family: var(--font);
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s, transform 0.1s;
+            width: 100%;
+        }
+        .age-btn:hover  { background: var(--green-dark); }
+        .age-btn:active { transform: scale(0.97); }
+
+        .arrow-circle {
+            width: 24px; height: 24px;
+            background: rgba(255,255,255,0.22);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .footer-note {
+            font-size: 10px;
+            color: var(--muted);
+            margin-top: 14px;
+            padding: 0 8px;
+            text-align: center;
+        }
+        .footer-note u { cursor: pointer; }
+
+        /* ── STEP 2 — SOCIAL PROOF ── */
+        .social-proof-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px 24px;
+            text-align: center;
+        }
+
+        .social-img {
+            width: 100%;
+            max-width: 280px;
+            height: auto !important;
+            margin-bottom: 15px;
+        }
+
+        .badge-img {
+            width: auto;
+            max-width: 85%;
+            max-height: 8vh;
+            margin-bottom: 10px;
+        }
+
+        .social-sub {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* ── STEP 3 — BOAS-VINDAS (Cabeça Blindada e Sem Scroll) ── */
+        .welcome-wrap {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 15px 24px 0;
+        }
+
         .welcome-img, .welcome-img-card {
             width: 100%;
             max-height: 32vh;
             object-fit: cover;
-            object-position: center 10%;
-            border-radius: 0 0 28px 28px;
+            object-position: center 10% !important; /* CORREÇÃO: Foca na cabeça da Sofia */
+            border-radius: 24px;
             margin-bottom: 15px;
         }
 
-        .welcome-text-container { max-width: 320px; margin: 0 auto; text-align: center; }
-        .welcome-text-container h2 { font-size: 21px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; letter-spacing: -0.4px; }
-        .welcome-text-container .desc { font-size: 13.5px; color: #555; line-height: 1.6; }
-
-        .welcome-img-card { width: 100%; max-height: 30vh; object-fit: cover; object-position: center center; border-radius: 24px; margin-bottom: 20px; }
+        .welcome-text-container {
+            max-width: 320px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .welcome-text-container h2 {
+            font-size: 21px;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 12px;
+            letter-spacing: -0.4px;
+        }
+        .welcome-text-container .desc {
+            font-size: 13.5px;
+            color: #555;
+            line-height: 1.6;
+        }
 
         /* ── QUIZ HEADER & CARDS ── */
         .quiz-header { width: 100%; padding: 14px 20px 0; }
@@ -109,7 +257,7 @@
         .opt-card.single:hover { background: var(--green); border-color: var(--green); color: #fff; }
         .emoji { font-size: 24px; padding-right: 10px; }
 
-        /* ── INTERATIVIDADE ANATOMIA (TELA 9) ── */
+        /* ── INTERATIVIDADE ANATOMIA (TELA 9 - RESTAURADA) ── */
         .anatomy-container { display: flex; width: 100%; gap: 15px; align-items: center; }
         .anatomy-list { flex: 1.1; display: flex; flex-direction: column; gap: 10px; }
         .anatomy-view { flex: 0.9; position: relative; display: flex; justify-content: center; }
@@ -127,7 +275,7 @@
             pointer-events: none;
             box-shadow: 0 0 15px rgba(255,165,0,0.8);
             animation: pulse-glow 1.5s infinite ease-in-out;
-            z-index: 5;
+            z-index: 5; /* Fica no topo */
         }
         .glow-dot.active { opacity: 1; transform: scale(1.4); }
 
@@ -139,6 +287,55 @@
         @keyframes pulse-glow {
             0%, 100% { box-shadow: 0 0 10px rgba(255,140,0,0.6); }
             50% { box-shadow: 0 0 25px rgba(255,69,0,0.9); }
+        }
+
+        /* ── NOVO LAYOUT SIDE-BY-SIDE (TELA 30) ── */
+        .profile-side-layout {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 15px 0 10px;
+            padding: 0 10px;
+        }
+        .summary-column-list {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .summary-column-item {
+            display: flex;
+            flex-direction: column; /* Legenda no topo, valor embaixo */
+            align-items: flex-start;
+            padding-bottom: 6px;
+            border-bottom: 1.5px solid #f0f0f0; /* Divisor fino sutil */
+            text-align: left;
+        }
+        .summary-column-label {
+            font-size: 10px;
+            color: var(--muted);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .summary-column-value {
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--text);
+            margin-top: 1px;
+        }
+        .summary-column-image {
+            flex: 0.9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .serene-sofia-img {
+            width: 100%;
+            max-height: 135px; /* Tamanho proporcional perfeito para não rolar a tela */
+            object-fit: contain;
         }
 
         /* ── DINÂMICA DE INPUTS MÉTRICOS ── */
@@ -181,13 +378,6 @@
             border-color: #111 transparent;
             display: block; width: 0;
         }
-
-        /* ── LISTA DE PERFIL PREMIUM (TELA 30) ── */
-        .summary-list { width: 100%; display: flex; flex-direction: column; gap: 12px; margin: 20px 0; padding: 0 10px; }
-        .summary-item { display: flex; justify-content: space-between; align-items: center; padding-bottom: 12px; border-bottom: 1.5px solid #f0f0f0; }
-        .summary-left { display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--muted); font-weight: 800; }
-        .summary-right { font-weight: 800; font-size: 14px; color: var(--text); }
-        .serene-sofia-img { width: auto !important; height: 140px !important; object-fit: contain !important; margin: 15px auto; display: block; }
 
         /* ── CARREGAMENTO CIRCULAR (TELA 33) ── */
         .spinner-container { width: 140px; height: 140px; position: relative; margin: 20px auto; }
@@ -263,169 +453,6 @@
             flex-shrink: 0;
         }
 
-        /* ════════════════════════════════
-           STEP 36 — LANDING DA OFERTA (SALES PAGE)
-        ════════════════════════════════ */
-        #step-36 {
-            overflow-y: auto !important; /* Libera scroll longo obrigatoriamente */
-            height: 100%;
-            background: #FFFFFF;
-        }
-
-        /* Cronômetro Fixo (Sticky Header) no topo */
-        .sticky-timer-bar {
-            position: sticky;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 60px;
-            background: #FFFFFF;
-            border-bottom: 1.5px solid #F0F0F0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-        }
-        .sticky-timer-bar .timer-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 16px;
-            font-weight: 800;
-        }
-        .sticky-timer-bar .timer-num {
-            color: #ff3333;
-            font-family: monospace;
-            font-size: 20px;
-        }
-        .sticky-timer-bar .btn-mini {
-            background: var(--green);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 800;
-            cursor: pointer;
-        }
-
-        /* Antes/Depois Comparação */
-        .offer-images-row {
-            display: flex;
-            width: 100%;
-            gap: 15px;
-            margin-top: 20px;
-            padding: 0 15px;
-        }
-        .offer-col {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .offer-col .tag-col {
-            border-radius: 8px;
-            padding: 4px 16px;
-            font-weight: 800;
-            font-size: 13px;
-            margin-bottom: 10px;
-            width: fit-content;
-        }
-        .offer-col.before .tag-col { background: var(--card-bg); color: var(--text); }
-        .offer-col.after .tag-col { background: var(--green-light); color: var(--green); }
-        
-        .offer-card-img {
-            width: 100%;
-            aspect-ratio: 3 / 4;
-            object-fit: cover;
-            border-radius: 16px;
-            background: #eee;
-            margin-bottom: 12px;
-        }
-
-        .offer-metrics {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            text-align: left;
-        }
-        .offer-metrics p { font-size: 10px; color: var(--muted); font-weight: 700; text-transform: uppercase; }
-        .offer-metrics h4 { font-size: 14px; font-weight: 800; margin-bottom: 4px; }
-        
-        /* Barras de Força do Antes e Depois */
-        .offer-bar { width: 100%; height: 6px; background: #eee; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
-        .offer-bar-fill { height: 100%; border-radius: 10px; }
-        .offer-col.before .offer-bar-fill { background: #555; width: 45%; }
-        .offer-col.after .offer-bar-fill { background: var(--green); width: 95%; }
-
-        /* Copos de Água da Projeção */
-        .water-grid { display: flex; gap: 4px; margin-top: 5px; }
-        .water-glass { font-size: 14px; }
-
-        /* Selo Desconto 50% Fixo no Meio */
-        .discount-seal {
-            background: #FFF9E6;
-            border: 1.5px solid #FFE0B2;
-            border-radius: 16px;
-            padding: 15px;
-            margin: 25px 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .discount-left { display: flex; align-items: center; gap: 10px; }
-        .discount-left .icon { font-size: 24px; }
-        .discount-text h5 { font-size: 14px; font-weight: 800; color: #E65100; }
-        .discount-text p { font-size: 11px; color: #888; }
-        .discount-right { display: flex; flex-direction: column; align-items: flex-end; }
-        .discount-right .desc-timer { font-size: 9px; color: #E65100; font-weight: 800; text-transform: uppercase; }
-        .discount-right .timer-val { font-family: monospace; font-size: 18px; font-weight: 800; color: #ff3333; }
-
-        /* Checkout Card */
-        .checkout-box {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 24px;
-            margin: 25px 15px;
-            text-align: center;
-        }
-        .checkout-box .title-card { font-size: 18px; font-weight: 800; margin-bottom: 12px; }
-        .price-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 15px 0; }
-        .old-price { font-size: 16px; color: #aa0000; text-decoration: line-through; font-weight: 600; }
-        .new-price { font-size: 32px; color: var(--green); font-weight: 800; }
-        .refund-sub { font-size: 12px; color: var(--muted); font-weight: 700; margin-top: 10px; }
-
-        /* Deliverables Grid */
-        .deliv-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-            padding: 0 15px;
-            margin-top: 25px;
-            text-align: left;
-        }
-        .deliv-item {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        .deliv-text { flex: 1; }
-        .deliv-text h4 { font-size: 14px; font-weight: 800; margin-bottom: 4px; }
-        .deliv-text p { font-size: 12px; color: #666; line-height: 1.4; }
-        .deliv-mock {
-            width: 80px;
-            height: 110px;
-            border-radius: 12px;
-            background: #eee;
-            object-fit: cover;
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
         @media (max-width: 360px) {
             #step-1 h1 { font-size: 20px; }
             .age-btn { padding: 13px 12px; font-size: 13px; }
@@ -435,12 +462,12 @@
 <body>
 <div class="app-shell">
 
-    <!-- STEP 1 (Original Aprovado) -->
+    <!-- STEP 1 (Seu Original Intocado) -->
     <div id="step-1" class="step active">
         <div style="display:flex;flex-direction:column;align-items:center;padding:22px 20px 0;text-align:center;">
             <span class="rating-badge"><span class="star">★</span> 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
             <h1>Desafio de 28 dias de Caminhada Tai Chi em Casa para emagrecimento</h1>
-            <p class="section-tag" style="margin-top:12px;">DE ACORDO WITH A SUA IDADE</p>
+            <p class="section-tag" style="margin-top:12px;">DE ACORDO COM A SUA IDADE</p>
             <span class="quiz-badge">quiz de 1 minuto</span>
         </div>
 
@@ -609,6 +636,7 @@
                 </div>
                 <div class="anatomy-view">
                     <img src="static/img/target-body.png" alt="Áreas Alvo" onerror="this.style.background='#ddd'">
+                    <!-- flares restaurados com z-index correto -->
                     <div class="glow-dot dot-arms"></div><div class="glow-dot dot-abs"></div><div class="glow-dot dot-glutes"></div><div class="glow-dot dot-legs"></div>
                 </div>
             </div>
@@ -965,7 +993,7 @@
             </div>
         </div>
         <div class="footer-action">
-            <button id="btn-target" class="btn-primary disabled" onclick="saveTargetWeight()">Continuar</button>
+            <button id="btn-target" class="btn-primary disabled" onclick="goTo('step-28')">Continuar</button>
         </div>
     </div>
 
@@ -994,6 +1022,8 @@
         </div>
     </div>
 
+    <!-- ── NOVAS TELAS (Telas 29 a 35) ADICIONADAS ABAIXO ── -->
+
     <!-- STEP 29: NOME (23/25) -->
     <div id="step-29" class="step">
         <div class="quiz-header">
@@ -1019,6 +1049,9 @@
         <div class="main-content">
             <h2 style="font-size: 20px; margin-bottom: 5px;">Aqui está o seu perfil de bem-estar</h2>
             
+            <!-- Título do IMC acima do gráfico -->
+            <p style="font-size: 11px; font-weight: 800; color: var(--muted); text-align: left; width: 100%; margin-bottom: 5px; text-transform: uppercase; padding-left: 10px;">ÍNDICE DE MASSA CORPORAL (IMC)</p>
+
             <div class="bmi-gauge-container">
                 <div class="gauge-pointer" id="dynamic-pointer">Seu IMC é <span id="gauge-bmi-val">--</span></div>
                 <div class="gauge-bar"></div>
@@ -1030,26 +1063,29 @@
             </div>
 
             <!-- Lista de perfil limpa (sem parecer botão) conforme solicitado -->
-            <div class="summary-list">
-                <div class="summary-item">
-                    <div class="summary-left">🔄 Estilo de vida</div>
-                    <div class="summary-right">Ativo</div>
+            <div class="profile-side-layout">
+                <div class="summary-column-list">
+                    <div class="summary-column-item">
+                        <span class="summary-column-label">ESTILO DE VIDA</span>
+                        <span class="summary-column-value">Ativo</span>
+                    </div>
+                    <div class="summary-column-item">
+                        <span class="summary-column-label">TIPO DE ALIMENTAÇÃO</span>
+                        <span class="summary-column-value">Gourmet</span>
+                    </div>
+                    <div class="summary-column-item">
+                        <span class="summary-column-label">MOTIVAÇÃO FITNESS</span>
+                        <span class="summary-column-value">Alta</span>
+                    </div>
                 </div>
-                <div class="summary-item">
-                    <div class="summary-left">🥗 Tipo de alimentação</div>
-                    <div class="summary-right">Gourmet</div>
-                </div>
-                <div class="summary-item">
-                    <div class="summary-left">⚡ Motivação fitness</div>
-                    <div class="summary-right">Alta</div>
+                <div class="summary-column-image">
+                    <img src="static/img/serene-sofia.png" class="serene-sofia-img" onerror="this.style.background='#ddd'">
                 </div>
             </div>
 
-            <img src="static/img/serene-sofia.png" class="serene-sofia-img" onerror="this.style.background='#ddd'">
-
-            <div id="risks-box" class="analysis-box" style="display: none; background: #fff5f5; border-color: #ffcccc;">
-                <span class="analysis-icon">⚠️</span>
-                <p class="analysis-text"><strong>Riscos de um IMC não saudável!</strong><br>Seu peso representa um risco para a sua saúde. Usaremos seu índice para criar um programa de perda de peso adaptado às suas necessidades.</p>
+            <div id="risks-box" class="analysis-box" style="display: none;">
+                <span id="risks-icon" class="analysis-icon">⚠️</span>
+                <p id="risks-text" class="analysis-text"></p>
             </div>
         </div>
         <div class="footer-action">
@@ -1057,14 +1093,14 @@
         </div>
     </div>
 
-    <!-- STEP 31: IDADE BIOLÓGICA (Card Ajustado) -->
+    <!-- STEP 31: IDADE BIOLÓGICA -->
     <div id="step-31" class="step">
         <div class="welcome-wrap">
             <img src="static/img/bio-age-chart.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
             <div class="welcome-text-container">
                 <h2>Idade biológica</h2>
                 <p class="desc" style="font-size: 14px; font-weight: 800; margin-bottom: 8px;">Caminhar regularmente pode ajudar a reduzir a idade biológica e apoiar a saúde do coração</p>
-                <p class="desc" style="color: #666; font-size: 11px;">Um estudo publicado no Journal of Physical Activity and Health constatou que adults mais velhos que caminham regularmente tendem a apresentar menos fatores de risco ligados à saúde metabólica e cardiovascular.<br>Apenas para fins educativos. Não constitui aconselhamento médico.</p>
+                <p class="desc" style="color: #666; font-size: 11px;">Um estudo publicado no Journal of Physical Activity and Health constatou que adultos mais velhos que caminham regularmente tendem a apresentar menos fatores de risco ligados à saúde metabólica e cardiovascular.<br>Apenas para fins educativos. Não constitui aconselhamento médico.</p>
             </div>
         </div>
         <div class="footer-action">
@@ -1096,7 +1132,7 @@
         </div>
     </div>
 
-    <!-- STEP 33: TELA DE CARREGAMENTO ANIMADA (Avaliações do Google) -->
+    <!-- STEP 33: TELA DE CARREGAMENTO ANIMADA -->
     <div id="step-33" class="step">
         <div class="main-content" style="justify-content: center;">
             <div class="spinner-container">
@@ -1110,13 +1146,13 @@
 
             <div class="review-box" id="review-slider">
                 <div class="review-name" id="rev-name">Juliana Rosella</div>
-                <div class="review-stars">★★★★★ <span style="font-size: 11px; color: #F5A623; font-weight: 800;">Avaliações do Google</span></div>
+                <div class="review-stars" style="color: #F5A623;">★★★★★ <span style="font-size: 11px; color: #4285F4; font-weight: 800;">Avaliações do Google</span></div>
                 <div class="review-desc" id="rev-desc">A barriga sempre foi meu ponto fragilidade, mas sumiu! Lembro de como meu marido ria de mim, mas agora ele está impressionado!</div>
             </div>
         </div>
     </div>
 
-    <!-- STEP 34: EMAIL (Correção da Ativação do Botão) -->
+    <!-- STEP 34: EMAIL -->
     <div id="step-34" class="step">
         <div class="main-content" style="justify-content: center;">
             <h2>Digite seu e-mail para receber seu plano pessoal de treino de Caminhada Tai Chi em Casa</h2>
@@ -1131,183 +1167,14 @@
         </div>
     </div>
 
-    <!-- STEP 35: RESULTADOS VISÍVEIS 28 DIAS (Animação Flutuante) -->
+    <!-- STEP 35: RESULTADOS VISÍVEIS 28 DIAS -->
     <div id="step-35" class="step">
         <div class="main-content" style="justify-content: center;">
             <img src="static/img/final-chart.png" class="chart-animated" onerror="this.style.background='#ddd'">
             <h2 style="margin-top: 25px;">Tenha resultados visíveis em apenas 28 dias!</h2>
         </div>
         <div class="footer-action">
-            <button class="btn-primary" onclick="goTo('step-36')">Continuar</button> <!-- Conectado ao Step 36 da oferta -->
-        </div>
-    </div>
-
-    <!-- ════════════════════════════════════
-         STEP 36 — LANDING DA OFERTA (SALES PAGE)
-    ════════════════════════════════════ -->
-    <div id="step-36" class="step">
-        <!-- Cronômetro Fixo (Sticky Header) no topo -->
-        <div class="sticky-timer-bar">
-            <div class="timer-box">
-                <span>Oferta expira em:</span>
-                <span class="timer-num" id="offer-timer">10:00</span>
-            </div>
-            <button class="btn-mini" onclick="document.getElementById('checkout-target').scrollIntoView({behavior: 'smooth'})">Quero meu plano</button>
-        </div>
-
-        <div class="main-content">
-            <!-- Título Principal -->
-            <h2>Aproveite sua oferta especial por tempo limitado!</h2>
-            
-            <!-- Imagens de Antes e Depois -->
-            <div class="offer-images-row">
-                <div class="offer-col before">
-                    <span class="tag-col">Antes</span>
-                    <img src="static/img/offer-before.png" class="offer-card-img" onerror="this.style.background='#ddd'">
-                    <div class="offer-metrics">
-                        <p>Gordura corporal</p>
-                        <h4>Obeso</h4>
-                        <div class="offer-bar"><div class="offer-bar-fill"></div></div>
-                        
-                        <p>Caminhada Tai Chi em Casa</p>
-                        <h4>Médio</h4>
-                    </div>
-                </div>
-                <div class="offer-col after">
-                    <span class="tag-col">Depois</span>
-                    <img src="static/img/offer-after.png" class="offer-card-img" onerror="this.style.background='#ddd'">
-                    <div class="offer-metrics">
-                        <p>Gordura corporal</p>
-                        <h4>Fit</h4>
-                        <div class="offer-bar"><div class="offer-bar-fill"></div></div>
-                        
-                        <p>Caminhada Tai Chi em Casa</p>
-                        <h4>Avançado</h4>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Botão Quero meu plano abaixo das fotos -->
-            <button class="btn-primary" style="margin-top: 25px; margin-bottom: 25px;" onclick="document.getElementById('checkout-target').scrollIntoView({behavior: 'smooth'})">Quero meu plano</button>
-
-            <!-- Título do Perfil com o Nome Dinâmico do usuário -->
-            <h2 style="font-size: 20px; margin-bottom: 10px;"><span id="offer-user-name">--</span>, seu plano personalizado de Caminhada Tai Chi em Casa está pronto!</h2>
-
-            <!-- Detalhes do Perfil Metétrico Dinâmico -->
-            <div class="summary-list" style="margin-top: 15px;">
-                <div class="summary-item">
-                    <div class="summary-left">🎯 Objetivo principal</div>
-                    <div class="summary-right" id="offer-goal-val">Reduzir a idade biológica</div>
-                </div>
-                <div class="summary-item">
-                    <div class="summary-left">💪 Nível de condicionamento</div>
-                    <div class="summary-right">Medium</div>
-                </div>
-                <div class="summary-item">
-                    <div class="summary-left">😴 Qualidade do sono</div>
-                    <div class="summary-right">Precisa melhorar</div>
-                </div>
-                <div class="summary-item">
-                    <div class="summary-left">👤 Idade Fitness</div>
-                    <div class="summary-right"><span id="offer-fitness-age">--</span> anos (7 anos a mais que a real)</div>
-                </div>
-            </div>
-
-            <!-- Tempo recomendado e Ingestão de Água -->
-            <div class="summary-list" style="margin-top: 15px;">
-                <div class="summary-item">
-                    <div class="summary-left">⏰ Tempo de treino recomendado</div>
-                    <div class="summary-right">7 min por dia</div>
-                </div>
-                <div class="summary-item" style="border: none;">
-                    <div class="summary-left">💧 Ingestão diária de água</div>
-                    <div class="summary-right">1.9 L</div>
-                </div>
-            </div>
-
-            <h2 style="font-size: 20px; margin-top: 30px; margin-bottom: 15px;">O que você recebe para alcançar seus objetivos</h2>
-
-            <!-- Deliverables List com Mockups -->
-            <div class="deliv-grid">
-                <div class="deliv-item">
-                    <div class="deliv-text">
-                        <h4>Plano de Caminhada Adaptado</h4>
-                        <p>Totalmente ajustado às suas necessidades, condicionamento e sensibilidades corporais.</p>
-                    </div>
-                    <img src="static/img/mockup-1.png" class="deliv-mock" onerror="this.style.background='#ddd'">
-                </div>
-                <div class="deliv-item">
-                    <div class="deliv-text">
-                        <h4>Guias Exclusivos de Nutrição</h4>
-                        <p>Aprenda a se alimentar de forma saudável, equilibrada e prazerosa sem dietas restritivas.</p>
-                    </div>
-                    <img src="static/img/mockup-2.png" class="deliv-mock" onerror="this.style.background='#ddd'">
-                </div>
-                <div class="deliv-item">
-                    <div class="deliv-text">
-                        <h4>Cronograma Fácil e Flexível</h4>
-                        <p>Gerencie seus treinos semanais com metas claras que se adaptam perfeitamente à sua rotina corrida.</p>
-                    </div>
-                    <img src="static/img/mockup-3.png" class="deliv-mock" onerror="this.style.background='#ddd'">
-                </div>
-            </div>
-
-            <!-- Botão Meio -->
-            <button class="btn-primary" style="margin-top: 30px;" onclick="document.getElementById('checkout-target').scrollIntoView({behavior: 'smooth'})">Quero meu plano</button>
-
-            <!-- Selo Desconto 50% e Cronômetro Secundário -->
-            <div class="discount-seal">
-                <div class="discount-left">
-                    <span class="icon">🔥</span>
-                    <div class="discount-text">
-                        <h5>50% DE DESCONTO</h5>
-                        <p>Desconto reservado apenas por:</p>
-                    </div>
-                </div>
-                <div class="discount-right">
-                    <span class="discount-timer" id="offer-timer-2">10:00</span>
-                </div>
-            </div>
-
-            <!-- Caixa de Depoimentos Adicionais do Google -->
-            <div class="review-box" style="margin: 20px 15px;">
-                <div class="review-name">Gabriela Silva</div>
-                <div class="review-stars">★★★★★ <span style="font-size: 11px; color: #4285F4; font-weight: 800;">Avaliações do Google</span></div>
-                <div class="review-desc">Comecei a praticar sem muita pretensão e hoje sou outra pessoa! Minha flexibilidade e disposição no dia a dia melhoraram incrivelmente.</div>
-                
-                <!-- Espaço reservado para carregar antes/depois do depoimento -->
-                <div style="display:flex; gap:10px; margin-top:15px; justify-content:center;">
-                    <img src="static/img/review-before.png" style="width:45%; border-radius:10px; height: 120px; object-fit: cover;" onerror="this.style.background='#ddd'">
-                    <img src="static/img/review-after.png" style="width:45%; border-radius:10px; height: 120px; object-fit: cover;" onerror="this.style.background='#ddd'">
-                </div>
-            </div>
-
-            <!-- CHECKOUT BOX -->
-            <div class="checkout-box" id="checkout-target">
-                <h3 class="title-card">Seu Plano Personalizado</h3>
-                <p style="font-size: 13px; color: #555;">Tenha resultados visíveis em apenas 4 semanas!</p>
-                
-                <div class="price-row">
-                    <span class="old-price">R$ 54,99</span>
-                    <span class="new-price">R$ 27,00</span>
-                </div>
-
-                <button class="btn-primary" onclick="alert('Redirecionando para o Gateway de Pagamento...')">Quero meu plano</button>
-                <p class="refund-sub">🛡️ Garantia de Reembolso de 07 dias</p>
-            </div>
-
-            <!-- Seção de Garantia Adicional -->
-            <div class="welcome-text-container" style="margin-top: 30px; margin-bottom: 40px; padding: 0 15px;">
-                <img src="static/img/badge-users.png" style="max-width: 150px; margin-bottom: 15px;">
-                <h3 style="font-size: 18px; margin-bottom: 10px;">Garantia de reembolso de 100%</h3>
-                <p class="desc" style="font-size: 12px; color: #666; line-height: 1.5;">Acreditamos que nosso plano pode funcionar para você e que você terá resultados visíveis em 4 semanas! Estamos dispostos a devolver seu dinheiro caso você não veja resultados visíveis e consiga comprovar que seguiu o nosso plano. Consulte nossa Política de Reembolso para entender todos os requisitos.</p>
-            </div>
-
-            <!-- Footer Legal -->
-            <div style="padding: 20px; border-top: 1px solid #eee; width: 100%; text-align: center; font-size: 11px; color: #888;">
-                <p style="margin-bottom: 8px;">Smart Produtos Digitais LTDA</p>
-                <p>© 2026. Todos os direitos reservados. Lasta é uma marca registrada da Lasta, Inc. 2026</p>
-            </div>
+            <button class="btn-primary" onclick="alert('Fim do Quiz! Redirecionando para a página de vendas.')">Continuar</button>
         </div>
     </div>
 
@@ -1333,7 +1200,6 @@
             if (id === 'step-30') animateBMIGauge();
             if (id === 'step-32') renderDynamicPlan();
             if (id === 'step-33') startSpinnerLoader();
-            if (id === 'step-36') startOfferTimer(); // Ativa timer regressivo na oferta
         }
     }
 
@@ -1599,32 +1465,6 @@
                 setTimeout(() => goTo('step-34'), 500);
             }
         }, 70);
-    }
-
-    /* ── LÓGICA DO CRONÔMETRO DE OFERTA DA PÁGINA DE VENDAS (TELA 36) ── */
-    function startOfferTimer() {
-        // Alimenta dinamicamente os valores de dados da oferta
-        document.getElementById('offer-user-name').textContent = userData.name || 'Aluna';
-        document.getElementById('offer-fitness-age').textContent = (userData.age ? parseInt(userData.age) + 7 : '--');
-
-        let totalTime = 600; // 10 minutos em segundos
-        const timerVal1 = document.getElementById('offer-timer');
-        const timerVal2 = document.getElementById('offer-timer-2');
-
-        const countdown = setInterval(() => {
-            totalTime--;
-            
-            const minutes = Math.floor(totalTime / 60);
-            const seconds = totalTime % 60;
-            const formatted = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-            if (timerVal1) timerVal1.textContent = formatted;
-            if (timerVal2) timerVal2.textContent = formatted;
-
-            if (totalTime <= 0) {
-                clearInterval(countdown);
-            }
-        }, 1000);
     }
 
     function validateEmail() {
