@@ -1418,7 +1418,7 @@
             </div>
         </div>
         <div class="footer-action">
-            <button id="btn-age" class="btn-primary disabled" onclick="goTo('step-29')">Próximo</button>
+            <button id="btn-age" class="btn-primary disabled" onclick="saveAge()">Próximo</button>
         </div>
     </div>
 
@@ -1672,7 +1672,7 @@
                     </div>
                     <div class="off-plan-feature-item" style="background: #fff; border: 1px solid #eaeaea;">
                         <span class="off-feat-icon">👤</span>
-                        <div class="off-feat-text" style="display:flex; flex-direction:column;"><span style="font-size: 10px; color: #888; font-weight: 800;">IDADE FITNESS</span><strong id="off-fit-age">7 anos a mais do que sua idade real</strong></div>
+                        <div class="off-feat-text" style="display:flex; flex-direction:column;"><span style="font-size: 10px; color: #888; font-weight: 800;">IDADE FITNESS</span><strong id="off-fit-age">-- anos (8 anos a mais do que sua idade real)</strong></div>
                     </div>
                 </div>
 
@@ -2044,6 +2044,12 @@
         else btn.classList.add('disabled');
     }
 
+    // NOVA FUNÇÃO: Salva dinamicamente a idade inserida
+    function saveAge() {
+        userData.age = parseInt(document.getElementById('age-input').value);
+        goTo('step-29');
+    }
+
     function validateName() {
         const val = document.getElementById('name-input').value.trim();
         const btn = document.getElementById('btn-name');
@@ -2208,9 +2214,9 @@
             bmiDesc.innerHTML = `Ótimo! Seu índice (${bmi}) está dentro da faixa saudável. Nosso plano vai te focar em tonificação e bem-estar geral.`;
         }
 
-        // Calcula dinamicamente a Idade Fitness baseada na idade do usuário
-        const fitAge = (userData.age ? parseInt(userData.age) + 7 : 42);
-        document.getElementById('off-fit-age').textContent = `${fitAge} anos (7 anos a mais do que sua idade real)`;
+        // NOVO AJUSTE: Calcula a Idade Fitness de forma dinâmica (Idade do usuário + 8)
+        const fitAge = (userData.age ? parseInt(userData.age) + 8 : 43);
+        document.getElementById('off-fit-age').textContent = `${fitAge} anos (8 anos a mais do que sua idade real)`;
         
         startOfferTimer();
         startOfferCarousel();
