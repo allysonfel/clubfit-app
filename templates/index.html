@@ -212,16 +212,15 @@
 
         .welcome-img, .welcome-img-card {
             width: 100%;
-            aspect-ratio: 3 / 2; /* Casamento perfeito com o seu formato 450x300 */
-            max-height: 230px; /* Limite de altura seguro para iPhone */
+            max-height: 32vh;
             object-fit: cover;
-            object-position: center top !important; /* Evita corte da cabeça */
+            object-position: center 10% !important; /* CORREÇÃO: Foca na cabeça da Sofia */
             border-radius: 24px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .welcome-text-container {
-            max-width: 320px; 
+            max-width: 320px;
             margin: 0 auto;
             text-align: center;
         }
@@ -258,6 +257,158 @@
         .opt-card.single:hover { background: var(--green); border-color: var(--green); color: #fff; }
         .emoji { font-size: 24px; padding-right: 10px; }
 
+        /* ── INTERATIVIDADE ANATOMIA (TELA 9 - RESTAURADA) ── */
+        .anatomy-container { display: flex; width: 100%; gap: 15px; align-items: center; }
+        .anatomy-list { flex: 1.1; display: flex; flex-direction: column; gap: 10px; }
+        .anatomy-view { flex: 0.9; position: relative; display: flex; justify-content: center; }
+        .anatomy-view img { width: 100%; max-height: 280px; object-fit: contain; z-index: 1; }
+        
+        .glow-dot {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--orange-glow);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.3s ease-in-out;
+            pointer-events: none;
+            box-shadow: 0 0 15px rgba(255,165,0,0.8);
+            animation: pulse-glow 1.5s infinite ease-in-out;
+            z-index: 5; /* Fica no topo */
+        }
+        .glow-dot.active { opacity: 1; transform: scale(1.4); }
+
+        .dot-arms   { top: 25%; left: 35%; }
+        .dot-abs    { top: 40%; left: 50%; transform: translateX(-50%); }
+        .dot-glutes { top: 52%; left: 62%; }
+        .dot-legs   { top: 72%; left: 50%; transform: translateX(-50%); }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(255,140,0,0.6); }
+            50% { box-shadow: 0 0 25px rgba(255,69,0,0.9); }
+        }
+
+        /* ── NOVO LAYOUT SIDE-BY-SIDE (TELA 30) ── */
+        .profile-side-layout {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin: 15px 0 10px;
+            padding: 0 10px;
+        }
+        .summary-column-list {
+            flex: 1.1;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .summary-column-item {
+            display: flex;
+            flex-direction: column; /* Legenda no topo, valor embaixo */
+            align-items: flex-start;
+            padding-bottom: 6px;
+            border-bottom: 1.5px solid #f0f0f0; /* Divisor fino sutil */
+            text-align: left;
+        }
+        .summary-column-label {
+            font-size: 10px;
+            color: var(--muted);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .summary-column-value {
+            font-weight: 800;
+            font-size: 14px;
+            color: var(--text);
+            margin-top: 1px;
+        }
+        .summary-column-image {
+            flex: 0.9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .serene-sofia-img {
+            width: 100%;
+            max-height: 135px; /* Tamanho proporcional perfeito para não rolar a tela */
+            object-fit: contain;
+        }
+
+        /* ── DINÂMICA DE INPUTS MÉTRICOS ── */
+        .metric-input-wrapper { width: 100%; display: flex; flex-direction: column; gap: 15px; margin-top: 10px; }
+        .metric-field { width: 100%; background: var(--card-bg); border: 2px solid transparent; border-radius: var(--radius); padding: 18px; font-size: 24px; font-weight: 800; text-align: center; outline: none; transition: border-color 0.2s; }
+        .metric-field:focus { border-color: var(--green); }
+        .unit-label { font-size: 16px; color: var(--text); font-weight: 800; margin-left: 5px; }
+        .analysis-box { width: 100%; background: #fff5f5; border: 1.5px solid #ffcccc; border-radius: 12px; padding: 15px; margin-top: 15px; text-align: left; display: flex; gap: 12px; align-items: flex-start; }
+        .analysis-box.green { background: #f4faf7; border-color: #cdeada; }
+        .analysis-box.orange { background: #fffdf5; border-color: #fceec7; }
+        .analysis-icon { font-size: 20px; }
+        .analysis-text { font-size: 13px; line-height: 1.5; font-weight: 500; }
+        .analysis-text strong { font-weight: 800; }
+        .error-message { color: #d9534f; font-size: 12px; font-weight: 700; margin-top: 5px; text-align: center; width: 100%; }
+
+        /* ── DINÂMICA DO PONTEIRO DE IMC (TELA 30) ── */
+        .bmi-gauge-container { width: 100%; position: relative; margin: 10px 0 15px; }
+        .gauge-bar { width: 100%; height: 12px; border-radius: 10px; background: linear-gradient(to right, #4CAF50 0%, #4CAF50 40%, #FF9800 40%, #FF9800 75%, #F44336 75%, #F44336 100%); position: relative; }
+        .gauge-labels { display: flex; justify-content: space-between; font-size: 10px; color: #888; font-weight: 700; margin-top: 6px; }
+        .gauge-pointer {
+            position: absolute;
+            top: -24px;
+            transform: translateX(-50%);
+            background: #111;
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: left 1s ease-in-out;
+        }
+        .gauge-pointer::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 50%;
+            transform: translateX(-50%);
+            border-width: 4px 4px 0;
+            border-style: solid;
+            border-color: #111 transparent;
+            display: block; width: 0;
+        }
+
+        /* ── CARREGAMENTO CIRCULAR (TELA 33) ── */
+        .spinner-container { width: 140px; height: 140px; position: relative; margin: 20px auto; }
+        .svg-circle { width: 100%; height: 100%; transform: rotate(-90deg); }
+        .bg-circle, .progress-circle { width: 100%; height: 100%; fill: none; stroke-width: 10; stroke-linecap: round; }
+        .bg-circle { stroke: #eee; }
+        .progress-circle { stroke: var(--green); stroke-dasharray: 440; stroke-dashoffset: 440; transition: stroke-dashoffset 0.05s linear; }
+        .percentage-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 32px; font-weight: 800; color: var(--text); }
+        
+        .review-box { width: 100%; background: #F5F5F0; border-radius: 12px; padding: 20px; text-align: left; margin-top: 10px; min-height: 120px; transition: opacity 0.3s; }
+        .review-name { font-weight: 800; font-size: 14px; margin-bottom: 4px; }
+        .review-stars { color: #F5A623; font-size: 14px; margin-bottom: 8px; } /* Estrelas Amarelas */
+        .review-desc { font-size: 13px; color: #555; line-height: 1.5; }
+
+        /* ── GRÁFICO DINÂMICO DE PERDA DE PESO (TELA 32) ── */
+        .dynamic-chart-box { width: 100%; background: #fbfbfb; border: 1px solid #eee; border-radius: 16px; padding: 15px; margin: 15px auto; }
+
+        /* ── GRÁFICO ANIMADO FLUTUANTE (TELA 35) ── */
+        .chart-animated {
+            width: 100%;
+            max-height: 30vh;
+            object-fit: contain;
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(46,158,88,0.15); /* Sombra suave verde */
+            animation: float-chart 3s infinite ease-in-out;
+        }
+        @keyframes float-chart {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
         /* ── BOTÃO PRINCIPAL ── */
         .btn-primary {
             display: block;
@@ -283,13 +434,11 @@
             pointer-events: none;
         }
 
-        /* Botão fixo no rodapé (telas de quiz multi-select) */
         .btn-fixed {
             position: fixed;
             bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
-            width: calc(100% - 40px);
             max-width: 440px;
             z-index: 10;
             box-shadow: 0 4px 20px rgba(46,158,88,0.3);
@@ -300,207 +449,14 @@
 
         .footer-action {
             padding: 0 20px 36px;
+            width: 100%;
+            flex-shrink: 0;
         }
 
         @media (max-width: 360px) {
             #step-1 h1 { font-size: 20px; }
             .age-btn { padding: 13px 12px; font-size: 13px; }
         }
-
-        /* ════════════════════════════════════════
-           ADICIONAL: ESTILOS STEP-OFFER (PÁGINA DE VENDAS)
-        ════════════════════════════════════════ */
-        #step-offer {
-            overflow-y: auto !important; /* Long scroll */
-            height: 100%;
-            background: #FFFFFF;
-        }
-
-        /* Header Fixo com Cronômetro */
-        .sticky-timer-bar {
-            position: sticky;
-            top: 0; left: 0;
-            width: 100%; height: 60px;
-            background: #FFFFFF;
-            border-bottom: 1.5px solid #F0F0F0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 20px;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-        }
-        .timer-wrap-sticky {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-        .timer-wrap-sticky span {
-            font-size: 9px;
-            color: var(--muted);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .sticky-btn-mini {
-            background: var(--green);
-            color: #fff;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: 800;
-            cursor: pointer;
-        }
-
-        /* Antes/Depois Comparativo */
-        .offer-images-row {
-            display: flex;
-            width: 100%;
-            gap: 15px;
-            margin-top: 25px;
-            padding: 0 15px;
-        }
-        .offer-col {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .offer-col .tag-col {
-            border-radius: 8px;
-            padding: 4px 16px;
-            font-weight: 800;
-            font-size: 13px;
-            margin-bottom: 10px;
-            width: fit-content;
-        }
-        .offer-col.before .tag-col { background: var(--card-bg); color: var(--text); }
-        .offer-col.after .tag-col { background: var(--green-light); color: var(--green); border: 1.5px solid var(--green); }
-        
-        .offer-card-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 16px;
-            background: #eee;
-            margin-bottom: 12px;
-        }
-
-        .offer-metrics {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            text-align: left;
-        }
-        .offer-metrics p { font-size: 10px; color: var(--muted); font-weight: 700; text-transform: uppercase; }
-        .offer-metrics h4 { font-size: 14px; font-weight: 800; margin-bottom: 4px; }
-        
-        /* Barras de Força do Antes e Depois */
-        .offer-bar { width: 100%; height: 6px; background: #eee; border-radius: 100px; margin-bottom: 10px; overflow: hidden; }
-        .offer-col.before .offer-bar-fill { background: #555; width: 45%; height: 100%; }
-        .offer-col.after .offer-bar-fill { background: var(--green); width: 95%; height: 100%; }
-
-        /* Selo Desconto 50% Fixo no Meio */
-        .discount-seal {
-            background: #FFF5F5;
-            border: 1.5px solid #FFEBEB;
-            border-radius: 16px;
-            padding: 15px;
-            margin: 25px 15px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: calc(100% - 30px);
-        }
-        .discount-left { display: flex; align-items: center; gap: 10px; }
-        .discount-left .icon { font-size: 24px; }
-        .discount-text h5 { font-size: 14px; font-weight: 800; color: #ff3333; }
-        .discount-text p { font-size: 11px; color: #888; }
-        .discount-right { display: flex; flex-direction: column; align-items: flex-end; }
-        .discount-right .desc-timer { font-size: 9px; color: #ff3333; font-weight: 800; text-transform: uppercase; }
-
-        /* Checkout Card */
-        .checkout-box {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 24px;
-            margin: 25px 15px;
-            text-align: center;
-            width: calc(100% - 30px);
-        }
-        .checkout-box .title-card { font-size: 18px; font-weight: 800; margin-bottom: 12px; }
-        .price-row { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 15px 0; }
-        .price-old { font-size: 16px; color: #aa0000; text-decoration: line-through; font-weight: 600; }
-        .price-new { font-size: 32px; color: var(--green); font-weight: 800; }
-        .refund-sub { font-size: 12px; color: var(--muted); font-weight: 700; margin-top: 10px; }
-
-        /* Deliverables Grid */
-        .deliv-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            width: 100%;
-            padding: 0 15px;
-            margin-top: 25px;
-            text-align: left;
-        }
-        .deliv-item {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-        .deliv-text { flex: 1; }
-        .deliv-text h4 { font-size: 14px; font-weight: 800; margin-bottom: 4px; }
-        .deliv-text p { font-size: 12px; color: #666; line-height: 1.4; }
-        .deliv-mock {
-            width: 80px;
-            height: 160px;
-            border-radius: 12px;
-            background: #eee;
-            object-fit: cover;
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-        }
-
-        /* Reviews Row */
-        .review-results-row {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            width: 100%;
-            padding: 0 15px;
-        }
-        .review-result-img {
-            flex: 1;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 12px;
-            background: #eee;
-        }
-
-        /* Seção de Garantia */
-        .warranty-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            padding: 35px 20px;
-            margin-top: 30px;
-            border-top: 1.5px solid #F0F0F0;
-        }
-        .warranty-img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            margin-bottom: 20px;
-        }
-        .warranty-section h3 { font-size: 18px; font-weight: 800; margin-bottom: 12px; }
-        .warranty-section p { font-size: 12px; color: #666; line-height: 1.5; margin-bottom: 25px; }
-        .legal-links { display: flex; gap: 15px; justify-content: center; font-size: 11px; color: var(--muted); margin-bottom: 15px; }
-        .legal-links u { cursor: pointer; }
-        .copyright-text { font-size: 10px; color: var(--muted); text-align: center; }
     </style>
 </head>
 <body>
@@ -511,7 +467,7 @@
         <div style="display:flex;flex-direction:column;align-items:center;padding:22px 20px 0;text-align:center;">
             <span class="rating-badge"><span class="star">★</span> 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
             <h1>Desafio de 28 dias de Caminhada Tai Chi em Casa para emagrecimento</h1>
-            <p class="section-tag" style="margin-top:12px;">DE ACORDO WITH A SUA IDADE</p>
+            <p class="section-tag" style="margin-top:12px;">DE ACORDO COM A SUA IDADE</p>
             <span class="quiz-badge">quiz de 1 minuto</span>
         </div>
 
@@ -641,277 +597,609 @@
             <h3>Você conhece a Caminhada Tai Chi em Casa?</h3>
             <p class="hint">&nbsp;</p>
             <div class="options-list">
-                <!-- Alterado 'final' para 'step-offer' para ir para a oferta no clique -->
-                <div class="opt-card single" onclick="autoNext(this,'step-offer')"><div class="opt-left"><span class="opt-label">Sim, pratico regularmente</span></div><span class="emoji">😎</span></div>
-                <div class="opt-card single" onclick="autoNext(this,'step-offer')"><div class="opt-left"><span class="opt-label">Sim, já experimentei</span></div><span class="emoji">🧐</span></div>
-                <div class="opt-card single" onclick="autoNext(this,'step-offer')"><div class="opt-left"><span class="opt-label">Não, nunca experimentei</span></div><span class="emoji">🤷‍♀️</span></div>
+                <div class="opt-card single" onclick="autoNext(this,'step-8')"><div class="opt-left"><span class="opt-label">Sim, pratico regularmente</span></div><span class="emoji">😎</span></div>
+                <div class="opt-card single" onclick="autoNext(this,'step-8')"><div class="opt-left"><span class="opt-label">Sim, já experimentei</span></div><span class="emoji">🧐</span></div>
+                <div class="opt-card single" onclick="autoNext(this,'step-8')"><div class="opt-left"><span class="opt-label">Não, nunca experimentei</span></div><span class="emoji">🤷‍♀️</span></div>
             </div>
         </div>
     </div>
 
-    <!-- STEP OFFER — Página de Oferta (Injetada de Forma Segura) -->
-    <div id="step-offer" class="step">
-        <!-- SEÇÃO 1 — Header fixo (sticky top) com Cronômetro -->
-        <div class="sticky-timer-bar">
-            <div class="timer-wrap-sticky">
-                <span class="offer-timer-display">10 : 00</span>
-                <span>MIN &nbsp; SEC</span>
+    <!-- STEP 8: TRANSIÇÃO/CONCEITO -->
+    <div id="step-8" class="step">
+        <div class="welcome-wrap">
+            <img src="static/img/power-sofia.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
+            <div class="welcome-text-container">
+                <h2>Descubra o poder da Caminhada Tai Chi em Casa</h2>
+                <p class="desc">Este programa único combina o fluxo consciente do Tai Chi com os benefícios de uma caminhada suave — ajudando você a aliviar o estresse, melhorar o equilíbrio e aumentar sua energia a cada passo.</p>
             </div>
-            <button class="sticky-btn-mini" onclick="document.getElementById('checkout-box-target').scrollIntoView({behavior: 'smooth'})">Quero meu plano</button>
         </div>
+        <div class="footer-action">
+            <button class="btn-primary" onclick="goTo('step-9')">Continuar</button>
+        </div>
+    </div>
 
+    <!-- STEP 9: ÁREAS-ALVO INTERATIVO (5/25) -->
+    <div id="step-9" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:20%"></div></div>
+            <div class="step-label">5 / 25</div>
+        </div>
+        <div class="quiz-body pb-fixed">
+            <h3>Quais são suas áreas-alvo?</h3>
+            <p class="hint">Selecione as áreas que deseja focar</p>
+            <div class="anatomy-container">
+                <div class="anatomy-list">
+                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-arms', 'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Braços</span></div></div>
+                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-abs', 'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Abdômen</span></div></div>
+                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-glutes', 'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Glúteos</span></div></div>
+                    <div class="opt-card" onclick="toggleTargetZone(this, 'dot-legs', 'btn9')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Pernas</span></div></div>
+                </div>
+                <div class="anatomy-view">
+                    <img src="static/img/target-body.png" alt="Áreas Alvo" onerror="this.style.background='#ddd'">
+                    <!-- flares restaurados com z-index correto -->
+                    <div class="glow-dot dot-arms"></div><div class="glow-dot dot-abs"></div><div class="glow-dot dot-glutes"></div><div class="glow-dot dot-legs"></div>
+                </div>
+            </div>
+        </div>
+        <button id="btn9" class="btn-primary btn-fixed disabled" onclick="goTo('step-10')">Continuar</button>
+    </div>
+
+    <!-- STEP 10: BEST SHAPE (6/25) -->
+    <div id="step-10" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:24%"></div></div>
+            <div class="step-label">6 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Há quanto tempo você esteve na melhor forma da sua vida?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-11')"><div class="opt-left"><span class="opt-label">Há menos de 1 ano</span></div><span class="emoji">🤔</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-11')"><div class="opt-left"><span class="opt-label">Há 1-2 anos</span></div><span class="emoji">😅</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-11')"><div class="opt-left"><span class="opt-label">Há mais de 3 anos</span></div><span class="emoji">😢</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-11')"><div class="opt-left"><span class="opt-label">Nunca</span></div><span class="emoji">❌</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 11: TRANSIÇÃO "VOCÊ É INCRÍVEL" -->
+    <div id="step-11" class="step">
+        <div class="welcome-wrap">
+            <img src="static/img/amazing-sofia.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
+            <div class="welcome-text-container">
+                <h2>Você é incrível!</h2>
+                <p class="desc">Muitas pessoas lidam com o medo de não serem boas o bastante. Vamos levar isso em conta ao criar seu plano para oferecer uma abordagem que fortaleça sua confiança!</p>
+            </div>
+        </div>
+        <div class="footer-action">
+            <button class="btn-primary" onclick="goTo('step-12')">Continuar</button>
+        </div>
+    </div>
+
+    <!-- STEP 12: NIVEL ATIVIDADE (7/25) -->
+    <div id="step-12" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:28%"></div></div>
+            <div class="step-label">7 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Qual é o seu nível de atividade?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-13')"><div class="opt-left"><span class="opt-label">Avançado</span></div><span class="emoji">😎</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-13')"><div class="opt-left"><span class="opt-label">Intermediário</span></div><span class="emoji">🤔</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-13')"><div class="opt-left"><span class="opt-label">Iniciante</span></div><span class="emoji">🤷‍♀️</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 13: FLEXIBILIDADE (8/25) -->
+    <div id="step-13" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:32%"></div></div>
+            <div class="step-label">8 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Quão flexível você é?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-14')"><div class="opt-left"><span class="opt-label">Bastante flexível</span></div><span class="emoji">💪</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-14')"><div class="opt-left"><span class="opt-label">Estou apenas começando</span></div><span class="emoji">👍</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-14')"><div class="opt-left"><span class="opt-label">Não muito</span></div><span class="emoji">👌</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-14')"><div class="opt-left"><span class="opt-label">Não tenho certeza</span></div><span class="emoji">💪</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 14: EXERCICIO FREQUENCIA (9/25) -->
+    <div id="step-14" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:36%"></div></div>
+            <div class="step-label">9 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Com que frequência você se exercita?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-15')"><div class="opt-left"><span class="opt-label">Quase todos os dias</span></div><span class="emoji">👍</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-15')"><div class="opt-left"><span class="opt-label">Várias vezes por semana</span></div><span class="emoji">👌</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-15')"><div class="opt-left"><span class="opt-label">Várias vezes por mês</span></div><span class="emoji">🤔</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 15: ESCADAS (10/25) -->
+    <div id="step-15" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:40%"></div></div>
+            <div class="step-label">10 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Como você se sente depois de subir um lance de escadas?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-16')"><div class="opt-left"><span class="opt-label">Fico sem fôlego</span></div><span class="emoji">🤷‍♀️</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-16')"><div class="opt-left"><span class="opt-label">Fico um pouco ofegante, mas estou bem</span></div><span class="emoji">🫣</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-16')"><div class="opt-left"><span class="opt-label">Fico bem depois de um lance de escadas</span></div><span class="emoji">👌</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-16')"><div class="opt-left"><span class="opt-label">Consigo subir facilmente de 3 a 5 lances de escadas</span></div><span class="emoji">💪</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 16: CAMINHADA FREQUENCIA (11/25) -->
+    <div id="step-16" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:44%"></div></div>
+            <div class="step-label">11 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Com que frequência você sai para caminhar?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-17')"><div class="opt-left"><span class="opt-label">Quase todos os dias</span></div><span class="emoji">💪</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-17')"><div class="opt-left"><span class="opt-label">2-3 vezes por semana</span></div><span class="emoji">👍</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-17')"><div class="opt-left"><span class="opt-label">Mais ou menos uma vez por mês</span></div><span class="emoji">👌</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 17: SENSIBILIDADES (12/25) -->
+    <div id="step-17" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:48%"></div></div>
+            <div class="step-label">12 / 25</div>
+        </div>
+        <div class="quiz-body pb-fixed">
+            <h3>Você tem alguma das seguintes sensibilidades?</h3>
+            <p class="hint">Selecione todas que desejar</p>
+            <div class="options-list">
+                <div class="opt-card" onclick="toggleSelect(this,'btn17')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Costas sensíveis</span></div>
+                    <img src="{{ url_for('static', filename='img/focus-1.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn17')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Joelhos sensíveis</span></div>
+                    <img src="{{ url_for('static', filename='img/focus-2.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn17')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Cotovelos sensíveis</span></div>
+                    <img src="{{ url_for('static', filename='img/focus-3.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn17')">
+                    <div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Nenhuma das opções acima</span></div>
+                    <img src="{{ url_for('static', filename='img/focus-4.png') }}" class="opt-thumb" onerror="this.style.background='#ddd'">
+                </div>
+            </div>
+        </div>
+        <div class="footer-action"><button id="btn17" class="btn-primary btn-fixed disabled" onclick="goTo('step-18')">Continuar</button></div>
+    </div>
+
+    <!-- STEP 18: ROTINA TRABALHO (13/25) -->
+    <div id="step-18" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:52%"></div></div>
+            <div class="step-label">13 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Como é sua rotina de trabalho?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-19')"><div class="opt-left"><span class="opt-label">Das 9 às 17</span></div><span class="emoji">☀️</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-19')"><div class="opt-left"><span class="opt-label">Turnos noturnos</span></div><span class="emoji">🌑</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-19')"><div class="opt-left"><span class="opt-label">É bem flexível</span></div><span class="emoji">🙂</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-19')"><div class="opt-left"><span class="opt-label">Sou aposentada</span></div><span class="emoji">🌴</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 19: DIA TÍPICO (14/25) -->
+    <div id="step-19" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:56%"></div></div>
+            <div class="step-label">14 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Como você descreveria seu dia típico?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-20')"><div class="opt-left"><span class="opt-label">Fico em pé o dia todo</span></div><span class="emoji">🏃‍♀️</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-20')"><div class="opt-left"><span class="opt-label">Faço pausas ativas</span></div><span class="emoji">✌️</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-20')"><div class="opt-left"><span class="opt-label">Passo a maior parte do dia sentada</span></div><span class="emoji">👩‍💻</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 20: SONO (15/25) -->
+    <div id="step-20" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div>
+            <div class="step-label">15 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Quantas horas você costuma dormir?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-21')"><div class="opt-left"><span class="opt-label">Durmo menos de 5 horas</span></div><span class="emoji">😴</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-21')"><div class="opt-left"><span class="opt-label">Durmo cerca de 5-6 horas</span></div><span class="emoji">💤</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-21')"><div class="opt-left"><span class="opt-label">Durmo bem por 7-8 horas</span></div><span class="emoji">💪</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-21')"><div class="opt-left"><span class="opt-label">Gosto de dormir mais de 8 horas</span></div><span class="emoji">😎</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 21: INGESTÃO DE ÁGUA (16/25) -->
+    <div id="step-21" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:64%"></div></div>
+            <div class="step-label">16 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Qual é a sua ingestão diária de água?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="options-list">
+                <div class="opt-card single" onclick="autoNext(this, 'step-22')"><div class="opt-left"><span class="opt-label">Cerca de 2 copos</span></div><span class="emoji">💧</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-22')"><div class="opt-left"><span class="opt-label">Entre 2 e 6 copos</span></div><span class="emoji">💦</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-22')"><div class="opt-left"><span class="opt-label">Mais de 6 copos</span></div><span class="emoji">😎</span></div>
+                <div class="opt-card single" onclick="autoNext(this, 'step-22')"><div class="opt-left"><span class="opt-label">Bebo apenas café ou chá</span></div><span class="emoji">☕</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STEP 22: HÁBITOS RUINS (17/25) - multi-select -->
+    <div id="step-22" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
+            <div class="step-label">17 / 25</div>
+        </div>
+        <div class="quiz-body pb-fixed">
+            <h3>Você tem algum hábito ruim?</h3>
+            <p class="hint">Selecione todas que desejar</p>
+            <div class="options-list">
+                <div class="opt-card" onclick="toggleSelect(this,'btn22')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Tenho dificuldade para dormir o suficiente</span></div><span class="emoji">😴</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn22')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Tenho dificuldade para reduzir o açúcar</span></div><span class="emoji">🍫</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn22')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Sou viciada em refrigerante</span></div><span class="emoji">🥤</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn22')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Consumo muitos alimentos salgados</span></div><span class="emoji">🧂</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn22')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Costumo beliscar à meia-noite</span></div><span class="emoji">🌘</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn22')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Nenhuma das opções acima</span></div><span class="emoji">👍</span></div>
+            </div>
+        </div>
+        <div class="footer-action"><button id="btn22" class="btn-primary btn-fixed disabled" onclick="goTo('step-23')">Continuar</button></div>
+    </div>
+
+    <!-- STEP 23: GANHO DE PESO (18/25) - multi-select -->
+    <div id="step-23" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
+            <div class="step-label">18 / 25</div>
+        </div>
+        <div class="quiz-body pb-fixed">
+            <h3>Algum acontecimento da sua vida levou ao ganho de peso?</h3>
+            <p class="hint">Você pode selecionar vários</p>
+            <div class="options-list">
+                <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Casamento ou relacionamento</span></div><span class="emoji">💑</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Rotina de trabalho corrida</span></div><span class="emoji">👩‍💻</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Estresse ou saúde mental</span></div><span class="emoji">🤯</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Gravidez</span></div><span class="emoji">🤰</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Medicamentos ou distúrbio hormonal</span></div><span class="emoji">💊</span></div>
+                <div class="opt-card" onclick="toggleSelect(this,'btn23')"><div class="opt-left"><div class="opt-icon">+</div> <span class="opt-label">Nenhum evento parecido</span></div><span class="emoji">👍</span></div>
+            </div>
+        </div>
+        <div class="footer-action"><button id="btn23" class="btn-primary btn-fixed disabled" onclick="goTo('step-24')">Continuar</button></div>
+    </div>
+
+    <!-- STEP 24: TRANSIÇÃO HÁBITOS (Estilo Card) -->
+    <div id="step-24" class="step">
+        <div class="welcome-wrap">
+            <img src="static/img/habits-sofia.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
+            <div class="welcome-text-container">
+                <h2>Você sempre pode mudar seus hábitos para melhor</h2>
+                <p class="desc">Grandes mudanças na vida muitas vezes afetam o peso de uma pessoa. Isso é normal. Vamos apoiar você até alcançar seu objetivo.</p>
+            </div>
+        </div>
+        <div class="footer-action">
+            <button class="btn-primary" onclick="goTo('step-25')">Continuar</button>
+        </div>
+    </div>
+
+    <!-- STEP 25: ALTURA (19/25) -->
+    <div id="step-25" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:76%"></div></div>
+            <div class="step-label">19 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Qual é a sua altura?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="metric-input-wrapper">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <input type="number" id="height-input" class="metric-field" placeholder="170" oninput="validateHeight()">
+                    <span class="unit-label">cm</span>
+                </div>
+            </div>
+            <div class="analysis-box orange" style="margin-top: 30px;">
+                <span class="analysis-icon">☝️</span>
+                <p class="analysis-text"><strong>Calculando seu índice de massa corporal.</strong><br>O IMC é amplamente usado como fator de risco para o desenvolvimento de vários problemas de saúde.</p>
+            </div>
+        </div>
+        <div class="footer-action">
+            <button id="btn-height" class="btn-primary disabled" onclick="saveHeight()">Continuar</button>
+        </div>
+    </div>
+
+    <!-- STEP 26: PESO ATUAL (20/25) -->
+    <div id="step-26" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:80%"></div></div>
+            <div class="step-label">20 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Qual é o seu peso atual?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="metric-input-wrapper">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <input type="number" id="weight-input" class="metric-field" placeholder="70" oninput="calculateBMI()">
+                    <span class="unit-label">kg</span>
+                </div>
+            </div>
+            <div id="bmi-analysis-box" class="analysis-box" style="display: none;">
+                <span id="bmi-emoji" class="analysis-icon">🔥</span>
+                <p id="bmi-status-text" class="analysis-text"></p>
+            </div>
+        </div>
+        <div class="footer-action">
+            <button id="btn-weight" class="btn-primary disabled" onclick="saveWeight()">Continuar</button>
+        </div>
+    </div>
+
+    <!-- STEP 27: PESO IDEAL (21/25) -->
+    <div id="step-27" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:84%"></div></div>
+            <div class="step-label">21 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Qual seria o seu peso ideal?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="metric-input-wrapper">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <input type="number" id="target-weight-input" class="metric-field" placeholder="60" oninput="validateWeights()">
+                    <span class="unit-label">kg</span>
+                </div>
+                <div id="weight-error-msg" class="error-message" style="display: none;"></div>
+            </div>
+            <div id="goal-analysis-box" class="analysis-box" style="display: none;">
+                <span id="goal-icon" class="analysis-icon">⭐</span>
+                <p id="goal-text" class="analysis-text"></p>
+            </div>
+        </div>
+        <div class="footer-action">
+            <button id="btn-target" class="btn-primary disabled" onclick="goTo('step-28')">Continuar</button>
+        </div>
+    </div>
+
+    <!-- STEP 28: IDADE (22/25) -->
+    <div id="step-28" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div>
+            <div class="step-label">22 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Qual é a sua idade?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="metric-input-wrapper">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <input type="number" id="age-input" class="metric-field" placeholder="35" oninput="validateAge()">
+                    <span class="unit-label">anos</span>
+                </div>
+            </div>
+            <div class="analysis-box orange" style="margin-top: 30px;">
+                <span class="analysis-icon">☝️</span>
+                <p class="analysis-text">Isso nos ajudará a ajustar seu plano pessoal com base na sua taxa metabólica basal.</p>
+            </div>
+        </div>
+        <div class="footer-action">
+            <button id="btn-age" class="btn-primary disabled" onclick="goTo('step-29')">Próximo</button>
+        </div>
+    </div>
+
+    <!-- ── NOVAS TELAS (Telas 29 a 35) ADICIONADAS ABAIXO ── -->
+
+    <!-- STEP 29: NOME (23/25) -->
+    <div id="step-29" class="step">
+        <div class="quiz-header">
+            <div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div>
+            <div class="step-label">23 / 25</div>
+        </div>
+        <div class="quiz-body">
+            <h3>Qual é o seu nome?</h3>
+            <p class="hint">&nbsp;</p>
+            <div class="metric-input-wrapper">
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <input type="text" id="name-input" class="metric-field" placeholder="Seu nome" oninput="validateName()" style="font-size: 20px;">
+                </div>
+            </div>
+        </div>
+        <div class="footer-action">
+            <button id="btn-name" class="btn-primary disabled" onclick="saveName()">Continuar</button>
+        </div>
+    </div>
+
+    <!-- STEP 30: PERFIL DE BEM-ESTAR -->
+    <div id="step-30" class="step">
         <div class="main-content">
-            <!-- SEÇÃO 2 — Antes e Depois -->
-            <div class="offer-images-row">
-                <div class="offer-col before">
-                    <span class="tag-col">Antes</span>
-                    <img src="static/img/offer-antes.png" class="offer-card-img" onerror="this.style.background='#ddd'">
-                    <div class="offer-metrics">
-                        <p>Gordura corporal</p>
-                        <h4>Obeso</h4>
-                        <div class="offer-bar"><div class="offer-bar-fill"></div></div>
-                        
-                        <p>Nível de Caminhada</p>
-                        <h4>Medium</h4>
-                    </div>
-                </div>
-                <div class="offer-col after">
-                    <span class="tag-col">Depois</span>
-                    <img src="static/img/offer-depois.png" class="offer-card-img" onerror="this.style.background='#ddd'">
-                    <div class="offer-metrics">
-                        <p>Gordura corporal</p>
-                        <h4>Fit</h4>
-                        <div class="offer-bar"><div class="offer-bar-fill"></div></div>
-                        
-                        <p>Nível de Caminhada</p>
-                        <h4>Advanced</h4>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Botão Quero meu plano abaixo das fotos -->
-            <button class="btn-primary" style="margin-top: 25px; margin-bottom: 25px;" onclick="document.getElementById('checkout-box-target').scrollIntoView({behavior: 'smooth'})">Quero meu plano</button>
-
-            <!-- SEÇÃO 3 — Seu perfil com base nas respostas (Gauge IMC Dinâmico de Segurança) -->
-            <h2 style="font-size: 20px; margin-bottom: 5px;">Seu perfil com base nas respostas</h2>
+            <h2 style="font-size: 20px; margin-bottom: 5px;">Aqui está o seu perfil de bem-estar</h2>
             
-            <div class="bmi-card-offer">
-                <div class="bmi-header">
-                    <span>IMC</span>
-                    <span>24.9</span>
+            <!-- Título do IMC acima do gráfico -->
+            <p style="font-size: 11px; font-weight: 800; color: var(--muted); text-align: left; width: 100%; margin-bottom: 5px; text-transform: uppercase; padding-left: 10px;">ÍNDICE DE MASSA CORPORAL (IMC)</p>
+
+            <div class="bmi-gauge-container">
+                <div class="gauge-pointer" id="dynamic-pointer">Seu IMC é <span id="gauge-bmi-val">--</span></div>
+                <div class="gauge-bar"></div>
+                <div class="gauge-labels">
+                    <span>NORMAL</span>
+                    <span>SOBREPESO</span>
+                    <span>OBESIDADE</span>
                 </div>
-                <div class="gauge-bar-offer">
-                    <div class="gauge-pointer-offer">Seu 31.2</div>
-                    <div class="gauge-labels-offer">
-                        <span>Abaixo do peso</span>
-                        <span>Normal</span>
-                        <span>Acima do peso</span>
-                        <span>Obesidade</span>
+            </div>
+
+            <!-- Lista de perfil limpa (sem parecer botão) conforme solicitado -->
+            <div class="profile-side-layout">
+                <div class="summary-column-list">
+                    <div class="summary-column-item">
+                        <span class="summary-column-label">ESTILO DE VIDA</span>
+                        <span class="summary-column-value">Ativo</span>
+                    </div>
+                    <div class="summary-column-item">
+                        <span class="summary-column-label">TIPO DE ALIMENTAÇÃO</span>
+                        <span class="summary-column-value">Gourmet</span>
+                    </div>
+                    <div class="summary-column-item">
+                        <span class="summary-column-label">MOTIVAÇÃO FITNESS</span>
+                        <span class="summary-column-value">Alta</span>
                     </div>
                 </div>
-                <div class="risks-offer">Obesidade</div>
-                <p class="risks-desc-offer">Seu peso atual representa riscos para a sua saúde 31.2. Para lidar com isso, usamos seu índice para criar um programa de perda de peso personalizado que se adapta às suas necessidades. obesidade</p>
-            </div>
-
-            <!-- SEÇÃO 4 — Plano personalizado -->
-            <div class="personalized-header">
-                <span>🏃</span>
-                <span>Plano personalizado de Caminhada Tai Chi em Casa</span>
-            </div>
-
-            <div class="duration-row">
-                <span class="duration-num">7 min</span>
-                <span class="duration-badge">DURAÇÃO DE TREINO RECOMENDADA</span>
-            </div>
-
-            <div class="water-card-offer">
-                <div class="water-title">
-                    <span>💧</span> Ingestão de água
-                </div>
-                <div class="water-grid">
-                    <span class="water-glass">🥤</span>
-                    <span class="water-glass">🥤</span>
-                    <span class="water-glass">🥤</span>
-                    <span class="water-glass">🥤</span>
-                    <span class="water-glass">🥤</span>
-                    <span class="water-glass">🥤</span>
-                    <span class="water-glass">🥤</span>
-                    <span class="water-glass">🥤</span>
-                </div>
-                <div class="water-details">
-                    <span class="water-num">1.9</span>
-                    <span class="water-badge">INGESTÃO DIÁRIA DE ÁGUA RECOMENDADA</span>
+                <div class="summary-column-image">
+                    <img src="static/img/serene-sofia.png" class="serene-sofia-img" onerror="this.style.background='#ddd'">
                 </div>
             </div>
 
-            <h2 style="font-size: 18px; margin-top: 30px; margin-bottom: 15px;">Seu plano personalizado de Caminhada Tai Chi em Casa está pronto!</h2>
-
-            <div class="personalized-grid">
-                <div class="grid-card">
-                    <span class="icon">🎯</span>
-                    <span class="label">OBJETIVO PRINCIPAL</span>
-                    <span class="val">Reduzir a idade biológica</span>
-                </div>
-                <div class="grid-card">
-                    <span class="icon">💪</span>
-                    <span class="label">NÍVEL DE CONDICIONAMENTO</span>
-                    <span class="val">Medium</span>
-                </div>
-                <div class="grid-card">
-                    <span class="icon">😴</span>
-                    <span class="label">QUALIDADE DO SONO</span>
-                    <span class="val">Precisa melhorar</span>
-                </div>
-                <div class="grid-card">
-                    <span class="icon">👤</span>
-                    <span class="label">IDADE FITNESS</span>
-                    <span class="val">7 anos a mais do que sua idade real</span>
-                </div>
+            <div id="risks-box" class="analysis-box" style="display: none;">
+                <span id="risks-icon" class="analysis-icon">⚠️</span>
+                <p id="risks-text" class="analysis-text"></p>
             </div>
+        </div>
+        <div class="footer-action">
+            <button class="btn-primary" onclick="goTo('step-31')">Continuar</button>
+        </div>
+    </div>
 
-            <div class="focus-list">
-                <p style="font-weight: 800; font-size: 14px; margin-bottom: 5px;">Seu plano também foca em</p>
-                <div class="focus-item"><span>✅</span> Autoconfiança</div>
-                <div class="focus-item"><span>✅</span> Mais energia</div>
-                <div class="focus-item"><span>✅</span> Alívio do estresse</div>
-                <div class="focus-item"><span>✅</span> Redução da sua idade fitness</div>
+    <!-- STEP 31: IDADE BIOLÓGICA -->
+    <div id="step-31" class="step">
+        <div class="welcome-wrap">
+            <img src="static/img/bio-age-chart.png" class="welcome-img-card" onerror="this.style.background='#ddd'">
+            <div class="welcome-text-container">
+                <h2>Idade biológica</h2>
+                <p class="desc" style="font-size: 14px; font-weight: 800; margin-bottom: 8px;">Caminhar regularmente pode ajudar a reduzir a idade biológica e apoiar a saúde do coração</p>
+                <p class="desc" style="color: #666; font-size: 11px;">Um estudo publicado no Journal of Physical Activity and Health constatou que adultos mais velhos que caminham regularmente tendem a apresentar menos fatores de risco ligados à saúde metabólica e cardiovascular.<br>Apenas para fins educativos. Não constitui aconselhamento médico.</p>
             </div>
+        </div>
+        <div class="footer-action">
+            <button class="btn-primary" onclick="goTo('step-32')">Continuar</button>
+        </div>
+    </div>
 
-            <!-- SEÇÃO 5 — O que você recebe -->
-            <h2 style="font-size: 20px; margin-top: 40px; margin-bottom: 10px;">O que você recebe para alcançar seus objetivos</h2>
-            
-            <div class="deliv-grid">
-                <div class="deliv-item">
-                    <div class="deliv-text">
-                        <h4>Plano de Caminhada Tai Chi em Casa adaptado às suas necessidades e ao seu estilo de vida</h4>
-                    </div>
-                    <img src="static/img/offer-app-1.png" class="deliv-mock" onerror="this.style.background='#ddd'">
-                </div>
-                <div class="deliv-item">
-                    <div class="deliv-text">
-                        <h4>Guias exclusivos de nutrição e estilo de vida saudável</h4>
-                    </div>
-                    <img src="static/img/offer-app-2.png" class="deliv-mock" onerror="this.style.background='#ddd'">
-                </div>
-                <div class="deliv-item">
-                    <div class="deliv-text">
-                        <h4>Cronograma de treino fácil de seguir e flexível</h4>
-                    </div>
-                    <img src="static/img/offer-app-3.png" class="deliv-mock" onerror="this.style.background='#ddd'">
-                </div>
-                <div class="deliv-item">
-                    <div class="deliv-text">
-                        <h4>Desafios e acompanhamento</h4>
-                    </div>
-                    <img src="static/img/offer-app-4.png" class="deliv-mock" onerror="this.style.background='#ddd'">
-                </div>
+    <!-- STEP 32: GRÁFICO DINÂMICO DE PROJEÇÃO -->
+    <div id="step-32" class="step">
+        <div class="main-content" style="justify-content: flex-start;">
+            <h2 style="font-size: 20px; margin-bottom: 5px;">O único plano de que você vai precisar para entrar em forma em 2026</h2>
+            <p style="color: #666; font-size: 13px; margin-bottom: 20px;">Você está a um passo de alcançar seu objetivo!</p>
+
+            <h1 style="color: var(--green); font-size: 28px; margin-bottom: 15px;"><span id="proj-target-weight">--</span> kg até <span id="proj-date">--</span></h1>
+            <p style="font-size: 11px; color: #888; margin-bottom: 15px;">Prepare-se para surpreender todo mundo!</p>
+
+            <div class="dynamic-chart-box">
+                <svg viewBox="0 0 300 120" style="width: 100%; height: auto;">
+                    <path d="M10 20 Q 150 50, 290 100" fill="none" stroke="#2E9E58" stroke-width="4"></path>
+                    <circle cx="10" cy="20" r="6" fill="#FFC107"></circle>
+                    <text x="15" y="15" font-size="10" font-weight="800" id="chart-start-weight">-- kg</text>
+                    <circle cx="290" cy="100" r="6" fill="#2E9E58"></circle>
+                    <text x="245" y="115" font-size="10" font-weight="800" id="chart-end-weight" fill="#2E9E58">-- kg</text>
+                </svg>
             </div>
+        </div>
+        <div class="footer-action">
+            <button class="btn-primary" onclick="goTo('step-33')">Continuar</button>
+        </div>
+    </div>
 
-            <!-- Botão full-width -->
-            <button class="btn-primary" style="margin-top: 30px; margin-bottom: 40px;" onclick="document.getElementById('checkout-box-target').scrollIntoView({behavior: 'smooth'})">Quero meu plano</button>
-
-            <!-- SEÇÃO 6 — Depoimentos -->
-            <h2 style="font-size: 20px; margin-bottom: 15px;">Pessoas reais. Resultados reais do nosso plano de Caminhada Tai Chi em Casa</h2>
-
-            <div class="review-box">
-                <div class="review-header">
-                    <div class="review-user">
-                        <span class="review-avatar">👩</span>
-                        <span class="review-name">Sophie Marshall</span>
-                    </div>
-                    <span class="review-badge-text">Trustpilot</span>
-                </div>
-                <div class="review-stars">★★★★★</div>
-                <div class="review-desc">"Nunca gostei tanto do meu bumbum! Nunca recebi tantos elogios e tanta atenção! É simplesmente surreal! Não consigo parar de me olhar no espelho!"</div>
+    <!-- STEP 33: TELA DE CARREGAMENTO ANIMADA -->
+    <div id="step-33" class="step">
+        <div class="main-content" style="justify-content: center;">
+            <div class="spinner-container">
+                <svg class="svg-circle">
+                    <circle class="bg-circle" cx="70" cy="70" r="60"></circle>
+                    <circle class="progress-circle" id="loader-circle" cx="70" cy="70" r="60"></circle>
+                </svg>
+                <div class="percentage-text" id="loader-percent">0%</div>
             </div>
+            <h2 id="loader-headline" style="font-size: 18px; line-height: 1.3;">Analisando seu perfil de bem-estar...</h2>
 
-            <div class="review-box">
-                <div class="review-header">
-                    <div class="review-user">
-                        <span class="review-avatar">👩</span>
-                        <span class="review-name">Maria Clara</span>
-                    </div>
-                    <span class="review-badge-text">Trustpilot</span>
-                </div>
-                <div class="review-stars">★★★★★</div>
-                <div class="review-desc">"Perdi 6kg em 4 semanas sem sair de casa. Os exercícios são leves mas muito eficazes. Recomendo demais!"</div>
+            <div class="review-box" id="review-slider">
+                <div class="review-name" id="rev-name">Juliana Rosella</div>
+                <div class="review-stars" style="color: #F5A623;">★★★★★ <span style="font-size: 11px; color: #4285F4; font-weight: 800;">Avaliações do Google</span></div>
+                <div class="review-desc" id="rev-desc">A barriga sempre foi meu ponto fragilidade, mas sumiu! Lembro de como meu marido ria de mim, mas agora ele está impressionado!</div>
             </div>
+        </div>
+    </div>
 
-            <div class="review-box">
-                <div class="review-header">
-                    <div class="review-user">
-                        <span class="review-avatar">👩</span>
-                        <span class="review-name">Ana Beatriz</span>
-                    </div>
-                    <span class="review-badge-text">Trustpilot</span>
-                </div>
-                <div class="review-stars">★★★★★</div>
-                <div class="review-desc">"Nunca pensei que caminhada em casa pudesse ser tão transformadora. Meu equilíbrio melhorou muito!"</div>
+    <!-- STEP 34: EMAIL -->
+    <div id="step-34" class="step">
+        <div class="main-content" style="justify-content: center;">
+            <h2>Digite seu e-mail para receber seu plano pessoal de treino de Caminhada Tai Chi em Casa</h2>
+            <p style="color: #666; font-size: 13px; margin: 10px 0 25px;">Inclui um guia imprimível para praticar offline 🎁</p>
+
+            <div class="metric-input-wrapper">
+                <input type="email" id="email-input" class="metric-field" placeholder="seuemail@exemplo.com" oninput="validateEmail()" style="font-size: 18px;">
             </div>
+        </div>
+        <div class="footer-action">
+            <button id="btn-email" class="btn-primary disabled" onclick="saveEmail()">Continuar</button>
+        </div>
+    </div>
 
-            <div class="review-results-row">
-                <img src="static/img/offer-resultado-1.png" class="review-result-img" onerror="this.style.background='#ddd'">
-                <img src="static/img/offer-resultado-2.png" class="review-result-img" onerror="this.style.background='#ddd'">
-            </div>
-
-            <!-- SEÇÃO 7 — Headline personalizada -->
-            <h2 style="font-size: 20px; margin-top: 45px; margin-bottom: 20px;"><span id="offer-name">Você</span>, tenha resultados visíveis em 4 semanas — descubra a sua melhor versão</h2>
-            
-            <div class="focus-list" style="flex-direction: row; justify-content: center; gap: 15px; margin-bottom: 20px;">
-                <div class="focus-item">🏋️ Peso-alvo: 60 kg</div>
-                <div class="focus-item">📊 Nível: Medium</div>
-            </div>
-
-            <!-- SEÇÃO 8 — Countdown + desconto -->
-            <div class="discount-badge-seal">🔥 50% de desconto</div>
-            <p style="font-size: 11px; color: var(--muted); font-weight: 700;">desconto reservado apenas por:</p>
-            <div class="offer-timer-display">10 : 00</div>
-
-            <!-- SEÇÃO 9 — Preço único -->
-            <div class="checkout-box" id="checkout-box-target">
-                <p style="font-size: 12px; color: var(--muted); margin-bottom: 8px;">Tenha resultados visíveis em apenas 4 semanas</p>
-                <div class="pricing-card">
-                    <span class="popular-badge">MAIS POPULAR</span>
-                    <h3>Seu plano personalizado</h3>
-                    <div class="price-row">
-                        <span class="price-old">R$54,99</span>
-                        <span class="price-new">R$27,00</span>
-                    </div>
-                </div>
-
-                <div class="info-badges-list">
-                    <div class="info-badge-item"><span>🛡️</span> Garantia de reembolso de 7 dias</div>
-                    <div class="info-badge-item"><span>🎁</span> Obtenha agora e ganhe um plano imprimível grátis!</div>
-                </div>
-
-                <button class="btn-primary" style="margin-top: 25px;" onclick="alert('Redirecionando para o Gateway de Pagamento...')">Quero meu plano</button>
-            </div>
-
-            <!-- SEÇÃO 10 — Garantia -->
-            <div class="warranty-section">
-                <img src="static/img/offer-garantia.png" class="warranty-img" onerror="this.style.background='#ddd'">
-                <h3>Garantia de reembolso de 100%</h3>
-                <p>Acreditamos que nosso plano pode funcionar para você e que você terá resultados visíveis em 4 semanas! Estamos até dispostos a devolver seu dinheiro caso você não veja resultados visíveis e consiga comprovar que seguiu o nosso plano. Consulte nossa Política de Reembolso para entender todos os requisitos</p>
-                
-                <div class="legal-links">
-                    <u>Termos de Uso</u> . <u>Política de Privacidade</u> . <u>Política de Reembolso</u>
-                </div>
-                <p class="copyright-text">Copyright © 2026 Smart Produtos Digitais LTDA. Todos os direitos reservados.</p>
-            </div>
-
+    <!-- STEP 35: RESULTADOS VISÍVEIS 28 DIAS -->
+    <div id="step-35" class="step">
+        <div class="main-content" style="justify-content: center;">
+            <img src="static/img/final-chart.png" class="chart-animated" onerror="this.style.background='#ddd'">
+            <h2 style="margin-top: 25px;">Tenha resultados visíveis em apenas 28 dias!</h2>
+        </div>
+        <div class="footer-action">
+            <button class="btn-primary" onclick="alert('Fim do Quiz! Redirecionando para a página de vendas.')">Continuar</button>
         </div>
     </div>
 
 </div><!-- /app-shell -->
 
 <script>
+    let userData = {
+        height: 0,
+        weight: 0,
+        targetWeight: 0,
+        bmi: 0,
+        age: 0,
+        name: ''
+    };
+
     function goTo(id) {
         document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
         const t = document.getElementById(id);
         if (t) { 
             t.classList.add('active'); 
             window.scrollTo(0, 0); 
-            if (id === 'step-offer') startOfferTimer();
+            
+            if (id === 'step-30') animateBMIGauge();
+            if (id === 'step-32') renderDynamicPlan();
+            if (id === 'step-33') startSpinnerLoader();
         }
     }
 
@@ -934,22 +1222,262 @@
         setTimeout(() => goTo(nextId), 400);
     }
 
-    // Timer da oferta sincronizado e persistente
-    var offerSeconds = 600;
-    var offerTimerInterval = null;
+    function toggleTargetZone(card, dotClass, btnId) {
+        const isSelected = card.classList.toggle('selected');
+        const icon = card.querySelector('.opt-icon');
+        if (isSelected) {
+            if (icon) icon.textContent = '✓';
+        } else {
+            if (icon) icon.textContent = '+';
+        }
 
-    function startOfferTimer() {
-        if (offerTimerInterval) return;
-        offerTimerInterval = setInterval(function() {
-            offerSeconds--;
-            if (offerSeconds < 0) offerSeconds = 600;
-            var m = Math.floor(offerSeconds / 60);
-            var s = offerSeconds % 60;
-            var display = (m < 10 ? '0' : '') + m + ' : ' + (s < 10 ? '0' : '') + s;
-            document.querySelectorAll('.offer-timer-display').forEach(function(el) {
-                el.textContent = display;
-            });
-        }, 1000);
+        const dot = document.querySelector('.' + dotClass);
+        if (dot) {
+            if (isSelected) dot.classList.add('active');
+            else dot.classList.remove('active');
+        }
+
+        const btn = document.getElementById(btnId);
+        if (btn) {
+            const hasSel = !!document.querySelector('#step-9 .opt-card.selected');
+            btn.classList.toggle('disabled', !hasSel);
+        }
+    }
+
+    /* ── LÓGICA DE INPUTS MÉTRICOS ── */
+    
+    function validateHeight() {
+        const val = parseFloat(document.getElementById('height-input').value);
+        const btn = document.getElementById('btn-height');
+        if (val > 100 && val < 250) btn.classList.remove('disabled');
+        else btn.classList.add('disabled');
+    }
+
+    function saveHeight() {
+        userData.height = parseFloat(document.getElementById('height-input').value);
+        goTo('step-26');
+    }
+
+    function calculateBMI() {
+        const weight = parseFloat(document.getElementById('weight-input').value);
+        const btn = document.getElementById('btn-weight');
+        const bmiBox = document.getElementById('bmi-analysis-box');
+        const bmiText = document.getElementById('bmi-status-text');
+        const bmiEmoji = document.getElementById('bmi-emoji');
+
+        if (weight > 30 && weight < 250) {
+            btn.classList.remove('disabled');
+            const hMetros = userData.height / 100;
+            const bmi = (weight / (hMetros * hMetros)).toFixed(1);
+            userData.bmi = parseFloat(bmi);
+            bmiBox.style.display = 'flex';
+
+            if (bmi >= 30) {
+                bmiBox.className = "analysis-box";
+                bmiEmoji.textContent = "🥵";
+                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado obesidade.</strong><br>Seu peso atual representa riscos para a sua saúde. Usaremos seu índice para criar um programa de perda de peso adaptado às suas necessidades.`;
+            } else if (bmi >= 25) {
+                bmiBox.className = "analysis-box orange";
+                bmiEmoji.textContent = "😒";
+                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado sobrepeso.</strong><br>Seu peso requer mais atenção. Usaremos seu índice para personalizar um programa de perda de peso alinhado às suas necessidades e objetivos.`;
+            } else if (bmi < 18.5) {
+                bmiBox.className = "analysis-box orange";
+                bmiEmoji.textContent = "⚠️";
+                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado abaixo do peso.</strong><br>Foque em tonificação muscular e em uma alimentação equilibrada. Mantenha-se positiva e tente manter o consumo diário de calorias dentro da faixa recomendada.`;
+            } else {
+                bmiBox.className = "analysis-box green";
+                bmiEmoji.textContent = "✨";
+                bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado peso saudável.</strong><br>Ótimo! Seu peso está dentro da faixa saudável. Nosso plano vai te focar em tonificação e bem-estar geral.`;
+            }
+        } else {
+            btn.classList.add('disabled');
+            bmiBox.style.display = 'none';
+        }
+    }
+
+    function saveWeight() {
+        userData.weight = parseFloat(document.getElementById('weight-input').value);
+        goTo('step-27');
+    }
+
+    function validateWeights() {
+        const target = parseFloat(document.getElementById('target-weight-input').value);
+        const current = userData.weight;
+        const btn = document.getElementById('btn-target');
+        const errMsg = document.getElementById('weight-error-msg');
+        const goalBox = document.getElementById('goal-analysis-box');
+        const goalIcon = document.getElementById('goal-icon');
+        const goalText = document.getElementById('goal-text');
+
+        if (!target) {
+            btn.classList.add('disabled');
+            errMsg.style.display = 'none';
+            goalBox.style.display = 'none';
+            return;
+        }
+
+        if (target < 40 || target > 250) {
+            errMsg.textContent = "Por favor, insira um valor entre 40 e 250.";
+            errMsg.style.display = 'block';
+            btn.classList.add('disabled');
+            goalBox.style.display = 'none';
+            return;
+        }
+
+        if (target >= current) {
+            errMsg.textContent = "Seu peso ideal deve ser menor que o atual.";
+            errMsg.style.display = 'block';
+            btn.classList.add('disabled');
+            goalBox.style.display = 'none';
+            return;
+        }
+
+        errMsg.style.display = 'none';
+        btn.classList.remove('disabled');
+        goalBox.style.display = 'flex';
+
+        const lossPct = Math.round(((current - target) / current) * 100);
+
+        if (lossPct >= 20) {
+            goalBox.className = "analysis-box orange";
+            goalIcon.textContent = "🏆";
+            goalText.innerHTML = `<strong>OBJETIVO AMBICIOSO: perder ${lossPct}% do seu peso.</strong><br>Pessoas com sobrepeso que perdem mais de 20% do peso corporal tendem a ter melhor saúde e satisfação com a vida em comparação com aquelas que perdem 10% ou menos.`;
+        } else {
+            goalBox.className = "analysis-box green";
+            goalIcon.textContent = "☘️";
+            goalText.innerHTML = `<strong>MELHORE SUA SAÚDE: perder ${lossPct}% do seu peso.</strong><br>Condições de saúde relacionadas ao peso melhoram com uma perda de peso de 10% ou mais. O risco de doenças diminui e a energia melhora.`;
+        }
+    }
+
+    function saveTargetWeight() {
+        userData.targetWeight = parseFloat(document.getElementById('target-weight-input').value);
+        goTo('step-28');
+    }
+
+    function validateAge() {
+        const val = parseInt(document.getElementById('age-input').value);
+        const btn = document.getElementById('btn-age');
+        if (val > 14 && val < 110) btn.classList.remove('disabled');
+        else btn.classList.add('disabled');
+    }
+
+    function validateName() {
+        const val = document.getElementById('name-input').value.trim();
+        const btn = document.getElementById('btn-name');
+        if (val.length >= 2) btn.classList.remove('disabled');
+        else btn.classList.add('disabled');
+    }
+
+    function saveName() {
+        userData.name = document.getElementById('name-input').value.trim();
+        goTo('step-30');
+    }
+
+    /* ── SCRIPTS DE ANIMAÇÕES DINÂMICAS ── */
+    
+    function animateBMIGauge() {
+        const bmi = userData.bmi || 22.0;
+        document.getElementById('gauge-bmi-val').textContent = bmi;
+        
+        let pct = ((bmi - 15) / (35 - 15)) * 100;
+        if (pct < 5) pct = 5;
+        if (pct > 95) pct = 95;
+        
+        setTimeout(() => {
+            document.getElementById('dynamic-pointer').style.left = pct + '%';
+        }, 300);
+
+        const risksBox = document.getElementById('risks-box');
+        const risksIcon = document.getElementById('risks-icon');
+        const risksText = document.getElementById('risks-text');
+
+        if (bmi >= 30) {
+            risksBox.style.display = 'flex';
+            risksBox.className = "analysis-box"; // Vermelho
+            risksIcon.textContent = "🥵";
+            risksText.innerHTML = `<strong>Riscos de um IMC não saudável!</strong><br>Seu peso representa um risco crítico para a sua saúde. Usaremos seu índice para criar um programa de perda de peso adaptado às suas necessidades.`;
+        } else if (bmi >= 25) {
+            risksBox.style.display = 'flex';
+            risksBox.className = "analysis-box orange"; // Laranja
+            risksIcon.textContent = "😒";
+            risksText.innerHTML = `<strong>Seu peso requer mais atenção!</strong><br>Usaremos seu índice de sobrepeso para personalizar um programa de perda de peso alinhado às suas necessidades e objetivos.`;
+        } else {
+            risksBox.style.display = 'none'; // Esconde se for saudável
+        }
+    }
+
+    function renderDynamicPlan() {
+        const current = userData.weight || 70;
+        const target = userData.targetWeight || 60;
+        const weightDiff = current - target;
+        
+        const weeks = Math.max(4, Math.ceil(weightDiff / 1)); 
+        const today = new Date();
+        const targetDate = new Date(today.getTime() + (weeks * 7 * 24 * 60 * 60 * 1000));
+        
+        const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+        const formattedDate = `${meses[targetDate.getMonth()]} ${targetDate.getDate()}, ${targetDate.getFullYear()}`;
+
+        document.getElementById('proj-target-weight').textContent = target;
+        document.getElementById('proj-date').textContent = formattedDate;
+
+        document.getElementById('chart-start-weight').textContent = current + ' kg';
+        document.getElementById('chart-end-weight').textContent = target + ' kg';
+    }
+
+    function startSpinnerLoader() {
+        const circle = document.getElementById('loader-circle');
+        const percentText = document.getElementById('loader-percent');
+        const headline = document.getElementById('loader-headline');
+        let count = 0;
+
+        const reviews = [
+            { name: "Juliana Rosella", desc: "A barriga sempre foi meu ponto fragilidade, mas sumiu! Lembro de como meu marido ria de mim, mas agora ele está impressionado!" },
+            { name: "Mariana Costa", desc: "Nunca gostei tanto do meu bumbum! Nunca recebi tantos elogios e tanta atenção! É simplesmente surreal!" },
+            { name: "Carla Mendes", desc: "Depois que completei meus 28 dias do Tai Chi com a Sofia Lee, perdi 6 kg e me sinto 10 anos mais jovem! Super recomendo!" }
+        ];
+
+        let reviewIdx = 0;
+        const reviewInterval = setInterval(() => {
+            reviewIdx = (reviewIdx + 1) % reviews.length;
+            document.getElementById('review-slider').style.opacity = 0;
+            setTimeout(() => {
+                document.getElementById('rev-name').textContent = reviews[reviewIdx].name;
+                document.getElementById('rev-desc').textContent = reviews[reviewIdx].desc;
+                document.getElementById('review-slider').style.opacity = 1;
+            }, 300);
+        }, 2500);
+
+        const loaderInterval = setInterval(() => {
+            count++;
+            percentText.textContent = count + '%';
+            
+            const offset = 440 - (440 * count) / 100;
+            circle.style.strokeDashoffset = offset;
+
+            if (count === 30) headline.textContent = "Alinhando rotina de caminhada...";
+            if (count === 60) headline.textContent = "Calculando taxa metabólica basal...";
+            if (count === 85) headline.textContent = "Montando cronograma Sofia Lee...";
+
+            if (count >= 100) {
+                clearInterval(loaderInterval);
+                clearInterval(reviewInterval);
+                setTimeout(() => goTo('step-34'), 500);
+            }
+        }, 70);
+    }
+
+    function validateEmail() {
+        const email = document.getElementById('email-input').value.trim();
+        const btn = document.getElementById('btn-email');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (emailRegex.test(email)) btn.classList.remove('disabled');
+        else btn.classList.add('disabled');
+    }
+
+    function saveEmail() {
+        goTo('step-35');
     }
 </script>
 </body>
