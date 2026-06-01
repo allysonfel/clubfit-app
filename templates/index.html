@@ -868,7 +868,7 @@
             <span class="rating-badge"><span class="star">★</span> 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
             <h1>Desafio de 28 dias de Caminhada Tai Chi em Casa para emagrecimento</h1>
             <p class="section-tag" style="margin-top:12px;">DE ACORDO COM A SUA IDADE</p>
-            <span class="quiz-badge">quiz de 1 minute</span>
+            <span class="quiz-badge">quiz de 1 minuto</span>
         </div>
 
         <div class="hero-layout" style="padding:0 16px;">
@@ -1481,7 +1481,8 @@
                 </div>
             </div>
 
-            <div id="risks-box" class="analysis-box" style="display: none;">
+            <!-- QUADRO DE ANÁLISE DE RISCO DO IMC (Sempre visível e reativo) -->
+            <div id="risks-box" class="analysis-box">
                 <span id="risks-icon" class="analysis-icon">⚠️</span>
                 <p id="risks-text" class="analysis-text"></p>
             </div>
@@ -1498,7 +1499,7 @@
             <div class="welcome-text-container">
                 <h2>Idade biológica</h2>
                 <p class="desc" style="font-size: 14px; font-weight: 800; margin-bottom: 8px;">Caminhar regularmente pode ajudar a reduzir a idade biológica e apoiar a saúde do coração</p>
-                <p class="desc" style="color: #666; font-size: 11px;">Um estudo publicado no Journal of Physical Activity and Health constatou que adults mais velhos que caminham regularmente tendem a apresentar menos fatores de risco ligados à saúde metabólica e cardiovascular.<br>Apenas para fins educativos. Não constitui aconselhamento médico.</p>
+                <p class="desc" style="color: #666; font-size: 11px;">Um estudo publicado no Journal of Physical Activity and Health constatou que adultos mais velhos que caminham regularmente tendem a apresentar menos fatores de risco ligados à saúde metabólica e cardiovascular.<br>Apenas para fins educativos. Não constitui aconselhamento médico.</p>
             </div>
         </div>
         <div class="footer-action">
@@ -1577,7 +1578,7 @@
         </div>
     </div>
 
-    <!-- STEP 36: NOVA PÁGINA DE OFERTA COMPLETA (ATUALIZADA COM IMAGENS ÚNICAS) -->
+    <!-- STEP 36: NOVA PÁGINA DE OFERTA COMPLETA (ATUALIZADA) -->
     <div id="step-36" class="step">
         <div class="offer-scroll">
             
@@ -1956,11 +1957,11 @@
 
             if (bmi >= 30) {
                 bmiBox.className = "analysis-box";
-                bmiEmoji.textContent = "🥵";
+                bmiEmoji.textContent = "📛"; // ATUALIZADO
                 bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado obesidade.</strong><br>Seu peso atual representa riscos para a sua saúde. Usaremos seu índice para criar um programa de perda de peso adaptado às suas necessidades.`;
             } else if (bmi >= 25) {
                 bmiBox.className = "analysis-box orange";
-                bmiEmoji.textContent = "😒";
+                bmiEmoji.textContent = "😔"; // ATUALIZADO
                 bmiText.innerHTML = `<strong>Seu IMC é ${bmi}, considerado sobrepeso.</strong><br>Seu peso requer mais atenção. Usaremos seu índice para personalizar um programa de perda de peso alinhado às suas necessidades e objetivos.`;
             } else if (bmi < 18.5) {
                 bmiBox.className = "analysis-box orange";
@@ -2058,7 +2059,7 @@
     /* ── SCRIPTS DE ANIMAÇÕES DINÂMICAS ── */
     
     function animateBMIGauge() {
-        const bmi = userData.bmi || 22.0;
+        const bmi = userData.bmi || 24.9; // Baseado no screenshot
         document.getElementById('gauge-bmi-val').textContent = bmi;
         
         let pct = ((bmi - 15) / (35 - 15)) * 100;
@@ -2073,18 +2074,24 @@
         const risksIcon = document.getElementById('risks-icon');
         const risksText = document.getElementById('risks-text');
 
+        risksBox.style.display = 'flex'; // SEMPRE VISÍVEL
+
         if (bmi >= 30) {
-            risksBox.style.display = 'flex';
             risksBox.className = "analysis-box"; // Vermelho
-            risksIcon.textContent = "🥵";
+            risksIcon.textContent = "📛"; // ATUALIZADO
             risksText.innerHTML = `<strong>Riscos de um IMC não saudável!</strong><br>Seu peso representa um risco crítico para a sua saúde. Usaremos seu índice para criar um programa de perda de peso adaptado às suas necessidades.`;
         } else if (bmi >= 25) {
-            risksBox.style.display = 'flex';
             risksBox.className = "analysis-box orange"; // Laranja
-            risksIcon.textContent = "😒";
+            risksIcon.textContent = "😔"; // ATUALIZADO
             risksText.innerHTML = `<strong>Seu peso requer mais atenção!</strong><br>Usaremos seu índice de sobrepeso para personalizar um programa de perda de peso alinhado às suas necessidades e objetivos.`;
+        } else if (bmi < 18.5) {
+            risksBox.className = "analysis-box orange"; // Laranja
+            risksIcon.textContent = "⚠️";
+            risksText.innerHTML = `<strong>Abaixo do peso ideal!</strong><br>Foque em tonificação muscular e em uma alimentação equilibrada. Mantenha-se positiva e tente manter o consumo diário de calorias dentro da faixa recomendada.`;
         } else {
-            risksBox.style.display = 'none'; // Esconde se for saudável
+            risksBox.className = "analysis-box green"; // Verde
+            risksIcon.textContent = "✨";
+            risksText.innerHTML = `<strong>Seu peso está excelente!</strong><br>Ótimo! Seu peso está dentro da faixa saudável. Nosso plano vai focar em tonificação e bem-estar geral.`;
         }
     }
 
