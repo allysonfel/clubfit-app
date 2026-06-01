@@ -540,7 +540,7 @@
         .off-comp-img {
             width: 100%;
             height: 160px;
-            object-fit: contain;
+            object-fit: cover;
             background: #eee;
             border-radius: 10px;
             margin-bottom: 12px;
@@ -632,71 +632,107 @@
             text-align: left;
         }
 
-        .off-deliverables-section {
-            width: 100%;
+        /* ── ESTRUTURA DOS BENEFÍCIOS COM DOIS iPHONES LADO A LADO ── */
+        .off-deliv-group {
             display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .off-deliverable-card {
+            align-items: center;
+            justify-content: space-between;
             background: #fff;
             border: 1px solid #eaeaea;
             border-radius: var(--radius);
-            padding: 16px;
+            padding: 20px;
+            gap: 15px;
+            width: 100%;
+        }
+        .off-deliv-list {
+            flex: 1;
             display: flex;
-            align-items: center;
-            gap: 16px;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .off-deliv-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
             text-align: left;
         }
-        .off-del-icon-wrap {
-            width: 44px;
-            height: 44px;
+        .off-deliv-icon {
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             background: var(--green-light);
             color: var(--green-dark);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 16px;
             flex-shrink: 0;
         }
-        .off-del-text-wrap {
-            flex: 1;
-        }
-        .off-del-title {
+        .off-deliv-text {
             font-size: 13px;
             font-weight: 700;
             color: #111;
             line-height: 1.4;
         }
-        .off-del-img-placeholder {
-            width: 70px;
-            height: 100px;
-            background: #eee;
-            border-radius: 8px;
+        .off-deliv-phone {
+            width: 105px;
+            height: auto;
+            object-fit: contain;
             flex-shrink: 0;
-            border: 1px solid #ddd;
         }
 
-        /* Trustpilot & Reviews */
-        .off-reviews-section {
+        /* ── CARROSSEL DE DEPOIMENTOS ── */
+        .off-carousel-container {
+            width: 100%;
+            position: relative;
+        }
+        .off-slide {
+            display: none;
             width: 100%;
             background: #fff;
             border-radius: var(--radius);
             border: 1px solid #eaeaea;
             padding: 20px;
             text-align: left;
+            animation: fadeSlide 0.5s ease-in-out;
         }
-        .off-review-trustpilot {
+        .off-slide.active {
+            display: block;
+        }
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateX(12px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .off-carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .off-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .off-dot.active {
+            background: var(--green);
+        }
+
+        /* Google Reviews Section */
+        .off-reviews-section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            width: 100%;
         }
         .off-review-stars {
             color: #FFC107;
             font-size: 12px;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
         }
         .off-review-content {
             font-size: 13px;
@@ -704,17 +740,17 @@
             line-height: 1.5;
             margin-bottom: 15px;
         }
-        .off-review-images {
-            display: flex;
-            gap: 8px;
+        
+        /* Ajuste de uma única imagem panorâmica por depoimento */
+        .off-review-single-img {
             width: 100%;
-        }
-        .off-review-img-box {
-            flex: 1;
-            height: 140px;
-            background: #eee;
+            height: auto;
+            max-height: 200px;
+            object-fit: contain;
             border-radius: 8px;
             border: 1px solid #ddd;
+            margin-top: 10px;
+            background: #eee;
         }
 
         /* pricing block styles */
@@ -1079,7 +1115,7 @@
     <div id="step-14" class="step">
         <div class="quiz-header">
             <div class="progress-bar"><div class="progress-fill" style="width:36%"></div></div>
-            <div class="step-label">9 / 25</div>
+            <div class="step-label">10 / 25</div>
         </div>
         <div class="quiz-body">
             <h3>Com que frequência você se exercita?</h3>
@@ -1462,7 +1498,7 @@
             <div class="welcome-text-container">
                 <h2>Idade biológica</h2>
                 <p class="desc" style="font-size: 14px; font-weight: 800; margin-bottom: 8px;">Caminhar regularmente pode ajudar a reduzir a idade biológica e apoiar a saúde do coração</p>
-                <p class="desc" style="color: #666; font-size: 11px;">Um estudo publicado no Journal of Physical Activity and Health constatou que adultos mais velhos que caminham regularmente tendem a apresentar menos fatores de risco ligados à saúde metabólica e cardiovascular.<br>Apenas para fins educativos. Não constitui aconselhamento médico.</p>
+                <p class="desc" style="color: #666; font-size: 11px;">Um estudo publicado no Journal of Physical Activity and Health constatou que adults mais velhos que caminham regularmente tendem a apresentar menos fatores de risco ligados à saúde metabólica e cardiovascular.<br>Apenas para fins educativos. Não constitui aconselhamento médico.</p>
             </div>
         </div>
         <div class="footer-action">
@@ -1541,7 +1577,7 @@
         </div>
     </div>
 
-    <!-- STEP 36: NOVA PÁGINA DE OFERTA COMPLETA (MOCKADO PARA GITHUB) -->
+    <!-- STEP 36: NOVA PÁGINA DE OFERTA COMPLETA (ATUALIZADA COM IMAGENS ÚNICAS) -->
     <div id="step-36" class="step">
         <div class="offer-scroll">
             
@@ -1556,14 +1592,13 @@
 
             <div class="off-container">
                 
-                <!-- Comparativo Antes e Depois (As imagens que você já possui podem ser colocadas aqui) -->
+                <!-- Comparativo Antes e Depois (Mapeado para static/img/antes.png e static/img/depois.png) -->
                 <div class="off-comparison-wrapper">
                     <div class="off-comp-card">
                         <span class="off-comp-badge before">Antes</span>
-                        <!-- Substitua o 'src' abaixo pela sua imagem de "Antes" -->
-                        <img src="" class="off-comp-img" alt="Gordura Corporal - Obese" onerror="this.style.background='#ddd'">
-                        <div class="off-comp-stat">Gordura corporal:<br><strong>Obese</strong></div>
-                        <div class="off-comp-stat">Nível de Caminhada Tai Chi em Casa:<br><strong>Medium</strong></div>
+                        <img src="static/img/antes.png" class="off-comp-img" alt="Gordura Corporal - Obeso" onerror="this.style.background='#ddd'">
+                        <div class="off-comp-stat">Gordura corporal:<br><strong>Obeso</strong></div>
+                        <div class="off-comp-stat">Nível de Caminhada Tai Chi em Casa:<br><strong>Médio</strong></div>
                         <div class="off-progress-bars">
                             <div class="off-progress-segment active"></div>
                             <div class="off-progress-segment active"></div>
@@ -1573,10 +1608,9 @@
                     </div>
                     <div class="off-comp-card">
                         <span class="off-comp-badge after">Depois</span>
-                        <!-- Substitua o 'src' abaixo pela sua imagem de "Depois" -->
-                        <img src="" class="off-comp-img" alt="Gordura Corporal - Fit" onerror="this.style.background='#ddd'">
+                        <img src="static/img/depois.png" class="off-comp-img" alt="Gordura Corporal - Fit" onerror="this.style.background='#ddd'">
                         <div class="off-comp-stat">Gordura corporal:<br><strong>Fit</strong></div>
-                        <div class="off-comp-stat">Nível de Caminhada Tai Chi em Casa:<br><strong>Advanced</strong></div>
+                        <div class="off-comp-stat">Nível de Caminhada Tai Chi em Casa:<br><strong>Avançada</strong></div>
                         <div class="off-progress-bars">
                             <div class="off-progress-segment active"></div>
                             <div class="off-progress-segment active"></div>
@@ -1629,7 +1663,7 @@
                     </div>
                     <div class="off-plan-feature-item" style="background: #fff; border: 1px solid #eaeaea;">
                         <span class="off-feat-icon">💪</span>
-                        <div class="off-feat-text" style="display:flex; flex-direction:column;"><span style="font-size: 10px; color: #888; font-weight: 800;">NÍVEL DE CONDICIONAMENTO</span><strong>Medium</strong></div>
+                        <div class="off-feat-text" style="display:flex; flex-direction:column;"><span style="font-size: 10px; color: #888; font-weight: 800;">NÍVEL DE CONDICIONAMENTO</span><strong>Médio</strong></div>
                     </div>
                     <div class="off-plan-feature-item" style="background: #fff; border: 1px solid #eaeaea;">
                         <span class="off-feat-icon">😴</span>
@@ -1651,57 +1685,113 @@
                     </div>
                 </div>
 
-                <!-- Entregáveis / O que você recebe -->
+                <!-- Entregáveis (2 iPhones com layouts perfeitamente adaptados ao print) -->
                 <h2 class="off-section-title" style="margin-top: 10px; font-size: 20px;">O que você recebe para alcançar seus objetivos</h2>
                 
                 <div class="off-deliverables-section">
-                    <div class="off-deliverable-card">
-                        <div class="off-del-icon-wrap">😊</div>
-                        <div class="off-del-text-wrap">
-                            <div class="off-del-title">Plano de Caminhada Tai Chi em Casa adaptado às suas necessidades e ao seu estilo de vida</div>
+                    
+                    <!-- Bloco 1 (Itens 1 e 2 + iPhone 1) -->
+                    <div class="off-deliv-group">
+                        <div class="off-deliv-list">
+                            <div class="off-deliv-item">
+                                <div class="off-deliv-icon">😊</div>
+                                <div class="off-deliv-text">Plano de Caminhada Tai Chi em Casa adaptado às suas necessidades e ao seu estilo de vida</div>
+                            </div>
+                            <div class="off-deliv-item">
+                                <div class="off-deliv-icon">🔥</div>
+                                <div class="off-deliv-text">Guias exclusivos de nutrição e estilo de vida saudável</div>
+                            </div>
                         </div>
-                        <!-- Espaço reservado para mockups de celular -->
-                        <div class="off-del-img-placeholder" style="background-image: url(''); background-size: cover; background-position: center;"></div>
+                        <img src="static/img/iphone-1.png" class="off-deliv-phone" alt="Mockup iPhone Treino" onerror="this.style.background='#eee'">
                     </div>
-                    <div class="off-deliverable-card">
-                        <div class="off-del-icon-wrap">🔥</div>
-                        <div class="off-del-text-wrap">
-                            <div class="off-del-title">Guias exclusivos de nutrição e estilo de vida saudável</div>
+
+                    <!-- Bloco 2 (Itens 3 e 4 + iPhone 2) -->
+                    <div class="off-deliv-group">
+                        <div class="off-deliv-list">
+                            <div class="off-deliv-item">
+                                <div class="off-deliv-icon">🌿</div>
+                                <div class="off-deliv-text">Cronograma de treino fácil de seguir e flexível</div>
+                            </div>
+                            <div class="off-deliv-item">
+                                <div class="off-deliv-icon">💖</div>
+                                <div class="off-deliv-text">Desafios e acompanhamento de progresso</div>
+                            </div>
                         </div>
-                        <div class="off-del-img-placeholder" style="background-image: url(''); background-size: cover; background-position: center;"></div>
+                        <img src="static/img/iphone-2.png" class="off-deliv-phone" alt="Mockup iPhone Plano" onerror="this.style.background='#eee'">
                     </div>
-                    <div class="off-deliverable-card">
-                        <div class="off-del-icon-wrap">🌿</div>
-                        <div class="off-del-text-wrap">
-                            <div class="off-del-title">Cronograma de treino fácil de seguir e flexível</div>
-                        </div>
-                        <div class="off-del-img-placeholder" style="background-image: url(''); background-size: cover; background-position: center;"></div>
-                    </div>
-                    <div class="off-deliverable-card">
-                        <div class="off-del-icon-wrap">💖</div>
-                        <div class="off-del-text-wrap">
-                            <div class="off-del-title">Desafios e acompanhamento de metas</div>
-                        </div>
-                        <div class="off-del-img-placeholder" style="background-image: url(''); background-size: cover; background-position: center;"></div>
-                    </div>
+
                 </div>
 
-                <!-- Prova Social / Depoimentos -->
+                <!-- Banner Adicional (Opcional - Pode conter imagem de folhas / 12M+ Principiantes) -->
+                <div style="text-align: center; margin: 10px 0; width: 100%;">
+                    <img src="static/img/badge-12m.png" alt="12+ milhões começaram a prática" style="max-width: 90%; height: auto;" onerror="this.style.display='none'">
+                </div>
+
+                <!-- Seção de Depoimentos Carrossel Dinâmico (Com imagem unificada para o antes e depois) -->
                 <h2 class="off-section-title" style="margin-top:10px; font-size:20px;">Pessoas reais. Resultados reais do nosso plano de Caminhada Tai Chi em Casa</h2>
                 
-                <div class="off-reviews-section">
-                    <div class="off-review-trustpilot">
-                        <span style="font-weight: 800; font-size: 14px;">Sophie Marshall</span>
-                        <span style="color:#00B67A; font-weight:800; font-size: 12px;">★ Trustpilot</span>
-                    </div>
-                    <div class="off-review-stars">★★★★★</div>
-                    <p class="off-review-content">Nunca gostei tanto do meu bumbum! Nunca recebi tantos elogios e tanta atenção! É simplesmente surreal! Não consigo parar de me olhar no espelho!</p>
+                <div class="off-carousel-container">
                     
-                    <!-- Espaço para antes e depois dos depoimentos -->
-                    <div class="off-review-images">
-                        <div class="off-review-img-box" style="background-image: url(''); background-size: cover; background-position: center;"></div>
-                        <div class="off-review-img-box" style="background-image: url(''); background-size: cover; background-position: center;"></div>
+                    <!-- Depoimento Slide 1 -->
+                    <div class="off-slide active">
+                        <div class="off-reviews-section-header">
+                            <span style="font-weight: 800; font-size: 14px;">Sophie Marshall</span>
+                            <img src="static/img/google-reviews-logo.png" alt="Google Reviews" style="height: 18px; object-fit: contain;" onerror="this.style.display='none'">
+                        </div>
+                        <div class="off-review-stars">★★★★★</div>
+                        <p class="off-review-content">Nunca gostei tanto do meu bumbum! Nunca recebi tantos elogios e tanta atenção! É simplesmente surreal! Não consigo parar de me olhar no espelho!</p>
+                        
+                        <!-- Nova imagem unificada do depoimento 1 -->
+                        <img src="static/img/review-1.png" class="off-review-single-img" alt="Resultado Sophie Marshall" onerror="this.style.background='#eee'">
                     </div>
+
+                    <!-- Depoimento Slide 2 -->
+                    <div class="off-slide">
+                        <div class="off-reviews-section-header">
+                            <span style="font-weight: 800; font-size: 14px;">Letícia Ramos</span>
+                            <img src="static/img/google-reviews-logo.png" alt="Google Reviews" style="height: 18px; object-fit: contain;" onerror="this.style.display='none'">
+                        </div>
+                        <div class="off-review-stars">★★★★★</div>
+                        <p class="off-review-content">Sempre tive muita dificuldade para emagrecer depois dos 40 anos, mas com a caminhada do Tai Chi perdi 7kg em 4 semanas sem sacrifícios.</p>
+                        
+                        <!-- Nova imagem unificada do depoimento 2 -->
+                        <img src="static/img/review-2.png" class="off-review-single-img" alt="Resultado Letícia Ramos" onerror="this.style.background='#eee'">
+                    </div>
+
+                    <!-- Depoimento Slide 3 -->
+                    <div class="off-slide">
+                        <div class="off-reviews-section-header">
+                            <span style="font-weight: 800; font-size: 14px;">Sandra Mendes</span>
+                            <img src="static/img/google-reviews-logo.png" alt="Google Reviews" style="height: 18px; object-fit: contain;" onerror="this.style.display='none'">
+                        </div>
+                        <div class="off-review-stars">★★★★★</div>
+                        <p class="off-review-content">Minha postura melhorou muito e minhas dores no quadril desapareceram. Sinto-me mais leve, calma e com uma disposição incrível o dia todo!</p>
+                        
+                        <!-- Nova imagem unificada do depoimento 3 -->
+                        <img src="static/img/review-3.png" class="off-review-single-img" alt="Resultado Sandra Mendes" onerror="this.style.background='#eee'">
+                    </div>
+
+                    <!-- Depoimento Slide 4 -->
+                    <div class="off-slide">
+                        <div class="off-reviews-section-header">
+                            <span style="font-weight: 800; font-size: 14px;">Beatriz Fonseca</span>
+                            <img src="static/img/google-reviews-logo.png" alt="Google Reviews" style="height: 18px; object-fit: contain;" onerror="this.style.display='none'">
+                        </div>
+                        <div class="off-review-stars">★★★★★</div>
+                        <p class="off-review-content">Extremamente prático e fácil de fazer na sala de casa. O aplicativo me deu um cronograma dinâmico que finalmente consegui manter!</p>
+                        
+                        <!-- Nova imagem unificada do depoimento 4 -->
+                        <img src="static/img/review-4.png" class="off-review-single-img" alt="Resultado Beatriz Fonseca" onerror="this.style.background='#eee'">
+                    </div>
+
+                    <!-- Dots de Navegação do Carrossel -->
+                    <div class="off-carousel-dots">
+                        <span class="off-dot active"></span>
+                        <span class="off-dot"></span>
+                        <span class="off-dot"></span>
+                        <span class="off-dot"></span>
+                    </div>
+
                 </div>
 
                 <!-- SEÇÃO DE PREÇO E CHECKOUT -->
@@ -1710,7 +1800,7 @@
                     
                     <div style="display:flex; justify-content: center; gap: 15px; width: 100%;">
                         <span style="font-size: 12px; font-weight:700; color:#555;">🟢 Peso-alvo: <strong class="dyn-target-weight">--</strong> kg</span>
-                        <span style="font-size: 12px; font-weight:700; color:#555;">📈 Nível: <strong>Medium</strong></span>
+                        <span style="font-size: 12px; font-weight:700; color:#555;">📈 Nível: <strong>Médio</strong></span>
                     </div>
 
                     <!-- Banner de Desconto Temporário -->
@@ -1752,11 +1842,17 @@
 
                     <!-- Caixa Selo de Reembolso Garantido -->
                     <div style="background: #fff; border: 1px solid #eaeaea; border-radius: var(--radius); padding: 16px; text-align: center; margin-top: 10px;">
-                        <!-- Insira a URL do selo de garantia quando subir no GitHub -->
-                        <img src="" alt="Selo Garantia" style="max-height: 50px; background:#ddd; margin: 0 auto 10px; display:block;" onerror="this.style.display='none'">
+                        <!-- Slogan de Garantia em PNG acima da descrição -->
+                        <img src="static/img/selo-garantia.png" alt="Garantia de Reembolso" style="max-height: 80px; width: auto; margin: 0 auto 10px; display:block;" onerror="this.style.display='none'">
                         <h4 style="font-size: 14px; font-weight: 800; margin-bottom: 5px;">Garantia de reembolso de 100%</h4>
                         <p style="font-size: 11px; color: #666; line-height: 1.5;">Acreditamos que nosso plano pode funcionar para você e que você terá resultados visíveis em 4 semanas! Estamos dispostos a devolver seu dinheiro caso você não veja resultados visíveis e consiga comprovar que seguiu o nosso plano. Consulte nossa Política de Reembolso para entender todos os requisitos.</p>
                     </div>
+                </div>
+
+                <!-- Rodapé Institucional com Copyright -->
+                <div style="padding: 24px 20px; text-align: center; font-size: 11px; color: #999; border-top: 1px solid #eee; margin-top: 20px; width: 100%;">
+                    <p style="margin-bottom: 5px; font-weight: 800;">Smart Produtos Digitais LTDA</p>
+                    <p>Copyright © 2026. Todos os direitos reservados.</p>
                 </div>
 
             </div>
@@ -2110,6 +2206,7 @@
         document.getElementById('off-fit-age').textContent = `${fitAge} anos (7 anos a mais do que sua idade real)`;
         
         startOfferTimer();
+        startOfferCarousel();
     }
 
     let offerTimerInterval;
@@ -2130,6 +2227,37 @@
         }
         updateTimer();
         offerTimerInterval = setInterval(updateTimer, 1000);
+    }
+
+    /* ── SCRIPT DE ROTAÇÃO AUTOMÁTICA DO CARROSSEL DE DEPOIMENTOS ── */
+    let carouselIdx = 0;
+    let carouselInterval;
+    function startOfferCarousel() {
+        if (carouselInterval) clearInterval(carouselInterval);
+        const slides = document.querySelectorAll('.off-slide');
+        const dots = document.querySelectorAll('.off-dot');
+        if (slides.length === 0) return;
+
+        function showSlide(idx) {
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === idx);
+                if (dots[i]) dots[i].classList.toggle('active', i === idx);
+            });
+        }
+
+        // Adiciona evento de clique manual nas bolinhas (dots)
+        dots.forEach((dot, i) => {
+            dot.addEventListener('click', () => {
+                carouselIdx = i;
+                showSlide(carouselIdx);
+            });
+        });
+
+        // Altera automaticamente o slide a cada 5 segundos
+        carouselInterval = setInterval(() => {
+            carouselIdx = (carouselIdx + 1) % slides.length;
+            showSlide(carouselIdx);
+        }, 5000);
     }
 
     function scrollToPayment() {
