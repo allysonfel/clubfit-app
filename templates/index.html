@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -423,6 +424,8 @@
             cursor: pointer;
             width: calc(100% - 40px);
             margin: 0 auto;
+            text-align: center;
+            text-decoration: none;
             transition: background 0.15s, transform 0.1s;
         }
         .btn-primary:hover  { background: var(--green-dark); }
@@ -457,6 +460,368 @@
             #step-1 h1 { font-size: 20px; }
             .age-btn { padding: 13px 12px; font-size: 13px; }
         }
+
+        /* ── NOVOS ESTILOS EXCLUSIVOS DA PÁGINA DE OFERTA (STEP 36) ── */
+        .offer-scroll {
+            overflow-y: auto;
+            height: 100%;
+            width: 100%;
+            background: #FAFAF8;
+            padding-bottom: 60px;
+        }
+        .off-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: #fff;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .off-timer-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .off-timer-num {
+            font-size: 18px;
+            font-weight: 800;
+            color: #d32f2f;
+        }
+        .off-timer-lbl {
+            font-size: 8px;
+            color: #777;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        .off-btn-top {
+            background: var(--green);
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .off-container {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 25px;
+        }
+        .off-comparison-wrapper {
+            display: flex;
+            width: 100%;
+            gap: 12px;
+        }
+        .off-comp-card {
+            flex: 1;
+            background: #fff;
+            border-radius: var(--radius);
+            border: 1px solid #eaeaea;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .off-comp-badge {
+            font-size: 12px;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 100px;
+            margin-bottom: 10px;
+        }
+        .off-comp-badge.before { background: #f0f0f0; color: #555; }
+        .off-comp-badge.after { background: #e8f5ee; color: var(--green); }
+        .off-comp-img {
+            width: 100%;
+            height: 160px;
+            object-fit: contain;
+            background: #eee;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+        .off-comp-stat {
+            font-size: 11px;
+            color: #666;
+            margin-bottom: 6px;
+            width: 100%;
+            text-align: left;
+        }
+        .off-comp-stat strong { color: #111; font-weight: 800; }
+        .off-progress-bars {
+            display: flex;
+            gap: 3px;
+            width: 100%;
+            margin-top: 4px;
+        }
+        .off-progress-segment {
+            height: 4px;
+            flex: 1;
+            background: #e0e0e0;
+            border-radius: 2px;
+        }
+        .off-progress-segment.active { background: var(--green); }
+
+        .off-section-title {
+            font-size: 24px;
+            font-weight: 800;
+            color: #111;
+            margin-bottom: 5px;
+            text-align: center;
+            letter-spacing: -0.5px;
+        }
+        .off-profile-box {
+            background: #fff;
+            border-radius: var(--radius);
+            border: 1px solid #eaeaea;
+            padding: 16px;
+            width: 100%;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        }
+        .off-profile-header-imc {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--muted);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            text-align: left;
+        }
+        .off-plan-features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+        }
+        .off-plan-feature-item {
+            background: #f7f9f8;
+            border-radius: var(--radius);
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: left;
+        }
+        .off-feat-icon {
+            font-size: 20px;
+        }
+        .off-feat-text {
+            font-size: 13px;
+            color: #333;
+        }
+        .off-feat-text strong { font-weight: 800; color: #111; }
+
+        .off-badge-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .off-badge-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #2E9E58;
+            text-align: left;
+        }
+
+        .off-deliverables-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .off-deliverable-card {
+            background: #fff;
+            border: 1px solid #eaeaea;
+            border-radius: var(--radius);
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            text-align: left;
+        }
+        .off-del-icon-wrap {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--green-light);
+            color: var(--green-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .off-del-text-wrap {
+            flex: 1;
+        }
+        .off-del-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #111;
+            line-height: 1.4;
+        }
+        .off-del-img-placeholder {
+            width: 70px;
+            height: 100px;
+            background: #eee;
+            border-radius: 8px;
+            flex-shrink: 0;
+            border: 1px solid #ddd;
+        }
+
+        /* Trustpilot & Reviews */
+        .off-reviews-section {
+            width: 100%;
+            background: #fff;
+            border-radius: var(--radius);
+            border: 1px solid #eaeaea;
+            padding: 20px;
+            text-align: left;
+        }
+        .off-review-trustpilot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .off-review-stars {
+            color: #FFC107;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+        .off-review-content {
+            font-size: 13px;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .off-review-images {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+        }
+        .off-review-img-box {
+            flex: 1;
+            height: 140px;
+            background: #eee;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        /* pricing block styles */
+        .off-price-box-wrapper {
+            width: 100%;
+            border: 2.5px solid var(--green);
+            border-radius: var(--radius);
+            background: #fff;
+            overflow: hidden;
+            position: relative;
+        }
+        .off-price-badge-top {
+            background: var(--green);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            text-align: center;
+            padding: 6px;
+            letter-spacing: 1px;
+        }
+        .off-price-body {
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .off-price-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .off-price-radio {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+        }
+        .off-price-radio-inner {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--green);
+        }
+        .off-price-details {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        .off-price-title {
+            font-size: 15px;
+            font-weight: 800;
+            color: #111;
+        }
+        .off-price-subtitle {
+            font-size: 11px;
+            color: #666;
+            margin-top: 2px;
+        }
+        .off-price-right {
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+        }
+        .off-price-old {
+            font-size: 11px;
+            color: #999;
+            text-decoration: line-through;
+        }
+        .off-price-new {
+            font-size: 18px;
+            font-weight: 800;
+            color: #111;
+        }
+
+        /* Discount Flash Banner */
+        .off-discount-banner {
+            background: #FFF0F0;
+            border: 1px solid #FFCDCD;
+            border-radius: var(--radius);
+            width: 100%;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .off-discount-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 800;
+            color: #D32F2F;
+        }
+        .off-discount-timer {
+            font-size: 13px;
+            font-weight: 800;
+            color: #D32F2F;
+            background: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #FFCDCD;
+        }
     </style>
 </head>
 <body>
@@ -468,7 +833,7 @@
             <span class="rating-badge"><span class="star">★</span> 4.8 de 5 &nbsp;|&nbsp; <strong>800k</strong> usuários</span>
             <h1>Desafio de 28 dias de Caminhada Tai Chi em Casa para emagrecimento</h1>
             <p class="section-tag" style="margin-top:12px;">DE ACORDO COM A SUA IDADE</p>
-            <span class="quiz-badge">quiz de 1 minuto</span>
+            <span class="quiz-badge">quiz de 1 minute</span>
         </div>
 
         <div class="hero-layout" style="padding:0 16px;">
@@ -993,7 +1358,7 @@
             </div>
         </div>
         <div class="footer-action">
-            <button id="btn-target" class="btn-primary disabled" onclick="goTo('step-28')">Continuar</button>
+            <button id="btn-target" class="btn-primary disabled" onclick="saveTargetWeight()">Continuar</button>
         </div>
     </div>
 
@@ -1021,8 +1386,6 @@
             <button id="btn-age" class="btn-primary disabled" onclick="goTo('step-29')">Próximo</button>
         </div>
     </div>
-
-    <!-- ── NOVAS TELAS (Telas 29 a 35) ADICIONADAS ABAIXO ── -->
 
     <!-- STEP 29: NOME (23/25) -->
     <div id="step-29" class="step">
@@ -1174,7 +1537,230 @@
             <h2 style="margin-top: 25px;">Tenha resultados visíveis em apenas 28 dias!</h2>
         </div>
         <div class="footer-action">
-            <button class="btn-primary" onclick="alert('Fim do Quiz! Redirecionando para a página de vendas.')">Continuar</button>
+            <!-- ALTERAÇÃO: Agora redireciona para a nova Página de Oferta (Step 36) -->
+            <button class="btn-primary" onclick="goTo('step-36')">Continuar</button>
+        </div>
+    </div>
+
+    <!-- STEP 36: NOVA PÁGINA DE OFERTA COMPLETA (MOCKADO PARA GITHUB) -->
+    <div id="step-36" class="step">
+        <div class="offer-scroll">
+            
+            <!-- Sticky Header com Timer de Conversão -->
+            <div class="off-header">
+                <div class="off-timer-box">
+                    <span class="off-timer-num dyn-timer">09 : 59</span>
+                    <span class="off-timer-lbl">MIN &nbsp; SEC</span>
+                </div>
+                <button class="off-btn-top" onclick="scrollToPayment()">Quero meu plano</button>
+            </div>
+
+            <div class="off-container">
+                
+                <!-- Comparativo Antes e Depois (As imagens que você já possui podem ser colocadas aqui) -->
+                <div class="off-comparison-wrapper">
+                    <div class="off-comp-card">
+                        <span class="off-comp-badge before">Antes</span>
+                        <!-- Substitua o 'src' abaixo pela sua imagem de "Antes" -->
+                        <img src="" class="off-comp-img" alt="Gordura Corporal - Obese" onerror="this.style.background='#ddd'">
+                        <div class="off-comp-stat">Gordura corporal:<br><strong>Obese</strong></div>
+                        <div class="off-comp-stat">Nível de Caminhada Tai Chi em Casa:<br><strong>Medium</strong></div>
+                        <div class="off-progress-bars">
+                            <div class="off-progress-segment active"></div>
+                            <div class="off-progress-segment active"></div>
+                            <div class="off-progress-segment"></div>
+                            <div class="off-progress-segment"></div>
+                        </div>
+                    </div>
+                    <div class="off-comp-card">
+                        <span class="off-comp-badge after">Depois</span>
+                        <!-- Substitua o 'src' abaixo pela sua imagem de "Depois" -->
+                        <img src="" class="off-comp-img" alt="Gordura Corporal - Fit" onerror="this.style.background='#ddd'">
+                        <div class="off-comp-stat">Gordura corporal:<br><strong>Fit</strong></div>
+                        <div class="off-comp-stat">Nível de Caminhada Tai Chi em Casa:<br><strong>Advanced</strong></div>
+                        <div class="off-progress-bars">
+                            <div class="off-progress-segment active"></div>
+                            <div class="off-progress-segment active"></div>
+                            <div class="off-progress-segment active"></div>
+                            <div class="off-progress-segment active"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Perfil dinâmico com base no IMC -->
+                <h2 class="off-section-title">Seu perfil com base nas respostas</h2>
+
+                <div class="off-profile-box">
+                    <p class="off-profile-header-imc">ÍNDICE DE MASSA CORPORAL (IMC)</p>
+                    <div class="bmi-gauge-container" style="margin-top: 30px;">
+                        <div class="gauge-pointer" id="off-dynamic-pointer">Seu IMC é <span id="off-gauge-bmi-val">--</span></div>
+                        <div class="gauge-bar"></div>
+                        <div class="gauge-labels">
+                            <span style="font-size: 8px;">Abaixo do peso</span>
+                            <span style="font-size: 8px;">Normal</span>
+                            <span style="font-size: 8px;">Acima do peso</span>
+                            <span style="font-size: 8px;">Obesidade</span>
+                        </div>
+                    </div>
+                    <div style="text-align: left; margin-top: 15px;">
+                        <h4 id="off-bmi-category" style="color: #e53935; font-size: 15px; font-weight: 800; margin-bottom: 5px;">Calculando...</h4>
+                        <p id="off-bmi-desc" style="font-size: 12px; color: #555; line-height: 1.5;"></p>
+                    </div>
+                </div>
+
+                <!-- Treinos e Hidratação Recomendações -->
+                <div class="off-plan-features-list">
+                    <div class="off-plan-feature-item">
+                        <span class="off-feat-icon">⏰</span>
+                        <div class="off-feat-text">Plano personalizado de Caminhada Tai Chi em Casa: <strong>7 min</strong> <span style="font-size: 9px; color: var(--green); font-weight: 800; background: var(--green-light); padding: 2px 6px; border-radius: 4px; margin-left: 5px; white-space: nowrap;">DURAÇÃO DE TREINO RECOMENDADA</span></div>
+                    </div>
+                    <div class="off-plan-feature-item">
+                        <span class="off-feat-icon">💧</span>
+                        <div class="off-feat-text">Ingestão de água: <strong>1.9L</strong> <span style="font-size: 9px; color: var(--green); font-weight: 800; background: var(--green-light); padding: 2px 6px; border-radius: 4px; margin-left: 5px; white-space: nowrap;">INGESTÃO DIÁRIA RECOMENDADA</span></div>
+                    </div>
+                </div>
+
+                <!-- Diagnóstico de Prontidão do Plano -->
+                <h2 class="off-section-title" style="margin-top: 10px; font-size: 20px;">Seu plano personalizado de Caminhada Tai Chi em Casa está pronto!</h2>
+                
+                <div class="off-plan-features-list">
+                    <div class="off-plan-feature-item" style="background: #fff; border: 1px solid #eaeaea;">
+                        <span class="off-feat-icon">🎯</span>
+                        <div class="off-feat-text" style="display:flex; flex-direction:column;"><span style="font-size: 10px; color: #888; font-weight: 800;">OBJETIVO PRINCIPAL</span><strong>Reduzir a idade biológica</strong></div>
+                    </div>
+                    <div class="off-plan-feature-item" style="background: #fff; border: 1px solid #eaeaea;">
+                        <span class="off-feat-icon">💪</span>
+                        <div class="off-feat-text" style="display:flex; flex-direction:column;"><span style="font-size: 10px; color: #888; font-weight: 800;">NÍVEL DE CONDICIONAMENTO</span><strong>Medium</strong></div>
+                    </div>
+                    <div class="off-plan-feature-item" style="background: #fff; border: 1px solid #eaeaea;">
+                        <span class="off-feat-icon">😴</span>
+                        <div class="off-feat-text" style="display:flex; flex-direction:column;"><span style="font-size: 10px; color: #888; font-weight: 800;">QUALIDADE DO SONO</span><strong>Precisa melhorar</strong></div>
+                    </div>
+                    <div class="off-plan-feature-item" style="background: #fff; border: 1px solid #eaeaea;">
+                        <span class="off-feat-icon">👤</span>
+                        <div class="off-feat-text" style="display:flex; flex-direction:column;"><span style="font-size: 10px; color: #888; font-weight: 800;">IDADE FITNESS</span><strong id="off-fit-age">7 anos a mais do que sua idade real</strong></div>
+                    </div>
+                </div>
+
+                <div style="width:100%; text-align:left;">
+                    <p style="font-size:14px; font-weight:800; margin-bottom:10px;">Seu plano também foca em:</p>
+                    <div class="off-badge-list">
+                        <div class="off-badge-item"><span>✓</span> Autoconfiança</div>
+                        <div class="off-badge-item"><span>✓</span> Mais energia</div>
+                        <div class="off-badge-item"><span>✓</span> Alívio do estresse</div>
+                        <div class="off-badge-item"><span>✓</span> Redução da sua idade fitness</div>
+                    </div>
+                </div>
+
+                <!-- Entregáveis / O que você recebe -->
+                <h2 class="off-section-title" style="margin-top: 10px; font-size: 20px;">O que você recebe para alcançar seus objetivos</h2>
+                
+                <div class="off-deliverables-section">
+                    <div class="off-deliverable-card">
+                        <div class="off-del-icon-wrap">😊</div>
+                        <div class="off-del-text-wrap">
+                            <div class="off-del-title">Plano de Caminhada Tai Chi em Casa adaptado às suas necessidades e ao seu estilo de vida</div>
+                        </div>
+                        <!-- Espaço reservado para mockups de celular -->
+                        <div class="off-del-img-placeholder" style="background-image: url(''); background-size: cover; background-position: center;"></div>
+                    </div>
+                    <div class="off-deliverable-card">
+                        <div class="off-del-icon-wrap">🔥</div>
+                        <div class="off-del-text-wrap">
+                            <div class="off-del-title">Guias exclusivos de nutrição e estilo de vida saudável</div>
+                        </div>
+                        <div class="off-del-img-placeholder" style="background-image: url(''); background-size: cover; background-position: center;"></div>
+                    </div>
+                    <div class="off-deliverable-card">
+                        <div class="off-del-icon-wrap">🌿</div>
+                        <div class="off-del-text-wrap">
+                            <div class="off-del-title">Cronograma de treino fácil de seguir e flexível</div>
+                        </div>
+                        <div class="off-del-img-placeholder" style="background-image: url(''); background-size: cover; background-position: center;"></div>
+                    </div>
+                    <div class="off-deliverable-card">
+                        <div class="off-del-icon-wrap">💖</div>
+                        <div class="off-del-text-wrap">
+                            <div class="off-del-title">Desafios e acompanhamento de metas</div>
+                        </div>
+                        <div class="off-del-img-placeholder" style="background-image: url(''); background-size: cover; background-position: center;"></div>
+                    </div>
+                </div>
+
+                <!-- Prova Social / Depoimentos -->
+                <h2 class="off-section-title" style="margin-top:10px; font-size:20px;">Pessoas reais. Resultados reais do nosso plano de Caminhada Tai Chi em Casa</h2>
+                
+                <div class="off-reviews-section">
+                    <div class="off-review-trustpilot">
+                        <span style="font-weight: 800; font-size: 14px;">Sophie Marshall</span>
+                        <span style="color:#00B67A; font-weight:800; font-size: 12px;">★ Trustpilot</span>
+                    </div>
+                    <div class="off-review-stars">★★★★★</div>
+                    <p class="off-review-content">Nunca gostei tanto do meu bumbum! Nunca recebi tantos elogios e tanta atenção! É simplesmente surreal! Não consigo parar de me olhar no espelho!</p>
+                    
+                    <!-- Espaço para antes e depois dos depoimentos -->
+                    <div class="off-review-images">
+                        <div class="off-review-img-box" style="background-image: url(''); background-size: cover; background-position: center;"></div>
+                        <div class="off-review-img-box" style="background-image: url(''); background-size: cover; background-position: center;"></div>
+                    </div>
+                </div>
+
+                <!-- SEÇÃO DE PREÇO E CHECKOUT -->
+                <div id="payment-block" style="width: 100%; display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
+                    <h2 class="off-section-title" style="font-size: 20px;"><span class="dyn-user-name">Você</span>, tenha resultados visíveis em 4 semanas — descubra a sua melhor versão</h2>
+                    
+                    <div style="display:flex; justify-content: center; gap: 15px; width: 100%;">
+                        <span style="font-size: 12px; font-weight:700; color:#555;">🟢 Peso-alvo: <strong class="dyn-target-weight">--</strong> kg</span>
+                        <span style="font-size: 12px; font-weight:700; color:#555;">📈 Nível: <strong>Medium</strong></span>
+                    </div>
+
+                    <!-- Banner de Desconto Temporário -->
+                    <div class="off-discount-banner">
+                        <div class="off-discount-left">🔥 50% de desconto <span style="font-size:9px; font-weight:500; color:#888;">desconto reservado apenas por:</span></div>
+                        <div class="off-discount-timer dyn-timer">09 : 59</div>
+                    </div>
+
+                    <p style="font-size: 12px; font-weight: 800; text-align: left; width: 100%; color: #333; margin-bottom: -5px;">Tenha resultados visíveis em apenas 4 semanas</p>
+
+                    <!-- Caixa Principal do Plano Personalizado -->
+                    <div class="off-price-box-wrapper">
+                        <div class="off-price-badge-top">MAIS POPULAR</div>
+                        <div class="off-price-body">
+                            <div class="off-price-left">
+                                <div class="off-price-radio">
+                                    <div class="off-price-radio-inner"></div>
+                                </div>
+                                <div class="off-price-details">
+                                    <span class="off-price-title">Seu plano personalizado</span>
+                                    <span class="off-price-subtitle">Suporte 24h e atualizações diárias</span>
+                                </div>
+                            </div>
+                            <div class="off-price-right">
+                                <span class="off-price-old">R$ 54,99</span>
+                                <span class="off-price-new">R$ 27,00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="font-size: 12px; color: #2E9E58; font-weight: 700; text-align: center; margin-top: 5px;">
+                        ✓ Garantia de reembolso de 30 dias
+                    </div>
+                    
+                    <p style="font-size:12px; color:#555; text-align:center;">🎁 Escolha seu plano e ganhe um plano de treino imprimível grátis!</p>
+
+                    <!-- Botão CTA de Compra -->
+                    <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="handleCheckout()">Quero meu plano</button>
+
+                    <!-- Caixa Selo de Reembolso Garantido -->
+                    <div style="background: #fff; border: 1px solid #eaeaea; border-radius: var(--radius); padding: 16px; text-align: center; margin-top: 10px;">
+                        <!-- Insira a URL do selo de garantia quando subir no GitHub -->
+                        <img src="" alt="Selo Garantia" style="max-height: 50px; background:#ddd; margin: 0 auto 10px; display:block;" onerror="this.style.display='none'">
+                        <h4 style="font-size: 14px; font-weight: 800; margin-bottom: 5px;">Garantia de reembolso de 100%</h4>
+                        <p style="font-size: 11px; color: #666; line-height: 1.5;">Acreditamos que nosso plano pode funcionar para você e que você terá resultados visíveis em 4 semanas! Estamos dispostos a devolver seu dinheiro caso você não veja resultados visíveis e consiga comprovar que seguiu o nosso plano. Consulte nossa Política de Reembolso para entender todos os requisitos.</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </div>
 
@@ -1200,6 +1786,7 @@
             if (id === 'step-30') animateBMIGauge();
             if (id === 'step-32') renderDynamicPlan();
             if (id === 'step-33') startSpinnerLoader();
+            if (id === 'step-36') setupOfferPage();
         }
     }
 
@@ -1478,6 +2065,86 @@
 
     function saveEmail() {
         goTo('step-35');
+    }
+
+    /* ── LÓGICA E SETUP DA PÁGINA DE OFERTA (STEP 36) ── */
+    
+    function setupOfferPage() {
+        // Substitui o "54" ou marcador pelo nome digitado no funil
+        const nameVal = userData.name || 'Você';
+        document.querySelectorAll('.dyn-user-name').forEach(el => el.textContent = nameVal);
+        
+        // Define o peso ideal no resumo de forma dinâmica
+        const targetVal = userData.targetWeight || 60;
+        document.querySelectorAll('.dyn-target-weight').forEach(el => el.textContent = targetVal);
+        
+        // Configura medidor de IMC na página de ofertas
+        const bmi = userData.bmi || 24.9;
+        document.getElementById('off-gauge-bmi-val').textContent = bmi;
+        
+        let pct = ((bmi - 15) / (35 - 15)) * 100;
+        if (pct < 5) pct = 5;
+        if (pct > 95) pct = 95;
+        
+        setTimeout(() => {
+            document.getElementById('off-dynamic-pointer').style.left = pct + '%';
+        }, 300);
+
+        const bmiCat = document.getElementById('off-bmi-category');
+        const bmiDesc = document.getElementById('off-bmi-desc');
+        if (bmi >= 30) {
+            bmiCat.textContent = "Obesidade";
+            bmiCat.style.color = "#d32f2f";
+            bmiDesc.innerHTML = `Seu peso atual representa riscos para a sua saúde (${bmi}). Para lidar com isso, usamos seu índice para criar um programa de perda de peso personalizado que se adapta às suas necessidades.`;
+        } else if (bmi >= 25) {
+            bmiCat.textContent = "Sobrepeso";
+            bmiCat.style.color = "#ef6c00";
+            bmiDesc.innerHTML = `Seu peso requer atenção redobrada (${bmi}). Usaremos seu índice para personalizar um programa de perda de peso alinhado às suas necessidades e objetivos.`;
+        } else {
+            bmiCat.textContent = "Saudável";
+            bmiCat.style.color = "var(--green)";
+            bmiDesc.innerHTML = `Ótimo! Seu índice (${bmi}) está dentro da faixa saudável. Nosso plano vai te focar em tonificação e bem-estar geral.`;
+        }
+
+        // Calcula dinamicamente a Idade Fitness baseada na idade do usuário
+        const fitAge = (userData.age ? parseInt(userData.age) + 7 : 42);
+        document.getElementById('off-fit-age').textContent = `${fitAge} anos (7 anos a mais do que sua idade real)`;
+        
+        startOfferTimer();
+    }
+
+    let offerTimerInterval;
+    function startOfferTimer() {
+        if (offerTimerInterval) clearInterval(offerTimerInterval);
+        let time = 599; // 9 minutos e 59 segundos em segundos
+        
+        function updateTimer() {
+            let mins = Math.floor(time / 60);
+            let secs = time % 60;
+            const formatted = `${mins.toString().padStart(2, '0')} : ${secs.toString().padStart(2, '0')}`;
+            document.querySelectorAll('.dyn-timer').forEach(el => el.textContent = formatted);
+            if (time <= 0) {
+                clearInterval(offerTimerInterval);
+            } else {
+                time--;
+            }
+        }
+        updateTimer();
+        offerTimerInterval = setInterval(updateTimer, 1000);
+    }
+
+    function scrollToPayment() {
+        const payBlock = document.getElementById('payment-block');
+        if (payBlock) {
+            payBlock.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+
+    function handleCheckout() {
+        // Redirecionamento de checkout de vendas
+        alert('Parabéns pela decisão! Redirecionando para a finalização segura da sua compra de R$ 27,00.');
+        // Altere para a sua URL de Checkout aqui:
+        // window.location.href = "https://seu-checkout.com/pay?prod=tai-chi&price=27";
     }
 </script>
 </body>
