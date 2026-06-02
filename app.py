@@ -7,7 +7,7 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-    @app.route('/upsell')
+@app.route('/upsell')
 def upsell():
     return render_template('upsell.html')
 
