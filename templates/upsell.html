@@ -79,7 +79,7 @@
 
         .question-text {
             font-size: 18px;
-            font-weight: 400; /* MUDADO: Texto base sem negrito */
+            font-weight: 400; /* Texto base sem negrito */
             line-height: 1.25;
             color: #000;
             margin-bottom: 15px;
@@ -87,7 +87,7 @@
             padding: 0 10px;
         }
 
-        /* CORREÇÃO: Mantém em negrito apenas a parte final solicitada */
+        /* Mantém em negrito apenas a parte final solicitada */
         .question-text strong {
             font-weight: 800;
         }
@@ -113,7 +113,7 @@
         .footer-action {
             width: 100%;
             text-align: center;
-            display: none; /* CORREÇÃO: Começa invisível para o delay de 10 segundos */
+            display: none; /* Começa invisível para o delay de 10 segundos */
         }
 
         .btn-primary {
@@ -145,14 +145,14 @@
         }
 
         .decline-link {
-    display: inline-block;
-    margin-top: 15px;
-    font-size: 12px;
-    color: var(--muted);
-    text-decoration: underline; /* CORREÇÃO: Aplica o sublinhado correto */
-    cursor: pointer;
-    font-weight: 600;
-}
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 12px;
+            color: var(--muted);
+            text-decoration: underline; /* Aplica o sublinhado correto */
+            cursor: pointer;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -165,7 +165,7 @@
         <!-- Títulos Otimizados -->
         <h1><span class="title-red">ESPERE!</span> Seu acesso ao Desafio de 28 Dias já está confirmado...</h1>
         
-        <!-- Pergunta de Impacto (Corrigida a interrogação e pesos de fonte) -->
+        <!-- Pergunta de Impacto -->
         <p class="question-text">Quer acelerar seu emagrecimento e aumentar suas chances de conquistar <strong>resultados nos próximos 28 dias?</strong></p>
 
         <!-- Player de Vídeo Compacto -->
@@ -179,20 +179,30 @@
 
     <!-- Rodapé Fixo (Ativado com script de atraso) -->
     <div class="footer-action" id="action-footer">
-        <button class="btn-primary" onclick="alert('Redirecionando para o Checkout do Acompanhamento VIP...')">
+        <button class="btn-primary" onclick="buyUpsell()">
             SIM! QUERO O ACOMPANHAMENTO VIP COM A DRA. SOFIA
         </button>
         <p class="sub-btn-note">Acelere sua jornada de emagrecimento com mais orientação, apoio e constância durante os 28 dias.</p>
-        <a class="decline-link" onclick="alert('Redirecionando para a área de membros padrão...')">Não, obrigado. Quero tentar sozinha.</a>
+        <a class="decline-link" onclick="skipUpsell()">Não, obrigado. Quero tentar sozinha.</a>
     </div>
 
 </div>
 
 <script>
-    // CORREÇÃO: Faz os botões inferiores aparecerem somente após 10 segundos de vídeo
+    // Faz os botões inferiores aparecerem somente após 10 segundos de vídeo
     setTimeout(function() {
         document.getElementById('action-footer').style.display = 'block';
     }, 10000); // 10000 milissegundos = 10 segundos
+
+    // Redireciona para o checkout do acompanhamento VIP
+    function buyUpsell() {
+        window.location.href = "https://go.perfectpay.com.br/PPU38CQCNQP";
+    }
+
+    // Redireciona o usuário para o painel de membros padrão
+    function skipUpsell() {
+        window.location.href = "/app";
+    }
 </script>
 </body>
 </html>
