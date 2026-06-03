@@ -70,7 +70,7 @@
         }
 
         h1 {
-            font-size: 20px; /* Reduzido de 24px para economizar espaço */
+            font-size: 20px;
             font-weight: 800;
             line-height: 1.25;
             letter-spacing: -0.5px;
@@ -78,8 +78,8 @@
         }
 
         .question-text {
-            font-size: 18px; /* Aumentado para dar destaque total */
-            font-weight: 800;
+            font-size: 18px;
+            font-weight: 400; /* MUDADO: Texto base sem negrito */
             line-height: 1.25;
             color: #000;
             margin-bottom: 15px;
@@ -87,10 +87,15 @@
             padding: 0 10px;
         }
 
+        /* CORREÇÃO: Mantém em negrito apenas a parte final solicitada */
+        .question-text strong {
+            font-weight: 800;
+        }
+
         /* Container do vídeo compacto */
         .video-box {
             width: 100%;
-            max-height: 220px; /* Reduzido para caber perfeitamente no iPhone */
+            max-height: 220px;
             aspect-ratio: 16 / 9;
             background: #000;
             border-radius: var(--radius);
@@ -108,6 +113,7 @@
         .footer-action {
             width: 100%;
             text-align: center;
+            display: none; /* CORREÇÃO: Começa invisível para o delay de 10 segundos */
         }
 
         .btn-primary {
@@ -143,7 +149,7 @@
             margin-top: 15px;
             font-size: 12px;
             color: var(--muted);
-            text-decoration: underline;
+            text-transform: underline;
             cursor: pointer;
             font-weight: 600;
         }
@@ -159,12 +165,11 @@
         <!-- Títulos Otimizados -->
         <h1><span class="title-red">ESPERE!</span> Seu acesso ao Desafio de 28 Dias já está confirmado...</h1>
         
-        <!-- Pergunta de Impacto Aumentada -->
-        <p class="question-text">¿Quer acelerar seu emagrecimento e aumentar suas chances de conquistar resultados nos próximos 28 dias?</p>
+        <!-- Pergunta de Impacto (Corrigida a interrogação e pesos de fonte) -->
+        <p class="question-text">Quer acelerar seu emagrecimento e aumentar suas chances de conquistar <strong>resultados nos próximos 28 dias?</strong></p>
 
         <!-- Player de Vídeo Compacto -->
         <div class="video-box">
-            <!-- Arraste o vídeo da Sofia para static/video/upsell-sofia.mp4 -->
             <video controls poster="static/img/hero-sofia.png">
                 <source src="static/video/upsell-sofia.mp4" type="video/mp4">
                 Seu navegador não suporta vídeos.
@@ -172,8 +177,8 @@
         </div>
     </div>
 
-    <!-- Rodapé Fixo no final da tela do iPhone -->
-    <div class="footer-action">
+    <!-- Rodapé Fixo (Ativado com script de atraso) -->
+    <div class="footer-action" id="action-footer">
         <button class="btn-primary" onclick="alert('Redirecionando para o Checkout do Acompanhamento VIP...')">
             SIM! QUERO O ACOMPANHAMENTO VIP COM A DRA. SOFIA
         </button>
@@ -182,5 +187,12 @@
     </div>
 
 </div>
+
+<script>
+    // CORREÇÃO: Faz os botões inferiores aparecerem somente após 10 segundos de vídeo
+    setTimeout(function() {
+        document.getElementById('action-footer').style.display = 'block';
+    }, 10000); // 10000 milissegundos = 10 segundos
+</script>
 </body>
 </html>
