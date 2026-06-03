@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ClubFit - Área do Membro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js para o gráfico de peso -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --green:       #2E9E58;
+            --green-dark:  #237A44;
+            --green-light: #E8F5EE;
+            --text:        #1A1A1A;
+            --muted:       #888888;
+            --card-bg:     #F5F5F0;
+            --radius:      16px;
+            --font:        'Inter', sans-serif;
+            --blue:        #2196F3;
+            --blue-light:  #E3F2FD;
+        }
+
+        body {
+            font-family: var(--font);
+            background: #FAFAF8;
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            position: relative;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        /* ── TOPO FIXO ── */
+        .app-header {
+            padding: 16px 20px;
+            background: #fff;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+        .app-logo {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--green);
+            letter-spacing: -0.5px;
+        }
+        .streak-badge {
+            background: #FFF0F0;
+            color: #D32F2F;
+            font-size: 12px;
+            font-weight: 800;
+            padding: 6px 12px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* ── ÁREA DE CONTEÚDO ── */
+        .app-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 20px 80px; /* Padding extra inferior para o menu */
+            background: #FAFAF8;
+        }
+
+        .tab-panel {
+            display: none;
+            flex-direction: column;
+            gap: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        .tab-panel.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ── MENU INFERIOR FIXO ── */
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: #fff;
+            border-top: 1px solid #eee;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+        .nav-item {
+            background: none;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: var(--muted);
+            font-family: var(--font);
+            font-size: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 25%;
+            transition: color 0.2s;
+        }
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            transition: stroke 0.2s;
+        }
+        .nav-item.active {
+            color: var(--green);
+        }
+
+        /* ── TITULARES DE SEÇÕES ── */
+        .section-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: #111;
+            letter-spacing: -0.5px;
+            text-align: left;
+        }
+        .section-subtitle {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: -15px;
+            text-align: left;
+        }
+
+        /* ── ABA 1: DESAFIO CALENDÁRIO ── */
+        .progress-box {
+            background: #fff;
+            border: 1px solid #eaeaea;
+            border-radius: var(--radius);
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .progress-title-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            font-weight: 800;
+        }
+        .progress-bar-container {
+            height: 8px;
+            background: #eee;
+            border-radius: 100px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: var(--green);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            width: 100%;
+        }
+        .day-btn {
+            background: #fff;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 12px;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            font-family: var(--font);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .day-btn .num { font-size: 16px; font-weight: 800; }
+        .day-btn .lbl { font-size: 8px; font-weight: 700; text-transform: uppercase; color: var(--muted); }
+        
+        .day-btn.completed {
+            background: var(--green-light);
+            border-color: var(--green);
+            color: var(--green-dark);
+        }
+        .day-btn.locked {
+            background: #f9f9f9;
+            border-color: #f0f0f0;
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* Sons Zen */
+        .zen-box {
+            background: #fff;
+            border: 1px solid #eaeaea;
+            border-radius: var(--radius);
+            padding: 16px;
+            text-align: left;
+        }
+        .sound-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #f9f9f9;
+        }
+        .sound-row:last-child { border: none; }
+        .sound-info { display: flex; align-items: center; gap: 10px; }
+        .sound-btn {
+            background: var(--green-light);
+            color: var(--green-dark);
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        /* ── ABA 2: DIÁRIO ÁGUA & PESO ── */
+        .diary-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        /* Copo D'água */
+        .water-card {
+            background: #fff;
+            border: 1px solid #eaeaea;
+            border-radius: var(--radius);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .water-left { text-align: left; }
+        .water-target { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+        .water-progress { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+        .water-btn {
+            background: var(--blue);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 10px 16px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+        .water-reset {
+            background: none;
+            border: none;
+            font-size: 11px;
+            color: var(--muted);
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        /* Efeito Copo SVG Visual */
+        .glass-container {
+            width: 70px;
+            height: 95px;
+            border: 4px solid #333;
+            border-top: none;
+            border-radius: 0 0 16px 16px;
+            position: relative;
+            overflow: hidden;
+            background: #fdfdfd;
+        }
+        .water-fill {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #2196F3;
+            height: 0%;
+            transition: height 0.5s ease-in-out;
+        }
+
+        /* Peso Card */
+        .weight-card {
+            background: #fff;
+            border: 1px solid #eaeaea;
+            border-radius: var(--radius);
+            padding: 20px;
+            text-align: left;
+        }
+        .weight-input-row {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .weight-input {
+            flex: 1;
+            padding: 12px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 700;
+            outline: none;
+        }
+        .weight-input:focus { border-color: var(--green); }
+        .btn-weight-save {
+            background: var(--green);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        /* ── ABA 3: NUTRIÇÃO ── */
+        .recipe-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .recipe-card {
+            background: #fff;
+            border: 1px solid #eaeaea;
+            border-radius: var(--radius);
+            padding: 16px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .recipe-img-box {
+            width: 65px;
+            height: 65px;
+            background: #eaeaea;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        .recipe-info h4 { font-weight: 800; font-size: 15px; margin-bottom: 4px; }
+        .recipe-info p { font-size: 12px; color: var(--muted); }
+
+        /* ── ABA 4: CHAT SOFIA VIP & PAYWALL ── */
+        .vip-panel {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Tela de Bloqueio (Paywall) */
+        .paywall-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 10px;
+            text-align: center;
+        }
+        .paywall-icon {
+            font-size: 48px;
+            animation: pulse-lock 2s infinite;
+        }
+        @keyframes pulse-lock {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Tela de Chat Liberada */
+        .chat-container {
+            display: none;
+            flex-direction: column;
+            height: calc(100vh - 160px);
+            background: #F0F2F5;
+            border-radius: var(--radius);
+            overflow: hidden;
+        }
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chat-bubble {
+            max-width: 75%;
+            padding: 10px 14px;
+            border-radius: 14px;
+            font-size: 13px;
+            line-height: 1.4;
+            text-align: left;
+        }
+        .chat-bubble.bot {
+            align-self: flex-start;
+            background: #fff;
+            color: #111;
+            border-bottom-left-radius: 4px;
+        }
+        .chat-bubble.user {
+            align-self: flex-end;
+            background: #D9FDD3;
+            color: #111;
+            border-bottom-right-radius: 4px;
+        }
+        .chat-input-area {
+            background: #fff;
+            padding: 10px;
+            display: flex;
+            gap: 8px;
+            border-top: 1px solid #eaeaea;
+        }
+        .chat-input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            font-size: 13px;
+        }
+        .chat-send-btn {
+            background: var(--green);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* ── MODAL DE VIDEO DO DIA ── */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+        .modal-content {
+            background: #fff;
+            border-radius: var(--radius);
+            width: 100%;
+            max-width: 420px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 12px; right: 15px;
+            font-size: 20px; font-weight: bold; cursor: pointer;
+            color: var(--muted);
+        }
+
+        /* Simulador Oculto no topo do Chat para você testar */
+        .test-toggle {
+            background: #f0f0f0;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 4px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- TOPO DO WEB APP -->
+    <header class="app-header">
+        <span class="app-logo">ClubFit</span>
+        <div class="streak-badge">
+            <span>🔥</span> <span id="streak-count">1</span> dia(s)
+        </div>
+    </header>
+
+    <!-- ÁREA DE CONTEÚDO DAS ABAS -->
+    <main class="app-content">
+
+        <!-- ABA 1: DESAFIO -->
+        <section id="panel-challenge" class="tab-panel active">
+            <h2 class="section-title">Seu Desafio</h2>
+            <p class="section-subtitle">Complete sua caminhada diária de 7 min</p>
+
+            <div class="progress-box">
+                <div class="progress-title-row">
+                    <span>Desafio 28 Dias</span>
+                    <span id="progress-text">0% Concluído</span>
+                </div>
+                <div class="progress-bar-container">
+                    <div id="progress-bar" class="progress-bar-fill"></div>
+                </div>
+            </div>
+
+            <!-- Calendário Interativo -->
+            <div class="calendar-grid" id="calendar-container">
+                <!-- Preenchido via Javascript -->
+            </div>
+
+            <!-- Sons de Fundo Zen -->
+            <div class="zen-box">
+                <h3 style="font-size: 14px; font-weight: 800; margin-bottom: 10px;">🎵 Áudios Zen para Caminhar</h3>
+                
+                <div class="sound-row">
+                    <div class="sound-info"><span>🌧️</span> <strong>Chuva Suave</strong></div>
+                    <button class="sound-btn" onclick="toggleAudio('rain', this)">▶</button>
+                </div>
+                <div class="sound-row">
+                    <div class="sound-info"><span>🌳</span> <strong>Floresta e Pássaros</strong></div>
+                    <button class="sound-btn" onclick="toggleAudio('forest', this)">▶</button>
+                </div>
+                <div class="sound-row">
+                    <div class="sound-info"><span>🧘‍♀️</span> <strong>Frequência de Cura</strong></div>
+                    <button class="sound-btn" onclick="toggleAudio('meditation', this)">▶</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABA 2: DIÁRIO DE MÉTRICAS -->
+        <section id="panel-diary" class="tab-panel">
+            <h2 class="section-title">Seu Diário</h2>
+            <p class="section-subtitle">Mantenha sua saúde sob controle</p>
+
+            <div class="diary-flex">
+                
+                <!-- Água Tracker -->
+                <div class="water-card">
+                    <div class="water-left">
+                        <div class="water-target">Meta: 1.9L</div>
+                        <div id="water-progress-text" class="water-progress">0 ml / 1900 ml</div>
+                        <button class="water-btn" onclick="addWater()">+ Beber 250ml</button>
+                        <button class="water-reset" onclick="resetWater()">Zerar</button>
+                    </div>
+                    <div class="glass-container">
+                        <div id="water-liquid" class="water-fill"></div>
+                    </div>
+                </div>
+
+                <!-- Peso Tracker -->
+                <div class="weight-card">
+                    <h3 style="font-size: 14px; font-weight: 800; margin-bottom: 5px;">⚖️ Registro de Peso</h3>
+                    <p style="font-size: 12px; color: var(--muted);">Acompanhe sua perda de peso em direção à sua meta</p>
+                    
+                    <div class="weight-input-row">
+                        <input type="number" id="weight-input" class="weight-input" placeholder="Ex: 68.5" step="0.1">
+                        <button class="btn-weight-save" onclick="saveWeight()">Salvar</button>
+                    </div>
+
+                    <div style="margin-top: 15px; width: 100%; height: 160px;">
+                        <canvas id="weightChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ABA 3: NUTRIÇÃO -->
+        <section id="panel-nutrition" class="tab-panel">
+            <h2 class="section-title">Guias de Nutrição</h2>
+            <p class="section-subtitle">Receitas rápidas e saudáveis</p>
+
+            <div class="recipe-list">
+                <div class="recipe-card">
+                    <div class="recipe-img-box">🍳</div>
+                    <div class="recipe-info">
+                        <h4>Ovos Mexidos com Chia</h4>
+                        <p>Rico em proteínas e ômega 3, perfeito para acelerar a saciedade matinal.</p>
+                    </div>
+                </div>
+                <div class="recipe-card">
+                    <div class="recipe-img-box">🥗</div>
+                    <div class="recipe-info">
+                        <h4>Salada Nutritiva de Grão-de-bico</h4>
+                        <p>Almoço leve, rico em fibras, com azeite de oliva e temperos termogênicos.</p>
+                    </div>
+                </div>
+                <div class="recipe-card">
+                    <div class="recipe-img-box">🍓</div>
+                    <div class="recipe-info">
+                        <h4>Iogurte com Amêndoas e Frutas Vermelhas</h4>
+                        <p>O lanche ideal para a tarde, com antioxidantes que eliminam o estresse.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABA 4: DRA. SOFIA VIP -->
+        <section id="panel-chat" class="tab-panel">
+            <div class="vip-panel">
+                
+                <!-- Simulador de Teste (Visível apenas para você validar a interface) -->
+                <div class="test-toggle" onclick="toggleVipStatus()">
+                    [TESTE: Clique para Simular Assinante Ativo/Inativo]
+                </div>
+
+                <!-- TELA BLOQUEADA (PAYWALL) -->
+                <div id="chat-paywall" class="paywall-container">
+                    <div class="paywall-icon">🔒</div>
+                    <h2 class="off-section-title" style="font-size: 20px;">Acompanhamento VIP 24h</h2>
+                    <p class="up-subheadline">Tenha a Dra. Sofia Lee na palma da sua mão para tirar dúvidas sobre exercícios, ajustar suas refeições e te manter motivada todos os dias!</p>
+                    
+                    <!-- Checkout para a assinatura PerfectPay -->
+                    <a href="https://go.perfectpay.com.br/PPU38CQCMGP" class="btn-primary" style="text-decoration: none;">
+                        QUERO ACESSO VIP COM DRA. SOFIA
+                    </a>
+                    
+                    <p class="up-description">Adicione esse acompanhamento exclusivo ao seu plano diário por apenas uma assinatura mensal.</p>
+                </div>
+
+                <!-- TELA LIBERADA (CHATBOT SIMULADO) -->
+                <div id="chat-active" class="chat-container">
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="chat-bubble bot">
+                            Olá! Eu sou a Sofia Lee, sua mentora VIP de bem-estar. Como foi sua prática de Tai Chi de hoje? Em que posso te ajudar hoje?
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input-text" class="chat-input" placeholder="Escreva para a Sofia...">
+                        <button class="chat-send-btn" onclick="sendMessage()">➔</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MENU INFERIOR DE ABAS (Estilo Aplicativo Mobile) -->
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchTab('challenge', this)">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg>
+            Desafio
+        </button>
+        <button class="nav-item" onclick="switchTab('diary', this)">
+            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+            Diário
+        </button>
+        <button class="nav-item" onclick="switchTab('nutrition', this)">
+            <svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/><path d="M12 7v5l3 3"/></svg>
+            Nutrição
+        </button>
+        <button class="nav-item" onclick="switchTab('chat', this)">
+            <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Dra. Sofia
+        </button>
+    </nav>
+
+</div>
+
+<!-- MODAL PARA REPRODUÇÃO DA AULA -->
+<div id="video-modal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <h3 id="modal-title" style="font-weight: 800; font-size: 18px; margin-bottom: 12px;">Aula</h3>
+        
+        <div class="video-container" style="margin-bottom: 15px;">
+            <!-- Player placeholder. Mude para seu link de aula do Vimeo/Panda ou Youtube -->
+            <iframe id="modal-video" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <button class="btn-primary" id="btn-complete-day">Concluir Prática de Hoje</button>
+    </div>
+</div>
+
+<script>
+    // ── LÓGICA DO SEU BANCO DE DADOS LOCAL (PERSISTÊNCIA) ──
+    let appState = {
+        completedDays: JSON.parse(localStorage.getItem('completedDays')) || [],
+        waterDrunk: parseInt(localStorage.getItem('waterDrunk')) || 0,
+        weightHistory: JSON.parse(localStorage.getItem('weightHistory')) || [78.5, 77.9, 77.2], // Mock inicial
+        isVipSubscribed: JSON.parse(localStorage.getItem('isVipSubscribed')) || false,
+        streak: parseInt(localStorage.getItem('streak')) || 1
+    };
+
+    // Áudio Players de Fundo Zen
+    let activeAudios = {};
+    const audioUrls = {
+        rain: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", // Exemplo público leve
+        forest: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        meditation: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
+    };
+
+    let weightChart = null;
+
+    // Inicializa o App
+    document.addEventListener("DOMContentLoaded", function() {
+        renderCalendar();
+        updateProgress();
+        updateWaterUI();
+        initWeightChart();
+        setupVipInterface();
+        document.getElementById('streak-count').textContent = appState.streak;
+    });
+
+    // Alternar as abas do Web App
+    function switchTab(tabId, btn) {
+        document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+        
+        btn.classList.add('active');
+        document.getElementById('panel-' + tabId).classList.add('active');
+
+        // Para carregar o tamanho do gráfico de forma correta ao alternar
+        if (tabId === 'diary' && weightChart) {
+            setTimeout(() => weightChart.update(), 150);
+        }
+    }
+
+    // Renderizar o calendário de 28 dias
+    function renderCalendar() {
+        const container = document.getElementById('calendar-container');
+        container.innerHTML = '';
+
+        for (let day = 1; day <= 28; day++) {
+            const btn = document.createElement('button');
+            btn.className = 'day-btn';
+            
+            // Lógica de bloqueio: Dia 1 está sempre livre. Outros só liberam se o anterior foi concluído.
+            const isUnlocked = day === 1 || appState.completedDays.includes(day - 1);
+            const isCompleted = appState.completedDays.includes(day);
+
+            if (isCompleted) {
+                btn.classList.add('completed');
+                btn.innerHTML = `<span class="num">✓</span><span class="lbl">Dia ${day}</span>`;
+            } else if (!isUnlocked) {
+                btn.classList.add('locked');
+                btn.innerHTML = `<span class="num">🔒</span><span class="lbl">Dia ${day}</span>`;
+            } else {
+                btn.innerHTML = `<span class="num">${day}</span><span class="lbl">Dia ${day}</span>`;
+            }
+
+            btn.onclick = () => {
+                if (isUnlocked || isCompleted) {
+                    openVideoModal(day);
+                }
+            };
+            container.appendChild(btn);
+        }
+    }
+
+    // Atualiza barra de progresso do desafio
+    function updateProgress() {
+        const percent = Math.round((appState.completedDays.length / 28) * 100);
+        document.getElementById('progress-text').textContent = `${percent}% Concluído`;
+        document.getElementById('progress-bar').style.width = `${percent}%`;
+    }
+
+    // Modal de vídeo das aulas
+    let currentActiveDay = 1;
+    function openVideoModal(day) {
+        currentActiveDay = day;
+        document.getElementById('modal-title').textContent = `Aula Prática - Dia ${day}`;
+        // Coloque seu link real do vídeo abaixo
+        document.getElementById('modal-video').src = "https://www.youtube.com/embed/dQw4w9WgXcQ"; 
+        document.getElementById('video-modal').style.display = 'flex';
+
+        // Botão para concluir o dia
+        document.getElementById('btn-complete-day').onclick = () => {
+            if (!appState.completedDays.includes(day)) {
+                appState.completedDays.push(day);
+                localStorage.setItem('completedDays', JSON.stringify(appState.completedDays));
+                
+                // Acrescenta dia de constância
+                appState.streak += 1;
+                localStorage.setItem('streak', appState.streak);
+                document.getElementById('streak-count').textContent = appState.streak;
+            }
+            closeModal();
+            renderCalendar();
+            updateProgress();
+        };
+    }
+
+    function closeModal() {
+        document.getElementById('video-modal').style.display = 'none';
+        document.getElementById('modal-video').src = "";
+    }
+
+    // Lógica Áudio Zen de fundo
+    function toggleAudio(soundType, btn) {
+        if (activeAudios[soundType]) {
+            activeAudios[soundType].pause();
+            delete activeAudios[soundType];
+            btn.textContent = "▶";
+            btn.style.background = "var(--green-light)";
+        } else {
+            // Pausa qualquer outro áudio zen ativo antes de iniciar outro
+            Object.keys(activeAudios).forEach(key => {
+                activeAudios[key].pause();
+                delete activeAudios[key];
+            });
+            document.querySelectorAll('.sound-btn').forEach(b => {
+                b.textContent = "▶";
+                b.style.background = "var(--green-light)";
+            });
+
+            const audio = new Audio(audioUrls[soundType]);
+            audio.loop = true;
+            audio.play();
+            activeAudios[soundType] = audio;
+            btn.textContent = "⏸";
+            btn.style.background = "#ffd2d2";
+        }
+    }
+
+    // ── LÓGICA DO CONTROLE DE ÁGUA ──
+    function addWater() {
+        if (appState.waterDrunk < 1900) {
+            appState.waterDrunk += 250;
+            if (appState.waterDrunk > 1900) appState.waterDrunk = 1900;
+            saveWaterState();
+        }
+    }
+
+    function resetWater() {
+        appState.waterDrunk = 0;
+        saveWaterState();
+    }
+
+    function saveWaterState() {
+        localStorage.setItem('waterDrunk', appState.waterDrunk);
+        updateWaterUI();
+    }
+
+    function updateWaterUI() {
+        document.getElementById('water-progress-text').textContent = `${appState.waterDrunk} ml / 1900 ml`;
+        const fillPercent = (appState.waterDrunk / 1900) * 100;
+        document.getElementById('water-liquid').style.height = `${fillPercent}%`;
+    }
+
+    // ── LÓGICA DO CONTROLE DE PESO ──
+    function initWeightChart() {
+        const ctx = document.getElementById('weightChart').getContext('2d');
+        
+        // Gera rótulos simples como (Semana 1, Semana 2...)
+        const labels = appState.weightHistory.map((_, idx) => `W${idx + 1}`);
+
+        weightChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Seu Peso (kg)',
+                    data: appState.weightHistory,
+                    borderColor: '#2E9E58',
+                    backgroundColor: 'rgba(46,158,88,0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { grid: { color: '#f0f0f0' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+    }
+
+    function saveWeight() {
+        const input = document.getElementById('weight-input');
+        const weightVal = parseFloat(input.value);
+
+        if (weightVal > 30 && weightVal < 250) {
+            appState.weightHistory.push(weightVal);
+            localStorage.setItem('weightHistory', JSON.stringify(appState.weightHistory));
+            
+            // Atualiza Gráfico
+            weightChart.data.labels.push(`W${appState.weightHistory.length}`);
+            weightChart.data.datasets[0].data = appState.weightHistory;
+            weightChart.update();
+
+            input.value = '';
+        }
+    }
+
+    // ── LÓGICA DO CHAT VIP & SIMULAÇÃO ──
+    function setupVipInterface() {
+        const paywall = document.getElementById('chat-paywall');
+        const chatActive = document.getElementById('chat-active');
+
+        if (appState.isVipSubscribed) {
+            paywall.style.display = 'none';
+            chatActive.style.display = 'flex';
+        } else {
+            paywall.style.display = 'flex';
+            chatActive.style.display = 'none';
+        }
+    }
+
+    // Função de Teste para simular o recebimento de compras ativas
+    function toggleVipStatus() {
+        appState.isVipSubscribed = !appState.isVipSubscribed;
+        localStorage.setItem('isVipSubscribed', JSON.stringify(appState.isVipSubscribed));
+        setupVipInterface();
+    }
+
+    // Enviar mensagem no chat e simular resposta inteligente da Dra. Sofia
+    function sendMessage() {
+        const input = document.getElementById('chat-input-text');
+        const text = input.value.trim();
+        if (!text) return;
+
+        const chatBox = document.getElementById('chat-messages');
+
+        // Cria balão do usuário
+        const userBubble = document.createElement('div');
+        userBubble.className = 'chat-bubble user';
+        userBubble.textContent = text;
+        chatBox.appendChild(userBubble);
+
+        input.value = '';
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Simula digitação da Dra. Sofia
+        setTimeout(() => {
+            const replies = [
+                "Isso é excelente! Manter a respiração cadenciada durante os passos do Tai Chi é o segredo para ativar o sistema nervoso parassimpático.",
+                "Seus joelhos doem um pouco? Tente fazer os passos de forma mais rasa, sem flexionar tanto as articulações hoje. Hidrate-se bem!",
+                "Excelente pergunta! Para o almoço de amanhã, o grão-de-bico com folhas verdes vai te manter saciada e manter a energia lá em cima.",
+                "Não desanime por hoje! O importante é a constância, 3 minutos de alongamento consciente já são suficientes se o seu dia foi corrido."
+            ];
+            const randomReply = replies[Math.floor(Math.random() * replies.length)];
+
+            const botBubble = document.createElement('div');
+            botBubble.className = 'chat-bubble bot';
+            botBubble.textContent = randomReply;
+            chatBox.appendChild(botBubble);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }, 1200);
+    }
+</script>
+
+</body>
+</html>

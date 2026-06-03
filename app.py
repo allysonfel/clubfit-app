@@ -11,6 +11,10 @@ def index():
 def upsell():
     return render_template('upsell.html')
 
+@app.route('/app')
+def app_member():
+    return render_template('app.html')
+
 if __name__ == '__main__':
     # O Railway define a porta automaticamente através da variável de ambiente PORT
     # Se ele não encontrar a variável (como no seu computador), ele usa a 8080 por padrão
