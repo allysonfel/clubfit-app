@@ -60,6 +60,25 @@
             color: var(--green);
             letter-spacing: -0.5px;
         }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-feedback-trigger {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+        .btn-feedback-trigger:active {
+            transform: scale(0.9);
+        }
         .streak-badge {
             background: #FFF0F0;
             color: #D32F2F;
@@ -95,7 +114,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ── MENU INFERIOR FIXO ── */
+        /* ── MENU INFERIOR FIXO (AJUSTADO PARA 3 ABAS) ── */
         .bottom-nav {
             position: absolute;
             bottom: 0;
@@ -122,7 +141,7 @@
             font-size: 10px;
             font-weight: 700;
             cursor: pointer;
-            width: 25%;
+            width: 33.33%; /* Dividido igualmente em 3 abas */
             transition: color 0.2s;
         }
         .nav-item svg {
@@ -339,37 +358,7 @@
             cursor: pointer;
         }
 
-        /* ── ABA 3: NUTRIÇÃO ── */
-        .recipe-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .recipe-card {
-            background: #fff;
-            border: 1px solid #eaeaea;
-            border-radius: var(--radius);
-            padding: 16px;
-            text-align: left;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-        .recipe-img-box {
-            width: 65px;
-            height: 65px;
-            background: #eaeaea;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-            flex-shrink: 0;
-        }
-        .recipe-info h4 { font-weight: 800; font-size: 15px; margin-bottom: 4px; }
-        .recipe-info p { font-size: 12px; color: var(--muted); }
-
-        /* ── ABA 4: CHAT SOFIA VIP & PAYWALL ── */
+        /* ── ABA 3: DRA. SOFIA VIP ── */
         .vip-panel {
             width: 100%;
             height: 100%;
@@ -377,7 +366,7 @@
             flex-direction: column;
         }
         
-        /* Tela de Bloqueio (Paywall) */
+        /* Tela de Bloqueio (Paywall Otimizada) */
         .paywall-container {
             display: flex;
             flex-direction: column;
@@ -396,15 +385,51 @@
             50% { transform: scale(1.1); }
         }
 
+        /* Botão de Compra no Paywall em Gradiente Pulsante */
+        .paywall-btn-premium {
+            display: block;
+            background: linear-gradient(135deg, var(--green) 0%, var(--green-dark) 100%);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            padding: 18px 24px;
+            font-size: 15px;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 8px 24px rgba(46,158,88,0.35);
+            transition: all 0.2s;
+            animation: pulse-premium-btn 2.2s infinite ease-in-out;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            width: 100%;
+        }
+        @keyframes pulse-premium-btn {
+            0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(46,158,88,0.35); }
+            50% { transform: scale(1.02); box-shadow: 0 12px 30px rgba(46,158,88,0.55); }
+        }
+        .paywall-btn-premium:active { transform: scale(0.98); }
+
         /* Tela de Chat Liberada */
         .chat-container {
             display: none;
             flex-direction: column;
-            height: calc(100vh - 160px);
+            height: calc(100vh - 180px);
             background: #F0F2F5;
             border-radius: var(--radius);
             overflow: hidden;
         }
+        .chat-header-bar {
+            background: #fff;
+            padding: 10px 15px;
+            border-bottom: 1px solid #eaeaea;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+        }
+        .chat-header-info h4 { font-size: 14px; font-weight: 800; margin-bottom: 2px; }
+        .chat-status-indicator { font-size: 11px; color: var(--green); font-weight: 700; }
+
         .chat-messages {
             flex: 1;
             padding: 15px;
@@ -433,6 +458,30 @@
             color: #111;
             border-bottom-right-radius: 4px;
         }
+
+        /* Balão de digitação ativo simulando IA */
+        #chat-typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background: #fff;
+            padding: 10px 14px;
+            border-radius: 14px;
+            border-bottom-left-radius: 4px;
+            font-size: 13px;
+            color: var(--muted);
+            gap: 4px;
+            align-items: center;
+            font-weight: 500;
+        }
+        .typing-dot {
+            animation: bounce 1.4s infinite both;
+            font-weight: 800;
+        }
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
         .chat-input-area {
             background: #fff;
             padding: 10px;
@@ -462,7 +511,7 @@
             font-weight: bold;
         }
 
-        /* ── MODAL DE VIDEO DO DIA ── */
+        /* ── MODAIS PADRÕES ── */
         .modal {
             display: none;
             position: fixed;
@@ -489,6 +538,36 @@
             color: var(--muted);
         }
 
+        /* Caixa de texto do feedback */
+        .feedback-textarea {
+            width: 100%;
+            height: 120px;
+            padding: 12px;
+            border: 1.5px solid #e0e0e0;
+            border-radius: var(--radius);
+            outline: none;
+            font-family: var(--font);
+            font-size: 13px;
+            resize: none;
+            margin-bottom: 15px;
+        }
+        .feedback-textarea:focus { border-color: var(--green); }
+
+        /* Estilo da Seção de Vídeos */
+        .video-container {
+            width: 100%;
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: var(--radius);
+            background: #000;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%; border: 0;
+        }
+
         /* Simulador Oculto no topo do Chat para você testar */
         .test-toggle {
             background: #f0f0f0;
@@ -508,8 +587,12 @@
     <!-- TOPO DO WEB APP -->
     <header class="app-header">
         <span class="app-logo">ClubFit</span>
-        <div class="streak-badge">
-            <span>🔥</span> <span id="streak-count">1</span> dia(s)
+        <div class="header-right">
+            <!-- Ícone de Envelope para abrir a caixa de Feedback -->
+            <button class="btn-feedback-trigger" onclick="openFeedbackModal()" title="Enviar Feedback">✉️</button>
+            <div class="streak-badge">
+                <span>🔥</span> <span id="streak-count">1</span> dia(s)
+            </div>
         </div>
     </header>
 
@@ -562,11 +645,11 @@
 
             <div class="diary-flex">
                 
-                <!-- Água Tracker -->
+                <!-- Água Tracker (Personalizado pelo peso do quiz) -->
                 <div class="water-card">
                     <div class="water-left">
-                        <div class="water-target">Meta: 1.9L</div>
-                        <div id="water-progress-text" class="water-progress">0 ml / 1900 ml</div>
+                        <div class="water-target" id="water-target-title">Meta: --</div>
+                        <div id="water-progress-text" class="water-progress">0 ml / -- ml</div>
                         <button class="water-btn" onclick="addWater()">+ Beber 250ml</button>
                         <button class="water-reset" onclick="resetWater()">Zerar</button>
                     </div>
@@ -593,66 +676,52 @@
             </div>
         </section>
 
-        <!-- ABA 3: NUTRIÇÃO -->
-        <section id="panel-nutrition" class="tab-panel">
-            <h2 class="section-title">Guias de Nutrição</h2>
-            <p class="section-subtitle">Receitas rápidas e saudáveis</p>
-
-            <div class="recipe-list">
-                <div class="recipe-card">
-                    <div class="recipe-img-box">🍳</div>
-                    <div class="recipe-info">
-                        <h4>Ovos Mexidos com Chia</h4>
-                        <p>Rico em proteínas e ômega 3, perfeito para acelerar a saciedade matinal.</p>
-                    </div>
-                </div>
-                <div class="recipe-card">
-                    <div class="recipe-img-box">🥗</div>
-                    <div class="recipe-info">
-                        <h4>Salada Nutritiva de Grão-de-bico</h4>
-                        <p>Almoço leve, rico em fibras, com azeite de oliva e temperos termogênicos.</p>
-                    </div>
-                </div>
-                <div class="recipe-card">
-                    <div class="recipe-img-box">🍓</div>
-                    <div class="recipe-info">
-                        <h4>Iogurte com Amêndoas e Frutas Vermelhas</h4>
-                        <p>O lanche ideal para a tarde, com antioxidantes que eliminam o estresse.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ABA 4: DRA. SOFIA VIP -->
+        <!-- ABA 3: DRA. SOFIA VIP -->
         <section id="panel-chat" class="tab-panel">
             <div class="vip-panel">
                 
-                <!-- Simulador de Teste (Visível apenas para você validar a interface) -->
+                <!-- Simulador de Teste para Alternar Assinatura no Desenvolvimento -->
                 <div class="test-toggle" onclick="toggleVipStatus()">
-                    [TESTE: Clique para Simular Assinante Ativo/Inativo]
+                    [TESTE: Clique aqui para simular se o cliente pagou a Assinatura ou não]
                 </div>
 
-                <!-- TELA BLOQUEADA (PAYWALL) -->
+                <!-- TELA BLOQUEADA (PAYWALL OTIMIZADA) -->
                 <div id="chat-paywall" class="paywall-container">
                     <div class="paywall-icon">🔒</div>
                     <h2 class="off-section-title" style="font-size: 20px;">Acompanhamento VIP 24h</h2>
                     <p class="up-subheadline">Tenha a Dra. Sofia Lee na palma da sua mão para tirar dúvidas sobre exercícios, ajustar suas refeições e te manter motivada todos os dias!</p>
                     
-                    <!-- Checkout para a assinatura PerfectPay -->
-                    <a href="https://go.perfectpay.com.br/PPU38CQCNQP" class="btn-primary" style="text-decoration: none;">
+                    <!-- Checkout Atualizado da Assinatura PerfectPay -->
+                    <a href="https://go.perfectpay.com.br/PPU38CQCNQP" class="paywall-btn-premium">
                         QUERO ACESSO VIP COM DRA. SOFIA
                     </a>
                     
-                    <p class="up-description">Adicione esse acompanhamento exclusivo ao seu plano diário por apenas uma assinatura mensal.</p>
+                    <p class="up-description" style="margin-top: 5px;">Adicione esse acompanhamento exclusivo ao seu plano diário por apenas uma assinatura mensal.</p>
                 </div>
 
-                <!-- TELA LIBERADA (CHATBOT SIMULADO) -->
+                <!-- TELA LIBERADA (CHAT INTERATIVO E INTELIGENTE SIMULADO) -->
                 <div id="chat-active" class="chat-container">
-                    <div class="chat-messages" id="chat-messages">
-                        <div class="chat-bubble bot">
-                            Olá! Eu sou a Sofia Lee, sua mentora VIP de bem-estar. Como foi sua prática de Tai Chi de hoje? Em que posso te ajudar hoje?
+                    <div class="chat-header-bar">
+                        <div class="chat-header-info">
+                            <h4>Dra. Sofia Lee</h4>
+                            <span class="chat-status-indicator" id="sofia-status">🟢 Online</span>
                         </div>
                     </div>
+                    
+                    <div class="chat-messages" id="chat-messages">
+                        <div class="chat-bubble bot" id="bot-welcome-msg">
+                            Olá! Eu sou a Sofia Lee, sua mentora VIP de bem-estar.
+                        </div>
+                    </div>
+                    
+                    <!-- Balão animado de Digitação da IA -->
+                    <div id="chat-typing-indicator">
+                        <span>Sofia está digitando</span>
+                        <span class="typing-dot" style="animation-delay: 0s;">.</span>
+                        <span class="typing-dot" style="animation-delay: 0.2s;">.</span>
+                        <span class="typing-dot" style="animation-delay: 0.4s;">.</span>
+                    </div>
+
                     <div class="chat-input-area">
                         <input type="text" id="chat-input-text" class="chat-input" placeholder="Escreva para a Sofia...">
                         <button class="chat-send-btn" onclick="sendMessage()">➔</button>
@@ -664,7 +733,7 @@
 
     </main>
 
-    <!-- MENU INFERIOR DE ABAS (Estilo Aplicativo Mobile) -->
+    <!-- MENU INFERIOR DE ABAS (ATUALIZADO PARA 3 ABAS) -->
     <nav class="bottom-nav">
         <button class="nav-item active" onclick="switchTab('challenge', this)">
             <svg viewBox="0 0 24 24"><path d="M12 2L2 22h20L12 2z"/></svg>
@@ -673,10 +742,6 @@
         <button class="nav-item" onclick="switchTab('diary', this)">
             <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
             Diário
-        </button>
-        <button class="nav-item" onclick="switchTab('nutrition', this)">
-            <svg viewBox="0 0 24 24"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z"/><path d="M12 7v5l3 3"/></svg>
-            Nutrição
         </button>
         <button class="nav-item" onclick="switchTab('chat', this)">
             <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -693,7 +758,6 @@
         <h3 id="modal-title" style="font-weight: 800; font-size: 18px; margin-bottom: 12px;">Aula</h3>
         
         <div class="video-container" style="margin-bottom: 15px;">
-            <!-- Player placeholder. Mude para seu link de aula do Vimeo/Panda ou Youtube -->
             <iframe id="modal-video" src="" frameborder="0" allowfullscreen></iframe>
         </div>
 
@@ -701,24 +765,84 @@
     </div>
 </div>
 
+<!-- MODAL DE CAIXA DE FEEDBACK -->
+<div id="feedback-modal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close" onclick="closeFeedbackModal()">&times;</span>
+        <h3 style="font-weight: 800; font-size: 18px; margin-bottom: 8px;">✉️ Enviar Feedback</h3>
+        <p style="font-size: 12px; color: var(--muted); margin-bottom: 15px;">Escreva abaixo sua dúvida, sugestão ou feedback sobre o aplicativo.</p>
+        
+        <textarea id="feedback-text" class="feedback-textarea" placeholder="Digite sua mensagem aqui..."></textarea>
+        
+        <button class="btn-primary" onclick="submitFeedback()">Enviar Mensagem</button>
+    </div>
+</div>
+
 <script>
-    // ── LÓGICA DO SEU BANCO DE DADOS LOCAL (PERSISTÊNCIA) ──
-    let appState = {
-        completedDays: JSON.parse(localStorage.getItem('completedDays')) || [],
-        waterDrunk: parseInt(localStorage.getItem('waterDrunk')) || 0,
-        weightHistory: JSON.parse(localStorage.getItem('weightHistory')) || [78.5, 77.9, 77.2], // Mock inicial
-        isVipSubscribed: JSON.parse(localStorage.getItem('isVipSubscribed')) || false,
-        streak: parseInt(localStorage.getItem('streak')) || 1
+    /* ── CONFIGURAÇÃO DE FÁCIL EDIÇÃO PARA AS SUAS AULAS DO DESAFIO (DIA 1 ao DIA 28) ── */
+    // Substitua os links do YouTube abaixo pelos links oficiais das suas aulas
+    const DESAFIO_VIDEOS = {
+        1: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        2: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        3: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        4: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        5: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        6: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        7: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        8: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        9: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        10: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        11: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        12: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        13: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        14: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        15: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        16: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        17: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        18: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        19: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        20: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        21: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        22: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        23: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        24: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        25: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        26: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        27: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        28: "https://www.youtube.com/embed/dQw4w9WgXcQ"
     };
 
-    // Áudio Players de Fundo Zen
-    let activeAudios = {};
-    const audioUrls = {
-        rain: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", // Exemplo público leve
+    /* ── CONFIGURAÇÃO DE FÁCIL EDIÇÃO PARA OS SEUS ÁUDIOS ZEN DE FUNDO ── */
+    // Substitua os links mp3 abaixo pelas suas próprias faixas musicais
+    const ZEN_AUDIOS = {
+        rain: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
         forest: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
         meditation: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"
     };
 
+    // Resgata os dados que o usuário preencheu no quiz
+    const userData = JSON.parse(localStorage.getItem('userData')) || {
+        name: 'Você',
+        weight: 70,
+        targetWeight: 60,
+        age: 35,
+        sensibilidades: [],
+        objetivos: []
+    };
+
+    // ── LÓGICA DO SEU BANCO DE DADOS LOCAL (PERSISTÊNCIA) ──
+    let appState = {
+        completedDays: JSON.parse(localStorage.getItem('completedDays')) || [],
+        waterDrunk: parseInt(localStorage.getItem('waterDrunk')) || 0,
+        weightHistory: JSON.parse(localStorage.getItem('weightHistory')) || [userData.weight || 70],
+        isVipSubscribed: JSON.parse(localStorage.getItem('isVipSubscribed')) || false,
+        streak: parseInt(localStorage.getItem('streak')) || 1
+    };
+
+    // Cálculo Científico de Hidratação Personalizada (Fórmula: Peso do Usuário * 35ml)
+    const calculatedWaterTarget = Math.round((userData.weight || 70) * 35);
+
+    let activeAudios = {};
     let weightChart = null;
 
     // Inicializa o App
@@ -729,9 +853,13 @@
         initWeightChart();
         setupVipInterface();
         document.getElementById('streak-count').textContent = appState.streak;
+        
+        // Define a saudação inicial do chatbot de acordo com as informações dele
+        const firstName = userData.name ? userData.name.split(' ')[0] : 'Amiga';
+        document.getElementById('bot-welcome-msg').textContent = `Olá, ${firstName}! Eu sou a Sofia Lee, sua mentora VIP de bem-estar. Vi no seu perfil que você deseja chegar aos ${userData.targetWeight || 60}kg através da prática consciente do Tai Chi. Como posso te orientar hoje?`;
     });
 
-    // Alternar as abas do Web App
+    // Alternar as abas do Web App (SPA)
     function switchTab(tabId, btn) {
         document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
         document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
@@ -754,7 +882,6 @@
             const btn = document.createElement('button');
             btn.className = 'day-btn';
             
-            // Lógica de bloqueio: Dia 1 está sempre livre. Outros só liberam se o anterior foi concluído.
             const isUnlocked = day === 1 || appState.completedDays.includes(day - 1);
             const isCompleted = appState.completedDays.includes(day);
 
@@ -784,13 +911,14 @@
         document.getElementById('progress-bar').style.width = `${percent}%`;
     }
 
-    // Modal de vídeo das aulas
+    // Modal de vídeo das aulas dinâmicas
     let currentActiveDay = 1;
     function openVideoModal(day) {
         currentActiveDay = day;
         document.getElementById('modal-title').textContent = `Aula Prática - Dia ${day}`;
-        // Coloque seu link real do vídeo abaixo
-        document.getElementById('modal-video').src = "https://www.youtube.com/embed/dQw4w9WgXcQ"; 
+        
+        // Puxa o link configurado na lista DESAFIO_VIDEOS de forma dinâmica
+        document.getElementById('modal-video').src = DESAFIO_VIDEOS[day] || "https://www.youtube.com/embed/dQw4w9WgXcQ"; 
         document.getElementById('video-modal').style.display = 'flex';
 
         // Botão para concluir o dia
@@ -833,7 +961,7 @@
                 b.style.background = "var(--green-light)";
             });
 
-            const audio = new Audio(audioUrls[soundType]);
+            const audio = new Audio(ZEN_AUDIOS[soundType]);
             audio.loop = true;
             audio.play();
             activeAudios[soundType] = audio;
@@ -842,11 +970,11 @@
         }
     }
 
-    // ── LÓGICA DO CONTROLE DE ÁGUA ──
+    // ── LÓGICA DO CONTROLE DE ÁGUA PERSONALIZADA ──
     function addWater() {
-        if (appState.waterDrunk < 1900) {
+        if (appState.waterDrunk < calculatedWaterTarget) {
             appState.waterDrunk += 250;
-            if (appState.waterDrunk > 1900) appState.waterDrunk = 1900;
+            if (appState.waterDrunk > calculatedWaterTarget) appState.waterDrunk = calculatedWaterTarget;
             saveWaterState();
         }
     }
@@ -862,16 +990,18 @@
     }
 
     function updateWaterUI() {
-        document.getElementById('water-progress-text').textContent = `${appState.waterDrunk} ml / 1900 ml`;
-        const fillPercent = (appState.waterDrunk / 1900) * 100;
+        // Exibe a meta personalizada do usuário baseada em seu peso
+        const targetLitres = (calculatedWaterTarget / 1000).toFixed(1);
+        document.getElementById('water-target-title').textContent = `Meta: ${targetLitres}L`;
+        document.getElementById('water-progress-text').textContent = `${appState.waterDrunk} ml / ${calculatedWaterTarget} ml`;
+        
+        const fillPercent = (appState.waterDrunk / calculatedWaterTarget) * 100;
         document.getElementById('water-liquid').style.height = `${fillPercent}%`;
     }
 
     // ── LÓGICA DO CONTROLE DE PESO ──
     function initWeightChart() {
         const ctx = document.getElementById('weightChart').getContext('2d');
-        
-        // Gera rótulos simples como (Semana 1, Semana 2...)
         const labels = appState.weightHistory.map((_, idx) => `W${idx + 1}`);
 
         weightChart = new Chart(ctx, {
@@ -908,7 +1038,6 @@
             appState.weightHistory.push(weightVal);
             localStorage.setItem('weightHistory', JSON.stringify(appState.weightHistory));
             
-            // Atualiza Gráfico
             weightChart.data.labels.push(`W${appState.weightHistory.length}`);
             weightChart.data.datasets[0].data = appState.weightHistory;
             weightChart.update();
@@ -931,14 +1060,13 @@
         }
     }
 
-    // Função de Teste para simular o recebimento de compras ativas
     function toggleVipStatus() {
         appState.isVipSubscribed = !appState.isVipSubscribed;
         localStorage.setItem('isVipSubscribed', JSON.stringify(appState.isVipSubscribed));
         setupVipInterface();
     }
 
-    // Enviar mensagem no chat e simular resposta inteligente da Dra. Sofia
+    // CHATBOT INTELIGENTE COM INJEÇÃO DE CONTEXTO DO QUIZ & DELAY REALISTA
     function sendMessage() {
         const input = document.getElementById('chat-input-text');
         const text = input.value.trim();
@@ -955,22 +1083,98 @@
         input.value = '';
         chatBox.scrollTop = chatBox.scrollHeight;
 
-        // Simula digitação da Dra. Sofia
+        // Exibe o status "Digitando..." e o balão de digitação
+        const typingIndicator = document.getElementById('chat-typing-indicator');
+        const statusText = document.getElementById('sofia-status');
+        
+        statusText.textContent = "✍️ Digitando...";
+        typingIndicator.style.display = "flex";
+        chatBox.scrollTop = chatBox.scrollHeight;
+
+        // Atraso de Resposta Realista (1.5 segundos)
         setTimeout(() => {
-            const replies = [
-                "Isso é excelente! Manter a respiração cadenciada durante os passos do Tai Chi é o segredo para ativar o sistema nervoso parassimpático.",
-                "Seus joelhos doem um pouco? Tente fazer os passos de forma mais rasa, sem flexionar tanto as articulações hoje. Hidrate-se bem!",
-                "Excelente pergunta! Para o almoço de amanhã, o grão-de-bico com folhas verdes vai te manter saciada e manter a energia lá em cima.",
-                "Não desanime por hoje! O importante é a constância, 3 minutos de alongamento consciente já são suficientes se o seu dia foi corrido."
-            ];
-            const randomReply = replies[Math.floor(Math.random() * replies.length)];
+            // Esconde digitação e volta o status para Online
+            typingIndicator.style.display = "none";
+            statusText.textContent = "🟢 Online";
+
+            const botReplyText = getSofiaResponse(text);
 
             const botBubble = document.createElement('div');
             botBubble.className = 'chat-bubble bot';
-            botBubble.textContent = randomReply;
+            botBubble.textContent = botReplyText;
             chatBox.appendChild(botBubble);
             chatBox.scrollTop = chatBox.scrollHeight;
-        }, 1200);
+        }, 1500);
+    }
+
+    // Mecanismo de Resposta Contextual da Sofia Lee utilizando as informações do Quiz
+    function getSofiaResponse(userText) {
+        const text = userText.toLowerCase();
+        const firstName = userData.name ? userData.name.split(' ')[0] : 'Amiga';
+        const weight = userData.weight || 70;
+        const target = userData.targetWeight || 60;
+        const sens = userData.sensibilidades || [];
+        
+        const hasKneeSens = sens.some(s => s.toLowerCase().includes('joelho'));
+        const hasBackSens = sens.some(s => s.toLowerCase().includes('costa') || s.toLowerCase().includes('lombar'));
+
+        if (text.includes('dor') || text.includes('articulacao') || text.includes('machucar') || text.includes('joelho') || text.includes('costas')) {
+            if (hasKneeSens && (text.includes('joelho') || text.includes('dor'))) {
+                return `Entendo perfeitamente, ${firstName}. No seu cadastro, você marcou que possui sensibilidade nos joelhos. Para a prática de hoje, recomendo caminhar mantendo as solas dos pés totalmente firmes no chão e evitar flexionar demais as articulações. Ouvir o seu corpo é essencial.`;
+            }
+            if (hasBackSens && (text.includes('costa') || text.includes('lombar') || text.includes('dor'))) {
+                return `Muita atenção com a sua postura lombar, ${firstName}! Como você mencionou que possui dores/sensibilidade nas costas, mantenha a coluna bem alinhada, relaxe os ombros e respire profundamente durante os movimentos da caminhada zen de hoje.`;
+            }
+            return `O Tai Chi deve ser sempre relaxante e terapêutico, ${firstName}. Se sentir qualquer dor ou incômodo físico, diminua a velocidade e faça passos mais curtos. Jamais force além do seu limite confortável.`;
+        }
+
+        if (text.includes('peso') || text.includes('emagrecer') || text.includes('balanca') || text.includes('meta')) {
+            return `Estamos focadas em sair dos seus ${weight}kg atuais e buscar de forma saudável a sua meta de ${target}kg, ${firstName}. O segredo do emagrecimento com a caminhada Tai Chi em casa está na constância diária de apenas 7 minutos e na ativação metabólica suave. Conte comigo!`;
+        }
+
+        if (text.includes('agua') || text.includes('beber') || text.includes('sede') || text.includes('hidratacao')) {
+            const litres = (calculatedWaterTarget / 1000).toFixed(1);
+            return `A hidratação ideal faz toda a diferença na queima de gordura e no alívio de estresse, ${firstName}. A sua meta diária personalizada é de ${litres}L de água. Lembre-se de tomar pequenos goles ao longo do dia, ok?`;
+        }
+
+        if (text.includes('como praticar') || text.includes('tai chi') || text.includes('exercicio') || text.includes('caminhada')) {
+            return `A caminhada consciente baseia-se na coordenação da respiração profunda com passos lentos e equilibrados. Siga o vídeo da sua aula do dia no nosso calendário e tente relaxar totalmente o tronco enquanto caminha.`;
+        }
+
+        if (text.includes('receita') || text.includes('comer') || text.includes('fome') || text.includes('nutricao') || text.includes('açúcar')) {
+            return `Para nutrir o seu corpo e diminuir a retenção líquida, ${firstName}, priorize refeições ricas em fibras e gorduras boas. Ovos mexidos com chia pela manhã ou um punhado de amêndoas com frutas vermelhas à tarde são ótimos aliados contra os picos de fome.`;
+        }
+
+        // Respostas de fallback natural
+        const defaultResponses = [
+            `Estou aqui com você, ${firstName}! Mantenha o foco na sua prática diária de 7 minutos. Pequenos passos consistentes vão te levar longe no nosso desafio de 28 dias.`,
+            `Como está se sentindo hoje, ${firstName}? Lembre-se de respirar fundo e relaxar a mente antes de iniciar os exercícios. Me diga se tiver qualquer dúvida sobre o plano.`,
+            `Lindo dia para praticar e desestressar, ${firstName}! Sinta os benefícios de cada movimento consciente que fizer hoje.`
+        ];
+        return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+    }
+
+    // ── LÓGICA DO MODAL DE FEEDBACK (DIRECIONA PARA clubfitonline@outlook.com) ──
+    function openFeedbackModal() {
+        document.getElementById('feedback-modal').style.display = 'flex';
+    }
+
+    function closeFeedbackModal() {
+        document.getElementById('feedback-modal').style.display = 'none';
+        document.getElementById('feedback-text').value = '';
+    }
+
+    function submitFeedback() {
+        const text = document.getElementById('feedback-text').value.trim();
+        if (!text) return;
+
+        const name = userData.name || 'Usuário';
+        const emailSubject = encodeURIComponent(`Feedback App ClubFit - de ${name}`);
+        const emailBody = encodeURIComponent(text);
+
+        // Abre o cliente de e-mail do usuário configurado para enviar para o seu endereço
+        window.location.href = `mailto:clubfitonline@outlook.com?subject=${emailSubject}&body=${emailBody}`;
+        closeFeedbackModal();
     }
 </script>
 

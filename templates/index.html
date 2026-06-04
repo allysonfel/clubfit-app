@@ -60,7 +60,7 @@
 
         h1, h2, h3 { font-weight: 800; text-align: center; letter-spacing: -0.8px; }
 
-        /* ── STEP 1 (Seu Original Intocado) ── */
+        /* ── STEP 1 ── */
         #step-1 {
             padding: 22px 20px 16px;
             align-items: center;
@@ -200,7 +200,7 @@
             margin-bottom: 20px;
         }
 
-        /* ── STEP 3 — BOAS-VINDAS (Cabeça Blindada e Sem Scroll) ── */
+        /* ── STEP 3 ── */
         .welcome-wrap {
             flex: 1;
             display: flex;
@@ -214,7 +214,7 @@
             width: 100%;
             max-height: 32vh;
             object-fit: cover;
-            object-position: center 10% !important; /* CORREÇÃO: Foca na cabeça da Sofia */
+            object-position: center 10% !important;
             border-radius: 24px;
             margin-bottom: 15px;
         }
@@ -257,7 +257,7 @@
         .opt-card.single:hover { background: var(--green); border-color: var(--green); color: #fff; }
         .emoji { font-size: 24px; padding-right: 10px; }
 
-        /* ── INTERATIVIDADE ANATOMIA (TELA 9 - RESTAURADA) ── */
+        /* ── INTERATIVIDADE ANATOMIA (TELA 9) ── */
         .anatomy-container { display: flex; width: 100%; gap: 15px; align-items: center; }
         .anatomy-list { flex: 1.1; display: flex; flex-direction: column; gap: 10px; }
         .anatomy-view { flex: 0.9; position: relative; display: flex; justify-content: center; }
@@ -275,7 +275,7 @@
             pointer-events: none;
             box-shadow: 0 0 15px rgba(255,165,0,0.8);
             animation: pulse-glow 1.5s infinite ease-in-out;
-            z-index: 5; /* Fica no topo */
+            z-index: 5;
         }
         .glow-dot.active { opacity: 1; transform: scale(1.4); }
 
@@ -307,10 +307,10 @@
         }
         .summary-column-item {
             display: flex;
-            flex-direction: column; /* Legenda no topo, valor embaixo */
+            flex-direction: column;
             align-items: flex-start;
             padding-bottom: 6px;
-            border-bottom: 1.5px solid #f0f0f0; /* Divisor fino sutil */
+            border-bottom: 1.5px solid #f0f0f0;
             text-align: left;
         }
         .summary-column-label {
@@ -334,7 +334,7 @@
         }
         .serene-sofia-img {
             width: 100%;
-            max-height: 135px; /* Tamanho proporcional perfeito para não rolar a tela */
+            max-height: 135px;
             object-fit: contain;
         }
 
@@ -389,7 +389,7 @@
         
         .review-box { width: 100%; background: #F5F5F0; border-radius: 12px; padding: 20px; text-align: left; margin-top: 10px; min-height: 120px; transition: opacity 0.3s; }
         .review-name { font-weight: 800; font-size: 14px; margin-bottom: 4px; }
-        .review-stars { color: #F5A623; font-size: 14px; margin-bottom: 8px; } /* Estrelas Amarelas */
+        .review-stars { color: #F5A623; font-size: 14px; margin-bottom: 8px; }
         .review-desc { font-size: 13px; color: #555; line-height: 1.5; }
 
         /* ── GRÁFICO DINÂMICO DE PERDA DE PESO (TELA 32) ── */
@@ -401,7 +401,7 @@
             max-height: 30vh;
             object-fit: contain;
             border-radius: 24px;
-            box-shadow: 0 10px 30px rgba(46,158,88,0.15); /* Sombra suave verde */
+            box-shadow: 0 10px 30px rgba(46,158,88,0.15);
             animation: float-chart 3s infinite ease-in-out;
         }
         @keyframes float-chart {
@@ -936,7 +936,7 @@
                 </div>
             </div>
         </div>
-        <button id="btn4" class="btn-primary btn-fixed disabled" onclick="goTo('step-5')">Continuar</button>
+        <button id="btn4" class="btn-primary btn-fixed disabled" onclick="saveObjectives()">Continuar</button>
     </div>
 
     <!-- STEP 5: BIOTIPO (2/25) -->
@@ -1192,7 +1192,7 @@
                 </div>
             </div>
         </div>
-        <div class="footer-action"><button id="btn17" class="btn-primary btn-fixed disabled" onclick="goTo('step-18')">Continuar</button></div>
+        <div class="footer-action"><button id="btn17" class="btn-primary btn-fixed disabled" onclick="saveSensitivities()">Continuar</button></div>
     </div>
 
     <!-- STEP 18: ROTINA TRABALHO (13/25) -->
@@ -1394,6 +1394,7 @@
             </div>
         </div>
         <div class="footer-action">
+            <!-- CORREÇÃO: Chamando a função correta no clique -->
             <button id="btn-target" class="btn-primary disabled" onclick="saveTargetWeight()">Continuar</button>
         </div>
     </div>
@@ -1556,10 +1557,10 @@
     <div id="step-34" class="step">
         <div class="main-content" style="justify-content: center;">
             <h2>Digite seu e-mail para receber seu plano pessoal de treino de Caminhada Tai Chi em Casa</h2>
-            <p style="color: #666; font-size: 13px; margin: 10px 0 25px;">Inclui um guia imprimível para praticar offline 🎁</p>
+            <p style="color: #666; font-size: 13px; margin: 10px 0 25px;">Faz com que a rotina fique leve 🎁</p>
 
             <div class="metric-input-wrapper">
-                <input type="email" id="email-input" class="metric-field" placeholder="seuemail@exemplo.com" oninput="validateEmail()" style="font-size: 18px;">
+                <input type="email" id="email-input" class="metric-field" placeholder="seuemail@exemplo.com" oninput="validateEmail()">
             </div>
         </div>
         <div class="footer-action">
@@ -1574,7 +1575,6 @@
             <h2 style="margin-top: 25px;">Tenha resultados visíveis em apenas 28 dias!</h2>
         </div>
         <div class="footer-action">
-            <!-- ALTERAÇÃO: Agora redireciona para a nova Página de Oferta (Step 36) -->
             <button class="btn-primary" onclick="goTo('step-36')">Continuar</button>
         </div>
     </div>
@@ -1939,6 +1939,7 @@
 
     function saveHeight() {
         userData.height = parseFloat(document.getElementById('height-input').value);
+        localStorage.setItem('userData', JSON.stringify(userData)); // SALVAMENTO DO PROGRESSO
         goTo('step-26');
     }
 
@@ -1981,6 +1982,7 @@
 
     function saveWeight() {
         userData.weight = parseFloat(document.getElementById('weight-input').value);
+        localStorage.setItem('userData', JSON.stringify(userData)); // SALVAMENTO DO PROGRESSO
         goTo('step-27');
     }
 
@@ -2035,6 +2037,7 @@
 
     function saveTargetWeight() {
         userData.targetWeight = parseFloat(document.getElementById('target-weight-input').value);
+        localStorage.setItem('userData', JSON.stringify(userData)); // SALVAMENTO DO PROGRESSO
         goTo('step-28');
     }
 
@@ -2048,6 +2051,7 @@
     // NOVA FUNÇÃO: Salva dinamicamente a idade inserida
     function saveAge() {
         userData.age = parseInt(document.getElementById('age-input').value);
+        localStorage.setItem('userData', JSON.stringify(userData)); // SALVAMENTO DO PROGRESSO
         goTo('step-29');
     }
 
@@ -2060,7 +2064,31 @@
 
     function saveName() {
         userData.name = document.getElementById('name-input').value.trim();
+        localStorage.setItem('userData', JSON.stringify(userData)); // SALVAMENTO DO PROGRESSO
         goTo('step-30');
+    }
+
+    /* ── SALVAR OBJETIVOS E SENSIBILIDADES DO CONTEXTO DO QUIZ ── */
+    function saveObjectives() {
+        const selectedCards = document.querySelectorAll('#step-4 .opt-card.selected');
+        const objs = [];
+        selectedCards.forEach(card => {
+            objs.push(card.querySelector('.opt-label').textContent.trim());
+        });
+        userData.objetivos = objs;
+        localStorage.setItem('userData', JSON.stringify(userData));
+        goTo('step-5');
+    }
+
+    function saveSensitivities() {
+        const selectedCards = document.querySelectorAll('#step-17 .opt-card.selected');
+        const sens = [];
+        selectedCards.forEach(card => {
+            sens.push(card.querySelector('.opt-label').textContent.trim());
+        });
+        userData.sensibilidades = sens;
+        localStorage.setItem('userData', JSON.stringify(userData));
+        goTo('step-18');
     }
 
     /* ── SCRIPTS DE ANIMAÇÕES DINÂMICAS ── */
@@ -2282,10 +2310,9 @@
     }
 
     function handleCheckout() {
-        // Redirecionamento de checkout de vendas
-        alert('Parabéns pela decisão! Redirecionando para a finalização segura da sua compra de R$ 27,00.');
-        // Altere para a sua URL de Checkout aqui:
-        // window.location.href = "https://go.perfectpay.com.br/PPU38CQCNQ9";
+        // Redireciona para o checkout oficial atualizado
+        localStorage.setItem('userData', JSON.stringify(userData));
+        window.location.href = "https://go.perfectpay.com.br/PPU38CQCNQ9";
     }
 </script>
 </body>
