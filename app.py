@@ -4,8 +4,8 @@ import google.generativeai as genai
 
 app = Flask(__name__)
 
-# Configuração da chave de API do Gemini (Lê do Railway ou usa a sua nova chave de teste como plano B)
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "AQ.Ab8RN6J061nf8z9htwZaCkg07Mmq0YtMWY8Z_7O6OglSXA5qqA")
+# Configuração de Segurança: Lê de forma oculta da variável de ambiente do Railway
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
 
@@ -21,7 +21,7 @@ def upsell():
 def app_member():
     return render_template('app.html')
 
-# NOVA ROTA: Processa as mensagens com inteligência dinâmica real usando o Gemini 1.5 Flash
+# ROTA: Processa as mensagens com inteligência dinâmica real usando o Gemini 1.5 Flash
 @app.route('/api/chat', methods=['POST'])
 def chat_with_sofia():
     if not GEMINI_API_KEY:
