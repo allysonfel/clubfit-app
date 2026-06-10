@@ -25,18 +25,20 @@ def app_member():
 @app.route('/api/chat', methods=['POST'])
 def chat_with_sofia():
     if not GEMINI_API_KEY:
-        return jsonify({"error": "Chave de API do Gemini não configurada."}), 500
+        return jsonify({"error": "Chave de API do Gemini não configurada no servidor."}), 500
     
     data = request.get_json() or {}
     user_message = data.get("message", "").strip()
-    user_data = data.get("userData", {})
+    
+    # Previne erros caso 'userData' venha explicitamente como null/None no JSON
+    user_data = data.get("userData") or {}
     
     if not user_message:
         return jsonify({"error": "Mensagem vazia."}), 400
 
-    # Extrai as informações de perfil do Quiz salvas localmente no navegador
+    # Extrai as informações de perfil do Quiz
     name = user_data.get("name", "amiga")
-    if name.lower() in ["você", "voce", ""]:
+    if not name or name.lower() in ["você", "voce", ""]:
         name = "amiga"
     
     weight = user_data.get("weight", "70")
@@ -45,8 +47,20 @@ def chat_with_sofia():
     sensibilidades = user_data.get("sensibilidades", [])
     objetivos = user_data.get("objetivos", [])
 
-    sens_text = ", ".join(sensibilidades) if sensibilidades else "Nenhuma sensibilidade marcada"
-    obj_text = ", ".join(objetivos) if objetivos else "Emagrecer de forma saudável"
+    # Tratamento seguro contra o bug do .join() caso os dados venham como string corrida
+    if isinstance(sensibilidades, str):
+        sens_text = sensibilidades if sensibilidades.strip() else "Nenhuma sensibilidade marcada"
+    elif isinstance(sensibilidades, list):
+        sens_text = ", ".join(str(s) for s in sensibilidades) if sensibilidades else "Nenhuma sensibilidade marcada"
+    else:
+        sens_text = "Nenhuma sensibilidade marcada"
+
+    if isinstance(objetivos, str):
+        obj_text = objetivos if objetivos.strip() else "Emagrecer de forma saudável"
+    elif isinstance(objetivos, list):
+        obj_text = ", ".join(str(o) for o in objetivos) if objetivos else "Emagrecer de forma saudável"
+    else:
+        obj_text = "Emagrecer de forma saudável"
 
     # System Instruction: Define a personalidade e injeta o perfil de saúde do usuário na IA
     system_instruction = (
@@ -72,15 +86,19 @@ def chat_with_sofia():
         )
         
         response = model.generate_content(user_message)
-        return jsonify({"response": response.text})
+        
+        # Validação de segurança: caso os filtros do Gemini bloqueiem o conteúdo gerado
+        if response and response.text:
+            return jsonify({"response": response.text})
+        else:
+            return jsonify({"response": "Desculpe, querida. Tive um probleminha para formular essa resposta agora. Pode me perguntar de outra forma?"})
         
     except Exception as e:
-        return jsonify({"error": f"Erro ao processar com o Gemini: {str(e)}"}), 500
+        # Registra o erro internamente nos logs do servidor (útil para debugar no Railway)
+        print(f"Erro ao processar com o Gemini: {str(e)}")
+        return jsonify({"error": f"Erro interno do servidor ao consultar a inteligência artificial."}), 500
 
 if __name__ == '__main__':
     # O Railway define a porta automaticamente através da variável de ambiente PORT
-    # Se ele não encontrar a variável (como no seu computador), ele usa a 8080 por padrão
     port = int(os.environ.get("PORT", 8080))
-    
-    # Importante: host='0.0.0.0' permite que o Railway torne seu app público
     app.run(host='0.0.0.0', port=port)

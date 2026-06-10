@@ -1,5 +1,3 @@
-code
-Html
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -765,12 +763,12 @@ Html
     };
 
     /* ── CONFIGURAÇÃO DE FÁCIL EDIÇÃO PARA OS SEUS ÁUDIOS ZEN DE FUNDO ── */
-// Caminhos locais apontando para a sua pasta static/audio/
-const ZEN_AUDIOS = {
-    rain: "/static/audio/chuva.mp3",
-    forest: "/static/audio/floresta.mp3",
-    meditation: "/static/audio/meditacao.mp3"
-};
+    // Caminhos locais apontando para a sua pasta static/audio/
+    const ZEN_AUDIOS = {
+        rain: "/static/audio/chuva.mp3",
+        forest: "/static/audio/floresta.mp3",
+        meditation: "/static/audio/meditacao.mp3"
+    };
 
     // Resgata os dados que o usuário preencheu no quiz
     const userData = JSON.parse(localStorage.getItem('userData')) || {
@@ -895,32 +893,40 @@ const ZEN_AUDIOS = {
         document.getElementById('modal-video').src = "";
     }
 
-   // Lógica Áudio Zen de fundo (Corrigida para ler os arquivos locais)
-function toggleAudio(soundType, btn) {
-    if (activeAudios[soundType]) {
-        activeAudios[soundType].pause();
-        delete activeAudios[soundType];
-        btn.textContent = "▶";
-        btn.style.background = "var(--green-light)";
-    } else {
-        // Pausa qualquer outro áudio zen ativo antes de iniciar outro
-        Object.keys(activeAudios).forEach(key => {
-            activeAudios[key].pause();
-            delete activeAudios[key];
-        });
-        document.querySelectorAll('.sound-btn').forEach(b => {
-            b.textContent = "▶";
-            b.style.background = "var(--green-light)";
-        });
+    // Lógica Áudio Zen de fundo (Corrigida para ler e tratar possíveis falhas)
+    function toggleAudio(soundType, btn) {
+        if (activeAudios[soundType]) {
+            activeAudios[soundType].pause();
+            delete activeAudios[soundType];
+            btn.textContent = "▶";
+            btn.style.background = "var(--green-light)";
+        } else {
+            // Pausa qualquer outro áudio zen ativo antes de iniciar outro
+            Object.keys(activeAudios).forEach(key => {
+                activeAudios[key].pause();
+                delete activeAudios[key];
+            });
+            document.querySelectorAll('.sound-btn').forEach(b => {
+                b.textContent = "▶";
+                b.style.background = "var(--green-light)";
+            });
 
-        const audio = new Audio(ZEN_AUDIOS[soundType]); // Usa a variável local corrigida
-        audio.loop = true;
-        audio.play();
-        activeAudios[soundType] = audio;
-        btn.textContent = "⏸";
-        btn.style.background = "#ffd2d2";
+            const audioPath = ZEN_AUDIOS[soundType];
+            const audio = new Audio(audioPath); 
+            audio.loop = true;
+
+            audio.play()
+                .then(() => {
+                    activeAudios[soundType] = audio;
+                    btn.textContent = "⏸";
+                    btn.style.background = "#ffd2d2";
+                })
+                .catch(err => {
+                    console.error(`Erro ao tentar carregar o áudio "${soundType}" em "${audioPath}":`, err);
+                    alert(`Não foi possível reproduzir o áudio "${soundType}". Verifique se o arquivo está na pasta "/static/audio/" e com o nome idêntico.`);
+                });
+        }
     }
-}
 
     // ── LÓGICA DO CONTROLE DE ÁGUA PERSONALIZADA ──
     function addWater() {
@@ -931,7 +937,6 @@ function toggleAudio(soundType, btn) {
         }
     }
 
-    // ... (Zerar etc continua igual)
     function resetWater() {
         appState.waterDrunk = 0;
         saveWaterState();
@@ -1019,80 +1024,88 @@ function toggleAudio(soundType, btn) {
         setupVipInterface();
     }
 
-    // ATUALIZADO: Envia a mensagem de forma real para o seu servidor Python que consulta o Gemini
-function sendMessage() {
-    const input = document.getElementById('chat-input-text');
-    const text = input.value.trim();
-    if (!text) return;
+    // Envia a mensagem de forma estruturada para o servidor Python
+    function sendMessage() {
+        const input = document.getElementById('chat-input-text');
+        const text = input.value.trim();
+        if (!text) return;
 
-    const chatBox = document.getElementById('chat-messages');
+        const chatBox = document.getElementById('chat-messages');
 
-    // Cria balão do usuário na tela
-    const userBubble = document.createElement('div');
-    userBubble.className = 'chat-bubble user';
-    userBubble.textContent = text;
-    chatBox.appendChild(userBubble);
+        // Cria balão do usuário na tela
+        const userBubble = document.createElement('div');
+        userBubble.className = 'chat-bubble user';
+        userBubble.textContent = text;
+        chatBox.appendChild(userBubble);
 
-    input.value = '';
-    chatBox.scrollTop = chatBox.scrollHeight;
+        input.value = '';
+        chatBox.scrollTop = chatBox.scrollHeight;
 
-    // Sorteia um tempo de digitação dinâmico (em milissegundos) para humanizar
-    const delayOptions = [3000, 5000, 8000, 12000, 18000, 20000];
-    const chosenDelay = delayOptions[Math.floor(Math.random() * delayOptions.length)];
+        // Sorteia um tempo de digitação dinâmico (em milissegundos) para humanizar
+        const delayOptions = [2000, 3000, 4000];
+        const chosenDelay = delayOptions[Math.floor(Math.random() * delayOptions.length)];
 
-    const typingIndicator = document.getElementById('chat-typing-indicator');
-    const statusText = document.getElementById('sofia-status');
-    
-    statusText.textContent = "✍️ Digitando...";
-    typingIndicator.style.display = "flex";
-    chatBox.scrollTop = chatBox.scrollHeight;
+        const typingIndicator = document.getElementById('chat-typing-indicator');
+        const statusText = document.getElementById('sofia-status');
+        
+        statusText.textContent = "✍️ Digitando...";
+        typingIndicator.style.display = "flex";
+        chatBox.scrollTop = chatBox.scrollHeight;
 
-    const startTime = Date.now();
+        const startTime = Date.now();
 
-    // Envia a mensagem e os dados salvos do quiz para a API do seu backend
-    fetch('/api/chat', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            message: text,
-            userData: userData
+        // Envia a mensagem e os dados salvos do quiz para a API do seu backend
+        fetch('/api/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: text,
+                userData: userData
+            })
         })
-    })
-    .then(response => response.json())
-    .then(data => {
-        const elapsed = Date.now() - startTime;
-        const remainingDelay = Math.max(0, chosenDelay - elapsed);
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Servidor respondeu com status ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const elapsed = Date.now() - startTime;
+            const remainingDelay = Math.max(0, chosenDelay - elapsed);
 
-        // Aguarda o tempo de digitação sorteado antes de exibir a resposta real do Gemini
-        setTimeout(() => {
+            // Aguarda o tempo de digitação sorteado antes de exibir a resposta real do Gemini
+            setTimeout(() => {
+                typingIndicator.style.display = "none";
+                statusText.textContent = "🟢 Online";
+
+                console.log("Dados recebidos da API de chat:", data);
+
+                // Tenta ler 'response' ou chaves alternativas como 'reply' ou 'text'
+                const replyText = data.response || data.reply || data.text || "Desculpe, querida. Tive um probleminha de conexão temporária. Pode repetir?";
+
+                const botBubble = document.createElement('div');
+                botBubble.className = 'chat-bubble bot';
+                botBubble.textContent = replyText;
+                chatBox.appendChild(botBubble);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, remainingDelay);
+        })
+        .catch(error => {
             typingIndicator.style.display = "none";
             statusText.textContent = "🟢 Online";
-
-            const replyText = data.response || "Desculpe, querida. Tive um probleminha de conexão temporária. Pode repetir?";
+            console.error("Erro no chat:", error);
 
             const botBubble = document.createElement('div');
             botBubble.className = 'chat-bubble bot';
-            botBubble.textContent = replyText;
+            botBubble.textContent = "Amiga, estou com um pouco de dificuldade de conexão agora. Tente me mandar uma mensagem novamente em alguns segundos.";
             chatBox.appendChild(botBubble);
             chatBox.scrollTop = chatBox.scrollHeight;
-        }, remainingDelay);
-    })
-    .catch(error => {
-        typingIndicator.style.display = "none";
-        statusText.textContent = "🟢 Online";
+        });
+    }
 
-        const botBubble = document.createElement('div');
-        botBubble.className = 'chat-bubble bot';
-        botBubble.textContent = "Amiga, estou com um pouco de dificuldade de conexão agora. Tente me mandar uma mensagem novamente em alguns segundos.";
-        chatBox.appendChild(botBubble);
-        chatBox.scrollTop = chatBox.scrollHeight;
-        console.error("Erro no chat:", error);
-    });
-}
-
-    // Mecanismo de Resposta Contextual da Sofia Lee utilizando as informações do Quiz
+    // Mecanismo de Resposta Contextual Local (caso necessário)
     function getSofiaResponse(userText) {
         const text = userText.toLowerCase();
         const firstName = userData.name ? userData.name.split(' ')[0] : 'Amiga';
@@ -1130,7 +1143,6 @@ function sendMessage() {
             return `Para nutrir o seu corpo e diminuir a retenção líquida, ${firstName}, priorize refeições ricas em fibras e gorduras boas. Ovos mexidos com chia pela manhã ou um punhado de amêndoas com frutas vermelhas à tarde são ótimos aliados contra os picos de fome.`;
         }
 
-        // Respostas de fallback natural
         const defaultResponses = [
             `Estou aqui com você, ${firstName}! Mantenha o foco na sua prática diária de 7 minutos. Pequenos passos consistentes vão te levar longe no nosso desafio de 28 dias.`,
             `Como está se sentindo hoje, ${firstName}? Lembre-se de respirar fundo e relaxar a mente antes de iniciar os exercícios. Me diga se tiver qualquer dúvida sobre o plano.`,
@@ -1164,4 +1176,4 @@ function sendMessage() {
 </script>
 
 </body>
-</html>_
+</html>
