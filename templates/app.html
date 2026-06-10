@@ -60,25 +60,6 @@
             color: var(--green);
             letter-spacing: -0.5px;
         }
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .btn-feedback-trigger {
-            background: none;
-            border: none;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s;
-        }
-        .btn-feedback-trigger:active {
-            transform: scale(0.9);
-        }
         .streak-badge {
             background: #FFF0F0;
             color: #D32F2F;
@@ -538,21 +519,6 @@
             color: var(--muted);
         }
 
-        /* Caixa de texto do feedback */
-        .feedback-textarea {
-            width: 100%;
-            height: 120px;
-            padding: 12px;
-            border: 1.5px solid #e0e0e0;
-            border-radius: var(--radius);
-            outline: none;
-            font-family: var(--font);
-            font-size: 13px;
-            resize: none;
-            margin-bottom: 15px;
-        }
-        .feedback-textarea:focus { border-color: var(--green); }
-
         /* Estilo da Seção de Vídeos */
         .video-container {
             width: 100%;
@@ -587,12 +553,8 @@
     <!-- TOPO DO WEB APP -->
     <header class="app-header">
         <span class="app-logo">ClubFit</span>
-        <div class="header-right">
-            <!-- Ícone de Envelope para abrir a caixa de Feedback -->
-            <button class="btn-feedback-trigger" onclick="openFeedbackModal()" title="Enviar Feedback">✉️</button>
-            <div class="streak-badge">
-                <span>🔥</span> <span id="streak-count">1</span> dia(s)
-            </div>
+        <div class="streak-badge">
+            <span>🔥</span> <span id="streak-count">1</span> dia(s)
         </div>
     </header>
 
@@ -762,19 +724,6 @@
         </div>
 
         <button class="btn-primary" id="btn-complete-day">Concluir Prática de Hoje</button>
-    </div>
-</div>
-
-<!-- MODAL DE CAIXA DE FEEDBACK -->
-<div id="feedback-modal" class="modal">
-    <div class="modal-content">
-        <span class="modal-close" onclick="closeFeedbackModal()">&times;</span>
-        <h3 style="font-weight: 800; font-size: 18px; margin-bottom: 8px;">✉️ Enviar Feedback</h3>
-        <p style="font-size: 12px; color: var(--muted); margin-bottom: 15px;">Escreva abaixo sua dúvida, sugestão ou feedback sobre o aplicativo.</p>
-        
-        <textarea id="feedback-text" class="feedback-textarea" placeholder="Digite sua mensagem aqui..."></textarea>
-        
-        <button class="btn-primary" onclick="submitFeedback()">Enviar Mensagem</button>
     </div>
 </div>
 
@@ -1066,7 +1015,7 @@
         setupVipInterface();
     }
 
-    // CHATBOT INTELIGENTE COM INJEÇÃO DE CONTEXTO DO QUIZ & DELAY REALISTA
+    // Enviar mensagem no chat e simular resposta inteligente da Dra. Sofia
     function sendMessage() {
         const input = document.getElementById('chat-input-text');
         const text = input.value.trim();
@@ -1179,4 +1128,4 @@
 </script>
 
 </body>
-</html>
+</html>_
