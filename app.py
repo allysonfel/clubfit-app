@@ -21,7 +21,7 @@ def upsell():
 def app_member():
     return render_template('app.html')
 
-# ROTA: Processa as mensagens com inteligência dinâmica real usando o Gemini 1.5 Flash
+# ROTA: Processa as mensagens com inteligência dinâmica real usando o Gemini 2.5 Flash
 @app.route('/api/chat', methods=['POST'])
 def chat_with_sofia():
     if not GEMINI_API_KEY:
@@ -79,9 +79,9 @@ def chat_with_sofia():
     )
 
     try:
-        # Inicializa o modelo Gemini 1.5 Flash com a instrução do sistema
+        # Inicializa o modelo Gemini com a instrução do sistema (usando o modelo atualizado gemini-2.5-flash)
         model = genai.GenerativeModel(
-            model_name="gemini-1.5-flash",
+            model_name="gemini-2.5-flash",
             system_instruction=system_instruction
         )
         
