@@ -449,6 +449,37 @@ def chat_with_sofia():
         print(f"Erro ao processar com o Gemini: {str(e)}")
         return jsonify({"error": "Erro interno do servidor ao consultar a inteligência artificial."}), 500
 
+# ── ROTA TEMPORÁRIA: Cria usuário de testes ativo no banco para testes rápidos ──
+@app.route('/api/criar-teste')
+def criar_usuario_teste():
+    import hashlib
+    email_teste = "teste@clubfit.online"
+    senha_teste = "senha123"
+    hashed_senha = hashlib.sha256(senha_teste.encode()).hexdigest()
+    
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    try:
+        # Insere ou substitui o usuário de testes ativo
+        cursor.execute('''
+            INSERT OR REPLACE INTO users (id, email, password, status) 
+            VALUES (999, ?, ?, 'active')
+        ''', (email_teste, hashed_senha))
+        
+        # Insere as métricas de saúde iniciais para o teste
+        cursor.execute('''
+            INSERT OR REPLACE INTO metrics (user_id, name, age, height, weight, target_weight, sensibilidades, objetivos) 
+            VALUES (999, 'Mariana Rezende', 45, 168, 82.5, 68.0, 'Joelhos sensíveis', 'Perder peso, Reduzir idade biológica')
+        ''')
+        
+        conn.commit()
+        return "<h3>Usuário de testes criado com sucesso!</h3><p>Acesse seu app e faça login com:<br><b>E-mail:</b> teste@clubfit.online<br><b>Senha:</b> senha123</p>"
+    except Exception as e:
+        print("Erro ao criar usuário de teste:", str(e))
+        return f"Erro ao criar usuário: {str(e)}"
+    finally:
+        conn.close()
+
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port)
