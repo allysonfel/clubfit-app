@@ -17,7 +17,6 @@
             --text:        #1A1A1A;
             --muted:       #888888;
             --card-bg:     #F5F5F0;
-            --radius: animateBMIGauge;
             --radius:      16px;
             --font:        'Inter', sans-serif;
             --blue:        #2196F3;
@@ -554,8 +553,14 @@
     <!-- TOPO DO WEB APP -->
     <header class="app-header">
         <span class="app-logo">ClubFit</span>
-        <div class="streak-badge">
-            <span>🔥</span> <span id="streak-count">1</span> dia(s)
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <!-- BOTÃO CONFIGURAÇÃO DO PERFIL -->
+            <button onclick="openProfileModal()" style="background: none; border: none; font-size: 13px; font-weight: 700; color: var(--green); cursor: pointer; display: flex; align-items: center; gap: 3px;">
+                👤 Meu Perfil
+            </button>
+            <div class="streak-badge">
+                <span>🔥</span> <span id="streak-count">1</span> dia(s)
+            </div>
         </div>
     </header>
 
@@ -564,8 +569,9 @@
 
         <!-- ABA 1: DESAFIO -->
         <section id="panel-challenge" class="tab-panel active">
-            <h2 class="section-title">Seu Desafio</h2>
-            <p class="section-subtitle">Complete sua caminhada diária de 7 min</p>
+            <!-- NOME PERSONALIZADO DINAMICAMENTE -->
+            <h2 class="section-title">Olá, <span id="header-user-name">amiga</span>!</h2>
+            <p class="section-subtitle" style="margin-top: 5px;">Complete sua caminhada diária de 7 min</p>
 
             <div class="progress-box">
                 <div class="progress-title-row">
@@ -724,13 +730,60 @@
             <iframe id="modal-video" src="" frameborder="0" allowfullscreen></iframe>
         </div>
 
-        <button class="btn-primary" id="btn-complete-day">Concluir Prática de Hoje</button>
+        <button class="btn-primary" id="btn-complete-day" style="width: 100%; border: none; background: var(--green); color: white; padding: 14px; border-radius: 8px; font-weight: 800; cursor: pointer;">Concluir Prática de Hoje</button>
+    </div>
+</div>
+
+<!-- MODAL DE CONFIGURAÇÃO DE PERFIL E ALTERAÇÃO DE SENHA -->
+<div id="profile-modal" class="modal">
+    <div class="modal-content" style="text-align: left; max-width: 400px; padding: 25px 20px;">
+        <span class="modal-close" onclick="closeProfileModal()">&times;</span>
+        <h3 style="font-weight: 800; font-size: 18px; margin-bottom: 15px; text-align: center;">Meu Perfil & Segurança</h3>
+        
+        <div id="profile-error-box" style="display: none; background: #FFF0F0; border: 1px solid #FFCDCD; color: #D32F2F; border-radius: 8px; padding: 10px; font-size: 12px; font-weight: 600; margin-bottom: 15px;"></div>
+        <div id="profile-success-box" style="display: none; background: #E8F5EE; border: 1px solid #CDEAda; color: #2E9E58; border-radius: 8px; padding: 10px; font-size: 12px; font-weight: 600; margin-bottom: 15px;"></div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+                <label style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;">Nome completo</label>
+                <input type="text" id="prof-name" style="padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <label style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;">Idade (anos)</label>
+                    <input type="number" id="prof-age" style="padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <label style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;">Altura (cm)</label>
+                    <input type="number" id="prof-height" style="padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <label style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;">Peso Atual (kg)</label>
+                    <input type="number" id="prof-weight" step="0.1" style="padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 4px;">
+                    <label style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;">Peso Alvo (kg)</label>
+                    <input type="number" id="prof-target" step="0.1" style="padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
+                </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 4px; margin-top: 5px; border-top: 1px solid #eee; padding-top: 15px;">
+                <label style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;">Definir Nova Senha (Mín. 6 dígitos)</label>
+                <input type="password" id="prof-password" placeholder="Nova senha (ou deixe em branco)" style="padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
+            </div>
+            
+            <button onclick="saveProfile()" style="background: var(--green); color: white; border: none; border-radius: 8px; padding: 14px; font-weight: 800; cursor: pointer; text-align: center; margin-top: 10px; font-size: 15px;">Salvar alterações</button>
+            <button onclick="handleLogout()" style="background: #FFF0F0; color: #D32F2F; border: 1.5px solid #FFCDCD; border-radius: 8px; padding: 12px; font-weight: 800; cursor: pointer; text-align: center; font-size: 14px; margin-top: 5px;">Sair da Conta</button>
+        </div>
     </div>
 </div>
 
 <script>
     /* ── CONFIGURAÇÃO DE FÁCIL EDIÇÃO PARA AS SUAS AULAS DO DESAFIO (DIA 1 ao DIA 28) ── */
-    // Substitua os links do YouTube abaixo pelos links oficiais das suas aulas
     const DESAFIO_VIDEOS = {
         1: "https://www.youtube.com/embed/dQw4w9WgXcQ",
         2: "https://www.youtube.com/embed/dQw4w9WgXcQ",
@@ -762,51 +815,86 @@
         28: "https://www.youtube.com/embed/dQw4w9WgXcQ"
     };
 
-    /* ── CONFIGURAÇÃO DE FÁCIL EDIÇÃO PARA OS SEUS ÁUDIOS ZEN DE FUNDO ── */
-    // Caminhos locais apontando para a sua pasta static/audio/
+    /* ── CONFIGURAÇÃO DE ÁUDIOS ZEN DE FUNDO ── */
     const ZEN_AUDIOS = {
         rain: "/static/audio/chuva.mp3",
         forest: "/static/audio/floresta.mp3",
         meditation: "/static/audio/meditacao.mp3"
     };
 
-    // Resgata os dados que o usuário preencheu no quiz
-    const userData = JSON.parse(localStorage.getItem('userData')) || {
+    // Definições de dados locais com sincronização do banco de dados SQLite
+    let userData = {
         name: 'Você',
         weight: 70,
         targetWeight: 60,
         age: 35,
+        height: 170,
         sensibilidades: [],
         objetivos: []
     };
 
-    // ── LÓGICA DO SEU BANCO DE DADOS LOCAL (PERSISTÊNCIA) ──
     let appState = {
         completedDays: JSON.parse(localStorage.getItem('completedDays')) || [],
         waterDrunk: parseInt(localStorage.getItem('waterDrunk')) || 0,
-        weightHistory: JSON.parse(localStorage.getItem('weightHistory')) || [userData.weight || 70],
+        weightHistory: JSON.parse(localStorage.getItem('weightHistory')) || [70],
         isVipSubscribed: JSON.parse(localStorage.getItem('isVipSubscribed')) || false,
         streak: parseInt(localStorage.getItem('streak')) || 1
     };
 
-    // Cálculo Científico de Hidratação Personalizada (Fórmula: Peso do Usuário * 35ml)
-    const calculatedWaterTarget = Math.round((userData.weight || 70) * 35);
-
+    // Declarado como reconfigurável dinamicamente
+    let calculatedWaterTarget = Math.round((userData.weight || 70) * 35);
     let activeAudios = {};
     let weightChart = null;
 
-    // Inicializa o App
+    // Inicialização do Web App conectada ao backend Flask
     document.addEventListener("DOMContentLoaded", function() {
-        renderCalendar();
-        updateProgress();
-        updateWaterUI();
-        initWeightChart();
-        setupVipInterface();
-        document.getElementById('streak-count').textContent = appState.streak;
-        
-        // Define a saudação inicial do chatbot de acordo com as informações dele
-        const firstName = userData.name ? userData.name.split(' ')[0] : 'Amiga';
-        document.getElementById('bot-welcome-msg').textContent = `Olá, ${firstName}! Eu sou a Sofia Lee, sua mentora VIP de bem-estar. Vi no seu perfil que você deseja chegar aos ${userData.targetWeight || 60}kg através da prática consciente do Tai Chi. Como posso te orientar hoje?`;
+        // Validação e carregamento de sessão
+        fetch('/api/user/data')
+        .then(response => {
+            if (response.status === 401) {
+                // Sessão encerrada ou não autorizada -> manda para login
+                window.location.href = '/login';
+                return;
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (!data) return;
+
+            // Alinha as métricas com o banco de dados
+            userData = data.userData;
+            calculatedWaterTarget = Math.round((userData.weight || 70) * 35);
+            
+            // Corrige o primeiro ponto do gráfico se estiver vazio
+            if (appState.weightHistory.length === 0 || appState.weightHistory[0] === 70) {
+                appState.weightHistory = [userData.weight];
+                localStorage.setItem('weightHistory', JSON.stringify(appState.weightHistory));
+            }
+
+            // Exibe o primeiro nome personalizado no cabeçalho
+            document.getElementById('header-user-name').textContent = userData.name.split(' ')[0];
+            document.getElementById('streak-count').textContent = appState.streak;
+
+            // Renderiza os componentes visuais de forma precisa
+            renderCalendar();
+            updateProgress();
+            updateWaterUI();
+            initWeightChart();
+            setupVipInterface();
+
+            // Configura a saudação inicial reativa no chat com a Dra. Sofia
+            const firstName = userData.name ? userData.name.split(' ')[0] : 'Amiga';
+            document.getElementById('bot-welcome-msg').textContent = `Olá, ${firstName}! Eu sou a Sofia Lee, sua mentora VIP de bem-estar. Vi no seu perfil que você deseja chegar aos ${userData.targetWeight || 60}kg através da prática consciente do Tai Chi. Como posso te orientar hoje?`;
+        })
+        .catch(err => {
+            console.error("Falha ao sincronizar com o banco de dados:", err);
+            // Sincronização offline de contingência
+            renderCalendar();
+            updateProgress();
+            updateWaterUI();
+            initWeightChart();
+            setupVipInterface();
+        });
     });
 
     // Alternar as abas do Web App (SPA)
@@ -817,7 +905,6 @@
         btn.classList.add('active');
         document.getElementById('panel-' + tabId).classList.add('active');
 
-        // Para carregar o tamanho do gráfico de forma correta ao alternar
         if (tabId === 'diary' && weightChart) {
             setTimeout(() => weightChart.update(), 150);
         }
@@ -866,18 +953,14 @@
     function openVideoModal(day) {
         currentActiveDay = day;
         document.getElementById('modal-title').textContent = `Aula Prática - Dia ${day}`;
-        
-        // Puxa o link configurado na lista DESAFIO_VIDEOS de forma dinâmica
         document.getElementById('modal-video').src = DESAFIO_VIDEOS[day] || "https://www.youtube.com/embed/dQw4w9WgXcQ"; 
         document.getElementById('video-modal').style.display = 'flex';
 
-        // Botão para concluir o dia
         document.getElementById('btn-complete-day').onclick = () => {
             if (!appState.completedDays.includes(day)) {
                 appState.completedDays.push(day);
                 localStorage.setItem('completedDays', JSON.stringify(appState.completedDays));
                 
-                // Acrescenta dia de constância
                 appState.streak += 1;
                 localStorage.setItem('streak', appState.streak);
                 document.getElementById('streak-count').textContent = appState.streak;
@@ -893,7 +976,7 @@
         document.getElementById('modal-video').src = "";
     }
 
-    // Lógica Áudio Zen de fundo (Corrigida para ler e tratar possíveis falhas)
+    // Lógica Áudio Zen de fundo
     function toggleAudio(soundType, btn) {
         if (activeAudios[soundType]) {
             activeAudios[soundType].pause();
@@ -901,7 +984,6 @@
             btn.textContent = "▶";
             btn.style.background = "var(--green-light)";
         } else {
-            // Pausa qualquer outro áudio zen ativo antes de iniciar outro
             Object.keys(activeAudios).forEach(key => {
                 activeAudios[key].pause();
                 delete activeAudios[key];
@@ -922,13 +1004,13 @@
                     btn.style.background = "#ffd2d2";
                 })
                 .catch(err => {
-                    console.error(`Erro ao tentar carregar o áudio "${soundType}" em "${audioPath}":`, err);
-                    alert(`Não foi possível reproduzir o áudio "${soundType}". Verifique se o arquivo está na pasta "/static/audio/" e com o nome idêntico.`);
+                    console.error("Não foi possível carregar o arquivo de áudio:", err);
+                    alert("Aviso: O arquivo de áudio não foi encontrado na pasta static/audio/.");
                 });
         }
     }
 
-    // ── LÓGICA DO CONTROLE DE ÁGUA PERSONALIZADA ──
+    // LÓGICA DO CONTROLE DE ÁGUA PERSONALIZADA
     function addWater() {
         if (appState.waterDrunk < calculatedWaterTarget) {
             appState.waterDrunk += 250;
@@ -948,7 +1030,6 @@
     }
 
     function updateWaterUI() {
-        // Exibe a meta personalizada do usuário baseada em seu peso
         const targetLitres = (calculatedWaterTarget / 1000).toFixed(1);
         document.getElementById('water-target-title').textContent = `Meta: ${targetLitres}L`;
         document.getElementById('water-progress-text').textContent = `${appState.waterDrunk} ml / ${calculatedWaterTarget} ml`;
@@ -957,10 +1038,14 @@
         document.getElementById('water-liquid').style.height = `${fillPercent}%`;
     }
 
-    // ── LÓGICA DO CONTROLE DE PESO ──
+    // LÓGICA DO CONTROLE DE PESO
     function initWeightChart() {
         const ctx = document.getElementById('weightChart').getContext('2d');
         const labels = appState.weightHistory.map((_, idx) => `W${idx + 1}`);
+
+        if (weightChart) {
+            weightChart.destroy();
+        }
 
         weightChart = new Chart(ctx, {
             type: 'line',
@@ -1004,7 +1089,7 @@
         }
     }
 
-    // ── LÓGICA DO CHAT VIP & SIMULAÇÃO ──
+    // LÓGICA DO CHAT VIP & SIMULAÇÃO
     function setupVipInterface() {
         const paywall = document.getElementById('chat-paywall');
         const chatActive = document.getElementById('chat-active');
@@ -1024,7 +1109,7 @@
         setupVipInterface();
     }
 
-    // Envia a mensagem de forma estruturada para o servidor Python
+    // Comunicação real com o servidor Python (Dra. Sofia Lee)
     function sendMessage() {
         const input = document.getElementById('chat-input-text');
         const text = input.value.trim();
@@ -1032,7 +1117,6 @@
 
         const chatBox = document.getElementById('chat-messages');
 
-        // Cria balão do usuário na tela
         const userBubble = document.createElement('div');
         userBubble.className = 'chat-bubble user';
         userBubble.textContent = text;
@@ -1041,7 +1125,7 @@
         input.value = '';
         chatBox.scrollTop = chatBox.scrollHeight;
 
-        // Sorteia um tempo de digitação dinâmico (em milissegundos) para humanizar
+        // Delays realistas de digitação humana (5s, 8s, 12s, 15s, 20s)
         const delayOptions = [5000, 8000, 12000, 15000, 20000];
         const chosenDelay = delayOptions[Math.floor(Math.random() * delayOptions.length)];
 
@@ -1054,20 +1138,16 @@
 
         const startTime = Date.now();
 
-        // Envia a mensagem e os dados salvos do quiz para a API do seu backend
         fetch('/api/chat', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                message: text,
-                userData: userData
-            })
+            body: JSON.stringify({ message: text })
         })
         .then(response => {
             if (!response.ok) {
-                throw new Error(`Servidor respondeu com status ${response.status}`);
+                throw new Error("Erro de conexão");
             }
             return response.json();
         })
@@ -1075,15 +1155,11 @@
             const elapsed = Date.now() - startTime;
             const remainingDelay = Math.max(0, chosenDelay - elapsed);
 
-            // Aguarda o tempo de digitação sorteado antes de exibir a resposta real do Gemini
             setTimeout(() => {
                 typingIndicator.style.display = "none";
                 statusText.textContent = "🟢 Online";
 
-                console.log("Dados recebidos da API de chat:", data);
-
-                // Tenta ler 'response' ou chaves alternativas como 'reply' ou 'text'
-                const replyText = data.response || data.reply || data.text || "Desculpe, querida. Tive um probleminha de conexão temporária. Pode repetir?";
+                const replyText = data.response || "Desculpe, querida. Tive um probleminha de conexão temporária. Pode repetir?";
 
                 const botBubble = document.createElement('div');
                 botBubble.className = 'chat-bubble bot';
@@ -1095,83 +1171,120 @@
         .catch(error => {
             typingIndicator.style.display = "none";
             statusText.textContent = "🟢 Online";
-            console.error("Erro no chat:", error);
 
             const botBubble = document.createElement('div');
             botBubble.className = 'chat-bubble bot';
-            botBubble.textContent = "Amiga, estou com um pouco de dificuldade de conexão agora. Tente me mandar uma mensagem novamente em alguns segundos.";
+            botBubble.textContent = "Amiga, estou com um pouco de dificuldade de conexão com meus sistemas agora. Pode tentar novamente em alguns segundos?";
             chatBox.appendChild(botBubble);
             chatBox.scrollTop = chatBox.scrollHeight;
+            console.error("Erro no chat:", error);
         });
     }
 
-    // Mecanismo de Resposta Contextual Local (caso necessário)
-    function getSofiaResponse(userText) {
-        const text = userText.toLowerCase();
-        const firstName = userData.name ? userData.name.split(' ')[0] : 'Amiga';
-        const weight = userData.weight || 70;
-        const target = userData.targetWeight || 60;
-        const sens = userData.sensibilidades || [];
+    // LÓGICA DO MODAL DE PERFIL, ALTERAÇÃO DE SENHA E LOGOUT
+    function openProfileModal() {
+        document.getElementById('prof-name').value = userData.name;
+        document.getElementById('prof-age').value = userData.age;
+        document.getElementById('prof-height').value = userData.height;
+        document.getElementById('prof-weight').value = userData.weight;
+        document.getElementById('prof-target').value = userData.targetWeight;
+        document.getElementById('prof-password').value = '';
         
-        const hasKneeSens = sens.some(s => s.toLowerCase().includes('joelho'));
-        const hasBackSens = sens.some(s => s.toLowerCase().includes('costa') || s.toLowerCase().includes('lombar'));
+        document.getElementById('profile-error-box').style.display = 'none';
+        document.getElementById('profile-success-box').style.display = 'none';
+        document.getElementById('profile-modal').style.display = 'flex';
+    }
 
-        if (text.includes('dor') || text.includes('articulacao') || text.includes('machucar') || text.includes('joelho') || text.includes('costas')) {
-            if (hasKneeSens && (text.includes('joelho') || text.includes('dor'))) {
-                return `Entendo perfeitamente, ${firstName}. No seu cadastro, você marcou que possui sensibilidade nos joelhos. Para a prática de hoje, recomendo caminhar mantendo as solas dos pés totalmente firmes no chão e evitar flexionar demais as articulações. Ouvir o seu corpo é essencial.`;
+    function closeProfileModal() {
+        document.getElementById('profile-modal').style.display = 'none';
+    }
+
+    function saveProfile() {
+        const name = document.getElementById('prof-name').value.trim();
+        const age = parseInt(document.getElementById('prof-age').value);
+        const height = parseInt(document.getElementById('prof-height').value);
+        const weight = parseFloat(document.getElementById('prof-weight').value);
+        const targetWeight = parseFloat(document.getElementById('prof-target').value);
+        const password = document.getElementById('prof-password').value;
+        
+        const errBox = document.getElementById('profile-error-box');
+        const succBox = document.getElementById('profile-success-box');
+        
+        errBox.style.display = 'none';
+        succBox.style.display = 'none';
+        
+        if (!name || !age || !height || !weight || !targetWeight) {
+            errBox.textContent = "Por favor, preencha todos os campos obrigatórios.";
+            errBox.style.display = 'block';
+            return;
+        }
+
+        const updatedData = {
+            name: name,
+            age: age,
+            height: height,
+            weight: weight,
+            targetWeight: targetWeight,
+            sensibilidades: userData.sensibilidades,
+            objetivos: userData.objetivos
+        };
+
+        fetch('/api/user/update', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                userData: updatedData,
+                password: password || undefined
+            })
+        })
+        .then(response => {
+            return response.json().then(data => {
+                if (!response.ok) throw new Error(data.error || "Falha ao salvar modificações.");
+                return data;
+            });
+        })
+        .then(data => {
+            succBox.textContent = "Alterações salvas com sucesso!";
+            succBox.style.display = 'block';
+            
+            // Recarrega os dados dinamicamente no app local
+            userData = updatedData;
+            document.getElementById('header-user-name').textContent = userData.name.split(' ')[0];
+            
+            // Recalcula meta de hidratação
+            calculatedWaterTarget = Math.round((userData.weight || 70) * 35);
+            updateWaterUI();
+
+            // Atualiza peso atual no gráfico se tiver alterado
+            if (appState.weightHistory.length > 0) {
+                appState.weightHistory[appState.weightHistory.length - 1] = userData.weight;
+                localStorage.setItem('weightHistory', JSON.stringify(appState.weightHistory));
+                if (weightChart) {
+                    weightChart.data.datasets[0].data = appState.weightHistory;
+                    weightChart.update();
+                }
             }
-            if (hasBackSens && (text.includes('costa') || text.includes('lombar') || text.includes('dor'))) {
-                return `Muita atenção com a sua postura lombar, ${firstName}! Como você mencionou que possui dores/sensibilidade nas costas, mantenha a coluna bem alinhada, relaxe os ombros e respire profundamente durante os movimentos da caminhada zen de hoje.`;
-            }
-            return `O Tai Chi deve ser sempre relaxante e terapêutico, ${firstName}. Se sentir qualquer dor ou incômodo físico, diminua a velocidade e faça passos mais curtos. Jamais force além do seu limite confortável.`;
-        }
 
-        if (text.includes('peso') || text.includes('emagrecer') || text.includes('balanca') || text.includes('meta')) {
-            return `Estamos focadas em sair dos seus ${weight}kg atuais e buscar de forma saudável a sua meta de ${target}kg, ${firstName}. O segredo do emagrecimento com a caminhada Tai Chi em casa está na constância diária de apenas 7 minutos e na ativação metabólica suave. Conte comigo!`;
-        }
-
-        if (text.includes('agua') || text.includes('beber') || text.includes('sede') || text.includes('hidratacao')) {
-            const litres = (calculatedWaterTarget / 1000).toFixed(1);
-            return `A hidratação ideal faz toda a diferença na queima de gordura e no alívio de estresse, ${firstName}. A sua meta diária personalizada é de ${litres}L de água. Lembre-se de tomar pequenos goles ao longo do dia, ok?`;
-        }
-
-        if (text.includes('como praticar') || text.includes('tai chi') || text.includes('exercicio') || text.includes('caminhada')) {
-            return `A caminhada consciente baseia-se na coordenação da respiração profunda com passos lentos e equilibrados. Siga o vídeo da sua aula do dia no nosso calendário e tente relaxar totalmente o tronco enquanto caminha.`;
-        }
-
-        if (text.includes('receita') || text.includes('comer') || text.includes('fome') || text.includes('nutricao') || text.includes('açúcar')) {
-            return `Para nutrir o seu corpo e diminuir a retenção líquida, ${firstName}, priorize refeições ricas em fibras e gorduras boas. Ovos mexidos com chia pela manhã ou um punhado de amêndoas com frutas vermelhas à tarde são ótimos aliados contra os picos de fome.`;
-        }
-
-        const defaultResponses = [
-            `Estou aqui com você, ${firstName}! Mantenha o foco na sua prática diária de 7 minutos. Pequenos passos consistentes vão te levar longe no nosso desafio de 28 dias.`,
-            `Como está se sentindo hoje, ${firstName}? Lembre-se de respirar fundo e relaxar a mente antes de iniciar os exercícios. Me diga se tiver qualquer dúvida sobre o plano.`,
-            `Lindo dia para praticar e desestressar, ${firstName}! Sinta os benefícios de cada movimento consciente que fizer hoje.`
-        ];
-        return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+            setTimeout(() => {
+                closeProfileModal();
+            }, 1200);
+        })
+        .catch(err => {
+            errBox.textContent = err.message;
+            errBox.style.display = 'block';
+        });
     }
 
-    // ── LÓGICA DO MODAL DE FEEDBACK (DIRECIONA PARA clubfitonline@outlook.com) ──
-    function openFeedbackModal() {
-        document.getElementById('feedback-modal').style.display = 'flex';
-    }
-
-    function closeFeedbackModal() {
-        document.getElementById('feedback-modal').style.display = 'none';
-        document.getElementById('feedback-text').value = '';
-    }
-
-    function submitFeedback() {
-        const text = document.getElementById('feedback-text').value.trim();
-        if (!text) return;
-
-        const name = userData.name || 'Usuário';
-        const emailSubject = encodeURIComponent(`Feedback App ClubFit - de ${name}`);
-        const emailBody = encodeURIComponent(text);
-
-        // Abre o cliente de e-mail do usuário configurado para enviar para o seu endereço
-        window.location.href = `mailto:clubfitonline@outlook.com?subject=${emailSubject}&body=${emailBody}`;
-        closeFeedbackModal();
+    function handleLogout() {
+        fetch('/api/logout')
+        .then(() => {
+            window.location.href = '/login';
+        })
+        .catch(() => {
+            window.location.href = '/login';
+        });
     }
 </script>
 

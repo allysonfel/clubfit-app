@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ClubFit - Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --green:       #2E9E58;
+            --green-dark:  #237A44;
+            --green-light: #E8F5EE;
+            --text:        #1A1A1A;
+            --muted:       #888888;
+            --radius:      16px;
+            --font:        'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font);
+            background: #FAFAF8;
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 15px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            background: #fff;
+            border-radius: var(--radius);
+            padding: 30px 24px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.03);
+            border: 1px solid #eaeaea;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--green);
+            letter-spacing: -0.8px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background: #FAFAF8;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: var(--font);
+            outline: none;
+            transition: border-color 0.15s, background 0.15s;
+        }
+
+        input:focus {
+            border-color: var(--green);
+            background: #fff;
+        }
+
+        .btn-login {
+            display: block;
+            width: 100%;
+            background: var(--green);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 0.15s;
+            margin-top: 24px;
+            text-align: center;
+        }
+
+        .btn-login:hover {
+            background: var(--green-dark);
+        }
+
+        .error-box {
+            display: none;
+            background: #FFF0F0;
+            border: 1px solid #FFCDCD;
+            color: #D32F2F;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .support-footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        .support-footer a {
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="logo">ClubFit</div>
+        <p class="subtitle">Insira seu e-mail e a senha temporária que enviamos para você após a confirmação do pagamento.</p>
+        
+        <!-- Caixa de erro reativa -->
+        <div class="error-box" id="error-message"></div>
+
+        <form id="login-form" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="email">E-mail de acesso</label>
+                <input type="email" id="email" placeholder="seuemail@exemplo.com" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Senha temporária</label>
+                <input type="password" id="password" placeholder="••••••••" required>
+            </div>
+
+            <button type="submit" class="btn-login" id="btn-submit">Entrar no aplicativo</button>
+        </form>
+
+        <div class="support-footer">
+            Não encontrou o e-mail com a senha? <br>Verifique a caixa de spam ou fale com o <a href="mailto:clubfitonline@outlook.com">suporte</a>.
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const errorBox = document.getElementById('error-message');
+            const btnSubmit = document.getElementById('btn-submit');
+            
+            errorBox.style.display = 'none';
+            btnSubmit.textContent = 'Verificando...';
+            btnSubmit.style.background = '#ccc';
+            btnSubmit.style.pointerEvents = 'none';
+            
+            // Faz o disparo para a API do Flask que verifica as credenciais no SQLite
+            fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            })
+            .then(response => {
+                return response.json().then(data => {
+                    if (!response.ok) {
+                        throw new Error(data.error || 'Falha ao realizar login.');
+                    }
+                    return data;
+                });
+            })
+            .then(data => {
+                // Login bem-sucedido! Redireciona o usuário para a área de membros
+                window.location.href = '/app';
+            })
+            .catch(error => {
+                // Exibe o erro retornado (ex: senha incorreta ou aguardando pagamento)
+                errorBox.textContent = error.message;
+                errorBox.style.display = 'block';
+                
+                btnSubmit.textContent = 'Entrar no aplicativo';
+                btnSubmit.style.background = 'var(--green)';
+                btnSubmit.style.pointerEvents = 'auto';
+            });
+        }
+    </script>
+</body>
+</html>
