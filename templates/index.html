@@ -2201,7 +2201,44 @@
     }
 
     function saveEmail() {
-        goTo('step-35');
+        const emailInput = document.getElementById('email-input');
+        const email = emailInput ? emailInput.value.trim() : '';
+        const btn = document.getElementById('btn-email');
+
+        if (!email) {
+            goTo('step-35');
+            return;
+        }
+
+        // Feedback visual de carregamento
+        if (btn) {
+            btn.textContent = "Processando plano...";
+            btn.style.background = "#ccc";
+            btn.style.pointerEvents = "none";
+        }
+
+        // Dispara os dados de saúde e e-mail para o banco de dados SQLite
+        fetch('/api/salvar-quiz', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: email,
+                userData: userData
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Quiz salvo com sucesso no banco de dados:", data);
+        })
+        .catch(err => {
+            console.error("Erro ao salvar dados do quiz (seguindo fluxo de contingência):", err);
+        })
+        .finally(() => {
+            // Failsafe: Sempre avança para os resultados e oferta, independente do status do envio
+            goTo('step-35');
+        });
     }
 
     /* ── LÓGICA E SETUP DA PÁGINA DE OFERTA (STEP 36) ── */
