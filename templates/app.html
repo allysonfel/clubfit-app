@@ -33,6 +33,12 @@
             overflow: hidden;
         }
 
+        /* ── PROTEÇÃO CONTRA VAZAMENTO LATERAL ── */
+        html, body {
+            overflow-x: hidden !important;
+            width: 100%;
+        }
+
         .app-container {
             width: 100%;
             max-width: 480px;
@@ -42,6 +48,7 @@
             background: #fff;
             position: relative;
             box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            overflow-x: hidden; /* Elimina rolagem horizontal de animações */
         }
 
         /* ── TOPO FIXO ── */
@@ -60,10 +67,35 @@
             color: var(--green);
             letter-spacing: -0.5px;
         }
+        
+        /* NOVO ESTILO DO BOTÃO PERFIL CLICÁVEL BADGE */
+        .profile-btn {
+            background: var(--green-light);
+            color: var(--green-dark);
+            border: 1px solid var(--green);
+            font-size: 11px;
+            font-weight: 800;
+            padding: 6px 12px;
+            border-radius: 100px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.2s ease-in-out;
+            box-shadow: 0 2px 8px rgba(46,158,88,0.1);
+        }
+        .profile-btn:hover {
+            background: var(--green);
+            color: #fff;
+        }
+        .profile-btn:active {
+            transform: scale(0.95);
+        }
+
         .streak-badge {
             background: #FFF0F0;
             color: #D32F2F;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 800;
             padding: 6px 12px;
             border-radius: 100px;
@@ -347,23 +379,23 @@
             flex-direction: column;
         }
         
-        /* Tela de Bloqueio (Paywall Otimizada) */
+        /* Tela de Bloqueio (Paywall Otimizada de Alta Conversão) */
         .paywall-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             padding: 40px 10px;
             text-align: center;
         }
         .paywall-icon {
-            font-size: 48px;
-            animation: pulse-lock 2s infinite;
+            font-size: 52px;
+            animation: pulse-lock 2.2s infinite;
         }
         @keyframes pulse-lock {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            50% { transform: scale(1.08); }
         }
 
         /* Botão de Compra no Paywall em Gradiente Pulsante */
@@ -533,17 +565,6 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%; border: 0;
         }
-
-        /* Simulador Oculto no topo do Chat para você testar */
-        .test-toggle {
-            background: #f0f0f0;
-            font-size: 9px;
-            font-weight: 800;
-            padding: 4px;
-            cursor: pointer;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
     </style>
 </head>
 <body>
@@ -554,12 +575,12 @@
     <header class="app-header">
         <span class="app-logo">ClubFit</span>
         <div style="display: flex; align-items: center; gap: 8px;">
-            <!-- BOTÃO CONFIGURAÇÃO DO PERFIL -->
-            <button onclick="openProfileModal()" style="background: none; border: none; font-size: 13px; font-weight: 700; color: var(--green); cursor: pointer; display: flex; align-items: center; gap: 3px;">
-                👤 Meu Perfil
+            <!-- BOTÃO PERFIL ESTILIZADO CLICÁVEL BADGE -->
+            <button onclick="openProfileModal()" class="profile-btn">
+                👤 Perfil
             </button>
             <div class="streak-badge">
-                <span>🔥</span> <span id="streak-count">1</span> dia(s)
+                <span>🔥</span> <span id="streak-count">0</span> dia(s)
             </div>
         </div>
     </header>
@@ -569,7 +590,7 @@
 
         <!-- ABA 1: DESAFIO -->
         <section id="panel-challenge" class="tab-panel active">
-            <!-- NOME PERSONALIZADO DINAMICAMENTE -->
+            <!-- NOME DE LOGIN REATIVO DO BANCO -->
             <h2 class="section-title">Olá, <span id="header-user-name">amiga</span>!</h2>
             <p class="section-subtitle" style="margin-top: 5px;">Complete sua caminhada diária de 7 min</p>
 
@@ -637,7 +658,7 @@
                         <button class="btn-weight-save" onclick="saveWeight()">Salvar</button>
                     </div>
 
-                    <div style="margin-top: 15px; width: 100%; height: 160px;">
+                    <div style="margin-top: 15px; width: 100%; height: 160px; position: relative; overflow: hidden;">
                         <canvas id="weightChart"></canvas>
                     </div>
                 </div>
@@ -648,24 +669,20 @@
         <!-- ABA 3: DRA. SOFIA VIP -->
         <section id="panel-chat" class="tab-panel">
             <div class="vip-panel">
-                
-                <!-- Simulador de Teste para Alternar Assinatura no Desenvolvimento -->
-                <div class="test-toggle" onclick="toggleVipStatus()">
-                    [TESTE: Clique aqui para simular se o cliente pagou a Assinatura ou não]
-                </div>
 
-                <!-- TELA BLOQUEADA (PAYWALL OTIMIZADA) -->
-                <div id="chat-paywall" class="paywall-container">
-                    <div class="paywall-icon">🔒</div>
-                    <h2 class="off-section-title" style="font-size: 20px;">Acompanhamento VIP 24h</h2>
-                    <p class="up-subheadline">Tenha a Dra. Sofia Lee na palma da sua mão para tirar dúvidas sobre exercícios, ajustar suas refeições e te manter motivada todos os dias!</p>
+                <!-- TELA BLOQUEADA (PAYWALL ALTAMENTE ATRATIVO E DE ALTA CONVERSÃO) -->
+                <div id="chat-paywall" class="paywall-container" style="background: #fff; border-radius: var(--radius); border: 1px solid #eaeaea; padding: 30px 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); margin: 5px 0;">
+                    <div class="paywall-icon" style="font-size: 52px; margin-bottom: 5px;">⭐</div>
+                    <p style="font-size: 11px; font-weight: 800; color: var(--green); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">Acompanhamento VIP 24h</p>
+                    <h2 style="font-size: 20px; font-weight: 800; line-height: 1.3; color: #111; letter-spacing: -0.5px; margin-bottom: 12px; text-align: center;">Tenha resultados até 3x mais rápidos com a Dra. Sofia Lee</h2>
+                    <p style="font-size: 13.5px; color: #555; line-height: 1.6; margin-bottom: 25px; padding: 0 5px; text-align: center;">Tire suas dúvidas sobre os exercícios na hora, faça ajustes personalizados na sua alimentação para acelerar seu metabolismo, e tenha uma mentora exclusiva guiando seus passos todos os dias!</p>
                     
-                    <!-- Checkout Atualizado da Assinatura PerfectPay -->
-                    <a href="https://go.perfectpay.com.br/PPU38CQCNQP" class="paywall-btn-premium">
-                        QUERO ACESSO VIP COM DRA. SOFIA
+                    <!-- Checkout de Alta Conversão -->
+                    <a href="https://go.perfectpay.com.br/PPU38CQCNQP" class="paywall-btn-premium" style="display: block; text-align: center; text-transform: uppercase;">
+                        Quero acelerar meus resultados
                     </a>
                     
-                    <p class="up-description" style="margin-top: 5px;">Adicione esse acompanhamento exclusivo ao seu plano diário por apenas uma assinatura mensal.</p>
+                    <p style="font-size: 11px; color: var(--muted); margin-top: 15px; line-height: 1.4; text-align: center;">Adicione esse acompanhamento exclusivo ao seu plano diário por apenas uma assinatura mensal.<br>Cancele a qualquer momento sem burocracias.</p>
                 </div>
 
                 <!-- TELA LIBERADA (CHAT INTERATIVO E INTELIGENTE SIMULADO) -->
@@ -822,7 +839,7 @@
         meditation: "/static/audio/meditacao.mp3"
     };
 
-    // Definições de dados locais com sincronização do banco de dados SQLite
+    // Definições de dados com sincronização total do banco de dados SQLite
     let userData = {
         name: 'Você',
         weight: 70,
@@ -834,25 +851,22 @@
     };
 
     let appState = {
-        completedDays: JSON.parse(localStorage.getItem('completedDays')) || [],
-        waterDrunk: parseInt(localStorage.getItem('waterDrunk')) || 0,
-        weightHistory: JSON.parse(localStorage.getItem('weightHistory')) || [70],
-        isVipSubscribed: JSON.parse(localStorage.getItem('isVipSubscribed')) || false,
-        streak: parseInt(localStorage.getItem('streak')) || 1
+        completedDays: [],
+        waterDrunk: 0,
+        weightHistory: [70],
+        isVipSubscribed: false,
+        streak: 0
     };
 
-    // Declarado como reconfigurável dinamicamente
     let calculatedWaterTarget = Math.round((userData.weight || 70) * 35);
     let activeAudios = {};
     let weightChart = null;
 
-    // Inicialização do Web App conectada ao backend Flask
+    // Inicialização conectada de forma segura ao backend Flask
     document.addEventListener("DOMContentLoaded", function() {
-        // Validação e carregamento de sessão
         fetch('/api/user/data')
         .then(response => {
             if (response.status === 401) {
-                // Sessão encerrada ou não autorizada -> manda para login
                 window.location.href = '/login';
                 return;
             }
@@ -861,41 +875,56 @@
         .then(data => {
             if (!data) return;
 
-            // Alinha as métricas com o banco de dados
+            // Sincronização dos estados subjetivos do usuário a partir do SQLite
             userData = data.userData;
+            appState = data.appState;
             calculatedWaterTarget = Math.round((userData.weight || 70) * 35);
             
-            // Corrige o primeiro ponto do gráfico se estiver vazio
-            if (appState.weightHistory.length === 0 || appState.weightHistory[0] === 70) {
-                appState.weightHistory = [userData.weight];
-                localStorage.setItem('weightHistory', JSON.stringify(appState.weightHistory));
-            }
+            // Ativa ou desativa o acesso VIP do chat com base no banco de dados
+            appState.isVipSubscribed = data.isVipSubscribed;
 
-            // Exibe o primeiro nome personalizado no cabeçalho
+            // Exibe o primeiro nome e constância reativa do banco
             document.getElementById('header-user-name').textContent = userData.name.split(' ')[0];
             document.getElementById('streak-count').textContent = appState.streak;
 
-            // Renderiza os componentes visuais de forma precisa
+            // Renderiza os componentes visuais
             renderCalendar();
             updateProgress();
             updateWaterUI();
             initWeightChart();
             setupVipInterface();
 
-            // Configura a saudação inicial reativa no chat com a Dra. Sofia
             const firstName = userData.name ? userData.name.split(' ')[0] : 'Amiga';
             document.getElementById('bot-welcome-msg').textContent = `Olá, ${firstName}! Eu sou a Sofia Lee, sua mentora VIP de bem-estar. Vi no seu perfil que você deseja chegar aos ${userData.targetWeight || 60}kg através da prática consciente do Tai Chi. Como posso te orientar hoje?`;
         })
         .catch(err => {
             console.error("Falha ao sincronizar com o banco de dados:", err);
-            // Sincronização offline de contingência
-            renderCalendar();
-            updateProgress();
-            updateWaterUI();
-            initWeightChart();
-            setupVipInterface();
+            window.location.href = '/login';
         });
     });
+
+    // Envia o estado de progresso dinamicamente para o SQLite
+    function saveAppStateToServer() {
+        fetch('/api/user/progress', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                completedDays: appState.completedDays,
+                streak: appState.streak,
+                waterDrunk: appState.waterDrunk,
+                weightHistory: appState.weightHistory
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Progresso sincronizado com sucesso:", data);
+        })
+        .catch(err => {
+            console.error("Erro na sincronização de progresso:", err);
+        });
+    }
 
     // Alternar as abas do Web App (SPA)
     function switchTab(tabId, btn) {
@@ -910,7 +939,7 @@
         }
     }
 
-    // Renderizar o calendário de 28 dias
+    // Renderizar o calendário subjetivo de 28 dias
     function renderCalendar() {
         const container = document.getElementById('calendar-container');
         container.innerHTML = '';
@@ -959,11 +988,14 @@
         document.getElementById('btn-complete-day').onclick = () => {
             if (!appState.completedDays.includes(day)) {
                 appState.completedDays.push(day);
+                appState.streak = appState.completedDays.length; // Constância subjetiva de dias assistidos
                 localStorage.setItem('completedDays', JSON.stringify(appState.completedDays));
                 
-                appState.streak += 1;
                 localStorage.setItem('streak', appState.streak);
                 document.getElementById('streak-count').textContent = appState.streak;
+                
+                // Envia dados salvos ao banco
+                saveAppStateToServer();
             }
             closeModal();
             renderCalendar();
@@ -1016,12 +1048,14 @@
             appState.waterDrunk += 250;
             if (appState.waterDrunk > calculatedWaterTarget) appState.waterDrunk = calculatedWaterTarget;
             saveWaterState();
+            saveAppStateToServer();
         }
     }
 
     function resetWater() {
         appState.waterDrunk = 0;
         saveWaterState();
+        saveAppStateToServer();
     }
 
     function saveWaterState() {
@@ -1086,10 +1120,13 @@
             weightChart.update();
 
             input.value = '';
+            
+            // Envia peso para persistência segura
+            saveAppStateToServer();
         }
     }
 
-    // LÓGICA DO CHAT VIP & SIMULAÇÃO
+    // LÓGICA DO CHAT VIP
     function setupVipInterface() {
         const paywall = document.getElementById('chat-paywall');
         const chatActive = document.getElementById('chat-active');
@@ -1101,12 +1138,6 @@
             paywall.style.display = 'flex';
             chatActive.style.display = 'none';
         }
-    }
-
-    function toggleVipStatus() {
-        appState.isVipSubscribed = !appState.isVipSubscribed;
-        localStorage.setItem('isVipSubscribed', JSON.stringify(appState.isVipSubscribed));
-        setupVipInterface();
     }
 
     // Comunicação real com o servidor Python (Dra. Sofia Lee)
@@ -1266,6 +1297,9 @@
                     weightChart.update();
                 }
             }
+
+            // Atualiza no banco
+            saveAppStateToServer();
 
             setTimeout(() => {
                 closeProfileModal();

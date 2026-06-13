@@ -36,11 +36,12 @@ def init_db():
             email TEXT UNIQUE NOT NULL,
             password TEXT NOT NULL,
             status TEXT DEFAULT 'pending_payment',
+            is_vip INTEGER DEFAULT 0,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     ''')
     
-    # Criar tabela de métricas ligada aos usuários
+    # Criar tabela de métricas ligada aos usuários (incluindo persistência de progresso pessoal)
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS metrics (
             user_id INTEGER PRIMARY KEY,
@@ -51,9 +52,40 @@ def init_db():
             target_weight REAL,
             sensibilidades TEXT,
             objetivos TEXT,
+            completed_days TEXT DEFAULT '',
+            streak INTEGER DEFAULT 0,
+            water_drunk INTEGER DEFAULT 0,
+            weight_history TEXT DEFAULT '',
             FOREIGN KEY (user_id) REFERENCES users (id)
         )
     ''')
+    
+    # Executa migrações silenciosas para garantir que novos campos existam em bancos de dados já criados
+    try:
+        cursor.execute("ALTER TABLE users ADD COLUMN is_vip INTEGER DEFAULT 0")
+    except sqlite3.OperationalError:
+        pass
+        
+    try:
+        cursor.execute("ALTER TABLE metrics ADD COLUMN completed_days TEXT DEFAULT ''")
+    except sqlite3.OperationalError:
+        pass
+        
+    try:
+        cursor.execute("ALTER TABLE metrics ADD COLUMN streak INTEGER DEFAULT 0")
+    except sqlite3.OperationalError:
+        pass
+        
+    try:
+        cursor.execute("ALTER TABLE metrics ADD COLUMN water_drunk INTEGER DEFAULT 0")
+    except sqlite3.OperationalError:
+        pass
+        
+    try:
+        cursor.execute("ALTER TABLE metrics ADD COLUMN weight_history TEXT DEFAULT ''")
+    except sqlite3.OperationalError:
+        pass
+        
     conn.commit()
     conn.close()
 
@@ -125,7 +157,6 @@ def upsell():
 
 @app.route('/app')
 def app_member():
-    # A verificação de login e barreira será realizada no frontend (app.html)
     return render_template('app.html')
 
 @app.route('/login')
@@ -206,7 +237,6 @@ def cakto_webhook():
     
     # Processa se o evento for de aprovação/conclusão de pagamento
     if event == "purchase_approved" or status in ["approved", "paid"]:
-        # Busca o e-mail do cliente enviado no payload da Cakto
         customer_data = data.get("data", {}).get("customer", {})
         email = customer_data.get("email") if customer_data else None
         
@@ -218,7 +248,6 @@ def cakto_webhook():
             
         email = email.lower().strip()
         
-        # Gera uma senha temporária aleatória de 8 caracteres
         temp_password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
         hashed_password = hashlib.sha256(temp_password.encode()).hexdigest()
         
@@ -229,22 +258,29 @@ def cakto_webhook():
             cursor.execute("SELECT id FROM users WHERE email = ?", (email,))
             user = cursor.fetchone()
             
+            # Se for uma aprovação de plano VIP, altera o is_vip para 1
+            is_upsell = "vip" in str(data.get("data", {}).get("items", [{}])[0].get("title", "")).lower()
+            
             if user:
                 user_id = user[0]
-                cursor.execute("UPDATE users SET password = ?, status = 'active' WHERE id = ?", (hashed_password, user_id))
+                if is_upsell:
+                    cursor.execute("UPDATE users SET is_vip = 1 WHERE id = ?", (user_id,))
+                else:
+                    cursor.execute("UPDATE users SET password = ?, status = 'active' WHERE id = ?", (hashed_password, user_id))
             else:
-                # Caso ela tenha comprado diretamente sem passar pelo quiz
-                cursor.execute("INSERT INTO users (email, password, status) VALUES (?, ?, 'active')", (email, hashed_password))
+                is_vip_val = 1 if is_upsell else 0
+                cursor.execute("INSERT INTO users (email, password, status, is_vip) VALUES (?, ?, 'active', ?)", (email, hashed_password, is_vip_val))
                 user_id = cursor.lastrowid
                 
-                # Cria uma métrica padrão básica
                 customer_name = customer_data.get("name", "Amiga")
                 cursor.execute("INSERT INTO metrics (user_id, name, age, height, weight, target_weight) VALUES (?, ?, 35, 170, 70.0, 60.0)", (user_id, customer_name))
                 
             conn.commit()
             
-            # Envia e-mail real com Resend informando a senha
-            send_welcome_email(email, temp_password)
+            # Envia e-mail de boas-vindas com as credenciais se não for apenas o upsell de VIP
+            if not is_upsell:
+                send_welcome_email(email, temp_password)
+                
             return jsonify({"success": True, "message": "Acesso criado e e-mail enviado."}), 200
         except Exception as e:
             print("Erro ao ativar conta via Webhook:", str(e))
@@ -280,7 +316,6 @@ def login_api():
     if status != "active":
         return jsonify({"error": "Seu acesso ainda está aguardando confirmação de pagamento."}), 403
         
-    # Salva a sessão segura do usuário no cookie
     session['user_id'] = user_id
     session['email'] = email
     
@@ -302,11 +337,12 @@ def get_user_data():
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     
-    cursor.execute("SELECT email FROM users WHERE id = ?", (user_id,))
+    cursor.execute("SELECT email, is_vip FROM users WHERE id = ?", (user_id,))
     user = cursor.fetchone()
     
     cursor.execute('''
-        SELECT name, age, height, weight, target_weight, sensibilidades, objetivos 
+        SELECT name, age, height, weight, target_weight, sensibilidades, objetivos,
+               completed_days, streak, water_drunk, weight_history
         FROM metrics WHERE user_id = ?
     ''', (user_id,))
     metrics = cursor.fetchone()
@@ -315,17 +351,21 @@ def get_user_data():
     if not user:
         return jsonify({"error": "Usuário inválido"}), 404
         
-    email = user[0]
+    email, is_vip = user
     
     if metrics:
-        name, age, height, weight, target_weight, sens, obj = metrics
+        name, age, height, weight, target_weight, sens, obj, comp_days, streak, water, weight_hist = metrics
         sens_list = sens.split(",") if sens else []
         obj_list = obj.split(",") if obj else []
+        comp_days_list = [int(d) for d in comp_days.split(",") if d] if comp_days else []
+        weight_hist_list = [float(w) for w in weight_hist.split(",") if w] if weight_hist else [weight]
     else:
         name, age, height, weight, target_weight, sens_list, obj_list = ("amiga", 35, 170, 70.0, 60.0, [], [])
+        comp_days_list, streak, water, weight_hist_list = ([], 0, 0, [70.0])
         
     return jsonify({
         "email": email,
+        "isVipSubscribed": is_vip == 1,
         "userData": {
             "name": name,
             "age": age,
@@ -334,10 +374,49 @@ def get_user_data():
             "targetWeight": target_weight,
             "sensibilidades": sens_list,
             "objetivos": obj_list
+        },
+        "appState": {
+            "completedDays": comp_days_list,
+            "streak": streak,
+            "waterDrunk": water,
+            "weightHistory": weight_hist_list
         }
     }), 200
 
-# 6. Atualiza Métricas ou altera a senha de dentro do app.html
+# 6. Atualiza Progresso (Constância, Água e Peso) no Banco de Dados
+@app.route('/api/user/progress', methods=['POST'])
+def update_user_progress():
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({"error": "Não autorizado"}), 401
+        
+    data = request.get_json() or {}
+    completed_days = data.get("completedDays", [])
+    streak = data.get("streak", 0)
+    water_drunk = data.get("waterDrunk", 0)
+    weight_history = data.get("weightHistory", [])
+    
+    # Converte as listas do frontend para o formato texto do SQLite
+    comp_days_str = ",".join(str(d) for d in completed_days) if isinstance(completed_days, list) else ""
+    weight_hist_str = ",".join(str(w) for w in weight_history) if isinstance(weight_history, list) else ""
+    
+    conn = sqlite3.connect(DB_PATH)
+    cursor = conn.cursor()
+    try:
+        cursor.execute('''
+            UPDATE metrics 
+            SET completed_days = ?, streak = ?, water_drunk = ?, weight_history = ?
+            WHERE user_id = ?
+        ''', (comp_days_str, streak, water_drunk, weight_hist_str, user_id))
+        conn.commit()
+        return jsonify({"success": True}), 200
+    except Exception as e:
+        print("Erro ao tentar salvar progresso de treino:", str(e))
+        return jsonify({"error": "Erro interno ao salvar progresso."}), 500
+    finally:
+        conn.close()
+
+# 7. Atualiza Métricas ou altera a senha de dentro do app.html
 @app.route('/api/user/update', methods=['POST'])
 def update_user_data():
     user_id = session.get('user_id')
@@ -386,7 +465,7 @@ def update_user_data():
     finally:
         conn.close()
 
-# 7. Consulta a Dra. Sofia Lee associada ao login do banco de dados (Mais seguro)
+# 8. Consulta a Dra. Sofia Lee associada ao login do banco de dados (Sincronizado)
 @app.route('/api/chat', methods=['POST'])
 def chat_with_sofia():
     if not GEMINI_API_KEY:
@@ -402,7 +481,6 @@ def chat_with_sofia():
     if not user_message:
         return jsonify({"error": "Mensagem vazia."}), 400
 
-    # Busca as informações diretamente do banco de dados (Sincronização 100% à prova de falhas)
     conn = sqlite3.connect(DB_PATH)
     cursor = conn.cursor()
     cursor.execute('''
@@ -468,8 +546,8 @@ def criar_usuario_teste():
         
         # Insere as métricas de saúde iniciais para o teste
         cursor.execute('''
-            INSERT OR REPLACE INTO metrics (user_id, name, age, height, weight, target_weight, sensibilidades, objetivos) 
-            VALUES (999, 'Mariana Rezende', 45, 168, 82.5, 68.0, 'Joelhos sensíveis', 'Perder peso, Reduzir idade biológica')
+            INSERT OR REPLACE INTO metrics (user_id, name, age, height, weight, target_weight, sensibilidades, objetivos, completed_days, streak, water_drunk, weight_history) 
+            VALUES (999, 'Mariana Rezende', 45, 168, 82.5, 68.0, 'Joelhos sensíveis', 'Perder peso, Reduzir idade biológica', '', 0, 0, '82.5')
         ''')
         
         conn.commit()
