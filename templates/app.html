@@ -68,7 +68,7 @@
             letter-spacing: -0.5px;
         }
         
-        /* NOVO ESTILO DO BOTÃO PERFIL CLICÁVEL BADGE */
+        /* ESTILO DO BOTÃO PERFIL CLICÁVEL BADGE */
         .profile-btn {
             background: var(--green-light);
             color: var(--green-dark);
@@ -751,7 +751,7 @@
     </div>
 </div>
 
-<!-- MODAL DE CONFIGURAÇÃO DE PERFIL E ALTERAÇÃO DE SENHA -->
+<!-- MODAL DE CONFIGURAÇÃO DE PERFIL E ALTERAÇÃO DE SENHA (CORRIGIDO COM LARGURAS EM 100%) -->
 <div id="profile-modal" class="modal">
     <div class="modal-content" style="text-align: left; max-width: 400px; padding: 25px 20px;">
         <span class="modal-close" onclick="closeProfileModal()">&times;</span>
@@ -763,38 +763,38 @@
         <div style="display: flex; flex-direction: column; gap: 12px;">
             <div style="display: flex; flex-direction: column; gap: 4px;">
                 <label style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;">Nome completo</label>
-                <input type="text" id="prof-name" style="padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
+                <input type="text" id="prof-name" style="width: 100%; padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
             </div>
             
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                 <div style="display: flex; flex-direction: column; gap: 4px;">
                     <label style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;">Idade (anos)</label>
-                    <input type="number" id="prof-age" style="padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
+                    <input type="number" id="prof-age" style="width: 100%; padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 4px;">
                     <label style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;">Altura (cm)</label>
-                    <input type="number" id="prof-height" style="padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
+                    <input type="number" id="prof-height" style="width: 100%; padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
                 </div>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                 <div style="display: flex; flex-direction: column; gap: 4px;">
                     <label style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;">Peso Atual (kg)</label>
-                    <input type="number" id="prof-weight" step="0.1" style="padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
+                    <input type="number" id="prof-weight" step="0.1" style="width: 100%; padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 4px;">
                     <label style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;">Peso Alvo (kg)</label>
-                    <input type="number" id="prof-target" step="0.1" style="padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
+                    <input type="number" id="prof-target" step="0.1" style="width: 100%; padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
                 </div>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 4px; margin-top: 5px; border-top: 1px solid #eee; padding-top: 15px;">
                 <label style="font-size: 10px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px;">Definir Nova Senha (Mín. 6 dígitos)</label>
-                <input type="password" id="prof-password" placeholder="Nova senha (ou deixe em branco)" style="padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
+                <input type="password" id="prof-password" placeholder="Nova senha (ou deixe em branco)" style="width: 100%; padding: 12px; border: 1.5px solid #e0e0e0; border-radius: 8px; font-size: 14px; outline: none; font-weight: 600;">
             </div>
             
             <button onclick="saveProfile()" style="background: var(--green); color: white; border: none; border-radius: 8px; padding: 14px; font-weight: 800; cursor: pointer; text-align: center; margin-top: 10px; font-size: 15px;">Salvar alterações</button>
-            <button onclick="handleLogout()" style="background: #FFF0F0; color: #D32F2F; border: 1.5px solid #FFCDCD; border-radius: 8px; padding: 12px; font-weight: 800; cursor: pointer; text-align: center; font-size: 14px; margin-top: 5px;">Sair da Conta</button>
+            <button onclick="handleLogout()" style="background: #FFF0F0; color: #D32F2F; border: 1.5px solid #FFCDCD; border-radius: 12px; padding: 12px; font-weight: 800; cursor: pointer; text-align: center; font-size: 14px; margin-top: 5px;">Sair da Conta</button>
         </div>
     </div>
 </div>
